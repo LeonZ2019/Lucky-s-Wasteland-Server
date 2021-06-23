@@ -1456,6 +1456,8 @@ customPlayerItems = compileFinal str
 	["Camo Net", "camonet", localize "STR_WL_ShopDescriptions_Camo", "client\icons\camonet.paa", 200, 100],
 	["Syphon Hose", "syphonhose", localize "STR_WL_ShopDescriptions_SyphonHose", "client\icons\syphonhose.paa", 200, 100],
 	["Energy Drink", "energydrink", localize "STR_WL_ShopDescriptions_Energy_Drink", "client\icons\energydrink.paa", 100, 50],
+	["Quadbike", "quadbike", localize "STR_WL_ShopDescriptions_QuadBike", "\A3\Soft_F\Quadbike_01\Data\UI\Quadbike_01_CA.paa", 500, 250],
+	["Water Scooter", "waterscooter", localize "STR_WL_ShopDescriptions_WaterScooter", "\A3\Boat_F_Exp\Scooter_Transport_01\Data\UI\Scooter_Transport_01_CA.paa", 500, 250],
 	["Warchest", "warchest", localize "STR_WL_ShopDescriptions_Warchest", "client\icons\warchest.paa", 1000, 500, "HIDDEN"] 
 ];
 
