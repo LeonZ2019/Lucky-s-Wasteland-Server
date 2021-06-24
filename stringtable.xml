@@ -97,6 +97,12 @@
 		<Key ID="STR_WL_ShopDescriptions_Warchest">
 			<English>A safe to store your team's money.</English>
 		</Key>
+		<Key ID="STR_WL_ShopDescriptions_QuadBike">
+			<English>A packable/deployable quad bike in player inventory</English>
+		</Key>
+		<Key ID="STR_WL_ShopDescriptions_WaterScooter">
+			<English>A packable/deployable water scooter in player inventory</English>
+		</Key>
 	</Package>
 	<Package name="Dialogs">
 		<Key ID="STR_WL_dialog_TeamkillText">

@@ -22,9 +22,7 @@ mf_items_water_scooter_nearest = {
 	_veh = objNull;
 	_vehs = nearestObjects [player, [MF_ITEMS_WATER_SCOOTER_DEPLOYED_TYPE], 3];
 	{
-		if (_x getVariable ["a3w_waterScooter", false]) exitWith {
-			_veh = _x;
-		};
+		_veh = _x;
 	} forEach _vehs;
 	_veh;
 } call mf_compile;

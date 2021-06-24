@@ -12,7 +12,7 @@
 #define path(file) format["%1\%2",_this, file]
 
 MF_ITEMS_QUAD_BIKE = "quadbike";
-MF_ITEMS_QUAD_BIKE_DEPLOYED_TYPE = "Quadbike_01_F";
+MF_ITEMS_QUAD_BIKE_DEPLOYED_TYPE = ["B_Quadbike_01_F", "O_Quadbike_01_F", "I_Quadbike_01_F", "B_G_Quadbike_01_F", "B_T_Quadbike_01_F", "O_G_Quadbike_01_F", "I_G_Quadbike_01_F", "I_E_Quadbike_01_F", "C_Quadbike_01_F"];
 MF_ITEMS_QUAD_BIKE_DURATION = 6;
 _deploy = build("deploy.sqf");
 _icon = "\A3\Soft_F\Quadbike_01\Data\UI\Quadbike_01_CA.paa";
@@ -33,11 +33,9 @@ mf_items_quad_bike_deloy_in_building = {
 
 mf_items_quad_bike_nearest = {
 	_veh = objNull;
-	_vehs = nearestObjects [player, [MF_ITEMS_QUAD_BIKE_DEPLOYED_TYPE], 3];
+	_vehs = nearestObjects [player, MF_ITEMS_QUAD_BIKE_DEPLOYED_TYPE, 3];
 	{
-		if (_x getVariable ["a3w_quadBike", false]) exitWith {
-			_veh = _x;
-		};
+		_veh = _x;
 	} forEach _vehs;
 	_veh;
 } call mf_compile;

@@ -40,6 +40,14 @@ spawnActionHandle = (_this select 1) spawn
 		};
 
 		[MF_ITEMS_REPAIR_KIT, 1] call mf_inventory_add;
+		if (["_diver_", typeOf player] call fn_findString != -1) then
+		{
+			[MF_ITEMS_WATER_SCOOTER, 1] call mf_inventory_add;
+		}
+		else
+		{
+			[MF_ITEMS_QUAD_BIKE, 1] call mf_inventory_add;
+		};
 	};
 
 	if (cbChecked ((uiNamespace getVariable "RespawnSelectionDialog") displayCtrl respawn_Preload_Checkbox)) then

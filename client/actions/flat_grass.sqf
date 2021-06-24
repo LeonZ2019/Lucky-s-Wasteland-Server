@@ -7,7 +7,7 @@
 //@file Created: 23/4/2021 11:40
 //@file Description: Remove nearbasdy grass
 
-#define DURATION 2
+#define DURATION 1
 #define ANIMATION "AinvPknlMstpSnonWnonDnon_medic_1"
 #define ERR_CANCELLED "Flat Grass Cancelled!"
 #define ERR_IN_VEHICLE "Flatting Failed! You can't do that in a vehicle"

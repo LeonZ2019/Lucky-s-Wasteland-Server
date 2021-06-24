@@ -26,7 +26,7 @@ if (count _this == 0) then {
 _error = "failed";
 switch (true) do {
 	case (!alive player): {_error = " "}; // Player is dead, no need for a error message
-	case (!surfaceIsWater position player): {_error = ERR_ON_WATER};
+	case (surfaceIsWater position player): {_error = ERR_ON_WATER};
 	case (player distance _veh > 5): {_error = ERR_TOO_FAR_AWAY};
 	case (vehicle player != player): {_text = ERR_IN_VEHICLE};
 	case (MF_ITEMS_QUAD_BIKE call mf_inventory_is_full): {_error = ERR_ALREADY_HAVE_QUADBIKE};

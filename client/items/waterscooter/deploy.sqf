@@ -33,13 +33,13 @@ _success = [MF_ITEMS_WATER_SCOOTER_DURATION, ANIM, _hasFailed, []] call a3w_acti
 
 if (_success) then {
 	_uid = getPlayerUID player;
-	_veh = createVehicle [MF_ITEMS_WATER_SCOOTER_DEPLOYED_TYPE, [player, [0,2,0]] call relativePos, [], 0, "CAN_COLLIDE"];
+	_veh = createVehicle [MF_ITEMS_WATER_SCOOTER_DEPLOYED_TYPE, [player, [0,3,0]] call relativePos, [], 0, "CAN_COLLIDE"];
+	clearItemCargo _veh;
 	_veh setDir getDir player;
 	_veh setVariable ["allowDamage", true, true];
-	_veh setVariable ["a3w_waterScooter", true, true];
 	_veh setVariable ["R3F_LOG_disabled", true];
 	_veh setVariable ["side", playerSide, true];
-
+    _veh setVariable ["ownerUID", _uid];
 	["You deployed water scooter successfully!", 5] call mf_notify_client;
 };
 _success;
