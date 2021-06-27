@@ -557,3 +557,5 @@ if !(["A3W_hcObjCleanup"] call isConfigOn) then
 	// Start clean-up loop
 	execVM "server\WastelandServClean.sqf";
 };
+
+[] execVM "server\removeFog.sqf";

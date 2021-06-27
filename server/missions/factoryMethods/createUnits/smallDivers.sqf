@@ -7,7 +7,7 @@
 
 if (!isServer) exitWith {};
 
-private ["_group", "_pos", "_leader", "_man2", "_man3"];
+private ["_group", "_pos", "_leader", "_man2", "_man3", "_man4"];
 
 _group = _this select 0;
 _pos = _this select 1;
@@ -44,6 +44,17 @@ _man3 addMagazine "20Rnd_556x45_UW_Mag";
 _man3 addWeapon "arifle_SDAR_F";
 _man3 addMagazine "20Rnd_556x45_UW_Mag";
 _man3 addMagazine "20Rnd_556x45_UW_Mag";
+
+// Rifleman
+_man4 = _group createUnit ["C_man_polo_4_F", [(_pos select 0) + 10, _pos select 1, 0], [], 1, "Form"];
+removeAllAssignedItems _man4;
+_man4 addUniform "U_B_Wetsuit";
+_man4 addVest "V_RebreatherB";
+_man4 addGoggles "G_Diving";
+_man4 addMagazine "20Rnd_556x45_UW_Mag";
+_man4 addWeapon "arifle_SDAR_F";
+_man4 addMagazine "20Rnd_556x45_UW_Mag";
+_man4 addMagazine "20Rnd_556x45_UW_Mag";
 
 _leader = leader _group;
 

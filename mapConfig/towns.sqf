@@ -35,5 +35,14 @@
 	["Town_27", 150, "Kalochori"],
 	["Town_28", 175, "Feres"],
 	["Town_29", 175, "Molos"],
-	["Town_30", 175, "Rodopoli"]
+	["Town_30", 175, "Rodopoli"],
+	["Town_31", 150, "Therisa"],
+	["Town_32", 90, "Galati"],
+	["Town_33", 125, "Gravia"],
+	["Town_34", 125, "Anthrakia"],
+	["Town_35", 140, "Neri"],
+	["Town_36", 135, "Stavros"],
+	["Town_37", 120, "Alikampos"],
+	["Town_38", 100, "Katalaki"],
+	["Town_39", 95, "Ifestiona"]
 ]

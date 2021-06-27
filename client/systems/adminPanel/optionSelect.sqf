@@ -42,11 +42,17 @@ if (_uid call isAdmin) then
 					closeDialog 0;
 					createDialog "MarkerLog";
 				};
-				case 3: //Tags
+				case 3: //Unstuck player
+				{
+					closeDialog 0;
+					execVM "client\systems\adminPanel\unstuck.sqf";
+					if (!isNil "notifyAdminMenu") then { ["UnstuckPlayer", "Used"] call notifyAdminMenu };
+				};
+				case 4: //Tags
 				{
 					execVM "client\systems\adminPanel\playerTags.sqf";
 				};
-				case 4: //Teleport
+				case 5: //Teleport
 				{
 					closeDialog 0;
 					["A3W_teleport", "onMapSingleClick",
@@ -64,32 +70,60 @@ if (_uid call isAdmin) then
 							};
 						};
 						if (isNil "_waterPos") then { vehicle player setPos _pos } else { vehicle player setPosASL _waterPos };
-						if (!isNil "notifyAdminMenu") then { ["teleport", _pos] spawn notifyAdminMenu };
 						["A3W_teleport", "onMapSingleClick"] call BIS_fnc_removeStackedEventHandler;
 						true
 					}] call BIS_fnc_addStackedEventHandler;
 					hint "Click on map to teleport";
+					openMap true;
 				};
-				case 5: //Money
+				case 6: //Teleport player to me
+				{
+					closeDialog 0;
+					execVM "client\systems\adminPanel\tptome.sqf";
+				};
+				case 7: //Teleport me to player
+				{
+					closeDialog 0;
+					execVM "client\systems\adminPanel\tpmeto.sqf";
+				};
+				case 8: //Money
 				{
 					_money = 5000;
 					//player setVariable ["cmoney", (player getVariable ["cmoney",0]) + _money, true];
 					[player, _money] call A3W_fnc_setCMoney;
 					if (!isNil "notifyAdminMenu") then { ["money", _money] call notifyAdminMenu };
 				};
-				case 6: //Debug Menu
+				case 9: //Debug Menu
 				{
 					closeDialog 0;
 					execVM "client\systems\adminPanel\loadDebugMenu.sqf";
 				};
-				case 7: //Object search menu
+				case 10: //Object search menu
 				{
 					closeDialog 0;
 					execVM "client\systems\adminPanel\loadObjectSearch.sqf";
 				};
-				case 8: // toggle God mode
+				case 11: // toggle God mode
 				{
 					execVM "client\systems\adminPanel\toggleGodMode.sqf";
+				};
+				case 12: // vehicle invincible
+				{
+					execVM "client\systems\adminPanel\vehicleInvincible.sqf";
+				};
+				case 13: // infinite ammo
+				{
+					execVM "client\systems\adminPanel\infiniteAmmo.sqf";
+				};
+				case 14: // virtual arsenal
+				{
+					closeDialog 0;
+					execVM "client\systems\adminPanel\virtualArsenal.sqf";
+				};
+				case 15: // virtual garage
+				{
+					closeDialog 0;
+					execVM "client\systems\adminPanel\virtualGarage.sqf";
 				};
 			};
 		};
@@ -132,19 +166,6 @@ if (_uid call isAdmin) then
 				case 6: //Show server FPS function
 				{
 					hint format["Server FPS: %1",serverFPS];
-				};
-				case 7: //Test Function
-				{
-					_group = createGroup civilian;
-					_leader = _group createunit ["C_man_polo_1_F", getPos player, [], 0.5, "Form"];
-
-					_leader addMagazine "RPG32_HE_F";
-					_leader addMagazine "RPG32_HE_F";
-					_leader addWeapon "launch_RPG32_F";
-					_leader addMagazine "30Rnd_556x45_Stanag";
-					_leader addMagazine "30Rnd_556x45_Stanag";
-					_leader addMagazine "30Rnd_556x45_Stanag";
-					_leader addWeapon "arifle_TRG20_F";
 				};
 			};
 		};

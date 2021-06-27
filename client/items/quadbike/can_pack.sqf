@@ -13,6 +13,8 @@
 #define ERR_ALREADY_HAVE_QUADBIKE "You can not carry another quad bike"
 #define ERR_ON_WATER "You can't pack on water"
 #define ERR_IN_VEHICLE "You can't pack quad bike in a vehicle"
+#define ERR_VEHICLE_NOT_EMPTY "Quad bike is not empty"
+#define ERR_VEHICLE_NOT_ALIVE "Quad bike has destroyed"
 
 private ["_veh", "_error"];
 _veh = objNull;
@@ -30,6 +32,8 @@ switch (true) do {
 	case (player distance _veh > 5): {_error = ERR_TOO_FAR_AWAY};
 	case (vehicle player != player): {_text = ERR_IN_VEHICLE};
 	case (MF_ITEMS_QUAD_BIKE call mf_inventory_is_full): {_error = ERR_ALREADY_HAVE_QUADBIKE};
+	case (!alive _veh): {_error = ERR_VEHICLE_NOT_ALIVE};
+	case ((count (crew _veh)) == 0): {_error = ERR_VEHICLE_NOT_EMPTY};
 	default {_error = ""};
 };
 _error;
