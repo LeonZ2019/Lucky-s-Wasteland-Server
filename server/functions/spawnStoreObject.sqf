@@ -102,6 +102,18 @@ if (_key != "" && _player isKindOf "Man" && {_isGenStore || _isGunStore || _isVe
 				_marker = _marker + "_planeSpawn";
 			};
 		};
+		
+		// ANTI-AIR
+		if (isNil "_itemEntry") then
+		{
+			_results = (call antiAirArray) select {_x select [1,999] isEqualTo _itemEntrySent};
+
+			if (count _results > 0) then
+			{
+				_itemEntry = _results select 0;
+				_marker = _marker + "_antiAirSpawn";
+			};
+		};
 	};
 
 	if (!isNil "_itemEntry" && markerShape _marker != "") then

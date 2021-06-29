@@ -63,6 +63,11 @@ switch(_switch) do
 		_itemsArray = call lmgArray;
 		_showAmmo = true;
 	};
+	case 4:
+	{
+		_itemsArray = call sniperArray;
+		_showAmmo = true;
+	};
 	case 5:
 	{
 		_itemsArray = call launcherArray;

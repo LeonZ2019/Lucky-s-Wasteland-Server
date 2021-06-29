@@ -48,8 +48,7 @@ _setupObjects =
 		_soldier = [_aiGroup, _position] call createRandomPilot; 
 		_soldier moveInDriver _vehicle;
 		// lock the vehicle untill the mission is finished and initialize cleanup on it
-		_vehicle lock 2;
-		//[_vehicle, _aiGroup] spawn checkMissionVehicleLock;
+		[_vehicle, _aiGroup] spawn checkMissionVehicleLock;
 		_vehicle
 	};
 	

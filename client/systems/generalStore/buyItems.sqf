@@ -194,7 +194,6 @@ storePurchaseHandle = _this spawn
 
 						// Confirm replace
 						if (backpack player != "" && {!(["backpack"] call _showReplaceConfirmMessage)}) exitWith {};
-
 						removeBackpack player;
 						player addBackpack _class;
 					};
@@ -370,9 +369,45 @@ storePurchaseHandle = _this spawn
 
 				// Confirm replace
 				if (uniform player != "" && {!(["uniform"] call _showReplaceConfirmMessage)}) exitWith {};
-
+				_items = uniformItems player;
+				_magazines = magazinesAmmoFull player;
+				_groundHolder = createVehicle ["groundweaponHolder", getPosATL player, [], 0, "CAN_COLLIDE"];
 				removeUniform player;
 				player forceAddUniform _class;
+				_items = _items apply {
+					if (isClass (configFile >> "CfgWeapons" >> _x)) then {
+						[getNumber (configfile >> "CfgWeapons" >> _x >> "mass"), _x];
+					} else {
+						if (isClass (configFile >> "CfgGlasses" >> _x)) then {
+							[getNumber (configfile >> "CfgGlasses" >> _x >> "mass"), _x];
+						} else {
+							if (isClass (configFile >> "CfgMagazines" >> _x)) then {
+								[0, "null000null"];
+							};
+						};
+					};
+				};
+				{
+					_ammunationClass = _x select 0;
+					_count = getNumber (configfile >> "CfgMagazines" >> _ammunationClass >> "count");
+					if (_x select 4 == "Uniform") then {
+						if (_x select 1 == _count) then {
+							_items pushBack [getNumber (configfile >> "CfgMagazines" >> _ammunationClass >> "mass"), _ammunationClass];
+						} else {
+							_groundHolder addMagazineAmmoCargo [_ammunationClass, 1, _x select 1]; 
+						};
+					};
+				} forEach _magazines;
+				_items sort false;
+				{
+					if (_x select 1 != "null000null") then {
+						if (player canAddItemToUniform (_x select 1)) then {
+							player addItemToUniform (_x select 1);
+						} else {
+							_groundHolder addMagazineCargoGlobal [_x select 1, 1]; 
+						};
+					};
+				} forEach _items;
 			};
 		} forEach (call uniformArray);
 	};
@@ -403,9 +438,45 @@ storePurchaseHandle = _this spawn
 
 				// Confirm replace
 				if (vest player != "" && {!(["vest"] call _showReplaceConfirmMessage)}) exitWith {};
-
+				_items = vestItems player;
+				_magazines = magazinesAmmoFull player;
+				_groundHolder = createVehicle ["groundweaponHolder", getPosATL player, [], 0, "CAN_COLLIDE"];
 				removeVest player;
 				player addVest _class;
+				_items = _items apply {
+					if (isClass (configFile >> "CfgWeapons" >> _x)) then {
+						[getNumber (configfile >> "CfgWeapons" >> _x >> "mass"), _x];
+					} else {
+						if (isClass (configFile >> "CfgGlasses" >> _x)) then {
+							[getNumber (configfile >> "CfgGlasses" >> _x >> "mass"), _x];
+						} else {
+							if (isClass (configFile >> "CfgMagazines" >> _x)) then {
+								[0, "null000null"];
+							};
+						};
+					};
+				};
+				{
+					_ammunationClass = _x select 0;
+					_count = getNumber (configfile >> "CfgMagazines" >> _ammunationClass >> "count");
+					if (_x select 4 == "Vest") then {
+						if (_x select 1 == _count) then {
+							_items pushBack [getNumber (configfile >> "CfgMagazines" >> _ammunationClass >> "mass"), _ammunationClass];
+						} else {
+							_groundHolder addMagazineAmmoCargo [_ammunationClass, 1, _x select 1]; 
+						};
+					};
+				} forEach _magazines;
+				_items sort false;
+				{
+					if (_x select 1 != "null000null") then {
+						if (player canAddItemToVest (_x select 1)) then {
+							player addItemToVest (_x select 1);
+						} else {
+							_groundHolder addMagazineCargoGlobal [_x select 1, 1]; 
+						};
+					};
+				} forEach _items;
 			};
 		} forEach (call vestArray);
 	};
@@ -431,9 +502,45 @@ storePurchaseHandle = _this spawn
 
 				// Confirm replace
 				if (backpack player != "" && {!(["backpack"] call _showReplaceConfirmMessage)}) exitWith {};
-
+				_items = backpackItems player;
+				_magazines = magazinesAmmoFull player;
+				_groundHolder = createVehicle ["groundweaponHolder", getPosATL player, [], 0, "CAN_COLLIDE"]; 
 				removeBackpack player;
 				player addBackpack _class;
+				_items = _items apply {  
+					if (isClass (configFile >> "CfgWeapons" >> _x)) then {
+						[getNumber (configfile >> "CfgWeapons" >> _x >> "mass"), _x];
+					} else {
+						if (isClass (configFile >> "CfgGlasses" >> _x)) then {
+							[getNumber (configfile >> "CfgGlasses" >> _x >> "mass"), _x];
+						} else {
+							if (isClass (configFile >> "CfgMagazines" >> _x)) then {
+								[0, "null000null"];
+							};
+						};
+					};
+				};
+				{
+					_ammunationClass = _x select 0;
+					_count = getNumber (configfile >> "CfgMagazines" >> _ammunationClass >> "count");
+					if (_x select 4 == "Backpack") then {
+						if (_x select 1 == _count) then {
+							_items pushBack [getNumber (configfile >> "CfgMagazines" >> _ammunationClass >> "mass"), _ammunationClass];
+						} else {
+							_groundHolder addMagazineAmmoCargo [_ammunationClass, 1, _x select 1]; 
+						};
+					};
+				} forEach _magazines;
+				_items sort false;
+				{
+					if (_x select 1 != "null000null") then {
+						if (player canAddItemToBackpack (_x select 1)) then {
+							player addItemToBackpack (_x select 1);
+						} else {
+							_groundHolder addMagazineCargoGlobal [_x select 1, 1]; 
+						};
+					};
+				} forEach _items;
 			};
 		} forEach (call backpackArray);
 	};

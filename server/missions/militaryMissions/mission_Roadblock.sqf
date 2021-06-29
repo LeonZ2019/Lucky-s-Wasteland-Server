@@ -19,13 +19,13 @@ _setupObjects =
 {
 	_missionPos = markerPos _missionLocation;
 	_markerDir = markerDir _missionLocation;
-	
-	_outpost = (call compile preprocessFileLineNumbers "server\missions\outposts\outpostsList.sqf") call BIS_fnc_selectRandom;
-	_objects = [_outpost, _missionPos, 0] call createOutpost;
 
 	//delete existing base parts and vehicles at location
 	_baseToDelete = nearestObjects [_missionPos, ["All"], 25];
-	{ deleteVehicle _x } forEach _baseToDelete; 	
+	{ deleteVehicle _x } forEach _baseToDelete;
+	
+	_outpost = (call compile preprocessFileLineNumbers "server\missions\outposts\roadblocksList.sqf") call BIS_fnc_selectRandom;
+	_objects = [_outpost, _missionPos, _markerDir] call createOutpost;
 	
 	/*_bargate = createVehicle ["Land_BarGate_F", _missionPos, [], 0, "NONE"];
 	_bargate setDir _markerDir;
@@ -39,7 +39,7 @@ _setupObjects =
 	_bunker2 setPosATL _bargate modelToWorld [-8,-2,-4.1];*/
 
 	_aiGroup = createGroup CIVILIAN;
-	[_aiGroup,_missionPos,12,15] spawn createCustomGroup3;
+	[_aiGroup,_missionPos,12,15] spawn createpoliceGroup;
 	
 	_missionHintText = format ["Enemies have set up an illegal roadblock and are stopping all vehicles! They need to be stopped!", militaryMissionColor];
 };
@@ -55,25 +55,6 @@ _failedExec =
 	
 };
 
-_drop_item = 
-{
-	private["_item", "_pos"];
-	_item = _this select 0;
-	_pos = _this select 1;
-
-	if (isNil "_item" || {typeName _item != typeName [] || {count(_item) != 2}}) exitWith {};
-	if (isNil "_pos" || {typeName _pos != typeName [] || {count(_pos) != 3}}) exitWith {};
-
-	private["_id", "_class"];
-	_id = _item select 0;
-	_class = _item select 1;
-
-	private["_obj"];
-	_obj = createVehicle [_class, _pos, [], 5, "None"];
-	_obj setPos ([_pos, [[2 + random 3,0,0], random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd);
-	_obj setVariable ["mf_item_id", _id, true];
-};
-
 _successExec =
 {
 	// Mission completed
@@ -83,6 +64,7 @@ _successExec =
 	[_box1, _randomBox] call fn_refillbox;
 
 	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach _objects;
+	[_locationsArray, _missionLocation, _objects] call setLocationObjects;
 
 	_successHintMessage = format ["The roadblock has been dismantled."];
 };

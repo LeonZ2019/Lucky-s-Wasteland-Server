@@ -9,7 +9,7 @@
 if (!isServer) exitwith {};
 #include "sideMissionDefines.sqf"
 
-private ["_nbUnits", "_wreckPos", "_wreck", "_box1", "_box2"];
+private ["_nbUnits", "_wreck", "_box1", "_box2"];
 
 _setupVars =
 {
@@ -21,16 +21,20 @@ _setupVars =
 _setupObjects =
 {
 	_missionPos = markerPos _missionLocation;
-	_wreckPos = _missionPos vectorAdd ([[25 + random 20, 0, 0], random 360] call BIS_fnc_rotateVector2D);
+	_wreckPos = _missionPos vectorAdd ([[random 10, 0, 0], random 360] call BIS_fnc_rotateVector2D);
+	_types = ["B_T_VTOL_01_vehicle_F", "O_T_VTOL_02_infantry_dynamicLoadout_F", "I_Heli_Transport_02_F", "O_Heli_Light_02_unarmed_F"];
+	_type = _types call BIS_fnc_selectRandom;
 
 	// Class, Position, Fuel, Ammo, Damage, Special
-	_wreck = ["O_Heli_Light_02_unarmed_F", _wreckPos, 0, 0, 1] call createMissionVehicle;
+	_wreck = [_type, _wreckPos, 0, 0, 0] call createMissionVehicle;
+	_wreck setDir random 360;
+	_wreck setDamage 1;
 
-	_box1 = createVehicle ["Box_NATO_WpsSpecial_F", _missionPos, [], 5, "None"];
+	_box1 = createVehicle ["Box_NATO_WpsSpecial_F", _missionPos, [], 2, "None"];
 	_box1 setDir random 360;
 	[_box1, "mission_USSpecial"] call fn_refillbox;
 
-	_box2 = createVehicle ["Box_East_WpsSpecial_F", _missionPos, [], 5, "None"];
+	_box2 = createVehicle ["Box_East_WpsSpecial_F", _missionPos, [], 2, "None"];
 	_box2 setDir random 360;
 	[_box2, "mission_USLaunchers"] call fn_refillbox;
 
@@ -40,7 +44,7 @@ _setupObjects =
 	[_aiGroup, _missionPos, _nbUnits] call createCustomGroup;
 
 	_missionPicture = getText (configFile >> "CfgVehicles" >> typeOf _wreck >> "picture");
-	_missionHintText = "A helicopter has come down under enemy fire!";
+	_missionHintText = "An aircraft has come down under enemy fire!";
 };
 
 _waitUntilMarkerPos = nil;

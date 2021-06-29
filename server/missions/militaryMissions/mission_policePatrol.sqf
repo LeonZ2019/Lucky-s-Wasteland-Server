@@ -11,7 +11,7 @@ private ["_convoyVeh","_veh1","_veh2","_veh3","_veh4","_veh5","_createVehicle","
 
 _setupVars =
 {
-	_missionType = "Altis Patrol";
+	_missionType = "Police Patrol";
 	_locationsArray = nil;
 };
 
@@ -41,11 +41,11 @@ _setupObjects =
 		_vehicle setDir _direction;
 		_aiGroup addVehicle _vehicle;
 
-		_soldier = [_aiGroup, _position] call createRandomSoldier; 
+		_soldier = [_aiGroup, _position] call createRandomPolice; 
 		_soldier moveInDriver _vehicle;
-		_soldier = [_aiGroup, _position] call createRandomSoldier; 
+		_soldier = [_aiGroup, _position] call createRandomPolice; 
 		_soldier moveInCommander _vehicle;
-		_soldier = [_aiGroup, _position] call createRandomSoldier; 
+		_soldier = [_aiGroup, _position] call createRandomPolice; 
 		_soldier moveInGunner _vehicle;
 
 		//_vehicle setVariable ["R3F_LOG_disabled", false, true]; // force vehicles to be unlocked

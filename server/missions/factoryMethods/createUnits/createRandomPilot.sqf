@@ -12,13 +12,12 @@
 
 if (!isServer) exitWith {};
 
-private ["_soldierTypes","_uniformTypes","_vestTypes","_backpackTypes","_weaponTypes","_group","_position","_soldier"];
+private ["_soldierTypes","_uniformTypes","_vestTypes","_weaponTypes","_group","_position","_soldier"];
 
 _headGearTypes = ["H_PilotHelmetFighter_O", "H_PilotHelmetFighter_B"];
 _soldierTypes = ["C_man_polo_1_F","C_man_polo_2_F","C_man_polo_3_F","C_man_polo_4_F","C_man_polo_5_F"];
 _uniformTypes = ["U_I_pilotCoveralls", "U_B_PilotCoveralls"];
 _vestTypes = ["V_PlateCarrier1_rgr","V_PlateCarrier2_rgr"];
-_backpackTypes = ["B_Parachute"];
 _weaponTypes = ["SMG_01_F","SMG_02_F","SMG_05_F","SMG_03C_TR_black"];
 
 _group = _this select 0;
@@ -28,7 +27,6 @@ _soldier = _group createUnit [_soldierTypes call BIS_fnc_selectRandom, _position
 
 _soldier addUniform (_uniformTypes call BIS_fnc_selectRandom);
 _soldier addVest (_vestTypes call BIS_fnc_selectRandom);
-_soldier addBackpack (_backpackTypes call BIS_fnc_selectRandom);
 
 _soldier addItemToVest "Chemlight_green";
 _soldier addItemToVest "SmokeShellGreen";

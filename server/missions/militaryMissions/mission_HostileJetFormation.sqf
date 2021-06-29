@@ -18,8 +18,8 @@ _setupVars =
 _setupObjects =
 {
 	_missionPos = markerPos (((call cityList) call BIS_fnc_selectRandom) select 0);
-
-	_planeChoices =["B_Plane_CAS_01_F", "O_Plane_CAS_02_F", "I_Plane_Fighter_03_CAS_F"];
+	//"B_Plane_CAS_01_F", "O_Plane_CAS_02_F", "I_Plane_Fighter_03_CAS_F"
+	_planeChoices =["B_Plane_Fighter_01_F", "O_Plane_Fighter_02_F","I_Plane_Fighter_04_F"];
 
 	_convoyVeh = _planeChoices call BIS_fnc_selectRandom;
 
@@ -49,7 +49,7 @@ _setupObjects =
 		_soldier moveInDriver _vehicle;
 		_vehicle allowCrewInImmobile true;
 		
-		// Reset all flares to 10
+		// Reset all flares to 60 or 25%
 		if (_type isKindOf "Air") then
 		{
 			{
@@ -58,11 +58,10 @@ _setupObjects =
 					_vehicle removeMagazinesTurret [_x, [-1]];
 				};
 			} forEach getArray (configFile >> "CfgVehicles" >> _type >> "magazines");
-
-			//_vehicle addMagazineTurret ["60Rnd_CMFlare_Chaff_Magazine", [10]];
+			_vehicle addMagazineTurret ["240Rnd_CMFlare_Chaff_Magazine", [-1], 60];
 		};
 		_vehicle lock 2;
-		//[_vehicle, _aiGroup] spawn checkMissionVehicleLock;
+		[_vehicle, _aiGroup] spawn checkMissionVehicleLock;
 		_vehicle
 	};
 

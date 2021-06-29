@@ -68,7 +68,7 @@ A3W_bountyFee = 50;
 A3W_bountyKillsLifetime = 3*24;
 
 // Persistence settings
-A3W_savingMethod = "extDB";      // Method used for saving data ("profile", "iniDB", "extDB")
+A3W_savingMethod = "iniDB";        // Method used for saving data ("profile", "iniDB", "extDB")
 A3W_playerSaving = 1;              // Save player data like position, health, inventory, etc. (0 = no, 1 = yes)
 A3W_moneySaving = 1;               // If playerSaving = 1, save player money amount (0 = no, 1 = yes)
 A3W_playerStatsGlobal = 0;         // If playerSaving = 1 and savingMethod = "extDB", players' stats on the scoreboard will be their all-time global values from all servers of your database (0 = no, 1 = yes)
@@ -154,7 +154,7 @@ A3W_payrollAmount = 500;           // Amount of money rewarded per territory on 
 A3W_serverMissions = 1;            // Enable server missions (0 = no, 1 = yes)
 A3W_missionsDifficulty = 0;        // Missions difficulty (0 = normal, 1 = hard)
 A3W_missionFarAiDrawLines = 1;     // Draw small red lines on the map from mission markers to individual units & vehicles which are further away than 75m from the objective (0 = no, 1 = yes)
-A3W_missionsQuantity = 8;          // Number of missions running at the same time (0 to 11)
+A3W_missionsQuantity = 9;          // Number of missions running at the same time (0 to 11)
 A3W_heliPatrolMissions = 1;        // Enable missions involving flying helicopters piloted by AI (0 = no, 1 = yes)
 A3W_jetPatrolMissions = 1;        // Enable missions involving flying jet piloted by AI (0 = no, 1 = yes)
 A3W_policeMissions = 1;        // Enable missions which will have police controlling altis (0 = no, 1 = yes)

@@ -17,7 +17,6 @@ MainMissions =
 	["mission_MBT", 1],
 	["mission_LightArmVeh", 1],
 	["mission_ArmedHeli", 1],
-	["mission_Hackers",5],
 	["mission_CivHeli", 1]
 ];
 
@@ -59,8 +58,7 @@ if !(ForestMissionMarkers isEqualTo []) then
 {
 	SideMissions append
 	[
-		["mission_AirWreck", 0.5],
-		["mission_WepCache", 1]
+		["mission_AirWreck", 0.75]
 	];
 };
 

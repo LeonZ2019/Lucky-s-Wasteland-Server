@@ -44,34 +44,6 @@ for "_i" from 1 to _nbUnits do
 	switch (true) do
 	{
 		// AT every 5 units
-		case (_i % 5 == 0):
-		{
-			_unit addHeadgear "H_ParadeDressCap_01_LDF_F";
-			_unit addBackpack "B_CivilianBackpack_01_Everyday_Black_F";
-
-			_unit addWeapon "arifle_Katiba_C_F";
-			_unit addPrimaryWeaponItem "acc_flashlight";
-			_unit addPrimaryWeaponItem "optic_ACO_grn";
-
-			_unit addWeapon "launch_NLAW_F";
-			_unit addSecondaryWeaponItem "NLAW_F";
-
-			for "_i" from 1 to 5 do {_unit addItemToUniform "16Rnd_9x21_Mag";};
-			for "_i" from 1 to 5 do {_unit addItemToVest "30Rnd_65x39_caseless_green";};
-			for "_i" from 1 to 2 do {_unit addItemToBackpack "NLAW_F";};
-		};
-		// Sniper every 6 units
-		case (_i % 6 == 0):
-		{
-			_unit addHeadgear "H_Cap_police";
-
-			_unit addWeapon "srifle_DMR_06_olive_F";
-			_unit addPrimaryWeaponItem "optic_KHS_old";
-			_unit addPrimaryWeaponItem "bipod_03_F_oli";
-
-			for "_i" from 1 to 5 do {_unit addItemToVest "20Rnd_762x51_Mag";};
-		};
-		// AA every 7 units
 		case (_i % 7 == 0):
 		{
 			_unit addHeadgear "H_ParadeDressCap_01_LDF_F";
@@ -80,13 +52,25 @@ for "_i" from 1 to _nbUnits do
 			_unit addWeapon "arifle_Katiba_C_F";
 			_unit addPrimaryWeaponItem "acc_flashlight";
 			_unit addPrimaryWeaponItem "optic_ACO_grn";
-
-			_unit addWeapon "launch_I_Titan_F";
-			_unit addSecondaryWeaponItem "Titan_AA";
+			_weaponsArray = [["launch_NLAW_F","NLAW_F"],["launch_I_Titan_F", "Titan_AA"]];
+			_weapon = _weaponsArray call BIS_fnc_selectRandom;
+			_unit addWeapon (_weapon select 0);
+			_unit addSecondaryWeaponItem (_weapon select 1);
 
 			for "_i" from 1 to 5 do {_unit addItemToUniform "16Rnd_9x21_Mag";};
 			for "_i" from 1 to 5 do {_unit addItemToVest "30Rnd_65x39_caseless_green";};
-			for "_i" from 1 to 2 do {_unit addItemToBackpack "Titan_AA";};
+			for "_i" from 1 to 2 do {_unit addItemToBackpack (_weapon select 1);};
+		};
+		// Sniper every 6 units
+		case (_i % 5 == 0):
+		{
+			_unit addHeadgear "H_Cap_police";
+
+			_unit addWeapon "srifle_DMR_06_olive_F";
+			_unit addPrimaryWeaponItem "optic_KHS_old";
+			_unit addPrimaryWeaponItem "bipod_03_F_oli";
+
+			for "_i" from 1 to 5 do {_unit addItemToVest "20Rnd_762x51_Mag";};
 		};
 		// Rifleman
 		default

@@ -4,7 +4,6 @@
 //	@file Version: 1.0
 //	@file Name: PatrolConvoy_1.sqf
 //	@file Author: [GoT] JoSchaap, [404] Del1te, AgentRev
-//	@file Created: 13/02/2014 22:52
 
 // starting positions for this route
 _starts =
@@ -14,7 +13,7 @@ _starts =
 	[7943.5, 21317],
 	[7939.63, 21329],
 	[7937.88, 21345],
-	[7937.75, 21361],
+	[7937.75, 21361]
 ];
 
 // starting directions in which the vehicles are spawned on this route

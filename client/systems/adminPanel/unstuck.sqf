@@ -24,8 +24,9 @@ if (pselect5 != "exit") then
 	_name = pselect5;
 	{    
 	if (isPlayer _x && (name _x == _name)) then {    
-          _unstuck = [(getPosASL _x select 0), (getPosASL _x select 1), (getPosASL _x select 2) + 1000]; 
-		  _x setposATL _unstuck
+          //_unstuck = [(getPosASL _x select 0), (getPosASL _x select 1), (getPosASL _x select 2) + 1000]; 
+		  //_x setposATL _unstuck
+		  _x setPosASL (_x modelToWorld [0,0,1500]);
 	}  
 	} forEach playableUnits;
 };

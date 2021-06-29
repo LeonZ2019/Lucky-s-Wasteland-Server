@@ -22,9 +22,21 @@ while {pselect5 == ""} do
 if (pselect5 != "exit") then
 {
 	_name = pselect5;
-	{    
-	if (isPlayer _x && (name _x == _name)) then {    
-          vehicle _x setPos (position player);
-	}  
+	{
+	if (isPlayer _x && (name _x == _name)) then {
+		private "_waterPos";
+		_pos = position player;
+		if (surfaceIsWater _pos) then
+		{
+			_top = +_pos;
+			_top set [2, (_top select 2) + 1000];
+			_buildings = (lineIntersectsSurfaces [_top, _pos, objNull, objNull, true, -1, "GEOM", "NONE"]) select {(_x select 2) isKindOf "Building"};
+			if !(_buildings isEqualTo []) then
+			{
+				_waterPos = _buildings select 0 select 0;
+			};
+		};
+		if (isNil "_waterPos") then { vehicle _x setPos _pos } else { vehicle _x setPosASL _waterPos };
+	}
 	} forEach playableUnits;
 };

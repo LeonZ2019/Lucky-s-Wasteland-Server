@@ -5,7 +5,7 @@
 //	@file Author: JoSchaap, AgentRev, LouD
 
 if (!isServer) exitwith {};
-#include "sideMissionDefines.sqf";
+#include "militaryMissionDefines.sqf";
 
 private ["_positions", "_boxes1", "_currBox1", "_box1"];
 
@@ -31,7 +31,7 @@ _setupObjects =
 	_box1 setDir random 360;
 	_box1 setVariable ["R3F_LOG_disabled", true, true];
 	
-	_missionHintText = format ["A Sniper Nest has been spotted. Head to the marked area and Take them out! Be careful they are fully armed and dangerous!", sideMissionColor];
+	_missionHintText = format ["A Sniper Nest has been spotted. Head to the marked area and Take them out! Be careful they are fully armed and dangerous!", militaryMissionColor];
 };
 
 _waitUntilMarkerPos = nil;
@@ -51,4 +51,4 @@ _successExec =
 	_successHintMessage = format ["The snipers are dead! Well Done!"];
 };
 
-_this call sideMissionProcessor;
+_this call militaryMissionProcessor;
