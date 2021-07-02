@@ -143,7 +143,17 @@ storePurchaseHandle = _this spawn
 	{
 		_class = _itemData param [1];
 		_price = _itemData param [2];
-
+		if (ctrlText 5300 == "Vehicle Store (15% tax)") then {
+			_price = _price * 1.15;
+		} else {
+			if (ctrlText 5300 == "Vehicle Store (5% discount)") then {
+			_price = _price * 0.95;
+			} else {
+				if (ctrlText 5300 == "Vehicle Store (10% discount)") then {
+					_price = _price * 0.9;
+				};
+			};
+		};
 		// Ensure the player has enough money
 		if (_price > _playerMoney) exitWith
 		{

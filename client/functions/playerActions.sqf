@@ -11,7 +11,7 @@
 	["Holster Weapon", { player action ["SwitchWeapon", player, player, 100] }, [], -11, false, false, "", "vehicle player == player && currentWeapon player != '' && stance player != 'UNDEFINED' && (stance player != 'CROUCH' || currentWeapon player != handgunWeapon player)"], // A3 v1.58 bug, holstering handgun while crouched causes infinite anim loop
 	//["Unholster Primary Weapon", { player action ["SwitchWeapon", player, player, 0] }, [], -11, false, false, "", "vehicle player == player && currentWeapon player == '' && primaryWeapon player != ''"],
 
-	["<img image='client\icons\flat_grass.paa'/> Flat Grass", "client\actions\flat_grass.sqf", [], 1, false, false, "", "vehicle player == player && !surfaceIsWater position player && getPosATL player select 2 <= 0.15"],
+	["<img image='client\icons\flat_grass.paa'/> Flatten Grass", "client\actions\flat_grass.sqf", [], 1, false, false, "", "vehicle player == player && !surfaceIsWater position player && getPosATL player select 2 <= 0.15"],
 
 	[format ["<img image='client\icons\playerMenu.paa' color='%1'/> <t color='%1'>[</t>Player Menu<t color='%1'>]</t>", "#FF8000"], "client\systems\playerMenu\init.sqf", [], -10, false], //, false, "", ""],
 
@@ -25,7 +25,7 @@
 	["<img image='client\icons\r3f_unlock.paa'/> Acquire Vehicle Ownership", "client\actions\takeOwnership.sqf", [], 1, false, false, "", "[] call fn_canTakeOwnership isEqualTo ''"],
 
 	["[0]"] call getPushPlaneAction,
-	["Push vehicle", "server\functions\pushVehicle.sqf", [2.5, true], 1, false, false, "", "[2.5] call canPushVehicleOnFoot"],
+	["Push vehicle", "server\functions\pushVehicle.sqf", [4, true], 1, false, false, "", "[4] call canPushVehicleOnFoot"],
 	["Push vehicle forward", "server\functions\pushVehicle.sqf", [2.5], 1, false, false, "", "[2.5] call canPushWatercraft"],
 	["Push vehicle backward", "server\functions\pushVehicle.sqf", [-2.5], 1, false, false, "", "[-2.5] call canPushWatercraft"],
 

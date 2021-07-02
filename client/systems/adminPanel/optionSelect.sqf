@@ -74,7 +74,7 @@ if (_uid call isAdmin) then
 						true
 					}] call BIS_fnc_addStackedEventHandler;
 					hint "Click on map to teleport";
-					openMap true;
+					if (!visibleMap) then {openMap true;};
 				};
 				case 6: //Teleport player to me
 				{
@@ -114,16 +114,6 @@ if (_uid call isAdmin) then
 				case 13: // infinite ammo
 				{
 					execVM "client\systems\adminPanel\infiniteAmmo.sqf";
-				};
-				case 14: // virtual arsenal
-				{
-					closeDialog 0;
-					execVM "client\systems\adminPanel\virtualArsenal.sqf";
-				};
-				case 15: // virtual garage
-				{
-					closeDialog 0;
-					execVM "client\systems\adminPanel\virtualGarage.sqf";
 				};
 			};
 		};
@@ -166,6 +156,16 @@ if (_uid call isAdmin) then
 				case 6: //Show server FPS function
 				{
 					hint format["Server FPS: %1",serverFPS];
+				};
+				case 7: // paint vehicle
+				{
+					closeDialog 0;
+					createDialog "A3W_vehPaintMenu";
+				};
+				case 8:
+				{
+					closeDialog 0;
+					call ps_access;
 				};
 			};
 		};

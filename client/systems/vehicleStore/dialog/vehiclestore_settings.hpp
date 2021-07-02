@@ -57,7 +57,7 @@ class vehshopd
 
 		class DialogTitleText: w_RscTextCenter
 		{
-			idc = -1;
+			idc = 5300; //vehshop_title
 			text = "Vehicle Store";
 			sizeEx = 0.06 * TEXT_SCALE;
 
@@ -280,7 +280,7 @@ class vehshopd
 
 		class StoreButton6: w_RscButton
 		{
-			idc = vehshop_button5;
+			idc = vehshop_button6;
 			action = "[6] call populateVehicleStore";
 			text = "Boats";
 			sizeEx = VehStoreButton_textSize;

@@ -25,7 +25,8 @@ _setupObjects =
 
 	// Class, Position, Fuel, Ammo, Damage, Special
 	_vehicle = [_vehicleClass, _missionPos] call createMissionVehicle;
-
+	_vehicle setFuel 0.5;
+	_vehicle setDamage 0.25;
 	// Remove AGM missiles for balance
 	switch (true) do
 	{

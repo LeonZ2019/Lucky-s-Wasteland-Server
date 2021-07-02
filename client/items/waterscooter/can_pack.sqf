@@ -31,7 +31,7 @@ switch (true) do {
 	case (vehicle player != player): {_text = ERR_IN_VEHICLE};
 	case (MF_ITEMS_WATER_SCOOTER call mf_inventory_is_full): {_error = ERR_ALREADY_HAVE_WATERSCOOTER};
 	case (!alive _veh): {_error = ERR_VEHICLE_NOT_ALIVE};
-	case ((count (crew _veh)) == 0): {_error = ERR_VEHICLE_NOT_EMPTY};
+	case ((count (crew _veh)) != 0): {_error = ERR_VEHICLE_NOT_EMPTY};
 	default {_error = ""};
 };
 _error;

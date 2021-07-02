@@ -109,15 +109,17 @@ _successExec =
 
 	_Boxes = ["Box_IND_Wps_F","Box_East_Wps_F","Box_NATO_Wps_F","Box_NATO_AmmoOrd_F","Box_NATO_Grenades_F","Box_East_WpsLaunch_F","Box_NATO_WpsLaunch_F","Box_East_WpsSpecial_F","Box_NATO_WpsSpecial_F"];    
 	_currBox1 = _Boxes call BIS_fnc_selectRandom;
-	_box1 = createVehicle [_currBox1, (getPosATL _veh) vectorAdd ([[_veh call fn_vehSafeDistance, 0, 0], random 360] call BIS_fnc_rotateVector2D), [], 5, "None"];
+	_box1 = createVehicle [_currBox1, _lastPos, [], 5, "None"];
 	_box1 setDir random 360;
+	[_box2, "mission_Main_A3snipers"] call fn_refillbox;
 
 	_currBox2 = _Boxes call BIS_fnc_selectRandom;
 	while {_currBox1 == _currBox2} do {
 		_currBox2 = _Boxes call BIS_fnc_selectRandom;
 	};
-	_box2 = createVehicle [_currBox2, (getPosATL _veh) vectorAdd ([[_veh call fn_vehSafeDistance, 0, 0], random 360] call BIS_fnc_rotateVector2D), [], 5, "None"];
+	_box2 = createVehicle [_currBox2, _lastPos, [], 5, "None"];
 	_box2 setDir random 360;
+	[_box2, "mission_USLaunchers"] call fn_refillbox;
 
 	_successHintMessage = "The sky is clear again, the enemy patrol was taken out! Ammo crates and some money have fallen near the pilot.";
 };

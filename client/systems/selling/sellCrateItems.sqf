@@ -72,10 +72,10 @@ storeSellingHandle = _this spawn
 	else
 	{
 		// Add total sell value to confirm message
-		_confirmMsg = format ["You will obtain $%1 for:<br/>", [_sellValue] call fn_numbersText];
+		_confirmMsg = format ["You will obtain $%1 for selling %2 content", [_sellValue] call fn_numbersText, _objName];
 
 		// Add item quantities and names to confirm message
-		{
+		/*{
 			_item = _x select 0;
 			_itemQty = _x select 1;
 
@@ -84,7 +84,7 @@ storeSellingHandle = _this spawn
 				_itemName = _x select 2;
 				_confirmMsg = _confirmMsg + format ["<br/>%1 x  %2%3", _itemQty, _itemName, if (PRICE_DEBUGGING) then { format [" ($%1)", [_x select 3] call fn_numbersText] } else { "" }];
 			};
-		} forEach _allCrateItems;
+		} forEach _allCrateItems;*/
 
 		// Display confirmation
 		if ([parseText _confirmMsg, "Confirm", "Sell", true] call BIS_fnc_guiMessage) then

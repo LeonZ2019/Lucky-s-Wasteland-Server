@@ -106,6 +106,16 @@ else
 				_objet enableCollisionWith _transporteur;
 
 				player globalChat format [STR_R3F_LOG_action_charger_deplace_fait, getText (configFile >> "CfgVehicles" >> (typeOf _transporteur) >> "displayName")];
+				/*waitUntil {!alive _transporteur};
+				if (!isNull attachedTo _objet) then
+				{
+					if (unitIsUAV _objet) then
+					{
+						[_objet, 1] call A3W_fnc_setLockState; // unlock
+						["enableDriving", _objet] call A3W_fnc_towingHelper;
+					};
+					_objet setPos ([position _transporteur, [[2 + random 3,0,0], random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd);
+				};*/
 			}
 			else
 			{

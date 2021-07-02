@@ -103,6 +103,19 @@ else
 					R3F_LOG_objet_selectionne = objNull;
 
 					player globalChat format [STR_R3F_LOG_action_charger_selection_fait, getText (configFile >> "CfgVehicles" >> (typeOf _objet) >> "displayName")];
+					/*waitUntil {!alive _transporteur};
+					if (!isNull attachedTo _objet) then
+					{
+						detach _objet;
+						_objet setVariable ["R3F_LOG_est_transporte_par", objNull, true];
+						if (unitIsUAV _objet) then
+						{
+							[_objet, 1] call A3W_fnc_setLockState;
+							["enableDriving", _objet] call A3W_fnc_towingHelper;
+						};
+						_transportNearby = [position _transporteur, [[2 + random 3,0,0], random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd;
+						_objet setPos _transportNearby;
+					};*/
 				}
 				else
 				{

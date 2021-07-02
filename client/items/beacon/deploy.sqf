@@ -11,6 +11,7 @@
 #define ANIM "AinvPknlMstpSlayWrflDnon_medic"
 #define ERR_CANCELLED "Action Cancelled"
 #define ERR_IN_VEHICLE "Action Failed! You can't do this in a vehicle"
+#define ERR_NOSTANCE "Action Failed! You can't do this in current stance"
 private ["_hasFailed", "_success","_pos","_uid","_beacon"];
 _hasFailed = {
 	private ["_progress", "_failed", "_text"];
@@ -20,6 +21,7 @@ _hasFailed = {
 		case (!alive player): {};
 		case (doCancelAction) :{doCancelAction = false; _text = ERR_CANCELLED;};
 		case (vehicle player != player): {_text = ERR_IN_VEHICLE};
+		case (stance player == "UNDEFINED"): {_text = ERR_NOSTANCE};
 		default {
 			_text = format["Spawn Beacon %1%2 Deployed", round(_progress*100), "%"];
 			_failed = false;

@@ -31,6 +31,11 @@ switch (toLower _action) do
 		[call FAR_FindTarget] spawn FAR_Drag;
 	};
 
+	/*case "action_drag_body":
+	{
+		[call FAR_FindDeadbody] spawn FAR_SwimDrag;
+	};*/
+
 	case "action_release":
 	{
 		[] spawn FAR_Release;

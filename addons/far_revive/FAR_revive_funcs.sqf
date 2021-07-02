@@ -21,6 +21,7 @@ FAR_Player_Actions =
 			["<t color='#00FF00'>" + "Revive" + "</t>", "addons\FAR_revive\FAR_handleAction.sqf", ["action_revive"], 100, true, true, "", FAR_Check_Revive], // also defined in addons\UAV_Control\functions.sqf
 			["<t color='#00FF00'>" + "Stabilize" + "</t>", "addons\FAR_revive\FAR_handleAction.sqf", ["action_stabilize"], 99, true, true, "", FAR_Check_Stabilize],
 			["<t color='#FFFF00'>" + "Drag" + "</t>", "addons\FAR_revive\FAR_handleAction.sqf", ["action_drag"], 98, true, true, "", FAR_Check_Dragging],
+			// ["<t color='#FF0000'>" + "Drag Dead Body" + "</t>", "addons\FAR_revive\FAR_handleAction.sqf", ["action_drag_body"], 99, true, true, "", FAR_Check_Dead_Body],
 			["<t color='#FFFF00'>" + "Eject injured units from vehicle" + "</t>", "addons\FAR_revive\FAR_handleAction.sqf", ["action_eject"], 5.2, false, true, "", FAR_Check_Eject_Injured]
 		];
 	};
@@ -251,6 +252,74 @@ FAR_Release =
 }
 call mf_compile;
 
+/*FAR_SwimDrag =
+{
+	player globalChat "A";
+	FAR_isDragging = true;
+	private ["_target", "_actions"];
+	player globalChat "B";
+	_target = _this select 0;
+	player globalChat "C";
+	_target attachTo [player, [0, 1, 0]];
+	_target setVariable ["FAR_draggedBy", player, true];
+	player globalChat "E";
+	player setVariable ["FAR_isDragging", _target];
+
+	_actions =
+	[
+		[player, ["<t color='#FFFF00'>" + "Load Body in vehicle" + "</t>", "addons\FAR_revive\FAR_handleAction.sqf", ["action_load"], 103, true, true, "", FAR_Check_Load_Dragged]] call fn_addManagedAction,
+		player addAction ["<t color='#FF0000'>" + "Release Body" + "</t>", "addons\FAR_revive\FAR_handleAction.sqf", ["action_release"], 102]
+	];
+	player globalChat "F";
+	waitUntil {!alive player || UNCONSCIOUS(player) || !FAR_isDragging || isNull DRAGGED_BY(_target)};
+	player globalChat "H";
+	if (!isNull _target) then
+	{
+		if (!isNull attachedTo _target) then { detach _target };
+		_target setVariable ["FAR_draggedBy", nil, true];
+	};
+	player globalChat "I";
+	FAR_isDragging = false;
+	player setVariable ["FAR_isDragging", objNull];
+
+	{ [player, _x] call fn_removeManagedAction } forEach _actions;
+	player globalChat "K";
+}
+call mf_compile;
+
+FAR_Load_Body_Vehicle =
+{
+	params [["_veh",cursorTarget]];
+	private "_draggedUnit";
+	_draggedUnit = player getVariable ["FAR_isDragging", objNull];
+
+	if (alive player && !alive _draggedUnit && attachedTo _draggedUnit == player) then
+	{
+		FAR_isDragging = false;
+		if ([_draggedUnit, _veh, true] call fn_canGetIn) then
+		{
+			_draggedUnit setVariable ["FAR_cancelAutoEject", true, true];
+			detach _draggedUnit;
+			[_draggedUnit, _veh, true] call A3W_fnc_getInFast;
+		};
+	};
+}
+call mf_compile;
+
+FAR_Eject_Body =
+{
+	params [["_veh",cursorTarget]];
+	{
+		moveOut _x;
+		unassignVehicle _x;
+		if (!isNull objectParent _x) then
+		{
+			_x setPos (_x modelToWorldVisual [0,0,0]);
+		};
+	} forEach crew _veh;
+}
+call mf_compile;*/
+
 FAR_Drag_Load_Vehicle =
 {
 	params [["_veh",cursorTarget]];
@@ -397,6 +466,35 @@ FAR_FindTarget =
 	_target
 }
 call mf_compile;
+/*
+FAR_FindDeadbody =
+{
+	private _target = cursorTarget;
+	if (!alive _target || _target distance HEALER > FAR_Max_Distance) then
+	{
+		_target = objNull;
+		private ["_unit", "_valid"];
+		{  //ATL equal to position of target select 2
+		// surfaceIsWater position target
+			_unit = _x;
+			_valid = true;
+			if (HEALER == player) then
+			{
+				_relDir = player getRelDir _unit;
+				if (_relDir > 180) then { _relDir = _relDir - 360 };
+				_valid = (abs _relDir <= 90); // medic must have target visible within a 180° horizontal FoV
+			};
+			if (_valid && (getPosATL _unit select 2) < 0.02 && surfaceIsWater (position _unit) && !alive _unit) exitWith 
+			{
+				_target = _unit;
+				player globalChat "found target";
+			};
+		} forEach nearestObjects [HEALER, ["Man"], FAR_Max_Distance];
+		//((HEALER modelToWorldVisual [0,0,0]) nearEntities ["CAManBase", FAR_Max_Distance]);
+	};
+	_target
+}
+call mf_compile;*/
 
 ////////////////////////////////////////////////
 // General Injured Action Check
@@ -419,6 +517,13 @@ FAR_Check_Dragging =
 	(call FAR_Check_Injured_Action && {["Unconscious", animationState _target] call fn_startsWith})
 }
 call mf_compile;
+
+/*FAR_Check_Dead_Body =
+{
+	private _target = call FAR_FindDeadbody;
+	(alive player && !FAR_isDragging && !isNull _target && {["deadstate", animationState _target] call fn_startsWith}) // Make sure player is alive and target is an dead unit
+}
+call mf_compile;*/
 
 ////////////////////////////////////////////////
 // Stabilize Action Check

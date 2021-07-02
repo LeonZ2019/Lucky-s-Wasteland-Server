@@ -16,7 +16,7 @@ _leader = _group createUnit ["C_man_polo_1_F", [(_pos select 0) + 10, _pos selec
 _leader addUniform "U_B_FullGhillie_ard";
 _leader addVest "V_Chestrig_rgr";
 _leader addWeapon "srifle_LRR_camo_F";
-_leader addPrimaryWeaponItem "optic_Nightstalker";
+_leader addPrimaryWeaponItem "optic_LRPS";
 for "_i" from 1 to 5 do {_leader addMagazine "7Rnd_408_Mag";};
 _leader addMagazine "HandGrenade";
 

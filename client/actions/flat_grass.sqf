@@ -43,7 +43,7 @@ mutexScriptInProgress = false;
 
 if (_success) then {
 	_cutter= "Land_ClutterCutter_large_F" createVehicle [0,0,0];
-	_cutter setPos (player modelToWorld [0,5,0]);
+	_cutter setPos (player modelToWorld [0,4,0]);
 	_cutter setDir (getDir player + 45);
     deleteVehicle _cutter;
 	["Action Completed!", 5] call mf_notify_client;

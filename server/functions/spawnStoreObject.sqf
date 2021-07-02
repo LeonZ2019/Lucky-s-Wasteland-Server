@@ -114,6 +114,28 @@ if (_key != "" && _player isKindOf "Man" && {_isGenStore || _isGunStore || _isVe
 				_marker = _marker + "_antiAirSpawn";
 			};
 		};
+		_itemPrice = _itemEntry select 2;
+		switch (_npcName) do
+		{
+			case "VehStore8";
+			case "VehStore9":
+			{
+				_itemPrice = _itemPrice * 1.15;
+			};
+			case "VehStore5":
+			{
+				_itemPrice = _itemPrice * 0.9;
+			};
+			case "VehStore1";
+			case "VehStore2";
+			case "VehStore3";
+			case "VehStore6";
+			case "VehStore7":
+			{
+				_itemPrice = _itemPrice * 0.95;
+			};
+		};
+		_itemEntry set [2, _itemPrice];
 	};
 
 	if (!isNil "_itemEntry" && markerShape _marker != "") then
