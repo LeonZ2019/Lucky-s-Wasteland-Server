@@ -35,7 +35,7 @@ _resupplyThread = [_vehicle, _unit] spawn
 	_vehName = getText (_vehCfg >> "displayName");
 	_isUAV = (round getNumber (_vehCfg >> "isUav") >= 1);
 	_isStaticWep = _vehClass isKindOf "StaticWeapon";
-	_isAntiAir = _vehClass in ["B_SAM_System_02_F", "B_SAM_System_01_F", "B_AAA_System_01_F", "B_Radar_System_01_F", "B_SAM_System_03_F", "O_Radar_System_02_F", "O_SAM_System_04_F"];
+	_isAntiAir = _vehClass in ["B_SAM_System_02_F", "B_SAM_System_01_F", "B_AAA_System_01_F", "B_Radar_System_01_F", "B_SAM_System_03_F", "O_Radar_System_02_F", "O_SAM_System_04_F", "B_Ship_MRLS_01_F", "B_Ship_Gun_01_F"];
 	scopeName "resupplyTruckThread";
 
 	_price = 1000; // price = 1000 for vehicles not found in vehicle store
@@ -77,7 +77,7 @@ _resupplyThread = [_vehicle, _unit] spawn
 			};
 
 			// Abort if vehicle is no longer local, otherwise commands won't do anything
-			_checkCondition = {!local _vehicle};
+			_checkCondition = {!local _vehicle && !_isAntiAir};
 			if (call _checkCondition) exitWith
 			{
 				_pauseText = "Take back control of the vehicle.";

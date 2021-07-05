@@ -7,7 +7,7 @@
 if (!isServer) exitwith {};
 #include "militaryMissionDefines.sqf";
 
-private ["_convoyVeh","_veh1","_veh2","_veh3","_veh4","_veh5","_createVehicle","_pos","_rad","_vehiclePosArray","_vPos1","_vPos2","_vPos3","_vehiclePos1","_vehiclePos2","_vehiclePos3","_vehiclePos4","_vehicles","_leader","_speedMode","_waypoint","_vehicleName","_numWaypoints","_cash","_box1","_box2","_box3"];
+private ["_convoyVeh","_veh1","_veh2","_veh3","_veh4","_veh5","_createVehicle","_pos","_rad","_vehiclePosArray","_vPos1","_vPos2","_vPos3","_vehiclePos1","_vehiclePos2","_vehiclePos3","_vehiclePos4","_vehicles","_leader","_speedMode","_waypoint","_vehicleName","_numWaypoints","_cash","_box1","_box2"];
 
 _setupVars =
 {
@@ -20,7 +20,7 @@ _setupObjects =
 	_town = (call cityList) call BIS_fnc_selectRandom;
 	_missionPos = markerPos (_town select 0);
 
-	_convoyVeh = ["I_MRAP_03_hmg_F","I_MBT_03_cannon_F","O_APC_Tracked_02_AA_F","I_MBT_03_cannon_F","I_MRAP_03_gmg_F"];
+	_convoyVeh = ["I_MRAP_03_hmg_F","I_MRAP_03_gmg_F","I_APC_Wheeled_03_cannon_F","I_MBT_03_cannon_F","I_MRAP_03_gmg_F"];
 	
 	_veh1 = _convoyVeh select 0;
 	_veh2 = _convoyVeh select 1;
@@ -135,12 +135,8 @@ _successExec =
 	_box2 = "Box_NATO_Wps_F" createVehicle getMarkerPos _marker;
     [_box2,"mission_USSpecial2"] call fn_refillbox;
 	_box2 allowDamage false;
-	
-	_box3 = "Box_NATO_Support_F" createVehicle getMarkerPos _marker;
-    [_box3,"mission_Main_A3snipers"] call fn_refillbox;
-	_box3 allowDamage false;
-	
-	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach [_box1, _box2, _box3];
+
+	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach [_box1, _box2];
 
 	_successHintMessage = "The patrol has been stopped, the money, crates and vehicles are yours to take.";
 };

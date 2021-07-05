@@ -7,7 +7,7 @@
 if (!isServer) exitwith {};
 #include "militaryMissionDefines.sqf";
 
-private ["_positions", "_boxes1", "_currBox1", "_box1"];
+private ["_positions", "_boxes1", "_currBox1", "_box1", "_box2"];
 
 _setupVars =
 {
@@ -55,6 +55,7 @@ _successExec =
 {
 	// Mission completed
 	_box1 setVariable ["R3F_LOG_disabled", false, true];
+	_box2 setVariable ["R3F_LOG_disabled", false, true];
 	_successHintMessage = format ["The snipers are dead! Well Done!"];
 };
 

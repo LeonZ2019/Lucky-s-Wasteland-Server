@@ -7,7 +7,7 @@
 if (!isServer) exitwith {};
 #include "militaryMissionDefines.sqf";
 
-private ["_planeChoices", "_convoyVeh", "_veh1", "_createVehicle", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_cash", "_boxes1", "_currBox1", "_boxes2", "_currBox2", "_box1", "_box2"];
+private ["_planeChoices", "_convoyVeh", "_veh1", "_createVehicle", "_vehicle", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_cash", "_boxes1", "_currBox1", "_box1"];
 
 _setupVars =
 {
@@ -47,22 +47,23 @@ _setupObjects =
 		// add pilot
 		_soldier = [_aiGroup, _position] call createRandomPilot; 
 		_soldier moveInDriver _vehicle;
-		// lock the vehicle untill the mission is finished and initialize cleanup on it
-		[_vehicle, _aiGroup] spawn checkMissionVehicleLock;
+		_vehicle addEventHandler ["GetOut", {
+			params ["_vehicle", "_role", "_unit", "_turret"];
+			_this select 2 setDamage 1;
+		}];
 		_vehicle
 	};
 	
 	_aiGroup = createGroup CIVILIAN;
 	
 	_vehicle = [_veh1, _missionPos vectorAdd ([[random 50, 0, 0], random 360] call BIS_fnc_rotateVector2D), 0] call _createVehicle;
-	_vehicle allowCrewInImmobile true;
 	_leader = effectiveCommander _vehicle;
 	_aiGroup selectLeader _leader;
 	_leader setRank "LIEUTENANT";
-	
-	_aiGroup setCombatMode "RED";
+
+	_aiGroup setCombatMode "YELLOW";
 	_aiGroup setBehaviour "COMBAT";
-	_aiGroup setFormation "STAG COLUMN";
+	_aiGroup setFormation "DIAMOND";
 	
 	_speedMode = if (missionDifficultyHard) then { "NORMAL" } else { "LIMITED" };
 	
@@ -95,31 +96,33 @@ _failedExec = nil;
 // _vehicles are automatically deleted or unlocked in missionProcessor depending on the outcome
 
 _successExec =
-{
+{	
 	// Mission completed
-
-	for "_i" from 1 to 5 do
+	_vehicle spawn
 	{
-		_cash = createVehicle ["Land_Money_F", _lastPos, [], 5, "None"];
-		_cash setPos ([_lastPos, [[2 + random 3,0,0], random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd);
-		_cash setDir random 360;
-		_cash setVariable ["cmoney", 5000, true];
-		_cash setVariable ["owner", "world", true];
-	};
+		_veh = _this;
+		waitUntil
+		{
+			sleep 0.1;
+			_pos = getPos _veh;
+			(isTouchingGround _veh || _pos select 2 < 5) && {vectorMagnitude velocity _veh < [1,5] select surfaceIsWater _pos}
+		};
+		_pos = getPosATL _veh;
+		for "_i" from 1 to 10 do
+		{
+			_cash = createVehicle ["Land_Money_F", _pos, [], 5, "None"];
+			_cash setPos ([_pos, [[2 + random 3,0,0], random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd);
+			_cash setDir random 360;
+			_cash setVariable ["cmoney", 1500, true];
+			_cash setVariable ["owner", "world", true];
+		};
 
-	_Boxes = ["Box_IND_Wps_F","Box_East_Wps_F","Box_NATO_Wps_F","Box_NATO_AmmoOrd_F","Box_NATO_Grenades_F","Box_East_WpsLaunch_F","Box_NATO_WpsLaunch_F","Box_East_WpsSpecial_F","Box_NATO_WpsSpecial_F"];    
-	_currBox1 = _Boxes call BIS_fnc_selectRandom;
-	_box1 = createVehicle [_currBox1, _lastPos, [], 5, "None"];
-	_box1 setDir random 360;
-	[_box2, "mission_Main_A3snipers"] call fn_refillbox;
-
-	_currBox2 = _Boxes call BIS_fnc_selectRandom;
-	while {_currBox1 == _currBox2} do {
-		_currBox2 = _Boxes call BIS_fnc_selectRandom;
+		_Boxes = ["Box_IND_Wps_F","Box_East_Wps_F","Box_NATO_Wps_F","Box_NATO_AmmoOrd_F","Box_NATO_Grenades_F","Box_East_WpsLaunch_F","Box_NATO_WpsLaunch_F","Box_East_WpsSpecial_F","Box_NATO_WpsSpecial_F"];    
+		_currBox1 = _Boxes call BIS_fnc_selectRandom;
+		_box1 = createVehicle [_currBox1, _pos, [], 5, "None"];
+		_box1 setDir random 360;
+		[_box1, "mission_USLaunchers"] call fn_refillbox;
 	};
-	_box2 = createVehicle [_currBox2, _lastPos, [], 5, "None"];
-	_box2 setDir random 360;
-	[_box2, "mission_USLaunchers"] call fn_refillbox;
 
 	_successHintMessage = "The sky is clear again, the enemy patrol was taken out! Ammo crates and some money have fallen near the pilot.";
 };

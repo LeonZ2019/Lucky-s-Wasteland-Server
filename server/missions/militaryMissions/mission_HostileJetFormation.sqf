@@ -7,7 +7,7 @@
 if (!isServer) exitwith {};
 #include "militaryMissionDefines.sqf"
 
-private ["_planeChoices", "_convoyVeh", "_veh1", "_veh2", "_createVehicle", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_vehicleName2", "_numWaypoints", "_cash", "_boxes1", "_currBox1", "_boxes2", "_currBox2", "_box1", "_box2"];
+private ["_planeChoices", "_convoyVeh", "_veh1", "_veh2", "_createVehicle", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_vehicleName2", "_numWaypoints", "_cash", "_boxes1", "_currBox1", "_currBox2", "_currBox3", "_box1", "_box2", "_box3"];
 
 _setupVars =
 {
@@ -47,26 +47,14 @@ _setupObjects =
 		// add pilot
 		_soldier = [_aiGroup, _position] call createRandomPilot; 
 		_soldier moveInDriver _vehicle;
-		_vehicle allowCrewInImmobile true;
-		
-		// Reset all flares to 60 or 25%
-		if (_type isKindOf "Air") then
-		{
-			{
-				if (["CMFlare", _x] call fn_findString != -1) then
-				{
-					_vehicle removeMagazinesTurret [_x, [-1]];
-				};
-			} forEach getArray (configFile >> "CfgVehicles" >> _type >> "magazines");
-			_vehicle addMagazineTurret ["240Rnd_CMFlare_Chaff_Magazine", [-1], 60];
-		};
-		_vehicle lock 2;
-		[_vehicle, _aiGroup] spawn checkMissionVehicleLock;
+		_vehicle addEventHandler ["GetOut", {
+			params ["_vehicle", "_role", "_unit", "_turret"];
+			_this select 2 setDamage 1;
+		}];
 		_vehicle
 	};
 
 	_aiGroup = createGroup CIVILIAN;
-
 	_vehicles =
 	[
 		[_veh1, _missionPos vectorAdd ([[random 50, 0, 0], random 360] call BIS_fnc_rotateVector2D), 0] call _createVehicle,
@@ -78,11 +66,11 @@ _setupObjects =
 	_aiGroup selectLeader _leader;
 	_leader setRank "LIEUTENANT";
 	
-	_aiGroup setCombatMode "RED";
+	_aiGroup setCombatMode "YELLOW";
 	_aiGroup setBehaviour "COMBAT";
-	_aiGroup setFormation "LINE";
+	_aiGroup setFormation "DIAMOND";
 
-	_speedMode = if (missionDifficultyHard) then { "FULL" } else { "NORMAL" };
+	_speedMode = if (missionDifficultyHard) then { "NORMAL" } else { "LIMITED" };
 
 	_aiGroup setSpeedMode _speedMode;
 
@@ -113,19 +101,26 @@ _waitUntilMarkerPos = {getPosATL _leader};
 _waitUntilExec = nil;
 _waitUntilCondition = {currentWaypoint _aiGroup >= _numWaypoints};
 
+_waitUntilSuccessCondition = { {!alive _x} count _vehicles == 3 };
+_ignoreAiDeaths = true;
+
 _failedExec = nil;
 
 // _vehicles are automatically deleted or unlocked in missionProcessor depending on the outcome
-
 _successExec =
 {
-	// Mission completed
-
+	_lastVeh = [];
+	{if (!isTouchingGround _x) then { _lastVeh pushBack _x };} forEach _vehicles;
+	while {count _lastVeh != 1} do {
+		_lastVeh = [];
+		{if (!isTouchingGround _x) then { _lastVeh pushBack _x };} forEach _vehicles;
+	};
+	_wreckPos = getPosATL (_lastVeh select 0);
 	//Money
 	for "_i" from 1 to 10 do
 	{
-		_cash = createVehicle ["Land_Money_F", _lastPos, [], 5, "None"];
-		_cash setPos ([_lastPos, [[2 + random 3,0,0], random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd);
+		_cash = createVehicle ["Land_Money_F", _wreckPos, [], 5, "None"];
+		_cash setPos ([_wreckPos, [[2 + random 3,0,0], random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd);
 		_cash setDir random 360;
 		_cash setVariable ["cmoney", 5000, true]; //50k
 		_cash setVariable ["owner", "world", true];
@@ -133,17 +128,17 @@ _successExec =
 
 	_Boxes1 = ["Box_IND_Wps_F","Box_East_Wps_F","Box_NATO_Wps_F","Box_NATO_AmmoOrd_F","Box_NATO_Grenades_F","Box_East_WpsLaunch_F","Box_NATO_WpsLaunch_F","Box_East_WpsSpecial_F","Box_NATO_WpsSpecial_F"];    
 	_currBox1 = _Boxes1 call BIS_fnc_selectRandom;
-	_box1 = createVehicle [_currBox1, _lastPos, [], 2, "None"];
+	_box1 = createVehicle [_currBox1, _wreckPos, [], 2, "None"];
 	_box1 setDir random 360;
 	[_box1, "mission_USSpecial"] call fn_refillbox;
 	
 	_currBox2 = _Boxes1 call BIS_fnc_selectRandom;
-	_box2 = createVehicle [_currBox2, _lastPos, [], 2, "None"];
+	_box2 = createVehicle [_currBox2, _wreckPos, [], 2, "None"];
 	_box2 setDir random 360;
 	[_box2, "mission_USLaunchers"] call fn_refillbox;
 
 	_currBox3 = _Boxes1 call BIS_fnc_selectRandom;
-	_box3 = createVehicle [_currBox3, _lastPos, [], 2, "None"];
+	_box3 = createVehicle [_currBox3, _wreckPos, [], 2, "None"];
 	_box3 setDir random 360;
 	[_box3, "mission_Main_A3snipers"] call fn_refillbox;
 	

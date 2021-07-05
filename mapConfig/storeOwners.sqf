@@ -31,12 +31,12 @@ storeOwnerConfig = compileFinal str
 	["VehStore1", 1, 75, []],
 	["VehStore2", 6, 45, ["Boats"]],
 	["VehStore3", 4, 250, ["Boats"]],
-	["VehStore4", 5, 155, ["Boats"]],
+	["VehStore4", 5, 155, []],
 	["VehStore5", 0, 190, ["Planes"]],
 	["VehStore6", 2, 45, []],
 	["VehStore7", 3, 240, ["Boats"]],
-	["VehStore8", 3, 180, ["Boats", "Tanks", "Armored"]],
-	["VehStore9", 3, 0, ["Boats", "Tanks", "Armored"]]
+	["VehStore8", 3, 180, ["Tanks", "Armored"]],
+	["VehStore9", 3, 0, ["Tanks", "Armored"]]
 ];
 
 // Outfits for store owners

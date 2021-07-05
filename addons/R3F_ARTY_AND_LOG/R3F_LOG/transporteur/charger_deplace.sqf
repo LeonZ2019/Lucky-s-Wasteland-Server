@@ -106,16 +106,28 @@ else
 				_objet enableCollisionWith _transporteur;
 
 				player globalChat format [STR_R3F_LOG_action_charger_deplace_fait, getText (configFile >> "CfgVehicles" >> (typeOf _transporteur) >> "displayName")];
-				/*waitUntil {!alive _transporteur};
-				if (!isNull attachedTo _objet) then
-				{
-					if (unitIsUAV _objet) then
-					{
-						[_objet, 1] call A3W_fnc_setLockState; // unlock
-						["enableDriving", _objet] call A3W_fnc_towingHelper;
+				/*_transporteur addEventHandler ["Dammaged", {
+					params ["_unit", "_selection", "_damage", "_hitIndex", "_hitPoint", "_shooter", "_projectile"];
+					_veh = _this select 0;
+					_items = _veh getVariable "R3F_LOG_objets_charges";
+					if (!alive _veh && count _items > 0) then {
+						{
+							if (!isNull attachedTo _x) then
+							{
+								_x setVariable ["R3F_LOG_est_transporte_par", objNull, true];
+								if (unitIsUAV _x) then
+								{
+									[_x, 1] call A3W_fnc_setLockState;
+									["enableDriving", _x] call A3W_fnc_towingHelper;
+								};
+								_x setPos ([position _veh, [[2 + random 3,0,0], random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd);
+							};
+						} forEach _items;
 					};
-					_objet setPos ([position _transporteur, [[2 + random 3,0,0], random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd);
-				};*/
+				}];
+				_transporteur addEventHandler ["Deleted", { // store?
+					params ["_entity"];
+				}];*/
 			}
 			else
 			{

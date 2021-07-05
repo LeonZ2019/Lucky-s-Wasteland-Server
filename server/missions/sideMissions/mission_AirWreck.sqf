@@ -25,6 +25,9 @@ _setupObjects =
 	_types = ["B_T_VTOL_01_vehicle_F", "O_T_VTOL_02_infantry_dynamicLoadout_F", "I_Heli_Transport_02_F", "O_Heli_Light_02_unarmed_F"];
 	_type = _types call BIS_fnc_selectRandom;
 
+	_baseToDelete = nearestObjects [_wreckPos, ["All"], 10];
+	{ deleteVehicle _x } forEach _baseToDelete;
+
 	// Class, Position, Fuel, Ammo, Damage, Special
 	_wreck = [_type, _wreckPos, 0, 0, 0] call createMissionVehicle;
 	_wreck setDir random 360;

@@ -24,6 +24,7 @@ _group = _this select 0;
 _position = _this select 1;
 
 _soldier = _group createUnit [_soldierTypes call BIS_fnc_selectRandom, _position, [], 0, "NONE"];
+removeAllAssignedItems _soldier;
 
 _soldier addUniform (_uniformTypes call BIS_fnc_selectRandom);
 _soldier addVest (_vestTypes call BIS_fnc_selectRandom);
@@ -42,13 +43,12 @@ switch (_weapon) do {
     case "SMG_03C_TR_black": {_ammo = "50Rnd_570x28_SMG_03"};
 };
 
-for "_i" from 1 to 3 do {_soldier addItemToVest "30Rnd_9x21_Mag_SMG_02";};
+for "_i" from 1 to 3 do {_soldier addItemToVest _ammo;};
 for "_i" from 1 to 2 do {_soldier addItemToUniform "9Rnd_45ACP_Mag";};
 
 sleep 0.1; // Without this delay, headgear doesn't get removed properly
 _soldier addHeadgear (_headGearTypes call BIS_fnc_selectRandom);
-
-removeAllAssignedItems _soldier;
+_soldier addWeaponItem [_weapon, _ammo];
 
 _soldier spawn refillPrimaryAmmo;
 _soldier call setMissionSkill;

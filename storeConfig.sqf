@@ -1138,8 +1138,8 @@ genObjectsArray = compileFinal str
 	["Concrete Ramp", "Land_RampConcrete_F", 350, "object"],
 	["Concrete Ramp (High)", "Land_RampConcreteHigh_F", 500, "object"],
 	["Scaffolding", "Land_Scaffolding_F", 250, "object"],
-	["Food sacks", "Land_Sacks_goods_F", 5000, "object"],
-	["Water Barrel", "Land_BarrelWater_F", 5000, "object"]
+	["Food sacks", "Land_Sacks_goods_F", 1800, "object"],
+	["Water Barrel", "Land_BarrelWater_F", 1800, "object"]
 ];
 
 allGenStoreVanillaItems = compileFinal str (call genItemArray + call genObjectsArray + call allStoreGear);
@@ -1347,7 +1347,7 @@ planesArray = compileFinal str
 	["A-164 Wipeout CAS", "B_Plane_CAS_01_dynamicLoadout_F", 60000, "vehicle"],
 	["To-199 Neophron CAS", "O_Plane_CAS_02_dynamicLoadout_F", 62000, "vehicle"],
 
-	["V-44 X Blackfish (Infantry)", "B_T_VTOL_01_infantry_F", 8500, "vehicle"],
+	["V-44 X Blackfish (Infantry)", "B_T_VTOL_01_infantry_F", 10000, "vehicle"],
 	["V-44 X Blackfish (Gunship)", "B_T_VTOL_01_armed_F", 45000, "vehicle"],
 	["Y-32 Xi'an", "O_T_VTOL_02_infantry_dynamicLoadout_F", 50000, "vehicle"],
 
@@ -1377,6 +1377,8 @@ planesArray = compileFinal str
 antiAirArray = compileFinal str
 [
 	["Mk21 Centurion", "B_SAM_System_02_F", 75000],
+	["Mk41 VLS", "B_Ship_MRLS_01_F", 120000],
+	["Mk45 Hammer", "B_Ship_Gun_01_F", 90000],
 	["Mk49 Spartan", "B_SAM_System_01_F", 80000],
 	["Praetorian 1C", "B_AAA_System_01_F", 55000],
 	["AN/MPQ-105 Radar", "B_Radar_System_01_F", 10000],

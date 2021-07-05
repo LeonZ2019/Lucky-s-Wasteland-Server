@@ -74,7 +74,7 @@ if (_key != "" && _player isKindOf "Man" && {_isGenStore || _isGunStore || _isVe
 			if (count _results > 0) then
 			{
 				_itemEntry = _results select 0;
-				_marker = _marker + (["_seaSpawn","_landSpawn"] select (markerType (_marker + "_seaSpawn") isEqualTo "")); // allow boat on landSpawn if no seaSpawn
+				_marker = _marker + "_seaSpawn";
 				_seaSpawn = true;
 			};
 		};
@@ -155,22 +155,22 @@ if (_key != "" && _player isKindOf "Man" && {_isGenStore || _isGunStore || _isVe
 		if (_player getVariable ["cmoney", 0] >= _itemPrice) then
 		{
 			private _markerPos = markerPos _marker;
-			private _npcPos = getPosASL _storeNPC;
-			private _canFloat = (round getNumber (configFile >> "CfgVehicles" >> _class >> "canFloat") > 0);
+			private _npcPos = getPosATL _storeNPC;
+			//private _canFloat = (round getNumber (configFile >> "CfgVehicles" >> _class >> "canFloat") > 0);
 			private _waterNonBoat = false;
 			private "_spawnPosAGL";
 
 			// non-boat spawn over water (e.g. aircraft carrier)
-			if (!isNull _storeNPC && surfaceIsWater _npcPos && !_seaSpawn) then
+			if (!isNull _storeNPC && surfaceIsWater _npcPos) then
 			{
 				_markerPos set [2, _npcPos select 2];
-				_spawnPosAGL = ASLtoAGL _markerPos;
-				_safePos = if (_canFloat) then { _spawnPosAGL } else { ASLtoATL _markerPos };
+				_spawnPosAGL = ASLToAGL _markerPos;
+				_safePos = _spawnPosAGL;
 				_waterNonBoat = true;
 			}
 			else // normal spawn
 			{
-				_safePos = _markerPos findEmptyPosition [0, 50, [_class, "B_Truck_01_transport_F"] select (!surfaceIsWater _markerPos && _seaSpawn)]; // use HEMTT in findEmptyPosition for boats on lands 
+				_safePos = _markerPos findEmptyPosition [0, 50, _class];
 				if (count _safePos == 0) then { _safePos = _markerPos };
 				_spawnPosAGL = _safePos;
 				if (_seaSpawn) then { _safePos vectorAdd [0,0,0.05] };
@@ -190,13 +190,11 @@ if (_key != "" && _player isKindOf "Man" && {_isGenStore || _isGunStore || _isVe
 
 			if (_waterNonBoat) then
 			{
-				private _posSurf = getPos _object;
-				private _posASL = getPosASL _object;
-
-				if (_posSurf select 2 < 0) then
-				{
-					_object setPosASL [_posSurf select 0, _posSurf select 1, (_posASL select 2) - (_posSurf select 2) + 0.05];
-				};
+				//_object setPosATL [_safePos select 0, _safePos select 1, (_safePos select 2 + 0.25)];
+				_newPos = [_safePos select 0, _safePos select 1, (_safePos select 2 + 0.25)];
+ 				_object allowDamage false;
+				_object setVehiclePosition [_newPos,[],10,"CAN_COLLIDE"];
+ 				_object allowDamage true;
 			};
 
 			if (_player getVariable [_timeoutKey, true]) then // Timeout
@@ -271,7 +269,7 @@ if (_key != "" && _player isKindOf "Man" && {_isGenStore || _isGunStore || _isVe
 				};
 			};
 
-			_object setDir (if (_object isKindOf "Plane") then { markerDir _marker } else { random 360 });
+			_object setDir (markerDir _marker);
 
 			_isDamageable = !(_object isKindOf "ReammoBox_F"); // ({_object isKindOf _x} count ["AllVehicles", "Lamps_base_F", "Cargo_Patrol_base_F", "Cargo_Tower_base_F"] > 0);
 
@@ -327,6 +325,15 @@ if (_key != "" && _player isKindOf "Man" && {_isGenStore || _isGunStore || _isVe
 				{
 					(group _object) setGroupOwner owner _player;
 				};
+			};
+
+			if ({_object isKindOf _x} count ["Land_Sacks_goods_F"] > 0) then
+			{
+				_object setVariable ["food", 40, true];
+			};
+			if ({_object isKindOf _x} count ["Land_BarrelWater_F"] > 0) then
+			{
+				_object setVariable ["water", 50, true];
 			};
 		};
 	};

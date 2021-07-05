@@ -147,8 +147,8 @@ A3W_vehicleLoot = 2;               // Level of loot added to vehicles (0 = none,
 A3W_territoryCaptureTime = 3*60;   // Time in seconds needed to capture a territory
 A3W_territoryPayroll = 1;          // Periodically reward sides and indie groups based on how many territories they own (0 = no, 1 = yes)
 A3W_territoryWarningIcons = 0;     // Show exclamation marks on map for friendly territories where enemies are present (0 = no, 1 = yes)
-A3W_payrollInterval = 30*60;       // Delay in seconds between each payroll
-A3W_payrollAmount = 500;           // Amount of money rewarded per territory on each payroll
+A3W_payrollInterval = 10*60;       // Delay in seconds between each payroll
+A3W_payrollAmount = 700;           // Amount of money rewarded per territory on each payroll
 
 // Mission settings
 A3W_serverMissions = 1;            // Enable server missions (0 = no, 1 = yes)
