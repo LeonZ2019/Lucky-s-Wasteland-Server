@@ -82,6 +82,7 @@ if (isServer) then
 	diag_log format ["############################# %1 #############################", missionName];
 	diag_log "WASTELAND SERVER - Initializing Server";
 	[] execVM "server\init.sqf";
+	"RM_DISPLAYTEXT_PUBVAR" addPublicVariableEventHandler {(_this select 1) spawn BIS_fnc_dynamicText;};
 };
 
 if (hasInterface || isServer) then

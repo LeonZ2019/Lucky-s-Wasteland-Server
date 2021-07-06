@@ -326,12 +326,11 @@ if (_key != "" && _player isKindOf "Man" && {_isGenStore || _isGunStore || _isVe
 					(group _object) setGroupOwner owner _player;
 				};
 			};
-
-			if ({_object isKindOf _x} count ["Land_Sacks_goods_F"] > 0) then
+			if (typeOf _object == "Land_Sacks_goods_F") then
 			{
 				_object setVariable ["food", 40, true];
 			};
-			if ({_object isKindOf _x} count ["Land_BarrelWater_F"] > 0) then
+			if (typeOf _object == "Land_BarrelWater_F") then
 			{
 				_object setVariable ["water", 50, true];
 			};

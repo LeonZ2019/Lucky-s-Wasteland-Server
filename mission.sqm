@@ -8,7 +8,7 @@ class EditorData
 	toggles=1097;
 	class ItemIDProvider
 	{
-		nextID=2287;
+		nextID=2306;
 	};
 	class MarkerIDProvider
 	{
@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=149;
+		nextID=168;
 	};
 	class Camera
 	{
-		pos[]={17615.756,96.979332,17846.459};
-		dir[]={0.62941802,-0.4077186,0.66151625};
-		up[]={0.28104827,0.91310662,0.29538026};
-		aside[]={0.72446752,-1.4170655e-007,-0.68931526};
+		pos[]={14710.638,44.095699,16087.218};
+		dir[]={-0.88084054,-0.47098228,0.04842712};
+		up[]={-0.4702819,0.88213199,0.025855456};
+		aside[]={0.054894958,1.9077197e-007,0.99851805};
 	};
 };
 binarizationWanted=0;
@@ -204,7 +204,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=400;
+		items=401;
 		class Item0
 		{
 			dataType="Group";
@@ -6039,7 +6039,7 @@ class Mission
 					class PositionInfo
 					{
 						position[]={15319.25,25.909698,26198.625};
-						angles[]={0,3.2560861,0};
+						angles[]={0,3.2560859,0};
 					};
 					side="Empty";
 					class Attributes
@@ -6352,7 +6352,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={15196.5,0,26186.5};
-				angles[]={0,1.6838721,0};
+				angles[]={0,1.683872,0};
 			};
 			side="Empty";
 			class Attributes
@@ -6390,8 +6390,8 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={15313,24.914051,26207};
-				angles[]={0,0.12295247,0};
+				position[]={15313,24.914045,26207};
+				angles[]={0,0.12295246,0};
 			};
 			side="Empty";
 			flags=5;
@@ -6400,6 +6400,30 @@ class Mission
 			};
 			id=488;
 			type="Land_Atm_01_F";
+			atlOffset=0.057159424;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=1;
+						};
+					};
+				};
+				nAttributes=1;
+			};
 		};
 		class Item283
 		{
@@ -7837,7 +7861,7 @@ class Mission
 		class Item358
 		{
 			dataType="Marker";
-			position[]={15350.404,-185.97,26203.461};
+			position[]={15354.759,-185.97,26203.414};
 			name="VehStore8_landSpawn";
 			type="Empty";
 			colorName="ColorBlack";
@@ -8559,7 +8583,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={3686.949,6.6700745,7492.9668};
+				position[]={3686.949,7.4683075,7492.9668};
 				angles[]={0,1.6257019,0};
 			};
 			side="Empty";
@@ -8569,7 +8593,7 @@ class Mission
 			};
 			id=2256;
 			type="Land_FireEscape_01_tall_F";
-			atlOffset=187.51067;
+			atlOffset=188.3089;
 		};
 		class Item386
 		{
@@ -8586,7 +8610,7 @@ class Mission
 			};
 			id=2257;
 			type="Land_FireEscape_01_tall_F";
-			atlOffset=14.133816;
+			atlOffset=13.628692;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -8616,7 +8640,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={3686.5061,-8.1331444,7490.4419};
+				position[]={3686.5061,-7.3349152,7490.4419};
 				angles[]={0,3.2397325,0};
 			};
 			side="Empty";
@@ -8626,7 +8650,7 @@ class Mission
 			};
 			id=2258;
 			type="Land_PierWooden_01_platform_F";
-			atlOffset=194.95599;
+			atlOffset=195.75423;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -8656,7 +8680,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={3681.9866,-5.1046901,7492.0347};
+				position[]={3681.9866,-4.5995665,7492.0347};
 				angles[]={0,0.072341323,0};
 			};
 			side="Empty";
@@ -8666,7 +8690,7 @@ class Mission
 			};
 			id=2259;
 			type="Land_QuayConcrete_01_5m_ladder_F";
-			atlOffset=184.90617;
+			atlOffset=185.4113;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -8694,7 +8718,7 @@ class Mission
 		class Item389
 		{
 			dataType="Marker";
-			position[]={15318.113,-185.97,26224.949};
+			position[]={15318.042,-185.97,26227.529};
 			name="VehStore8_seaSpawn";
 			type="Empty";
 			colorName="ColorBlack";
@@ -8708,7 +8732,7 @@ class Mission
 			name="VehStore9_seaSpawn";
 			type="Empty";
 			colorName="ColorBlack";
-			angle=91.554985;
+			angle=91.554962;
 			id=2261;
 		};
 		class Item391
@@ -8854,9 +8878,16 @@ class Mission
 			name="VehStore4_seaSpawn";
 			type="Empty";
 			colorName="ColorBlack";
-			angle=51.040993;
+			angle=51.040981;
 			id=2277;
 			atlOffset=0.0004940033;
+		};
+		class Item400
+		{
+			dataType="Layer";
+			name="Stair USS Freedom";
+			id=2293;
+			atlOffset=185.97;
 		};
 	};
 };

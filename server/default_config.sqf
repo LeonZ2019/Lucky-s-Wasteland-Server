@@ -29,15 +29,15 @@ A3W_headshotNoRevive = 0;          // BROKEN - Instant death on fatal headshot b
 
 // Artillery settings
 A3W_artilleryStrike = 1;           // Availability of Artillery Strike item (0 = no, 1 = yes)
-A3W_artilleryShells = 15;          // Number of shells per strike
+A3W_artilleryShells = 20;          // Number of shells per strike
 A3W_artilleryRadius = 50;          // Strike radius in meters within which the shells will randomly hit
-A3W_artilleryCooldown = 60*60;     // Cooldown in seconds between strike uses per individual player - resets on server restart
-A3W_artilleryCrateOdds = 1/10;     // Odds of finding one Artillery Strike in a mission crate (0.0 to 1.0)
+A3W_artilleryCooldown = 30*60;     // Cooldown in seconds between strike uses per individual player - resets on server restart
+A3W_artilleryCrateOdds = 1/15;     // Odds of finding one Artillery Strike in a mission crate (0.0 to 1.0)
 A3W_artilleryAmmo = "ModuleOrdnanceHowitzer_F_ammo"; // CfgAmmo class of fired shells, also available for example are the more powerful "R_230mm_fly" and less powerful "ModuleOrdnanceMortar_F_ammo"
 
 // Spawn settings
-A3W_townSpawnCooldown = 2.5*60;      // Number of seconds to wait between each spawn on a specific town (0 = disabled)
-A3W_spawnBeaconCooldown = 5*60;    // Number of seconds to wait between each use of a specific spawn beacon (0 = disabled)
+A3W_townSpawnCooldown = 1*60;      // Number of seconds to wait between each spawn on a specific town (0 = disabled)
+A3W_spawnBeaconCooldown = 2.5*60;    // Number of seconds to wait between each use of a specific spawn beacon (0 = disabled)
 A3W_spawnBeaconSpawnHeight = 1500; // Altitude in meters at which players will spawn when using spawn beacons (0 = ground/sea)
 
 // Antihack settings
@@ -147,7 +147,7 @@ A3W_vehicleLoot = 2;               // Level of loot added to vehicles (0 = none,
 A3W_territoryCaptureTime = 3*60;   // Time in seconds needed to capture a territory
 A3W_territoryPayroll = 1;          // Periodically reward sides and indie groups based on how many territories they own (0 = no, 1 = yes)
 A3W_territoryWarningIcons = 0;     // Show exclamation marks on map for friendly territories where enemies are present (0 = no, 1 = yes)
-A3W_payrollInterval = 10*60;       // Delay in seconds between each payroll
+A3W_payrollInterval = 15*60;       // Delay in seconds between each payroll
 A3W_payrollAmount = 700;           // Amount of money rewarded per territory on each payroll
 
 // Mission settings
@@ -166,4 +166,4 @@ A3W_sideMissionTimeout = 45*60;    // Time in seconds that a Side Mission will r
 A3W_moneyMissionDelay = 15*60;     // Time in seconds between Money Missions
 A3W_moneyMissionTimeout = 60*60;   // Time in seconds that a Money Mission will run for, unless completed
 A3W_militaryMissionDelay = 10*60;       // Time in seconds between Military Missions
-A3W_militaryMissionTimeout = 35*60;    // Time in seconds that a Military Mission will run for, unless completed
+A3W_militaryMissionTimeout = 60*60;    // Time in seconds that a Military Mission will run for, unless completed

@@ -18,7 +18,6 @@ _setupVars =
 _setupObjects =
 {
 	_missionPos = markerPos (((call cityList) call BIS_fnc_selectRandom) select 0);
-	//"B_Plane_CAS_01_F", "O_Plane_CAS_02_F", "I_Plane_Fighter_03_CAS_F"
 	_planeChoices =["B_Plane_Fighter_01_F", "O_Plane_Fighter_02_F","I_Plane_Fighter_04_F"];
 
 	_convoyVeh = _planeChoices call BIS_fnc_selectRandom;
@@ -51,6 +50,7 @@ _setupObjects =
 			params ["_vehicle", "_role", "_unit", "_turret"];
 			_this select 2 setDamage 1;
 		}];
+		_vehicle setMagazineTurretAmmo ["240Rnd_CMFlare_Chaff_Magazine", 20, [-1]];
 		_vehicle
 	};
 
@@ -109,18 +109,11 @@ _failedExec = nil;
 // _vehicles are automatically deleted or unlocked in missionProcessor depending on the outcome
 _successExec =
 {
-	_lastVeh = [];
-	{if (!isTouchingGround _x) then { _lastVeh pushBack _x };} forEach _vehicles;
-	while {count _lastVeh != 1} do {
-		_lastVeh = [];
-		{if (!isTouchingGround _x) then { _lastVeh pushBack _x };} forEach _vehicles;
-	};
-	_wreckPos = getPosATL (_lastVeh select 0);
 	//Money
 	for "_i" from 1 to 10 do
 	{
-		_cash = createVehicle ["Land_Money_F", _wreckPos, [], 5, "None"];
-		_cash setPos ([_wreckPos, [[2 + random 3,0,0], random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd);
+		_cash = createVehicle ["Land_Money_F", _lastPos, [], 5, "None"];
+		_cash setPos ([_lastPos, [[2 + random 3,0,0], random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd);
 		_cash setDir random 360;
 		_cash setVariable ["cmoney", 5000, true]; //50k
 		_cash setVariable ["owner", "world", true];
@@ -128,17 +121,17 @@ _successExec =
 
 	_Boxes1 = ["Box_IND_Wps_F","Box_East_Wps_F","Box_NATO_Wps_F","Box_NATO_AmmoOrd_F","Box_NATO_Grenades_F","Box_East_WpsLaunch_F","Box_NATO_WpsLaunch_F","Box_East_WpsSpecial_F","Box_NATO_WpsSpecial_F"];    
 	_currBox1 = _Boxes1 call BIS_fnc_selectRandom;
-	_box1 = createVehicle [_currBox1, _wreckPos, [], 2, "None"];
+	_box1 = createVehicle [_currBox1, _lastPos, [], 2, "None"];
 	_box1 setDir random 360;
 	[_box1, "mission_USSpecial"] call fn_refillbox;
 	
 	_currBox2 = _Boxes1 call BIS_fnc_selectRandom;
-	_box2 = createVehicle [_currBox2, _wreckPos, [], 2, "None"];
+	_box2 = createVehicle [_currBox2, _lastPos, [], 2, "None"];
 	_box2 setDir random 360;
 	[_box2, "mission_USLaunchers"] call fn_refillbox;
 
 	_currBox3 = _Boxes1 call BIS_fnc_selectRandom;
-	_box3 = createVehicle [_currBox3, _wreckPos, [], 2, "None"];
+	_box3 = createVehicle [_currBox3, _lastPos, [], 2, "None"];
 	_box3 setDir random 360;
 	[_box3, "mission_Main_A3snipers"] call fn_refillbox;
 	

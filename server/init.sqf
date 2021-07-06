@@ -87,7 +87,6 @@ if (isServer) then
 };
 
 call compile preprocessFileLineNumbers "server\functions\serverVars.sqf";
-"RM_DISPLAYTEXT_PUBVAR" addPublicVariableEventHandler {(_this select 1) spawn BIS_fnc_dynamicText;};
 if (isServer) then
 {
 	call compile preprocessFileLineNumbers "mapConfig\init.sqf";

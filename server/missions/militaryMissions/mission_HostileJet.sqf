@@ -22,7 +22,8 @@ _setupObjects =
 	_planeChoices =
 	[
 		"B_Plane_CAS_01_F",
-		"O_Plane_CAS_02_F"
+		"O_Plane_CAS_02_F",
+		"I_Plane_Fighter_03_CAS_F"
 	];
 
 	_veh1 = _planeChoices call BIS_fnc_selectRandom;
@@ -51,6 +52,7 @@ _setupObjects =
 			params ["_vehicle", "_role", "_unit", "_turret"];
 			_this select 2 setDamage 1;
 		}];
+		_vehicle setMagazineTurretAmmo ["120Rnd_CMFlare_Chaff_Magazine", 10, [-1]];
 		_vehicle
 	};
 	

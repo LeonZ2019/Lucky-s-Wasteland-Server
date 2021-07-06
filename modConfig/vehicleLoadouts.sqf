@@ -285,4 +285,16 @@ switch (true) do
 			["Laserdesignator_mounted", [0]]
 		];
 	};
+
+	/*case(_class isKindOf "B_MBT_01_TUSK_F"):
+	{
+		switch(_variant) do
+		{
+			case "tough":
+			{
+				_customCode = {_veh setVariable["J3264TokenVehVar",true, true];};
+			};
+			default {};
+		};
+	};*/
 };

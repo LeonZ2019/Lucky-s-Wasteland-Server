@@ -1273,6 +1273,7 @@ tanksArray = compileFinal str
 	["ZSU-39 Tigris AA", "O_APC_Tracked_02_AA_F", 50000, "vehicle"],
 	["M2A1 Slammer", "B_MBT_01_cannon_F", 50000, "vehicle"],
 	["M2A4 Slammer HMG", "B_MBT_01_TUSK_F", 50000, "vehicle"], // Commander gun variant
+	//["M2A4 Slammer HMG (Extra Tough)", "B_MBT_01_TUSK_F", 75000, "vehicle", "variant_tough" ],
 	["T-100 Varsuk", "O_MBT_02_cannon_F", 50000, "vehicle"],
 	["MBT-52 Kuma", "I_MBT_03_cannon_F", 60000, "vehicle"],
 	["T-140 Angara", "O_MBT_04_cannon_F", 75000, "vehicle"],
@@ -1575,6 +1576,22 @@ colorsArray = compileFinal str
 		"B_MBT_01_TUSK_F",
 		[
 			["Trump - Slammer", [[2, _texDir + "slammer_trump_2.paa"]]]
+		]
+	],
+	[
+		"C_Van_01_fuel_F",
+		[
+			["Pertamina", [[1, _texDir + "fuel_truck_pertamina_1.paa"]]]
+		]
+	],
+	[
+		"B_Truck_01_fuel_F",
+		[
+			["Pertamina", [
+				[0, _texDir + "hemtt_fuel_pertamina_0.paa"],
+				[1, _texDir + "hemtt_fuel_pertamina_1.paa"],
+				[2, _texDir + "hemtt_fuel_pertamina_2.paa"]
+			]]
 		]
 	]
 ];
