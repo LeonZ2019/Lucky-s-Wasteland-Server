@@ -175,18 +175,22 @@ _successExec =
 		_cash = "Land_Money_F" createVehicle markerPos _marker;
 		_cash setPos ((markerPos _marker) vectorAdd ([[2 + random 2,0,0], random 360] call BIS_fnc_rotateVector2D));
 		_cash setDir random 360;
-		_cash setVariable["cmoney",3500,true];  //35k
+		_cash setVariable["cmoney",6000,true];  //60k
 		_cash setVariable["owner","world",true];
 	};
 
+	_boxTypes = ["mission_USLaunchers","mission_RULaunchers","mission_USSpecial","mission_Main_A3snipers","mission_RUSniper","mission_Explosive","mission_Gear"];
+	_box1Type = _boxTypes call BIS_fnc_selectRandom;
 	_box1 = "Box_East_Wps_F" createVehicle getMarkerPos _marker;
-    [_box1,"mission_USLaunchers"] call fn_refillbox;
-	
+    [_box1, _box1Type] call fn_refillbox;
+
+	_box2Type = _boxTypes call BIS_fnc_selectRandom;
 	_box2 = "Box_NATO_Wps_F" createVehicle getMarkerPos _marker;
-    [_box2,"mission_USSpecial2"] call fn_refillbox;
-	
+    [_box2, _box2Type] call fn_refillbox;
+
+	_box3Type = _boxTypes call BIS_fnc_selectRandom;
 	_box3 = "Box_NATO_Support_F" createVehicle getMarkerPos _marker;
-    [_box3,"mission_Main_A3snipers"] call fn_refillbox;
+    [_box3, _box3Type] call fn_refillbox;
 	
 	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach [_box1, _box2, _box3];
 

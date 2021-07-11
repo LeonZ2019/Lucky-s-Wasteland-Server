@@ -25,17 +25,20 @@ _setupObjects =
 	_aiGroup setCombatMode "RED";
 	_aiGroup setBehaviour "COMBAT";
 	
+	_boxTypes = ["mission_USLaunchers","mission_RULaunchers","mission_USMachineguns","mission_RUMachineguns","mission_Main_A3snipers","mission_RUSniper","mission_Explosive"];
+	_box1Type = _boxTypes call BIS_fnc_selectRandom;
 	_boxes1 = ["Box_East_WpsSpecial_F","Box_IND_WpsSpecial_F"];
 	_currBox1 = _boxes1 call BIS_fnc_selectRandom;
 	_box1 = createVehicle [_currBox1, _missionPos, [], 5, "None"];
 	_box1 setDir random 360;
-	[_box1, "mission_Main_A3snipers"] call fn_refillbox;
+	[_box1, _box1Type] call fn_refillbox;
 	_box1 setVariable ["R3F_LOG_disabled", true, true];
 
+	_box2Type = _boxTypes call BIS_fnc_selectRandom;
 	_currBox2 = _boxes1 call BIS_fnc_selectRandom;
 	_box2 = createVehicle [_currBox2, _missionPos, [], 5, "None"];
 	_box2 setDir random 360;
-	[_box2, "mission_USSpecial"] call fn_refillbox;
+	[_box2, _box2Type] call fn_refillbox;
 	_box2 setVariable ["R3F_LOG_disabled", true, true];
 	
 	_missionHintText = format ["A Sniper Nest has been spotted. Head to the marked area and Take them out! Be careful they are fully armed and dangerous!", militaryMissionColor];

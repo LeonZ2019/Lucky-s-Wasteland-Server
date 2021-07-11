@@ -30,7 +30,9 @@ _setupObjects =
 	else
 	{
 		[
-			["B_Quadbike_01_F", "C_Van_01_box_F", "B_Quadbike_01_F"],
+			["B_T_LSV_01_unarmed_F", "B_Truck_01_transport_F", "B_T_LSV_01_unarmed_F"],
+			["O_LSV_02_unarmed_F", "O_Truck_02_transport_F", "O_LSV_02_unarmed_F"],
+			["I_C_Offroad_02_unarmed_F", "I_Truck_02_transport_F", "I_C_Offroad_02_unarmed_F"],
 			["I_G_Offroad_01_F", "I_Truck_02_transport_F", "I_G_Offroad_01_F"]
 		] call BIS_fnc_selectRandom;
 	};
@@ -130,13 +132,16 @@ _failedExec = nil;
 _successExec =
 {
 	// Mission completed
+	_boxTypes = ["mission_USRifles","mission_RURifles","mission_Explosive","mission_Gear","mission_Militia"];
+	_box1Type = _boxTypes call BIS_fnc_selectRandom;
 	_box1 = createVehicle ["Box_NATO_Wps_F", _lastPos, [], 2, "None"];
 	_box1 setDir random 360;
-	[_box1, "mission_USSpecial2"] call fn_refillbox;
+	[_box1, _box1Type] call fn_refillbox;
 
+	_box2Type = _boxTypes call BIS_fnc_selectRandom;
 	_box2 = createVehicle ["Box_East_WpsSpecial_F", _lastPos, [], 2, "None"];
 	_box2 setDir random 360;
-	[_box2, "mission_USLaunchers"] call fn_refillbox;
+	[_box2, _box2Type] call fn_refillbox;
 
 	_successHintMessage = "The convoy has been stopped, the weapon crates and vehicles are now yours to take.";
 };

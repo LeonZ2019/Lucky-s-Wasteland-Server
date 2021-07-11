@@ -160,17 +160,21 @@ _successExec =
 {
 	// Mission completed
 
+	_boxTypes = ["mission_USLaunchers","mission_RULaunchers","mission_USRifles","mission_RURifles","mission_USMachineguns","mission_RUMachineguns","mission_Explosive","mission_Gear"];
+	_box1Type = _boxTypes call BIS_fnc_selectRandom;
 	_box1 = createVehicle ["Box_NATO_Wps_F", _lastPos, [], 5, "None"];
 	_box1 setDir random 360;
-	[_box1, "mission_USSpecial"] call fn_refillbox;
+	[_box1, _box1Type] call fn_refillbox;
 
+	_box2Type = _boxTypes call BIS_fnc_selectRandom;
 	_box2 = createVehicle ["Box_East_Wps_F", _lastPos, [], 5, "None"];
 	_box2 setDir random 360;
-	[_box2, "mission_USLaunchers"] call fn_refillbox;
+	[_box2, _box2Type] call fn_refillbox;
 
+	_box3Type = _boxTypes call BIS_fnc_selectRandom;
 	_box3 = createVehicle ["Box_IND_WpsSpecial_F", _lastPos, [], 5, "None"];
 	_box3 setDir random 360;
-	[_box3, "mission_Main_A3snipers"] call fn_refillbox;
+	[_box3, _box3Type] call fn_refillbox;
 
 	_successHintMessage = "The sky is clear again, the enemy patrol was taken out! Ammo crates have fallen near the wreck.";
 };

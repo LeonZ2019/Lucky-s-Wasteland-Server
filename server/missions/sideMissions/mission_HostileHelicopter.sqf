@@ -155,13 +155,16 @@ _successExec =
 			(isTouchingGround _veh || _pos select 2 < 5) && {vectorMagnitude velocity _veh < [1,5] select surfaceIsWater _pos}
 		};
 
+		_boxTypes = ["mission_USLaunchers","mission_RULaunchers","mission_USSpecial","mission_USMachineguns","mission_RUMachineguns","mission_Main_A3snipers","mission_RUSniper"];
+		_box1Type = _boxTypes call BIS_fnc_selectRandom;
 		_box1 = createVehicle ["Box_NATO_Wps_F", (getPosATL _veh) vectorAdd ([[_veh call fn_vehSafeDistance, 0, 0], random 360] call BIS_fnc_rotateVector2D), [], 5, "None"];
 		_box1 setDir random 360;
-		[_box1, "mission_USSpecial"] call fn_refillbox;
+		[_box1, _box1Type] call fn_refillbox;
 
+		_box2Type = _boxTypes call BIS_fnc_selectRandom;
 		_box2 = createVehicle ["Box_East_Wps_F", (getPosATL _veh) vectorAdd ([[_veh call fn_vehSafeDistance, 0, 0], random 360] call BIS_fnc_rotateVector2D), [], 5, "None"];
 		_box2 setDir random 360;
-		[_box2, "mission_USLaunchers"] call fn_refillbox;
+		[_box2, _box2Type] call fn_refillbox;
 	};
 
 	_successHintMessage = "The sky is clear again, the enemy patrol was taken out! Ammo crates have fallen near the wreck.";

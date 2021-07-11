@@ -119,7 +119,9 @@ _successExec =
 			_cash setVariable ["owner", "world", true];
 		};
 
-		_Boxes = ["Box_IND_Wps_F","Box_East_Wps_F","Box_NATO_Wps_F","Box_NATO_AmmoOrd_F","Box_NATO_Grenades_F","Box_East_WpsLaunch_F","Box_NATO_WpsLaunch_F","Box_East_WpsSpecial_F","Box_NATO_WpsSpecial_F"];    
+		_boxTypes = ["mission_USLaunchers","mission_RULaunchers","mission_USSpecial","mission_USMachineguns","mission_RUMachineguns","mission_Explosive","mission_Gear"];
+		_box1Type = _boxTypes call BIS_fnc_selectRandom;
+		_Boxes = ["Box_IND_Wps_F","Box_East_Wps_F","Box_NATO_Wps_F","Box_East_WpsSpecial_F","Box_NATO_WpsSpecial_F"];
 		_currBox1 = _Boxes call BIS_fnc_selectRandom;
 		_box1 = createVehicle [_currBox1, _pos, [], 5, "None"];
 		_box1 setDir random 360;

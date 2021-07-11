@@ -7,7 +7,7 @@
 if (!isServer) exitwith {};
 #include "militaryMissionDefines.sqf"
 
-private ["_planeChoices", "_convoyVeh", "_veh1", "_veh2", "_createVehicle", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_vehicleName2", "_numWaypoints", "_cash", "_boxes1", "_currBox1", "_currBox2", "_currBox3", "_box1", "_box2", "_box3"];
+private ["_planeChoices", "_convoyVeh", "_veh1", "_veh2", "_createVehicle", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_vehicleName2", "_numWaypoints", "_cash", "_Boxes", "_currBox1", "_currBox2", "_currBox3", "_box1", "_box2", "_box3", "_box4"];
 
 _setupVars =
 {
@@ -119,23 +119,32 @@ _successExec =
 		_cash setVariable ["owner", "world", true];
 	};
 
-	_Boxes1 = ["Box_IND_Wps_F","Box_East_Wps_F","Box_NATO_Wps_F","Box_NATO_AmmoOrd_F","Box_NATO_Grenades_F","Box_East_WpsLaunch_F","Box_NATO_WpsLaunch_F","Box_East_WpsSpecial_F","Box_NATO_WpsSpecial_F"];    
-	_currBox1 = _Boxes1 call BIS_fnc_selectRandom;
+	_boxTypes = ["mission_USLaunchers","mission_RULaunchers","mission_USSpecial","mission_USMachineguns","mission_RUMachineguns","mission_Explosive","mission_Gear"];
+	_box1Type = _boxTypes call BIS_fnc_selectRandom;
+	_Boxes = ["Box_IND_Wps_F","Box_East_Wps_F","Box_NATO_Wps_F","Box_East_WpsSpecial_F","Box_NATO_WpsSpecial_F"];
+	_currBox1 = _Boxes call BIS_fnc_selectRandom;
 	_box1 = createVehicle [_currBox1, _lastPos, [], 2, "None"];
 	_box1 setDir random 360;
-	[_box1, "mission_USSpecial"] call fn_refillbox;
-	
-	_currBox2 = _Boxes1 call BIS_fnc_selectRandom;
+	[_box1, _box1Type] call fn_refillbox;
+
+	_box2Type = _boxTypes call BIS_fnc_selectRandom;
+	_currBox2 = _Boxes call BIS_fnc_selectRandom;
 	_box2 = createVehicle [_currBox2, _lastPos, [], 2, "None"];
 	_box2 setDir random 360;
-	[_box2, "mission_USLaunchers"] call fn_refillbox;
+	[_box2, _box2Type] call fn_refillbox;
 
-	_currBox3 = _Boxes1 call BIS_fnc_selectRandom;
+	_box3Type = _boxTypes call BIS_fnc_selectRandom;
+	_currBox3 = _Boxes call BIS_fnc_selectRandom;
 	_box3 = createVehicle [_currBox3, _lastPos, [], 2, "None"];
 	_box3 setDir random 360;
-	[_box3, "mission_Main_A3snipers"] call fn_refillbox;
+	[_box3, _box3Type] call fn_refillbox;
 	
-	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach [_box1, _box2, _box3];
+	_box4Type = _boxTypes call BIS_fnc_selectRandom;
+	_currBox4 = _Boxes call BIS_fnc_selectRandom;
+	_box4 = createVehicle [_currBox4, _lastPos, [], 2, "None"];
+	_box4 setDir random 360;
+	[_box4, _box4Type] call fn_refillbox;
+	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach [_box1, _box2, _box3, _box4];
 
 	_successHintMessage = "The sky is clear again, the enemy patrol was taken out! Ammo crates and some money have fallen near the pilot.";
 };

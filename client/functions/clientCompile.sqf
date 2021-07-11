@@ -36,6 +36,12 @@ fn_canTakeOwnership = "client\actions\canTakeOwnership.sqf" call mf_compile;
 fn_ctrlOverlapCheck = "client\functions\fn_ctrlOverlapCheck.sqf" call mf_compile;
 fn_disableCollision = "client\functions\fn_disableCollision.sqf" call mf_compile;
 fn_disableDriverAssist = "client\functions\fn_disableDriverAssist.sqf" call mf_compile;
+
+fn_driverAssistEngineOff = "client\functions\fn_driverAssistEngineOff.sqf" call mf_compile;
+fn_driverAssistEngineOn = "client\functions\fn_driverAssistEngineOn.sqf" call mf_compile;
+fn_driverAssistLightsOff = "client\functions\fn_driverAssistLightsOff.sqf" call mf_compile;
+fn_driverAssistLightsOn = "client\functions\fn_driverAssistLightsOn.sqf" call mf_compile;
+
 fn_emergencyEject = "client\functions\fn_emergencyEject.sqf" call mf_compile;
 fn_enableDriverAssist = "client\functions\fn_enableDriverAssist.sqf" call mf_compile;
 fn_encodeText = "client\functions\fn_encodeText.sqf" call mf_compile;

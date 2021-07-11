@@ -106,16 +106,16 @@ if (_uid call isAdmin) then
 			["PlayerMgmt_RemoveMoney", format ["%1 (%2)", name _target, getPlayerUID _target]] call notifyAdminMenu;*/
 			["This option has been disabled since money is now server-sided."] spawn BIS_fnc_guiMessage;
 		};
-		case 6: //Remove All Weapons
+		case 6: //Heal Player
 		{
-			/*_targetUID = getPlayerUID _target;
+			player setDamage 0;
+			if (player getVariable ["FAR_isUnconscious", 0] == 1) then
 			{
-				if(getPlayerUID _x == _targetUID) exitWith
-				{
-					removeAllWeapons _x;
-				};
-			}forEach playableUnits;*/
-			["This option has been disabled due to having never worked at all in the first place."] spawn BIS_fnc_guiMessage;
+				player setVariable ["FAR_isUnconscious", 0, true];
+			};
+			(findDisplay 27910) closeDisplay 0;
+			["PlayerMgmt_HealPlayer", format ["%1 (%2)", name _target, getPlayerUID _target]] call notifyAdminMenu;
+			
 		};
 		case 7: //Check Player Gear
 		{

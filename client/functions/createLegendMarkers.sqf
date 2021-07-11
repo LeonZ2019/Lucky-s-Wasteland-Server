@@ -22,6 +22,8 @@ if (["A3W_privateStorage"] call isConfigOn) then
 {
 	_markers pushBack ["Storage", "mil_dot", "ColorUNKNOWN", [1,1]];
 };
+// portal
+_markers pushBack ["Portal", "mil_dot", "ColorGreen", [1,1]];
 
 _mapSize = worldSize;
 _markerSpacing = 0.025 * _mapSize;

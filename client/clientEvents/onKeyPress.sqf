@@ -177,4 +177,10 @@ if (!_handled && _key in (actionKeys "PersonView" + actionKeys "TacticalView")) 
 	};
 };
 
+// Submarine dive and surface key
+/*if ( _key in (actionKeys "submarineUp" + actionKeys "submarineDown")) then
+{
+	_handled = true;
+};*/
+
 _handled
