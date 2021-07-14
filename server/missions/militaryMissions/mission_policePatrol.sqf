@@ -131,13 +131,11 @@ _successExec =
 	_boxTypes = ["mission_USRifles","mission_RURifles","mission_USMachineguns","mission_RUMachineguns","mission_PDW","mission_Gear","mission_Militia"];
 	_box1Type = _boxTypes call BIS_fnc_selectRandom;
 	_box1 = "Box_East_Wps_F" createVehicle getMarkerPos _marker;
-    [_box1, _box1Type] call fn_refillbox;
-	_box1 allowDamage false;
+	[_box1, _box1Type] call fn_refillbox;
 
 	_box2Type = _boxTypes call BIS_fnc_selectRandom;
 	_box2 = "Box_NATO_Wps_F" createVehicle getMarkerPos _marker;
-    [_box2, _box2Type] call fn_refillbox;
-	_box2 allowDamage false;
+	[_box2, _box2Type] call fn_refillbox;
 
 	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach [_box1, _box2];
 

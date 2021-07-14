@@ -126,6 +126,13 @@ _successExec =
 		_box1 = createVehicle [_currBox1, _pos, [], 5, "None"];
 		_box1 setDir random 360;
 		[_box1, "mission_USLaunchers"] call fn_refillbox;
+
+		_marker = createMarker [missionHJ", _pos, 0];
+		_marker setMarkerType "loc_plane";
+		_marker setMarkerText "Hostile Jet";
+		_marker setMarkerColor "ColorRed";
+		uiSleep 10;
+		deleteMarker _marker;
 	};
 
 	_successHintMessage = "The sky is clear again, the enemy patrol was taken out! Ammo crates and some money have fallen near the pilot.";

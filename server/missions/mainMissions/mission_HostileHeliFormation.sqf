@@ -176,6 +176,12 @@ _successExec =
 	_box3 setDir random 360;
 	[_box3, _box3Type] call fn_refillbox;
 
+	_marker = createMarker [missionHHF", _lastPos, 0];
+	_marker setMarkerType "loc_heli";
+	_marker setMarkerText "Hostile Helicopters";
+	_marker setMarkerColor "ColorRed";
+	uiSleep 10;
+	deleteMarker _marker;
 	_successHintMessage = "The sky is clear again, the enemy patrol was taken out! Ammo crates have fallen near the wreck.";
 };
 

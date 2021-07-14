@@ -108,10 +108,10 @@ if (_uid call isAdmin) then
 		};
 		case 6: //Heal Player
 		{
-			player setDamage 0;
-			if (player getVariable ["FAR_isUnconscious", 0] == 1) then
+			_target setDamage 0;
+			if (_target getVariable ["FAR_isUnconscious", 0] == 1) then
 			{
-				player setVariable ["FAR_isUnconscious", 0, true];
+				_target setVariable ["FAR_isUnconscious", 0, true];
 			};
 			(findDisplay 27910) closeDisplay 0;
 			["PlayerMgmt_HealPlayer", format ["%1 (%2)", name _target, getPlayerUID _target]] call notifyAdminMenu;

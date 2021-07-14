@@ -16,7 +16,7 @@ _setupVars =
 	_vehicleClass = ["I_Plane_Fighter_03_CAS_F", "B_Plane_CAS_01_F", "O_Plane_CAS_02_F"] call BIS_fnc_selectRandom;
 
 	_missionType = "Abandoned Jet";
-	_locationsArray = MissionSpawnMarkers;
+	_locationsArray = JetMarkers;
 };
 
 _setupObjects =

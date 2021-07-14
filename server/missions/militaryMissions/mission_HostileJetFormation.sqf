@@ -146,6 +146,12 @@ _successExec =
 	[_box4, _box4Type] call fn_refillbox;
 	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach [_box1, _box2, _box3, _box4];
 
+	_marker = createMarker [missionHJF", _lastPos, 0];
+	_marker setMarkerType "loc_plane";
+	_marker setMarkerText "Hostile Jets";
+	_marker setMarkerColor "ColorRed";
+	uiSleep 10;
+	deleteMarker _marker;
 	_successHintMessage = "The sky is clear again, the enemy patrol was taken out! Ammo crates and some money have fallen near the pilot.";
 };
 

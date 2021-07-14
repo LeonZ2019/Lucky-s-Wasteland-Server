@@ -165,6 +165,13 @@ _successExec =
 		_box2 = createVehicle ["Box_East_Wps_F", (getPosATL _veh) vectorAdd ([[_veh call fn_vehSafeDistance, 0, 0], random 360] call BIS_fnc_rotateVector2D), [], 5, "None"];
 		_box2 setDir random 360;
 		[_box2, _box2Type] call fn_refillbox;
+
+		_marker = createMarker [missionHH", getPosATL _veh, 0];
+		_marker setMarkerType "loc_heli";
+		_marker setMarkerText "Hostile Helicopter";
+		_marker setMarkerColor "ColorRed";
+		uiSleep 10;
+		deleteMarker _marker;
 	};
 
 	_successHintMessage = "The sky is clear again, the enemy patrol was taken out! Ammo crates have fallen near the wreck.";

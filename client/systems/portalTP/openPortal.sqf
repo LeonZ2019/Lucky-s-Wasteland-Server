@@ -44,18 +44,36 @@ if (!_isCurrentSafe) exitWith
 		{
 			_territoryText = _x select 1;
 			_enemyPlayers = 0;
-			_side = missionNamespace getVariable [format['%1_team',_x select 0], sideUnknown];
+			_isSameSide = false;
+			_side = str (missionNamespace getVariable [format['%1_team',_x select 0], sideUnknown]);
 			{
-				if (alive _x && {_x isKindOf "CAManBase" && {!(_x call A3W_fnc_isUnconscious)}}) then
-				{ 
-					if (!([_x, player] call A3W_fnc_isFriendly) && isPlayer _x && side _x != _side) then
+				if (isPlayer _x && alive _x && {_x isKindOf "CAManBase" && {!(_x call A3W_fnc_isUnconscious)}}) then
+				{
+					if (_side == "WEST" || _side == "EAST") then
 					{
-						_enemyPlayers = _enemyPlayers + 1;
+						if (side _x != _side) then
+						{
+							_enemyPlayers = _enemyPlayers + 1;
+						};
+						if (_x == player && playerSide == _side) then
+						{
+							_isSameSide = true;
+						};
+					} else
+					{
+						if (str (group _x) != _side) then
+						{
+							_enemyPlayers = _enemyPlayers + 1;
+						};
+						if (_x == player && str (group player) == _side) then
+						{
+							_isSameSide = true;
+						};
 					};
 				};
 			} forEach allUnits;
 			cutText [format["Teleporting from %1 to %2...", _this select 4 select 2 ,_territoryText], "BLACK", -0.25];
-			if (_enemyPlayers == 0 && _side == playerSide) then
+			if (_enemyPlayers == 0 && _isSameSide) then
 			{
 				[_pos] spawn {
 					params ["_pos"];

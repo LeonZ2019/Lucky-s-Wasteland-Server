@@ -8,7 +8,7 @@ class EditorData
 	toggles=582;
 	class ItemIDProvider
 	{
-		nextID=2840;
+		nextID=2847;
 	};
 	class MarkerIDProvider
 	{
@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=209;
+		nextID=213;
 	};
 	class Camera
 	{
-		pos[]={21732.408,16.084692,7695.8784};
-		dir[]={-0.79382503,-0.12322055,0.59553212};
-		up[]={-0.098566703,0.99237931,0.073945314};
-		aside[]={0.60010535,-3.7252903e-009,0.79992098};
+		pos[]={14492.001,43.679123,16358.88};
+		dir[]={0,-0.70710677,0.70710683};
+		up[]={0,0.70710677,0.70710671};
+		aside[]={0.99999994,0,-0};
 	};
 };
 binarizationWanted=0;
@@ -227,7 +227,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=510;
+		items=517;
 		class Item0
 		{
 			dataType="Group";
@@ -10949,7 +10949,7 @@ class Mission
 					class PositionInfo
 					{
 						position[]={9190.0996,121.63944,15801.486};
-						angles[]={-0,5.8585639,0};
+						angles[]={0,5.8585639,0};
 					};
 					side="Empty";
 					flags=4;
@@ -11194,7 +11194,7 @@ class Mission
 					};
 					id=2662;
 					type="Land_Laptop_device_F";
-					atlOffset=0.00076389313;
+					atlOffset=0.0007648468;
 					class CustomAttributes
 					{
 						class Attribute0
@@ -12007,7 +12007,7 @@ class Mission
 					};
 					id=2710;
 					type="Land_Laptop_device_F";
-					atlOffset=0.0094680786;
+					atlOffset=0.009475708;
 					class CustomAttributes
 					{
 						class Attribute0
@@ -12339,6 +12339,7 @@ class Mission
 					};
 					id=2726;
 					type="Land_Research_house_V1_F";
+					atlOffset=1.335144e-005;
 				};
 				class Item48
 				{
@@ -13225,7 +13226,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={9190.1016,121.07609,15801.493};
-				angles[]={-0,5.8585639,0};
+				angles[]={0,5.8585639,0};
 			};
 			side="Empty";
 			flags=4;
@@ -13241,7 +13242,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={7221.3516,133.63866,16522.596};
-				angles[]={-0,3.8814263,0};
+				angles[]={0,3.8814263,0};
 			};
 			side="Empty";
 			flags=4;
@@ -13375,7 +13376,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={11783.13,13.653546,9536.8906};
-				angles[]={-0,3.8814263,0};
+				angles[]={0,3.8814263,0};
 			};
 			side="Empty";
 			flags=4;
@@ -13392,7 +13393,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={11081.301,24.727648,13432.862};
-				angles[]={-0,3.8814263,0};
+				angles[]={0,3.8814263,0};
 			};
 			side="Empty";
 			flags=4;
@@ -13912,7 +13913,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={17987.666,34.308998,15297.705};
-				angles[]={-0,3.8814263,0};
+				angles[]={0,3.8814263,0};
 			};
 			side="Empty";
 			flags=4;
@@ -14218,6 +14219,80 @@ class Mission
 			id=414;
 			type="ProtectionZone_Invisible_F";
 			atlOffset=-20.493999;
+		};
+		class Item510
+		{
+			dataType="Marker";
+			position[]={21041.527,25.174999,7176.7422};
+			name="Jet_1";
+			type="Empty";
+			colorName="ColorBlue";
+			angle=119.02685;
+			id=2840;
+			atlOffset=-6.2942505e-005;
+		};
+		class Item511
+		{
+			dataType="Marker";
+			position[]={23188.475,3.1900001,18401.754};
+			name="Jet_2";
+			type="Empty";
+			colorName="ColorBlue";
+			id=2841;
+		};
+		class Item512
+		{
+			dataType="Marker";
+			position[]={26891.777,21.311695,24692.816};
+			name="Jet_3";
+			type="Empty";
+			colorName="ColorBlue";
+			angle=62.766068;
+			id=2842;
+			atlOffset=-0.014492035;
+		};
+		class Item513
+		{
+			dataType="Marker";
+			position[]={15123.757,17.91,16834.039};
+			name="Jet_4";
+			type="Empty";
+			colorName="ColorBlue";
+			angle=223.91267;
+			id=2843;
+		};
+		class Item514
+		{
+			dataType="Marker";
+			position[]={11650.748,21.059107,11747.956};
+			name="Jet_5";
+			type="Empty";
+			colorName="ColorBlue";
+			angle=209.51337;
+			id=2844;
+			atlOffset=-0.0056858063;
+		};
+		class Item515
+		{
+			dataType="Marker";
+			position[]={9013.4268,16.869446,21456.852};
+			name="Jet_6";
+			type="Empty";
+			colorName="ColorBlue";
+			angle=196.41806;
+			id=2845;
+			atlOffset=-0.012022018;
+		};
+		class Item516
+		{
+			dataType="Marker";
+			position[]={3830.6509,23.538492,7507.5073};
+			name="Jet_7";
+			type="Empty";
+			colorName="ColorBlue";
+			angle=90.279465;
+			id=2846;
+			atlOffset=3.4332275e-005;
 		};
 	};
 };

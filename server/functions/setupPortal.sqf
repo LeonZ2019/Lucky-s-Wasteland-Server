@@ -11,6 +11,8 @@ _table = (_laptop modelToWorld [0,0,0]) nearestObject "Land_CampingTable_small_w
 _structure allowDamage false;
 _table allowDamage false;
 _laptop allowDamage false;
+_laptop enableSimulationGlobal false;
+_table enableSimulationGlobal false;
 
 if (hasInterface) then
 {
