@@ -40,24 +40,21 @@ if (!_isCurrentSafe) exitWith
 {
 	_territories = call compile preprocessFileLineNumbers "mapConfig\territories.sqf";
 	{
-		if (_pos inArea (_x select 0)) then
+		if (_pos inArea (_x select 0)) exitWith
 		{
 			_territoryText = _x select 1;
+			_territoryMarker = _x select 0;
 			_enemyPlayers = 0;
 			_isSameSide = false;
 			_side = str (missionNamespace getVariable [format['%1_team',_x select 0], sideUnknown]);
 			{
-				if (isPlayer _x && alive _x && {_x isKindOf "CAManBase" && {!(_x call A3W_fnc_isUnconscious)}}) then
+				if (isPlayer _x && alive _x && _x isKindOf "CAManBase" && !(_x call A3W_fnc_isUnconscious) && (position _x) inArea _territoryMarker) then
 				{
 					if (_side == "WEST" || _side == "EAST") then
 					{
-						if (side _x != _side) then
+						if (str (side _x) != _side) then
 						{
 							_enemyPlayers = _enemyPlayers + 1;
-						};
-						if (_x == player && playerSide == _side) then
-						{
-							_isSameSide = true;
 						};
 					} else
 					{
@@ -65,13 +62,22 @@ if (!_isCurrentSafe) exitWith
 						{
 							_enemyPlayers = _enemyPlayers + 1;
 						};
-						if (_x == player && str (group player) == _side) then
-						{
-							_isSameSide = true;
-						};
 					};
 				};
 			} forEach allUnits;
+			if (str playerSide == "GUER") then
+			{
+				if (str (group player) == _side) then
+				{
+					_isSameSide = true;
+				};
+			} else
+			{
+				if (str playerSide == _side) then
+				{
+					_isSameSide = true;
+				};
+			};
 			cutText [format["Teleporting from %1 to %2...", _this select 4 select 2 ,_territoryText], "BLACK", -0.25];
 			if (_enemyPlayers == 0 && _isSameSide) then
 			{
