@@ -30,7 +30,7 @@ _ignoreAiDeaths = true;
 _waitUntilMarkerPos = nil;
 _waitUntilExec = nil;
 _waitUntilCondition = nil;
-_waitUntilSuccessCondition = {{isPlayer _x && _x distance _geoPos < 5} count playableUnits > 0};
+_waitUntilSuccessCondition = {{isPlayer _x && _x distance _geoPos < 5 && vehicle _x == _x} count playableUnits > 0};
 
 _failedExec =
 {

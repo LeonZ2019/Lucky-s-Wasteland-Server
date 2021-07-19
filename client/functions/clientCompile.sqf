@@ -39,8 +39,8 @@ fn_disableDriverAssist = "client\functions\fn_disableDriverAssist.sqf" call mf_c
 
 fn_driverAssistEngineOff = "client\functions\fn_driverAssistEngineOff.sqf" call mf_compile;
 fn_driverAssistEngineOn = "client\functions\fn_driverAssistEngineOn.sqf" call mf_compile;
-fn_driverAssistLightsOff = "client\functions\fn_driverAssistLightsOff.sqf" call mf_compile;
-fn_driverAssistLightsOn = "client\functions\fn_driverAssistLightsOn.sqf" call mf_compile;
+//fn_driverAssistLightsOff = "client\functions\fn_driverAssistLightsOff.sqf" call mf_compile;
+//fn_driverAssistLightsOn = "client\functions\fn_driverAssistLightsOn.sqf" call mf_compile;
 
 fn_emergencyEject = "client\functions\fn_emergencyEject.sqf" call mf_compile;
 fn_enableDriverAssist = "client\functions\fn_enableDriverAssist.sqf" call mf_compile;

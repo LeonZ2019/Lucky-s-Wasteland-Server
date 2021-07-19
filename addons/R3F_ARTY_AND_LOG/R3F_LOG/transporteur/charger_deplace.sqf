@@ -106,9 +106,6 @@ else
 				_objet enableCollisionWith _transporteur;
 
 				player globalChat format [STR_R3F_LOG_action_charger_deplace_fait, getText (configFile >> "CfgVehicles" >> (typeOf _transporteur) >> "displayName")];
-				/*_transporteur addEventHandler ["Deleted", { // store?
-					params ["_entity"];
-				}];*/
 			}
 			else
 			{

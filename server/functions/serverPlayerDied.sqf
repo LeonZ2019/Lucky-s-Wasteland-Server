@@ -22,7 +22,11 @@ if (isPlayer _unit && {["A3W_playerSaving"] call isConfigOn}) then
 };
 
 private _backpack = unitBackpack _unit;
-
+private _uav = getConnectedUAV _unit;
+if(!isnull _uav) then
+{
+	_unit connectTerminalToUAV objNull;
+};
 if (!isNull _backpack) then
 {
 	_backpack call A3W_fnc_setItemCleanup;
