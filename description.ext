@@ -1,5 +1,5 @@
 respawn="BASE";
-respawnDelay=15;
+respawnDelay=5;
 disabledAI=1;
 disableChannels[] = {{0,false,true}, {2,true,true}}; // 0 = global, 1 = side, 2 = command // new syntax: {{channel<number>, disableText<bool>, disableVoice<bool>}, ...};
 // side voice is disabled for indies in client\preInit.sqf
@@ -9,11 +9,13 @@ forceRotorLibSimulation = 0; // if you set this to 1, you deny freedom of choice
 weaponPool = 0;
 unsafeCVL = 1; // required for store selling bins and private storage
 corpseManagerMode = 1;
+corpseLimit = 60;
 corpseRemovalMinTime = 30*60;
 corpseRemovalMaxTime = 30*60;
 wreckManagerMode = 1;
-wreckRemovalMinTime = 10*60;
-wreckRemovalMaxTime = 10*60;
+wreckLimit = 30;
+wreckRemovalMinTime = 15*60;
+wreckRemovalMaxTime = 15*60;
 enableDebugConsole = 1;
 respawnDialog = 0; // do not enable this, otherwise the default scoreboard will overlap with the new one
 onPauseScript = "client\clientEvents\onPause.sqf";

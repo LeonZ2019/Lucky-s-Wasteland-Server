@@ -23,7 +23,7 @@ _setupObjects =
 	_box1Type = _boxTypes call BIS_fnc_selectRandom;
 	_box1 = createVehicle ["Box_IND_WpsSpecial_F", _missionPos, [], 5, "None"];
 	_box1 setDir random 360;
-	[_box1, _boxTypes] call fn_refillbox;
+	[_box1, _box1Type] call fn_refillbox;
 
 	_box2Type = _boxTypes call BIS_fnc_selectRandom;
 	_box2 = createVehicle ["Box_NATO_WpsSpecial_F", _missionPos, [], 5, "None"];

@@ -12,6 +12,7 @@
 #define ERR_NO_PUMP "You are not near a Fuel Pump/Container."
 #define ERR_IN_VEHICLE "You can't do this while in a vehicle."
 #define ERR_NO_JERRYCANS "You have no empty Jerrycans."
+#define ERR_TOO_FAR_AWAY "Filling Jerrycan Failed! You moved to far away"
 private ["_container", "_error"];
 _container = objNull;
 if (count _this == 0) then {
@@ -24,6 +25,7 @@ _error = "";
 switch (true) do {
 	case (player distance _container > (sizeOf typeOf _container / 3) max 2): {_error = ERR_NO_PUMP};
 	case (vehicle player != player): {_error = ERR_IN_VEHICLE};
+	case (player distance _container > 5): {_text = ERR_TOO_FAR_AWAY};
 	case ((MF_ITEMS_JERRYCAN_EMPTY call mf_inventory_count) <= 0): {_error = ERR_NO_JERRYCANS};
 };
 _error;

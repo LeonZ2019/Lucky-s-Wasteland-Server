@@ -7,7 +7,7 @@
 if (!isServer) exitwith {};
 #include "militaryMissionDefines.sqf"
 
-private ["_planeChoices", "_convoyVeh", "_veh1", "_veh2", "_createVehicle", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_vehicleName2", "_numWaypoints", "_cash", "_Boxes", "_currBox1", "_currBox2", "_currBox3", "_box1", "_box2", "_box3", "_box4"];
+private ["_planeChoices", "_convoyVeh", "_veh1", "_veh2", "_createVehicle", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_cash", "_Boxes", "_currBox1", "_currBox2", "_currBox3", "_box1", "_box2", "_box3", "_box4"];
 
 _setupVars =
 {
@@ -48,9 +48,18 @@ _setupObjects =
 		_soldier moveInDriver _vehicle;
 		_vehicle addEventHandler ["GetOut", {
 			params ["_vehicle", "_role", "_unit", "_turret"];
-			_this select 2 setDamage 1;
+			_unit setDamage 1;
 		}];
-		_vehicle setMagazineTurretAmmo ["240Rnd_CMFlare_Chaff_Magazine", 20, [-1]];
+		_vehicle addEventHandler ["Dammaged", {
+			params ["_unit", "_selection", "_damage", "_hitIndex", "_hitPoint", "_shooter", "_projectile"];
+			if (!alive _unit && _unit getVariable ["destroyedAt", 0] == 0) then
+			{
+				_unit setVariable ["destroyedAt", serverTime, true];
+			};
+		}];
+		_vehicle removeMagazineTurret ["240Rnd_CMFlare_Chaff_Magazine",[-1]];
+		_vehicle addMagazineTurret ["60Rnd_CMFlare_Chaff_Magazine",[-1]];
+		_vehicle setMagazineTurretAmmo ["60Rnd_CMFlare_Chaff_Magazine", 31, [-1]];
 		_vehicle
 	};
 
@@ -89,19 +98,15 @@ _setupObjects =
 
 	_missionPicture = getText (configFile >> "CfgVehicles" >> _veh1 >> "picture");
 	_vehicleName = getText (configFile >> "CfgVehicles" >> _veh1 >> "displayName");
-	_vehicleName2 = _vehicleName;
-	_vehicleName3 = _vehicleName;
-
-	_missionHintText = format ["A formation of Jets containing three <t color='%3'>%1</t> are patrolling the island. Destroy them and recover their cargo!", _vehicleName, _vehicleName2, _vehicleName3, militaryMissionColor];
-
+	_missionHintText = format ["A formation of Jets containing three <t color='%3'>%1</t> are patrolling the island. Destroy them and recover their cargo!", _vehicleName, _vehicleName, _vehicleName, militaryMissionColor];
 	_numWaypoints = count waypoints _aiGroup;
 };
 
 _waitUntilMarkerPos = {getPosATL _leader};
 _waitUntilExec = nil;
-_waitUntilCondition = {currentWaypoint _aiGroup >= _numWaypoints};
-
-_waitUntilSuccessCondition = { {!alive _x} count _vehicles == 3 };
+_waitUntilSuccessCondition = {
+	{(isTouchingGround _x || (getPos _x) select 2 < 5) && vectorMagnitude velocity _x < [1,5] select surfaceIsWater (getPos _x)} count _vehicles == 3
+};
 _ignoreAiDeaths = true;
 
 _failedExec = nil;
@@ -109,11 +114,28 @@ _failedExec = nil;
 // _vehicles are automatically deleted or unlocked in missionProcessor depending on the outcome
 _successExec =
 {
+	_timeDestroyed = [];
+	_pos = _lastPos;
+	_lastVehicle = objNull;
+	{
+		_timeDestroyed pushback (_x getVariable "destroyedAt");
+	} forEach _vehicles;
+	_timeDestroyed sort false;
+	{
+		if ((_x getVariable "destroyedAt") == (_timeDestroyed select 0)) exitWith
+		{
+			_lastVehicle = _x;
+		};
+	} forEach _vehicles;
+	if (!isNull _lastVehicle) then
+	{
+		_pos = getPosATL _lastVehicle;
+	};
 	//Money
 	for "_i" from 1 to 10 do
 	{
-		_cash = createVehicle ["Land_Money_F", _lastPos, [], 5, "None"];
-		_cash setPos ([_lastPos, [[2 + random 3,0,0], random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd);
+		_cash = createVehicle ["Land_Money_F", _pos, [], 5, "None"];
+		_cash setPos ([_pos, [[2 + random 3,0,0], random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd);
 		_cash setDir random 360;
 		_cash setVariable ["cmoney", 5000, true]; //50k
 		_cash setVariable ["owner", "world", true];
@@ -123,35 +145,38 @@ _successExec =
 	_box1Type = _boxTypes call BIS_fnc_selectRandom;
 	_Boxes = ["Box_IND_Wps_F","Box_East_Wps_F","Box_NATO_Wps_F","Box_East_WpsSpecial_F","Box_NATO_WpsSpecial_F"];
 	_currBox1 = _Boxes call BIS_fnc_selectRandom;
-	_box1 = createVehicle [_currBox1, _lastPos, [], 2, "None"];
+	_box1 = createVehicle [_currBox1, _pos, [], 2, "None"];
 	_box1 setDir random 360;
 	[_box1, _box1Type] call fn_refillbox;
 
 	_box2Type = _boxTypes call BIS_fnc_selectRandom;
 	_currBox2 = _Boxes call BIS_fnc_selectRandom;
-	_box2 = createVehicle [_currBox2, _lastPos, [], 2, "None"];
+	_box2 = createVehicle [_currBox2, _pos, [], 2, "None"];
 	_box2 setDir random 360;
 	[_box2, _box2Type] call fn_refillbox;
 
 	_box3Type = _boxTypes call BIS_fnc_selectRandom;
 	_currBox3 = _Boxes call BIS_fnc_selectRandom;
-	_box3 = createVehicle [_currBox3, _lastPos, [], 2, "None"];
+	_box3 = createVehicle [_currBox3, _pos, [], 2, "None"];
 	_box3 setDir random 360;
 	[_box3, _box3Type] call fn_refillbox;
 	
 	_box4Type = _boxTypes call BIS_fnc_selectRandom;
 	_currBox4 = _Boxes call BIS_fnc_selectRandom;
-	_box4 = createVehicle [_currBox4, _lastPos, [], 2, "None"];
+	_box4 = createVehicle [_currBox4, _pos, [], 2, "None"];
 	_box4 setDir random 360;
 	[_box4, _box4Type] call fn_refillbox;
 	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach [_box1, _box2, _box3, _box4];
 
-	_marker = createMarker [missionHJF", _lastPos, 0];
-	_marker setMarkerType "loc_plane";
-	_marker setMarkerText "Hostile Jets";
-	_marker setMarkerColor "ColorRed";
-	uiSleep 10;
-	deleteMarker _marker;
+	[_pos] spawn {
+		params ["_pos"];
+		_hint = createMarker ["missionHJF", _pos];
+		_hint setMarkerType "loc_plane";
+		_hint setMarkerText "Hostile Jets";
+		_hint setMarkerColor "ColorRed";
+		uiSleep 15;
+		deleteMarker _hint;
+	};
 	_successHintMessage = "The sky is clear again, the enemy patrol was taken out! Ammo crates and some money have fallen near the pilot.";
 };
 

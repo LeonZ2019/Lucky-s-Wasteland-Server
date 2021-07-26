@@ -54,6 +54,7 @@
 // timings
 #define BASE_SLEEP_INTERVAL 10
 #define CAPTURE_PERIOD (3*60) // now A3W_territoryCaptureTime in server config, this is only the fallback value
+#define CAPTURE_BOOST 1
 
 if(!isServer) exitWith {};
 
@@ -81,6 +82,7 @@ A3W_currentTerritoryOwners = [];
 // the server is lagging to shit
 _realLoopTime = BASE_SLEEP_INTERVAL;
 _capturePeriod = ["A3W_territoryCaptureTime", CAPTURE_PERIOD] call getPublicVar;
+_captureBoost = ["A3W_territoryCaptureBoost", CAPTURE_BOOST] call getPublicVar;
 
 // Store a note of the UID of every player we're indicating is blocked by setting a variable on them.
 // We need to mark-sweep this array each iteration to remove contested capping when the territory
@@ -356,8 +358,7 @@ _updatePlayerTerritoryActivity =
 			{
 				_territoryActivity set [0, _action];
 			};
-
-			_territoryActivity set [1, _capturePeriod - _newCapPointTimer];
+			_territoryActivity set [1, (_capturePeriod - _newCapPointTimer - ( (count _newTerritoryOccupiers) min _captureBoost ) * CAPTURE_BOOST)];
 			_newPlayersWithTerritoryActivity pushBack _playerUID;
 		};
 

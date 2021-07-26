@@ -15,6 +15,16 @@
 
 switch (true) do
 {
+	/*case (_class isKindOf "I_MRAP_03_F");
+	case (_class isKindOf "I_MRAP_03_gmg_F");
+	case (_class isKindOf "I_MRAP_03_hmg_F"):
+	{
+		switch (_variant) do
+		{
+			case "police": { _weapons = ["TruckHorn"] };
+			default { _weapons = ["AmbulanceHorn"] };
+		};
+	};*/
 	// AH-9 Pawnee
 	case (_class isKindOf "B_Heli_Light_01_dynamicLoadout_F"):
 	{

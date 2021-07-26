@@ -113,7 +113,7 @@ va_flipped = {
 };
 
 va_unflip_action_available = {
-  if (not(cfg_va_unflip_action_on)) exitWith {false};
+  if (not(cfg_va_unflip_action_on) || damage _vehicle == 1 ) exitWith {false};
   ARGVX4(0,_vehicle,objNull,false);
 
 
@@ -450,7 +450,7 @@ va_outside_add_actions = {
   };
 
   //Add unfliping action
-  _action_id = _player addaction [format["<img image='addons\vactions\icons\flip.paa'/> Unflip %1", _display_name], {_this call va_unflip_action;}, [_player, _vehicle],10,false,false,"",
+  _action_id = _player addaction [format["<img image='addons\vactions\icons\flip.paa'/> Unflip %1", _display_name], {_this call va_unflip_action;}, [_player, _vehicle],10,true,false,"",
   format["([objectFromNetId %1] call va_unflip_action_available)",str(netId _vehicle)]];
   va_outside_actions = va_outside_actions + [_action_id];
 

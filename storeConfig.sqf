@@ -1671,7 +1671,34 @@ colorsArray = compileFinal str
 				[2, _texDir + "hemtt_fuel_pertamina_2.paa"]
 			]]
 		]
-	]
+	]/*,
+	[
+		"I_MRAP_03_F",
+		[
+			["Police", [
+				[0, _texDir + "strider_police_0.paa"],
+				[1, _texDir + "strider_police_1.paa"]
+			]]
+		]
+	],
+	[
+		"I_MRAP_03_gmg_F",
+		[
+			["Police", [
+				[0, _texDir + "strider_police_0.paa"],
+				[1, _texDir + "strider_police_1.paa"]
+			]]
+		]
+	],
+	[
+		"I_MRAP_03_hmg_F",
+		[
+			["Police", [
+				[0, _texDir + "strider_police_0.paa"],
+				[1, _texDir + "strider_police_1.paa"]
+			]]
+		]
+	]*/
 ];
 
 //General Store Item List

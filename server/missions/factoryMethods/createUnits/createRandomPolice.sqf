@@ -29,6 +29,7 @@ _rank = param [2, "", [""]];
 _soldier = _group createUnit [_soldierTypes call BIS_fnc_selectRandom, _position, [], 0, "NONE"];
 _soldier addUniform (_uniformTypes call BIS_fnc_selectRandom);
 _soldier addVest (_vestTypes call BIS_fnc_selectRandom);
+_soldier addHeadgear (_headGearTypes call BIS_fnc_selectRandom);
 [_soldier, _weaponTypes call BIS_fnc_selectRandom, 3] call BIS_fnc_addWeapon;
 
 if (_rank != "") then
@@ -37,7 +38,6 @@ if (_rank != "") then
 };
 
 _soldier spawn refillPrimaryAmmo;
-_soldier spawn addMilCap;
 _soldier call setMissionSkill;
 
 _soldier addEventHandler ["Killed", server_playerDied];

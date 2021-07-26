@@ -149,6 +149,7 @@ A3W_territoryPayroll = 1;          // Periodically reward sides and indie groups
 A3W_territoryWarningIcons = 0;     // Show exclamation marks on map for friendly territories where enemies are present (0 = no, 1 = yes)
 A3W_payrollInterval = 15*60;       // Delay in seconds between each payroll
 A3W_payrollAmount = 700;           // Amount of money rewarded per territory on each payroll
+A3W_territoryCaptureBoost = 2;     // Boost capturing for each player
 
 // Mission settings
 A3W_serverMissions = 1;            // Enable server missions (0 = no, 1 = yes)

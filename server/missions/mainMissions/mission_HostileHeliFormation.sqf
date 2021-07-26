@@ -103,6 +103,13 @@ _setupObjects =
 		};
 
 		[_vehicle, _aiGroup] spawn checkMissionVehicleLock;
+		_vehicle addEventHandler ["Dammaged", {
+			params ["_unit", "_selection", "_damage", "_hitIndex", "_hitPoint", "_shooter", "_projectile"];
+			if (!alive _unit && _unit getVariable ["destroyedAt", 0] == 0) then
+			{
+				_unit setVariable ["destroyedAt", serverTime, true];
+			};
+		}];
 		_vehicle
 	};
 
@@ -110,9 +117,9 @@ _setupObjects =
 
 	_vehicles =
 	[
-		[_veh1, _missionPos vectorAdd ([[random 50, 0, 0], random 360] call BIS_fnc_rotateVector2D), 0] call _createVehicle,
-		[_veh2, _missionPos vectorAdd ([[random 50, 0, 0], random 360] call BIS_fnc_rotateVector2D), 0] call _createVehicle,
-		[_veh3, _missionPos vectorAdd ([[random 50, 0, 0], random 360] call BIS_fnc_rotateVector2D), 0] call _createVehicle
+		[_veh1, _missionPos vectorAdd ([[random 50, 0, 100], random 360] call BIS_fnc_rotateVector2D), 0] call _createVehicle,
+		[_veh2, _missionPos vectorAdd ([[random 50, 0, 100], random 360] call BIS_fnc_rotateVector2D), 0] call _createVehicle,
+		[_veh3, _missionPos vectorAdd ([[random 50, 0, 100], random 360] call BIS_fnc_rotateVector2D), 0] call _createVehicle
 	];
 
 	_leader = effectiveCommander (_vehicles select 0);
@@ -151,6 +158,11 @@ _setupObjects =
 _waitUntilMarkerPos = {getPosATL _leader};
 _waitUntilExec = nil;
 _waitUntilCondition = {currentWaypoint _aiGroup >= _numWaypoints};
+_waitUntilSuccessCondition = {
+	{(isTouchingGround _x || (getPos _x) select 2 < 5) && vectorMagnitude velocity _x < [1,5] select surfaceIsWater (getPos _x)} count _vehicles == 3
+};
+//{ {!alive _x} count _vehicles == 3 };
+_ignoreAiDeaths = true;
 
 _failedExec = nil;
 
@@ -159,29 +171,47 @@ _failedExec = nil;
 _successExec =
 {
 	// Mission completed
-
+	_timeDestroyed = [];
+	_lastVehicle = objNull;
+	_pos = _lastPos;
+	{
+		_timeDestroyed pushback (_x getVariable "destroyedAt");
+	} forEach _vehicles;
+	_timeDestroyed sort false;
+	{
+		if ((_x getVariable "destroyedAt") == (_timeDestroyed select 0)) exitWith
+		{
+			_lastVehicle = _x;
+		};
+	} forEach _vehicles;
+	if (!isNull _lastVehicle) then
+	{
+		_pos = getPosATL _lastVehicle;
+	};
 	_boxTypes = ["mission_USLaunchers","mission_RULaunchers","mission_USRifles","mission_RURifles","mission_USMachineguns","mission_RUMachineguns","mission_Explosive","mission_Gear"];
 	_box1Type = _boxTypes call BIS_fnc_selectRandom;
-	_box1 = createVehicle ["Box_NATO_Wps_F", _lastPos, [], 5, "None"];
+	_box1 = createVehicle ["Box_NATO_Wps_F", _pos, [], 5, "None"];
 	_box1 setDir random 360;
 	[_box1, _box1Type] call fn_refillbox;
 
 	_box2Type = _boxTypes call BIS_fnc_selectRandom;
-	_box2 = createVehicle ["Box_East_Wps_F", _lastPos, [], 5, "None"];
+	_box2 = createVehicle ["Box_East_Wps_F", _pos, [], 5, "None"];
 	_box2 setDir random 360;
 	[_box2, _box2Type] call fn_refillbox;
 
 	_box3Type = _boxTypes call BIS_fnc_selectRandom;
-	_box3 = createVehicle ["Box_IND_WpsSpecial_F", _lastPos, [], 5, "None"];
+	_box3 = createVehicle ["Box_IND_WpsSpecial_F", _pos, [], 5, "None"];
 	_box3 setDir random 360;
 	[_box3, _box3Type] call fn_refillbox;
-
-	_marker = createMarker [missionHHF", _lastPos, 0];
-	_marker setMarkerType "loc_heli";
-	_marker setMarkerText "Hostile Helicopters";
-	_marker setMarkerColor "ColorRed";
-	uiSleep 10;
-	deleteMarker _marker;
+	[_pos] spawn {
+		params ["_pos"];
+		_hint = createMarker ["missionHHF", _pos];
+		_hint setMarkerType "loc_heli";
+		_hint setMarkerText "Hostile Helicopters";
+		_hint setMarkerColor "ColorRed";
+		uiSleep 15;
+		deleteMarker _hint;
+	};
 	_successHintMessage = "The sky is clear again, the enemy patrol was taken out! Ammo crates have fallen near the wreck.";
 };
 

@@ -65,10 +65,23 @@ switch (_boxType) do
 		[
 			// Item type, Item class(es), # of items, # of magazines per weapon
 			["wep", ["launch_RPG7_F", "launch_RPG32_F", "launch_RPG32_ghex_F"], RANDOM_BETWEEN(1,2), RANDOM_BETWEEN(1,2)],
-			["mag", ["APERSTripMine_Wire_Mag", "APERSBoundingMine_Range_Mag", "APERSMine_Range_Mag", "ClaymoreDirectionalMine_Remote_Mag", "SLAMDirectionalMine_Wire_Mag", "ATMine_Range_Mag", "DemoCharge_Remote_Mag", "SatchelCharge_Remote_Mag", "IEDUrbanSmall_Remote_Mag", "IEDLandSmall_Remote_Mag", "IEDUrbanBig_Remote_Mag", "IEDLandBig_Remote_Mag", "TrainingMine_01_F"], RANDOM_BETWEEN(1,4)],
+			["mag", ["APERSTripMine_Wire_Mag", "APERSBoundingMine_Range_Mag", "APERSMine_Range_Mag", "ClaymoreDirectionalMine_Remote_Mag", "SLAMDirectionalMine_Wire_Mag", "ATMine_Range_Mag", "DemoCharge_Remote_Mag", "SatchelCharge_Remote_Mag", "IEDUrbanSmall_Remote_Mag", "IEDLandSmall_Remote_Mag", "IEDUrbanBig_Remote_Mag", "IEDLandBig_Remote_Mag"], RANDOM_BETWEEN(1,4)],
 			["mag", ["1Rnd_HE_Grenade_shell", "1Rnd_SmokePurple_Grenade_shell","1Rnd_SmokeBlue_Grenade_shell"], RANDOM_BETWEEN(0,4)],
 			["mag", "RPG32_HE_F", RANDOM_BETWEEN(0,2)],
 			["itm", "Toolkit", RANDOM_ODDS(0.7)]
+		];
+	};
+	case "mission_CTRGGears":
+	{
+		_boxItems =
+		[
+			// Item type, Item class(es), # of items, # of magazines per weapon
+			["itm", ["H_HelmetB_TI_arid_F", "H_HelmetB_TI_tna_F", "H_HelmetB_TI_arid_F"], RANDOM_BETWEEN(2,4)],
+			["itm", ["U_B_CTRG_1", "U_B_CTRG_2", "U_B_CTRG_3", "U_B_CTRG_Soldier_Arid_F", "U_B_CTRG_Soldier_2_Arid_F", "U_B_CTRG_Soldier_3_Arid_F", "U_B_CTRG_Soldier_urb_1_F", "U_B_CTRG_Soldier_urb_2_F", "U_B_CTRG_Soldier_urb_3_F", "U_B_CTRG_Soldier_F", "U_B_CTRG_Soldier_2_F", "U_B_CTRG_Soldier_3_F"], RANDOM_BETWEEN(10,14)],
+			["itm", ["NVGoggles", "NVGoggles_OPFOR", "NVGoggles_INDEP", "NVGoggles_tna_F", "O_NVGoggles_ghex_F", "O_NVGoggles_hex_F", "O_NVGoggles_urb_F"], RANDOM_BETWEEN(3,7)], //Night Visions
+			["itm", ["V_PlateCarrierL_CTRG", "V_PlateCarrierH_CTRG"], RANDOM_BETWEEN(2,4)],
+			["itm", ["B_Carryall_green_F"], RANDOM_BETWEEN(2,4)],
+			["itm", ["ItemGPS", "FirstAidKit", "Medikit", "ToolKit", "MineDetector", "Rangefinder", "Laserdesignator", "Laserdesignator_01_khk_F", "Laserdesignator_03", "Laserdesignator_02", "Laserdesignator_02_ghex_F", "B_IR_Grenade", "O_IR_Grenade", "I_IR_Grenade"], RANDOM_BETWEEN(4,6)] //Special Purpose
 		];
 	};
 	case "mission_USSpecial":

@@ -13,8 +13,11 @@ private ["_vehicle", "_vehicleName", "_vehDeterminer", "_vehicleClass"];
 
 _setupVars =
 {
-	_vehicleClass = ["I_Plane_Fighter_03_CAS_F", "B_Plane_CAS_01_F", "O_Plane_CAS_02_F"] call BIS_fnc_selectRandom;
-
+	_vehicleClass = [
+		["I_Plane_Fighter_03_dynamicLoadout_F", "variant_buzzardCAS"],
+		["B_Plane_CAS_01_dynamicLoadout_F", "vehicle"],
+		["O_Plane_CAS_02_dynamicLoadout_F", "vehicle"]
+	] call BIS_fnc_selectRandom;
 	_missionType = "Abandoned Jet";
 	_locationsArray = JetMarkers;
 };
@@ -22,48 +25,25 @@ _setupVars =
 _setupObjects =
 {
 	_missionPos = markerPos _missionLocation;
-
-	// Class, Position, Fuel, Ammo, Damage, Special
-	_vehicle = [_vehicleClass, _missionPos] call createMissionVehicle;
-	_vehicle setFuel 0.5;
-	_vehicle setDamage 0.25;
-	// Remove AGM missiles for balance
-	switch (true) do
-	{
-		case (_vehicle isKindOf "Plane_CAS_01_base_F"):
-		{
-			_vehicle setMagazineTurretAmmo ["6Rnd_Missile_AGM_02_F", 0, [-1]];
-		};
-		case (_vehicle isKindOf "Plane_CAS_02_base_F"):
-		{
-			_vehicle setMagazineTurretAmmo ["4Rnd_Missile_AGM_01_F", 0, [-1]];
-		};
-	};
-
-	// Reset all flares to 60
-	if (_vehicleClass isKindOf "Air") then
-	{
-		{
-			if (["CMFlare", _x] call fn_findString != -1) then
-			{
-				_vehicle removeMagazinesTurret [_x, [-1]];
-			};
-		} forEach getArray (configFile >> "CfgVehicles" >> _vehicleClass >> "magazines");
-
-		_vehicle addMagazineTurret ["60Rnd_CMFlare_Chaff_Magazine", [-1]];
-	};
-
+	_variant = _vehicleClass select 1;
+	_vehicleClass = _vehicleClass select 0;
+	_safePos = [_missionPos, 0, 30, 5, 0, 0, 0] call findSafePos;
+	_vehicle = [_vehicleClass, _safePos, 0.5, 1, 0.25, "NONE", _variant] call createMissionVehicle;
+	_vehicle setDir (markerDir _missionLocation);
+	_vehicle setHitPointDamage ["HitEngine", 0.8];
+	_vehicle setHitPointDamage ["HitHull", 0.75];
+	_vehicle setHitPointDamage ["HitAvionics", 0.5];
 	reload _vehicle;
 
 	_aiGroup = createGroup CIVILIAN;
-	[_aiGroup,_missionPos,12,15] spawn createCustomGroup;
+	[_aiGroup,_safePos,12,15] spawn createCustomGroup;
 
 	_missionPicture = getText (configFile >> "CfgVehicles" >> _vehicleClass >> "picture");
 	_vehicleName = getText (configFile >> "CfgVehicles" >> _vehicleClass >> "displayName");
 
 	_vehDeterminer = if ("AEIMO" find (_vehicleName select [0,1]) != -1) then { "An" } else { "A" };
 
-	_missionHintText = format ["%1 <t color='%3'>%2</t> has been immobilized, go get it for your team!", _vehDeterminer, _vehicleName, militaryMissionColor];	
+	_missionHintText = format ["%1 <t color='%3'>%2</t> has been immobilized, go get it for your team!", _vehDeterminer, _vehicleName, militaryMissionColor];
 };
 
 _waitUntilMarkerPos = nil;
@@ -79,8 +59,7 @@ _failedExec =
 _successExec =
 {
 	// Mission completed
-	_vehicle lock 1;
-	_vehicle setVariable ["R3F_LOG_disabled", false, true];
+	[_vehicle, 1] call A3W_fnc_setLockState;
 
 	_successHintMessage = format ["The %1 has been captured, well done.", _vehicleName];
 };

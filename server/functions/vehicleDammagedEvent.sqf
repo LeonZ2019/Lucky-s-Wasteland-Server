@@ -42,9 +42,7 @@ if (local _veh) then
 			} forEach _items;
 			_veh setVariable ["R3F_LOG_objets_charges", [], false];
 		};
-		/*_isTowing = _veh getVariable "R3F_LOG_remorque";
-		_isLifting = _veh getVariable "R3F_LOG_heliporte";
-
+		/*_isTowing = _veh getVariable ["R3F_LOG_remorque", objNull];
 		if (!isNull _isTowing) then
 		{
 			_veh setVariable ["R3F_LOG_remorque", objNull, true];
@@ -59,10 +57,10 @@ if (local _veh) then
 				pvar_detachTowedObject = [netId _isTowing];
 				publicVariable "pvar_detachTowedObject";
 			};
-		};
+		};*/
 		if (!isNull _isLifting) then
 		{
-			_veh setVariable ["R3F_LOG_remorque", objNull, true];
+			_veh setVariable ["R3F_LOG_heliporte", objNull, true];
 			_isLifting setVariable ["R3F_LOG_est_transporte_par", objNull, true];
 			["enableDriving", _isLifting] call A3W_fnc_towingHelper;
 
@@ -70,11 +68,15 @@ if (local _veh) then
 			if (local _isLifting) then
 			{
 				[_isLifting, _airdrop] call detachTowedObject;
+				if ((getPos _veh) select 2 <= 1) then
+				{
+					_isLifting setPos (_veh modelToWorld [0,-10,0]); //AGL
+				};
 			} else
 			{
 				pvar_detachTowedObject = [netId _isLifting, _airdrop];
 				publicVariable "pvar_detachTowedObject";
 			};
-		};*/
+		};
 	};
 };

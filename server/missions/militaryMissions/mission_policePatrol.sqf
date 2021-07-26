@@ -21,7 +21,6 @@ _setupObjects =
 	_missionPos = markerPos (_town select 0);
 
 	_convoyVeh = ["I_MRAP_03_hmg_F","I_MRAP_03_gmg_F","I_APC_Wheeled_03_cannon_F","I_MBT_03_cannon_F","I_MRAP_03_gmg_F"];
-	
 	_veh1 = _convoyVeh select 0;
 	_veh2 = _convoyVeh select 1;
 	_veh3 = _convoyVeh select 2;
@@ -29,23 +28,25 @@ _setupObjects =
 	_veh5 = _convoyVeh select 4;
 
 	_createVehicle = {
-		private ["_type","_position","_direction","_vehicle","_soldier"];
-		
+		private ["_type","_position","_direction","_maxRadius","_vehicle","_soldier"];
 		_type = _this select 0;
 		_position = _this select 1;
 		_direction = _this select 2;
-
-		_vehicle = createVehicle [_type, _position, [], 0, "None"];
+		_maxRadius = _this select 3;
+		//["I_MRAP_03_", _type] call fn_startsWith
+		//_vehicle = [_type, _position, 1, 1, 0, "NONE", "variant_police"] call createMissionVehicle;
+		_safePos = [_position, 0, _maxRadius + 50, 5, 0, 0, 0, _type] call findSafePos;
+		_vehicle = createVehicle [_type, _safePos, [], 0, "None"];
 		[_vehicle] call vehicleSetup;
 
 		_vehicle setDir _direction;
 		_aiGroup addVehicle _vehicle;
 
-		_soldier = [_aiGroup, _position] call createRandomPolice; 
+		_soldier = [_aiGroup, _safePos] call createRandomPolice; 
 		_soldier moveInDriver _vehicle;
-		_soldier = [_aiGroup, _position] call createRandomPolice; 
+		_soldier = [_aiGroup, _safePos] call createRandomPolice; 
 		_soldier moveInCommander _vehicle;
-		_soldier = [_aiGroup, _position] call createRandomPolice; 
+		_soldier = [_aiGroup, _safePos] call createRandomPolice; 
 		_soldier moveInGunner _vehicle;
 
 		//_vehicle setVariable ["R3F_LOG_disabled", false, true]; // force vehicles to be unlocked
@@ -59,22 +60,13 @@ _setupObjects =
 	
 	//_pos = getMarkerPos (_town select 0);
 	_rad = _town select 1;
-	_vehiclePosArray = [_missionPos,_rad,_rad + 50,5,0,0,0] call findSafePos;
-	/*_vPos1 = _vehiclePosArray select 0;
-	_vPos2 = _vehiclePosArray select 1;
-	_vPos3 = _vehiclePosArray select 2;
-	_vehiclePos1 = [_vPos1 + 5, _vPos2 + 5, _vPos3];
-	_vehiclePos2 = [_vPos1 + 10, _vPos2 + 10, _vPos3];
-	_vehiclePos3 = [_vPos1 + 15, _vPos2 + 15, _vPos3];
-	_vehiclePos4 = [_vPos1 + 20, _vPos2 + 20, _vPos3];*/
-
 	_vehicles =
 	[
-		[_veh1, _vehiclePosArray, 0] call _createVehicle,
-		[_veh2, _vehiclePosArray, 0] call _createVehicle,
-		[_veh3, _vehiclePosArray, 0] call _createVehicle,
-		[_veh4, _vehiclePosArray, 0] call _createVehicle,
-		[_veh5, _vehiclePosArray, 0] call _createVehicle
+		[_veh1, _missionPos, 0, _rad] call _createVehicle,
+		[_veh2, _missionPos, 0, _rad] call _createVehicle,
+		[_veh3, _missionPos, 0, _rad] call _createVehicle,
+		[_veh4, _missionPos, 0, _rad] call _createVehicle,
+		[_veh5, _missionPos, 0, _rad] call _createVehicle
 	];
 
 	_leader = effectiveCommander (_vehicles select 0);
@@ -118,23 +110,22 @@ _failedExec = nil;
 _successExec =
 {
 	// Mission completed
-
 	for "_x" from 1 to 10 do
 	{
-		_cash = "Land_Money_F" createVehicle markerPos _marker;
-		_cash setPos ((markerPos _marker) vectorAdd ([[2 + random 2,0,0], random 360] call BIS_fnc_rotateVector2D));
+		_cash = createVehicle ["Land_Money_F", _lastPos, [], 5, "None"];
+		_cash setPos ([_lastPos, [[2 + random 3,0,0], random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd);
 		_cash setDir random 360;
-		_cash setVariable["cmoney",2500,true];
-		_cash setVariable["owner","world",true];
+		_cash setVariable ["cmoney", 2000, true];
+		_cash setVariable ["owner", "world", true];
 	};
 
 	_boxTypes = ["mission_USRifles","mission_RURifles","mission_USMachineguns","mission_RUMachineguns","mission_PDW","mission_Gear","mission_Militia"];
 	_box1Type = _boxTypes call BIS_fnc_selectRandom;
-	_box1 = "Box_East_Wps_F" createVehicle getMarkerPos _marker;
+	_box1 = "Box_East_Wps_F" createVehicle _lastPos;
 	[_box1, _box1Type] call fn_refillbox;
 
 	_box2Type = _boxTypes call BIS_fnc_selectRandom;
-	_box2 = "Box_NATO_Wps_F" createVehicle getMarkerPos _marker;
+	_box2 = "Box_NATO_Wps_F" createVehicle _lastPos;
 	[_box2, _box2Type] call fn_refillbox;
 
 	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach [_box1, _box2];

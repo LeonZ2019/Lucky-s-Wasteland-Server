@@ -52,7 +52,9 @@ _setupObjects =
 			params ["_vehicle", "_role", "_unit", "_turret"];
 			_this select 2 setDamage 1;
 		}];
-		_vehicle setMagazineTurretAmmo ["120Rnd_CMFlare_Chaff_Magazine", 10, [-1]];
+		_vehicle removeMagazineTurret ["120Rnd_CMFlare_Chaff_Magazine",[-1]];
+		_vehicle addMagazineTurret ["60Rnd_CMFlare_Chaff_Magazine",[-1]];
+		_vehicle setMagazineTurretAmmo ["60Rnd_CMFlare_Chaff_Magazine", 31, [-1]];
 		_vehicle
 	};
 	
@@ -88,7 +90,7 @@ _setupObjects =
 
 	_numWaypoints = count waypoints _aiGroup;
 };
-	
+
 _waitUntilMarkerPos = {getPosATL _leader};
 _waitUntilExec = nil;
 _waitUntilCondition = {currentWaypoint _aiGroup >= _numWaypoints};
@@ -126,13 +128,13 @@ _successExec =
 		_box1 = createVehicle [_currBox1, _pos, [], 5, "None"];
 		_box1 setDir random 360;
 		[_box1, "mission_USLaunchers"] call fn_refillbox;
-
-		_marker = createMarker [missionHJ", _pos, 0];
-		_marker setMarkerType "loc_plane";
-		_marker setMarkerText "Hostile Jet";
-		_marker setMarkerColor "ColorRed";
-		uiSleep 10;
-		deleteMarker _marker;
+		
+		_hint = createMarker ["missionHJ", _pos];
+		_hint setMarkerType "loc_plane";
+		_hint setMarkerText "Hostile Jet";
+		_hint setMarkerColor "ColorRed";
+		uiSleep 15;
+		deleteMarker _hint;
 	};
 
 	_successHintMessage = "The sky is clear again, the enemy patrol was taken out! Ammo crates and some money have fallen near the pilot.";
