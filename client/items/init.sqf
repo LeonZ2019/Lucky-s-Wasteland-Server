@@ -17,6 +17,8 @@
 [_this, "cratemoney"] call mf_init;
 [_this, "quadbike"] call mf_init;
 [_this, "waterscooter"] call mf_init;
+[_this, "defibrillator"] call mf_init;
+[_this, "suicideVest"] call mf_init;
 
 if (["A3W_artilleryStrike"] call isConfigOn) then
 {

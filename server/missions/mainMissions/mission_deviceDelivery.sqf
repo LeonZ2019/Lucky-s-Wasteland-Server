@@ -9,7 +9,7 @@
 if (!isServer) exitwith {};
 #include "mainMissionDefines.sqf"
 
-private ["_vehicle", "_miller", "_millerMarker", "_aiGroup"];
+private ["_safePos", "_nearestRoad", "_startOfRoad", "_endOfRoad", "_roadCenter", "_roadDir", "_millerGrp", "_millerMarker", "_miller", "_vehicle", "_cash", "_box1", "_currBox1", "_pos"];
 
 _setupVars =
 {
@@ -29,9 +29,9 @@ _setupObjects =
 	_nearestRoad = getRoadInfo ((_safePos nearRoads 50) select 0);
 	_startOfRoad = _nearestRoad select 6;
 	_endOfRoad = _nearestRoad select 7;
-	_edgeOfRoad = - ((_nearestRoad select 1) / 2);
+	_edgeOfRoad = (round (- ((_nearestRoad select 1) / 2 * 1000))) / 1000;
 	_roadCenter = [((_startOfRoad select 0) + (_endOfRoad select 0)) / 2, ((_startOfRoad select 1) + (_endOfRoad select 1)) / 2, 0];
-	_roadDir = ([_startOfRoad, _endOfRoad] call BIS_fnc_dirTo) - 90;
+	_roadDir = round (([_startOfRoad, _endOfRoad] call BIS_fnc_dirTo) - 90);
 	if (_roadDir > 360) then {_roadDir = _roadDir - 360 };
 	if (_roadDir < 0) then {_roadDir = _roadDir + 360 };
 	_millerGrp = createGroup CIVILIAN;
@@ -43,9 +43,11 @@ _setupObjects =
 	_millerMarker setMarkerType "loc_talk";
 	_millerMarker setMarkerText "Miller";
 	_millerMarker setMarkerColor "ColorWhite";
+	_millerMarker setMarkerSize [0.75, 0.75];
 
 	_vehicle = createVehicle ["O_Truck_03_device_F", _missionPos, [], 0, "NONE"]; //unlocked
 	_vehicle setVariable ["ownerName", "Miller", true];
+	_vehicle setVariable ["Mission_Vehicle", true];
 
 	_aiGroup = createGroup CIVILIAN;
 	[_aiGroup,_missionPos, 10, 20] spawn createCustomGroup;
@@ -65,7 +67,7 @@ _setupObjects =
 };
 
 _ignoreAiDeaths = true;
-_waitUntilMarkerPos = {getPosATL _vehicle};
+_waitUntilMarkerPos = {getPos _vehicle};
 _waitUntilExec = nil;
 _waitUntilCondition = {!alive _miller || !alive _vehicle};
 _waitUntilSuccessCondition = {
@@ -89,10 +91,10 @@ _successExec =
 	_cash = createVehicle ["Land_Money_F", _pos, [], 5, "None"];
 	_cash setPos ([_pos, [[0,0,0], random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd);
 	_cash setVariable ["owner", "world", true];
-	_cash setVariable ["cmoney", 30000, true];
+	_cash setVariable ["cmoney", 10000, true];
 
 	_currBox1 = ["Box_East_WpsSpecial_F","Box_NATO_WpsSpecial_F"] call BIS_fnc_selectRandom;
-	_box1 = createVehicle [_currBox1, _pos, [], 2, "None"];
+	_box1 = createVehicle [_currBox1, _pos, [], 1, "None"];
 	_box1 setDir random 360;
 	[_box1, "mission_CTRGGears"] call fn_refillbox;
 

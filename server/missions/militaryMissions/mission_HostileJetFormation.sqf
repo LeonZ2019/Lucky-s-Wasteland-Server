@@ -7,7 +7,7 @@
 if (!isServer) exitwith {};
 #include "militaryMissionDefines.sqf"
 
-private ["_planeChoices", "_convoyVeh", "_veh1", "_veh2", "_createVehicle", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_cash", "_Boxes", "_currBox1", "_currBox2", "_currBox3", "_box1", "_box2", "_box3", "_box4"];
+private ["_planeChoices", "_convoyVeh", "_veh1", "_veh2", "_veh3", "_createVehicle", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_timeDestroyed", "_pos", "_lastVehicle", "_cash", "_boxTypes", "_box1Type", "_box2Type", "_box3Type", "_box4Type", "_Boxes", "_currBox1", "_currBox2", "_currBox3", "_currBox4", "_box1", "_box2", "_box3", "_box4"];
 
 _setupVars =
 {
@@ -77,7 +77,7 @@ _setupObjects =
 	
 	_aiGroup setCombatMode "YELLOW";
 	_aiGroup setBehaviour "COMBAT";
-	_aiGroup setFormation "DIAMOND";
+	_aiGroup setFormation "WEDGE";
 
 	_speedMode = if (missionDifficultyHard) then { "NORMAL" } else { "LIMITED" };
 
@@ -90,7 +90,7 @@ _setupObjects =
 		_waypoint setWaypointCompletionRadius 50;
 		_waypoint setWaypointCombatMode "GREEN";
 		_waypoint setWaypointBehaviour "SAFE";
-		_waypoint setWaypointFormation "VEE";
+		_waypoint setWaypointFormation "WEDGE";
 		_waypoint setWaypointSpeed _speedMode;
 	} forEach ((call cityList) call BIS_fnc_arrayShuffle);
 
@@ -169,7 +169,7 @@ _successExec =
 	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach [_box1, _box2, _box3, _box4];
 
 	[_pos] spawn {
-		params ["_pos"];
+		params ["_pos", "_hint"];
 		_hint = createMarker ["missionHJF", _pos];
 		_hint setMarkerType "loc_plane";
 		_hint setMarkerText "Hostile Jets";

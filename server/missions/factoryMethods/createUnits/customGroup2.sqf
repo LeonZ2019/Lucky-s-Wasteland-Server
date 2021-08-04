@@ -105,5 +105,4 @@ for "_i" from 1 to _nbUnits do
 	_unit addRating 1e11;
 	_unit spawn refillPrimaryAmmo;
 	_unit call setMissionSkill;
-	_unit addEventHandler ["Killed", server_playerDied];
 };

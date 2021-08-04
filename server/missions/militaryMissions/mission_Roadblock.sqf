@@ -7,7 +7,7 @@
 if (!isServer) exitwith {};
 #include "militaryMissionDefines.sqf";
 
-private [ "_box1", "_box2", "_outpost", "_objects"];
+private [ "_markerDir", "_baseToDelete", "_boxTypes", "_box2Type", "_box1", "_box2", "_outpost", "_objects"];
 
 _setupVars =
 {

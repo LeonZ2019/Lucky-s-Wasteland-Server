@@ -19,6 +19,27 @@ player createDiarySubject ["credits", "Credits"];
 
 player createDiaryRecord ["changelog",
 [
+"Custom Update Build 13",
+"
+<br/>[Added] HVT - High Value Target for carry 150k, refresh time is 30 seconds
+<br/>[Added] Items Strap-on Bomb and Defibrillator
+<br/>[Added] Civilians cloth in general store
+<br/>[Added] More gear to general store
+<br/>[Added] Mission Rescue War Crime, Rescue Hostage and Miller's Truck
+<br/>[Added] Parking lot in airport for plane only
+<br/>[Added] Small territory boost
+<br/>[Fixed] Vehicle light on driver assist
+<br/>[Fixed] Convoy path up to 6 start location
+<br/>[Fixed] Private variable for most of the mission
+<br/>[Fixed] Server restart message
+<br/>[Adjusted] Start up gear
+<br/>[Adjusted] Mission setup
+<br/>[Adjusted] Mission AI loadout
+"
+]];
+
+player createDiaryRecord ["changelog",
+[
 "v1.4d",
 "
 <br/>[Added] ADR-97 SMG

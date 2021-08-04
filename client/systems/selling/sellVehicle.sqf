@@ -55,9 +55,20 @@ storeSellingHandle = _this spawn
 		} else { true };
 	};
 
+	_checkIfMission =
+	{
+		if (_vehicle getVariable ["Mission_Vehicle", false]) then
+		{
+			playSound "FD_CP_Not_Clear_F";
+			[format ['You cant sell this "%1" from mission.', _objName], "Error"] call  BIS_fnc_guiMessage;
+			false
+		} else { true };
+	};
+
 	if (!call _checkDamage) exitWith {};
 	if (!call _checkValidDistance) exitWith {};
 	if (!call _checkValidOwnership) exitWith {};
+	if (!call _checkIfMission) exitWith {};
 
 	private _variant = _vehicle getVariable ["A3W_vehicleVariant", ""];
 	if (_variant != "") then { _variant = "variant_" + _variant };
@@ -86,6 +97,32 @@ storeSellingHandle = _this spawn
 			{
 				playSound "FD_CP_Not_Clear_F";
 				[format ['The %1 has already been sold!', _objname, VEHICLE_MAX_SELLING_DISTANCE], "Error"] call  BIS_fnc_guiMessage;
+			};
+
+			private _items = _vehicle getVariable "R3F_LOG_objets_charges";
+			if (count _items > 0) then {
+				{
+					if (!isNull attachedTo _x) then
+					{
+						detach _x;
+						_x setVariable ["R3F_LOG_est_transporte_par", objNull, true];
+						[_x, true] call fn_enableSimulationGlobal;
+						if (unitIsUAV _x) then
+						{
+							[_x, 1] call A3W_fnc_setLockState;
+							["enableDriving", _x] call A3W_fnc_towingHelper;
+						};
+						_dimension_max = (((boundingBox _x select 1 select 1) max (-(boundingBox _x select 0 select 1))) max ((boundingBox _x select 1 select 0) max (-(boundingBox _x select 0 select 0))));
+						_safePos = [
+							(getPos _veh select 0) - ((_dimension_max+5+(random 10)-(boundingBox _veh select 0 select 1))*sin (getDir _veh - 90+random 180)),
+							(getPos _veh select 1) - ((_dimension_max+5+(random 10)-(boundingBox _veh select 0 select 1))*cos (getDir _veh - 90+random 180)),
+							0
+						];
+						_x setPos _safePos;
+						_x setVelocity [0,0,0];
+					};
+				} forEach _items;
+				_veh setVariable ["R3F_LOG_objets_charges", [], false];
 			};
 
 			private _attachedObjs = attachedObjects _vehicle;

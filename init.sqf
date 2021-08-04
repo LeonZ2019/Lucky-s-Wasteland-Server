@@ -50,7 +50,7 @@ if (!isDedicated) then
 	{
 		if (hasInterface) then // Normal player
 		{
-			9999 cutText ["Welcome to A3Wasteland, please wait for your client to initialize", "BLACK", 0.01];
+			9999 cutText ["Welcome to Lucky's Wasteland, please wait for your client to initialize", "BLACK", 0.01];
 
 			waitUntil {!isNull player};
 			player setVariable ["playerSpawning", true, true];
@@ -99,6 +99,9 @@ if (hasInterface || isServer) then
 	[] execVM "addons\disableThermal\disableThermal.sqf";
 	[] execVM "addons\compass\voyagerCompass.sqf";
 	[] execVM "addons\serverRestartMessage\init.sqf";
+	[] execVM "addons\hostage\init.sqf";
+	[] execVM "addons\HvT\HvT.sqf";
+	[] execVM "addons\suicideVest\init.sqf";
 	if (isNil "drn_DynamicWeather_MainThread") then { drn_DynamicWeather_MainThread = [] execVM "addons\scripts\DynamicWeatherEffects.sqf" };
 };
 
@@ -107,5 +110,5 @@ if (hasInterface || isServer) then
 [
 	"!triggerActivated thisTrigger", 
 	"thisTrigger setTriggerTimeout [30,30,30,false]",
-	"{if (markerShape _x == 'POLYLINE') then {deleteMarker _x}} forEach allMapMarkers"
+	"{if (markerShape _x == 'POLYLINE' && markerChannel _x == 0) then {deleteMarker _x}} forEach allMapMarkers"
 ];

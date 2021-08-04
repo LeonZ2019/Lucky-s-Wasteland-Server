@@ -25,8 +25,29 @@ if ((getPlayerUID player) call isAdmin) then
 
 		(findDisplay 27910) closeDisplay 0; // ReviveBlankGUI_IDD
 		//(findDisplay 27911) closeDisplay 0; // ReviveGUI_IDD
-
 		hint "You are now invulnerable";
+		_curPlayerInvulnState = true;
+		while ({_curPlayerInvulnState}) do
+		{
+			if (getOxygenRemaining player < 0.80) then
+			{
+				player setOxygenRemaining 1;
+			};
+			if (thirstLevel < 80) then
+			{
+				thirstLevel = 100;
+			};
+			if (hungerLevel < 80) then
+			{
+				hungerLevel = 100;
+			};
+			if (getDammage player > 0.20) then
+			{
+				player setDamage 0;
+			};
+			uiSleep 30;
+			_curPlayerInvulnState = player getVariable ["isAdminInvulnerable", false];
+		};
 	}
 	else
 	{

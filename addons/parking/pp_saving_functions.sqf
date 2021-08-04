@@ -199,18 +199,6 @@ if (isServer) then {
     def(_parked_vehicles);
     _parked_vehicles = _player getVariable "parked_vehicles";
     _parked_vehicles = OR(_parked_vehicles,[]);
-    _nearestSpawn = allMapMarkers select {_x select [0,7] == "Parking" && {_x select [count _x - 6, 6] == "_spawn" && _player distance markerPos _x < 100}};
-    if (_nearestSpawn select [count _x - 12, 6] == "_plane") then
-    {
-      _temp_parked_vehicles = [];
-      {
-        if ((((_x select 1) select 0) select 1) isKindOf "Plane") then
-        {
-          _temp_parked_vehicles pushBack _x;
-        }
-      } forEach _parked_vehicles;
-      _parked_vehicles = _temp_parked_vehicles;
-    };
 
     def(_vehicle_data);
     _vehicle_data = [_parked_vehicles, _vehicle_id] call fn_getFromPairs;

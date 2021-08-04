@@ -145,8 +145,7 @@ _playerSideNum = switch (playerSide) do
 				{
 					case (_isUniform):
 					{
-						if !(player isUniformAllowed _weaponClass || // indie exception for NATO jungle ghillie & thermal suit due to BIS not giving a damn
-						     (playerSide == INDEPENDENT && {{_weaponClass == _x} count ["U_B_CTRG_Soldier_F","U_B_T_FullGhillie_tna_F"] > 0})) then
+						if !(["U_C_", _weaponClass] call fn_startsWith || (player isUniformAllowed _weaponClass || (playerSide == INDEPENDENT && {{_weaponClass == _x} count ["U_B_CTRG_Soldier_F","U_B_T_FullGhillie_tna_F"] > 0}))) then
 						{
 							_showItem = false;
 						};

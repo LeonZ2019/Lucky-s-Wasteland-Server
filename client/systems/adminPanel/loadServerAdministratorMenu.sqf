@@ -31,7 +31,8 @@ if ([_uid, 3] call isAdmin) then {
 					"Object Search",
 	                "Toggle God-mode",
 					"Vehicle Invincible",
-					"Infinity Ammo"
+					"Infinity Ammo",
+	                "Toggle Ghost Mode"
 	];
 
 	{

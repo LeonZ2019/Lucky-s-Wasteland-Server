@@ -58,6 +58,7 @@ if (local _veh) then
 				publicVariable "pvar_detachTowedObject";
 			};
 		};*/
+		_isLifting = _veh getVariable "R3F_LOG_heliporte";
 		if (!isNull _isLifting) then
 		{
 			_veh setVariable ["R3F_LOG_heliporte", objNull, true];

@@ -4,18 +4,20 @@
 //	@file Name: playerSetupGear.sqf
 //	@file Author: [GoT] JoSchaap, AgentRev
 
-private ["_player", "_uniform", "_vest", "_headgear", "_goggles"];
+private ["_player", "_uniform", "_vest", "_headgear", "_backpack", "_goggles"];
 _player = _this;
 
 // Clothing is now defined in "client\functions\getDefaultClothing.sqf"
 
 _uniform = [_player, "uniform"] call getDefaultClothing;
-//_vest = [_player, "vest"] call getDefaultClothing;
+_vest = [_player, "vest"] call getDefaultClothing;
 _headgear = [_player, "headgear"] call getDefaultClothing;
 _goggles = [_player, "goggles"] call getDefaultClothing;
-
+_backpack = [_player, "backpack"] call getDefaultClothing;
+_weapon = [_player, "weapon"] call getDefaultClothing;
+_weaponItem = [_player, "weaponItem"] call getDefaultClothing;
 if (_uniform != "") then { _player addUniform _uniform };
-//if (_vest != "") then { _player addVest _vest };
+if (_vest != "") then { _player addVest _vest };
 if (_headgear != "") then { _player addHeadgear _headgear };
 if (_goggles != "") then { _player addGoggles _goggles };
 
@@ -33,24 +35,20 @@ if (hmd _player != "") then { _player unlinkItem hmd _player };
 // Add NVG
 _player linkItem "NVGoggles";
 
-_player addWeapon "arifle_MX_SW_Black_F";
-_player addPrimaryWeaponItem "acc_pointer_IR";
-_player addPrimaryWeaponItem "optic_Hamr";
-_player addPrimaryWeaponItem "30Rnd_65x39_caseless_black_mag";
+_player addWeapon _weapon;
+if (_weaponItem select 0 != "") then { _player addPrimaryWeaponItem (_weaponItem select 0); };
+_player addPrimaryWeaponItem (_weaponItem select 1);
 
-_player addVest "V_TacVestIR_blk";
-_player addBackpack "B_AssaultPack_blk";
-for "_i" from 1 to 2 do {_player addMagazine "30Rnd_65x39_caseless_black_mag";};
+_player addBackpack _backpack;
+for "_i" from 1 to 3 do {_player addMagazine (_weaponItem select 1);};
 for "_i" from 1 to 2 do {_player addItem "MiniGrenade";};
+if (count _weaponItem == 3) then { for "_i" from 1 to 3 do {_player addItem (_weaponItem select 2);}; };
 
-_player addMagazine "9Rnd_45ACP_Mag";
+for "_i" from 1 to 2 do {_player addItem "9Rnd_45ACP_Mag";};
 _player addWeapon "hgun_ACPC2_F";
-_player addMagazine "9Rnd_45ACP_Mag";
-_player addMagazine "9Rnd_45ACP_Mag";
-_player addMagazine "9Rnd_45ACP_Mag";
 _player addItem "FirstAidKit";
 _player addItem "FirstAidKit";
-_player selectWeapon "arifle_MX_SW_Black_F";
+_player selectWeapon "_weapon";
 
 switch (true) do
 {

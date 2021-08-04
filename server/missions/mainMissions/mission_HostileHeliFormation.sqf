@@ -7,7 +7,7 @@
 if (!isServer) exitwith {};
 #include "mainMissionDefines.sqf"
 
-private ["_heliChoices", "_convoyVeh", "_veh1", "_veh2", "_veh3", "_createVehicle", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_vehicleName2", "_numWaypoints", "_box1", "_box2", "_box3"];
+private ["_heliChoices", "_convoyVeh", "_veh1", "_veh2", "_veh3", "_createVehicle", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_vehicleName2", "_numWaypoints", "_timeDestroyed", "_lastVehicle", "_pos", "_boxTypes", "_box1Type", "_box1", "_box2Type", "_box2", "_box3Type", "_box3"];
 
 _setupVars =
 {
@@ -127,7 +127,7 @@ _setupObjects =
 
 	_aiGroup setCombatMode "YELLOW"; // units will defend themselves
 	_aiGroup setBehaviour "SAFE"; // units feel safe until they spot an enemy or get into contact
-	_aiGroup setFormation "VEE";
+	_aiGroup setFormation "WEDGE";
 
 	_speedMode = if (missionDifficultyHard) then { "NORMAL" } else { "LIMITED" };
 
@@ -140,7 +140,7 @@ _setupObjects =
 		_waypoint setWaypointCompletionRadius 50;
 		_waypoint setWaypointCombatMode "YELLOW";
 		_waypoint setWaypointBehaviour "SAFE";
-		_waypoint setWaypointFormation "VEE";
+		_waypoint setWaypointFormation "WEDGE";
 		_waypoint setWaypointSpeed _speedMode;
 	} forEach ((call cityList) call BIS_fnc_arrayShuffle);
 

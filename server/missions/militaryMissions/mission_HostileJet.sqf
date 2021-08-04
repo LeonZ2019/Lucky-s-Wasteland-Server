@@ -7,7 +7,7 @@
 if (!isServer) exitwith {};
 #include "militaryMissionDefines.sqf";
 
-private ["_planeChoices", "_convoyVeh", "_veh1", "_createVehicle", "_vehicle", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_cash", "_boxes1", "_currBox1", "_box1"];
+private ["_planeChoices", "_convoyVeh", "_veh1", "_createVehicle", "_vehicle", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_pos", "_cash", "_boxTypes", "_box1Type", "_Boxes", "_currBox1", "_box1", "_hint"];
 
 _setupVars =
 {
@@ -127,7 +127,7 @@ _successExec =
 		_currBox1 = _Boxes call BIS_fnc_selectRandom;
 		_box1 = createVehicle [_currBox1, _pos, [], 5, "None"];
 		_box1 setDir random 360;
-		[_box1, "mission_USLaunchers"] call fn_refillbox;
+		[_box1, _box1Type] call fn_refillbox;
 		
 		_hint = createMarker ["missionHJ", _pos];
 		_hint setMarkerType "loc_plane";

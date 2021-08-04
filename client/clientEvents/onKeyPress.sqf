@@ -135,6 +135,11 @@ else // UNCONSCIOUS
 		execVM "addons\far_revive\FAR_lastResort.sqf";
 		_handled = true;
 	};
+	if (_key == 28) then // enter
+	{
+		execVM "client\items\defibrillator\use.sqf";
+		_handled = true;
+	};
 };
 
 // Scoreboard

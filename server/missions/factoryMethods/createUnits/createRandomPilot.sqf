@@ -53,6 +53,4 @@ _soldier addWeaponItem [_weapon, _ammo];
 _soldier spawn refillPrimaryAmmo;
 _soldier call setMissionSkill;
 
-_soldier addEventHandler ["Killed", server_playerDied];
-
 _soldier

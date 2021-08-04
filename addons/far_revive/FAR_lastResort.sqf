@@ -56,6 +56,12 @@ if !(player getVariable ["performingDuty", false]) then
 	}
 	else
 	{
-		titleText ["Get an explosive charge next time, my child.", "PLAIN", 0.5];
+		if (player getVariable ["isVestArmed", false]) then
+		{
+			[14] call vest_detonate_fnc_key_press;
+		} else
+		{
+			titleText ["Get an explosive charge next time, my child.", "PLAIN", 0.5];
+		};
 	};
 };

@@ -25,7 +25,7 @@ _moneytext ctrlSetText format["%1", [player getVariable ["cmoney", 0]] call fn_n
 
 {
 	_mvalue lbSetData [_mvalue lbAdd format ["$%1", [_x] call fn_numbersText], str _x];
-} forEach [5, 15, 20, 25, 50, 75, 100, 200, 300, 400, 500, 1000, 2000, 3000, 4000, 5000, 10000, 15000, 20000, 25000, 50000];
+} forEach [5, 20, 25, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 15000, 20000, 25000, 50000,100000];
 
 [] spawn
 {

@@ -16,7 +16,7 @@ private _ai = createAgent [_class, _veh, [], 0, "NONE"];
 _ai allowDamage false;
 _ai setVariable ["A3W_driverAssistOwner", player, true];
 [_ai, ["Autodrive","",""]] remoteExec ["A3W_fnc_setName", 0, _ai];
-_ai disableAI "LIGHTS";
+_veh disableAI "LIGHTS";
 _ai moveInDriver _veh;
 
 [_veh, _ai] spawn

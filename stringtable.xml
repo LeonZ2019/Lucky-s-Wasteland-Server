@@ -76,6 +76,9 @@
 		<Key ID="STR_WL_ShopDescriptions_RepairKit">
 			<English>With this kit, you won't need an engineer!</English>
 		</Key>
+		<Key ID="STR_WL_ShopDescriptions_Defibrillator">
+			<English>With this tool, you can bring back anyone from unconscious!</English>
+		</Key>
 		<Key ID="STR_WL_ShopDescriptions_MedKit">
 			<English>With this kit, you won't need a medic!</English>
 		</Key>
@@ -87,6 +90,9 @@
 		</Key>
 		<Key ID="STR_WL_ShopDescriptions_spawnBeacon">
 			<English>Choose your spawn location. Disclaimer: This product does not guarantee safe delivery of goods.</English>
+		</Key>
+		<Key ID="STR_WL_ShopDescriptions_strapBomb">
+			<English>A Boom (Dynamite) need strap on vest in order to detonate</English>
 		</Key>
 		<Key ID="STR_WL_ShopDescriptions_SyphonHose">
 			<English>Go forth and steal fuel from vehicles!</English>

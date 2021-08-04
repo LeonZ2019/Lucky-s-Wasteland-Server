@@ -115,6 +115,10 @@ if (_uid call isAdmin) then
 				{
 					execVM "client\systems\adminPanel\infiniteAmmo.sqf";
 				};
+				case 14: // ghost mode
+				{
+					execVM "client\systems\adminPanel\toggleGhostMode.sqf";
+				};
 			};
 		};
 		case (!isNull _displayDebug): //Debug panel

@@ -9,7 +9,7 @@
 if (!isServer) exitwith {};
 #include "militaryMissionDefines.sqf";
 
-private ["_vehicle", "_vehicleName", "_vehDeterminer", "_vehicleClass"];
+private ["_vehicle", "_variant", "_safePos", "_vehicleName", "_vehDeterminer", "_vehicleClass"];
 
 _setupVars =
 {
@@ -60,7 +60,6 @@ _successExec =
 {
 	// Mission completed
 	[_vehicle, 1] call A3W_fnc_setLockState;
-
 	_successHintMessage = format ["The %1 has been captured, well done.", _vehicleName];
 };
 

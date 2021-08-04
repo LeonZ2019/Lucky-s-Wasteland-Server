@@ -23,7 +23,7 @@ pp_marker_create = {
   _marker setMarkerTypeLocal _type;
   _marker setMarkerColorLocal _color;
   _marker setMarkerSizeLocal _size;
-  //_marker setMarkerText _text;
+  if (!isNil _text || _text != "") then { _marker setMarkerText _text; };
   (_marker)
 };
 
@@ -79,6 +79,9 @@ pp_create_terminal = {
 
   private _offset = switch (true) do {
     case (_garage isKindOf "Land_Carrier_01_base_F"): { [-28.663,108.289,23.9749] };
+    case (_garage isKindOf "Land_Hangar_F"): { [10.6934,-19.0488,0] };
+    case (_garage isKindOf "Land_ServiceHangar_01_R_F"): { [16.1, -13.4, 0] };
+    case (_garage isKindOf "Land_Airport_01_hangar_F"): { [10.668,-7.77734,0] };
     default                                           { [0,0,0] };
   };
 
@@ -92,6 +95,9 @@ pp_create_terminal = {
   _terminal setVectorDirAndUp [vectorDir _garage, vectorUp _garage];
   //_terminal attachTo [_garage, [0,0,0]];
   _terminal setVariable ["is_parking", true, true];
+  if ({_terminal isKindOf _x} count ["Land_Hangar_F", "Land_ServiceHangar_01_R_F", "Land_Airport_01_hangar_F"] != 0) then {
+    _terminal setVariable ["is_hangar", true, true];
+  }
   [_terminal, _garage] call pp_setup_terminal;
 
   (_pos)
@@ -116,7 +122,7 @@ pp_create_terminals = {
     _marker_pos = markerPos _marker;
     //if (isARRAY(pp_cities_whitelist) && {count(pp_cities_whitelist) > 0 && {not(_town_name in pp_cities_whitelist)}}) exitWith {};
 
-    _garage = (nearestObjects [_marker_pos, ["Land_i_Shed_Ind_F", "Land_Carrier_01_base_F"], 50]) select 0;
+    _garage = (nearestObjects [_marker_pos, ["Land_i_Shed_Ind_F", "Land_Carrier_01_base_F", "Land_Hangar_F", "Land_ServiceHangar_01_R_F", "Land_Airport_01_hangar_F"], 50]) select 0;
     if (!isOBJECT(_garage)) exitWith {
       diag_log format["No garage near %1", _marker];
     };
@@ -133,9 +139,14 @@ pp_create_terminals = {
 
 pp_get_near_vehicles = {
   ARGVX4(0,_player,objNull,[]);
-
+  init(_supportVehicle,[]);
+  _supportVehicle pushBack "Air";
+  if (count (allMapMarkers select {_x select [0,7] == "Parking" && {_x select [count _x - 12, 6] == "_plane" && {_x select [count _x - 6, 6] == "_spawn" && _player distance markerPos _x < 100}}}) == 0) then
+  {
+    _supportVehicle append ["LandVehicle","Ship"];
+  };
   def(_vehicles);
-  _vehicles = (nearestObjects [_player, ["LandVehicle","Air","Ship"], 50]) select {!(_x getVariable ["A3W_lockpickDisabled",false])};
+  _vehicles = (nearestObjects [_player, _supportVehicle, 50]) select {!(_x getVariable ["A3W_lockpickDisabled",false]) && {!(_x getVariable ["Mission_Vehicle", false])}};
 
   init(_filtered,[]);
   def(_uid);
@@ -306,6 +317,17 @@ pp_retrieve_vehicle_action = {
   _parked_vehicles = _player getVariable "parked_vehicles";
   _parked_vehicles = if (isARRAY(_parked_vehicles)) then {_parked_vehicles} else {[]};
 
+  if (count (allMapMarkers select {_x select [0,7] == "Parking" && {_x select [count _x - 12, 6] == "_plane" && {_x select [count _x - 6, 6] == "_spawn" && _player distance markerPos _x < 100}}}) != 0) then
+  {
+    init(_temp_parkedVehicles,[]);
+    {
+      if ((_x select 1 select 0 select 1) isKindOf "Plane") then
+      {
+        _temp_parkedVehicles pushBack _x;
+      };
+    } forEach _parked_vehicles;
+    _parked_vehicles = _temp_parkedVehicles;
+  };
 
   def(_vehicle_id);
   _vehicle_id = ["Retrieve Vehicle", _parked_vehicles] call pp_interact_park_vehicle_wait;
@@ -431,7 +453,14 @@ if (hasInterface) then
 
   if (pp_markers_enabled) then
   {
-    [format ["parking_terminal_%1", _forEachIndex + 1], getPosASL _x, pp_markers_properties] call pp_marker_create;
+    if (_x getVariable ["is_hangar",false]) then {
+      _hanger_marker = pp_markers_properties;
+      _hanger_marker pushBack "Hangar";
+      [format ["parking_terminal_%1", _forEachIndex + 1], getPosASL _x, _hanger_marker] call pp_marker_create;
+    } else
+    {
+      [format ["parking_terminal_%1", _forEachIndex + 1], getPosASL _x, pp_markers_properties] call pp_marker_create;
+    };
   };
 } forEach ((allMissionObjects "Land_CampingTable_small_F") select {_x getVariable ["is_parking",false]});
 

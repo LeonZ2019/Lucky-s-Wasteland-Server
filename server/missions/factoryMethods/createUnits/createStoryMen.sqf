@@ -60,6 +60,4 @@ _men setskill ["courage",1];
 _men setskill ["commanding",0.1];
 _men setskill ["general",0.1];
 
-_men addEventHandler ["Killed", server_playerDied];
-
 _men

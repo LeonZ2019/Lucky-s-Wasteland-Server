@@ -27,6 +27,7 @@ createOutpost = [_path, "createOutpost.sqf"] call mf_compile;
 createRandomSoldier = [_path, "createUnits\createRandomSoldier.sqf"] call mf_compile;
 createRandomSoldierC = [_path, "createUnits\createRandomSoldierC.sqf"] call mf_compile;
 createStoryMen = [_path, "createUnits\createStoryMen.sqf"] call mf_compile;
+createHostage = [_path, "createUnits\createHostage.sqf"] call mf_compile;
 createSmallDivers = [_path, "createUnits\smallDivers.sqf"] call mf_compile;
 generateMissionWeights = [_path, "generateMissionWeights.sqf"] call mf_compile;
 mission_VehicleCapture = "server\missions\mainMissions\mission_VehicleCapture.sqf" call mf_compile;

@@ -117,7 +117,6 @@ _leader = leader _group;
 	_x call setMissionSkill;
 	_x allowFleeing 0;
 	_x addRating 9999999;
-	_x addEventHandler ["Killed", server_playerDied];
 } forEach units _group;
 
 [_group, _pos] call defendArea;

@@ -16,6 +16,7 @@
 #define ERR_CONNECTED "Somebody is connected to the UAV."
 #define ERR_DESTROYED "The vehicle is destroyed."
 #define ERR_CANCELLED "Lockpicking cancelled!"
+#define ERR_MISSION_VEHICLE "The vehicle is belong to Mission!"
 
 params ["_vehicle"];
 
@@ -33,6 +34,7 @@ switch (true) do
 	case (!alive _vehicle): { _text = CONCAT(ERR_FAILED, ERR_DESTROYED) };
 	case (_vehicle getVariable ["ownerUID","0"] isEqualTo getPlayerUID player && {!unitIsUAV _vehicle || side _vehicle == side group player}): { _text = CONCAT(ERR_FAILED, ERR_OWNED) };
 	case (locked _vehicle > 1): { _text = CONCAT(ERR_FAILED, ERR_LOCKED) };
+	case (_vehicle getVariable ["Mission_Vehicle", false]): { _text = CONCAT(ERR_FAILED, ERR_MISSION_VEHICLE) };
 	case ({alive _x && getText (configFile >> "CfgVehicles" >> typeOf _x >> "simulation") != "UAVPilot"} count crew _vehicle > 0): { _text = CONCAT(ERR_FAILED, ERR_CREW) };
 	case (!isNull ((uavControl _vehicle) select 0)): { _text = CONCAT(ERR_FAILED, ERR_CONNECTED) };
 	//case (!isNull (_vehicle getVariable ["R3F_LOG_est_deplace_par", objNull])): { _text = CONCAT(ERR_FAILED, ERR_MOVED) };
