@@ -57,7 +57,7 @@ _successExec =
 	_obj = createVehicle ["Land_Defibrillator_F", [_hostage, [0,1,0]] call relativePos, [], 0, "CAN_COLLIDE"];
 	_obj setDir getDir _hostage;
 	_obj setVariable ["mf_item_id", "defibrillator", true];
-	_cash = createVehicle ["Land_Money_F", _hostage modelToWorld [0,1,0], [], 5, "None"];
+	_cash = createVehicle ["Land_Money_F", [_hostage, [0,1,0]] call relativePos, [], 5, "None"];
 	_cash setPos ([_hostage, [0,1,0], [[0,0,0], random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd);
 	_cash setVariable ["owner", "world", true];
 	_cash setVariable ["cmoney", 10000, true];

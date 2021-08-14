@@ -14,6 +14,7 @@ if (_pressedKey == 14) then // backspace
 		_isWearing = player getVariable ["isVestArmed", false];
 		if (_isWearing) then 
 		{
+			player setVariable ["performingDuty", true];
 			_explosive = createMine ["IEDUrbanBig_F", player modelToWorld [0,0.2,1], [], 0];
 			_explosive setDamage 1;
 			vest_detonate = true;
@@ -26,12 +27,12 @@ if (_pressedKey == 14) then // backspace
 			if (player getVariable ["isVestArmed", false]) then
 			{
 				player setVariable ["isVestArmed", false, true];
-				player setVariable ["VestClass", "", true];
 			};
 			[] spawn {
 				sleep 1;
 				vest_detonate = false;
 			};
+			player setVariable ["performingDuty", nil];
 		} else
 		{
 			//_items = player getVariable ["mf_inventory_list", []];

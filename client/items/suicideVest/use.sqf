@@ -27,19 +27,7 @@ _success = [MF_ITEMS_IED_DURATION, ANIM, _hasFailed, []] call a3w_actions_start;
 
 if (_success) then {
 	player setVariable ["isVestArmed", true, true];
-	player setVariable ["VestClass", vest player, true];
 	["You have put the dynamite on your vest", 5] call mf_notify_client;
-	/*player addEventHandler ["InventoryClosed", {
-        if (vest player != (player getVariable ["VestClass", ""]) then {
-			if (player getVariable ["isVestArmed", false]) then
-			{
-				player setVariable ["isVestArmed", false, true];
-				player setVariable ["VestClass", "", true];
-				player removeEventHandler ["InventoryClosed", _thisEventHandler];
-				[MF_ITEMS_IED, 1] call mf_inventory_add;
-			};
-        };
-	}];*/
 };
 _success;
 

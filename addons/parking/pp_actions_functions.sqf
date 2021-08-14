@@ -23,7 +23,7 @@ pp_marker_create = {
   _marker setMarkerTypeLocal _type;
   _marker setMarkerColorLocal _color;
   _marker setMarkerSizeLocal _size;
-  if (!isNil _text || _text != "") then { _marker setMarkerText _text; };
+  //_marker setMarkerText _text;
   (_marker)
 };
 
@@ -95,9 +95,6 @@ pp_create_terminal = {
   _terminal setVectorDirAndUp [vectorDir _garage, vectorUp _garage];
   //_terminal attachTo [_garage, [0,0,0]];
   _terminal setVariable ["is_parking", true, true];
-  if ({_terminal isKindOf _x} count ["Land_Hangar_F", "Land_ServiceHangar_01_R_F", "Land_Airport_01_hangar_F"] != 0) then {
-    _terminal setVariable ["is_hangar", true, true];
-  }
   [_terminal, _garage] call pp_setup_terminal;
 
   (_pos)
@@ -453,14 +450,7 @@ if (hasInterface) then
 
   if (pp_markers_enabled) then
   {
-    if (_x getVariable ["is_hangar",false]) then {
-      _hanger_marker = pp_markers_properties;
-      _hanger_marker pushBack "Hangar";
-      [format ["parking_terminal_%1", _forEachIndex + 1], getPosASL _x, _hanger_marker] call pp_marker_create;
-    } else
-    {
-      [format ["parking_terminal_%1", _forEachIndex + 1], getPosASL _x, pp_markers_properties] call pp_marker_create;
-    };
+    [format ["parking_terminal_%1", _forEachIndex + 1], getPosASL _x, pp_markers_properties] call pp_marker_create;
   };
 } forEach ((allMissionObjects "Land_CampingTable_small_F") select {_x getVariable ["is_parking",false]});
 
