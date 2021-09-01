@@ -44,6 +44,7 @@ _vehicle setVariable ["A3W_hitPointSelections", true, true];*/
 _vehicle setVariable ["A3W_handleDamageEH", _vehicle addEventHandler ["HandleDamage", vehicleHandleDamage]];
 _vehicle setVariable ["A3W_dammagedEH", _vehicle addEventHandler ["Dammaged", vehicleDammagedEvent]];
 _vehicle setVariable ["A3W_engineEH", _vehicle addEventHandler ["Engine", vehicleEngineEvent]];
+_vehicle setVariable ["A3W_deletedEH", _vehicle addEventHandler ["Deleted", vehicleDeletedEvent]];
 
 _vehicle addEventHandler ["GetIn", fn_vehicleGetInOutServer];
 _vehicle addEventHandler ["GetOut", fn_vehicleGetInOutServer];
@@ -89,13 +90,6 @@ switch (true) do
 		};
 
 		_vehicle addWeaponTurret ["CMFlareLauncher", [-1]];
-	};
-	case (_class isKindOf "Plane_Fighter_03_base_F"):
-	{
-		if (_brandNew) then
-		{
-			_vehicle addMagazineTurret ["300Rnd_20mm_shells", [-1]];
-		};
 	};
 	case ({_class isKindOf _x} count ["Wheeled_APC_F","Tank"] > 0):
 	{

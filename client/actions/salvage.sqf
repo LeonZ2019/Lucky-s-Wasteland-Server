@@ -129,6 +129,12 @@ mutexScriptInProgress = false;
 
 if (_success) then
 {
+	private _variant = _vehicle getVariable ["A3W_vehicleVariant", ""];
+	if (_variant == "flatbed") then
+	{
+		private _attachedObjs = attachedObjects _vehicle;
+		{ if (typeOf _x == "Truck_01_Rack_F") then { deleteVehicle _x; }; } forEach _attachedObjs;
+	};
 	deleteVehicle _vehicle;
 	//player setVariable ["cmoney", (player getVariable ["cmoney", 0]) + _money, true];
 	[player, _money] call A3W_fnc_setCMoney;

@@ -177,12 +177,13 @@ if (_key != "" && _player isKindOf "Man" && {_isGenStore || _isGunStore || _isVe
 			};
 
 			// delete wrecks near spawn
+			private _wreckPos = if (_waterNonBoat) then { ATLToASL _spawnPosAGL } else { _spawnPosAGL };
 			{
 				if (!alive _x) then
 				{
 					deleteVehicle _x;
 				};
-			} forEach nearestObjects [_spawnPosAGL, ["LandVehicle","Air","Ship"], 25 max sizeOf _class];
+			} forEach nearestObjects [_wreckPos, ["LandVehicle","Air","Ship","Truck_01_Rack_Base_F"], 25 max sizeOf _class];
 
 			if (_player getVariable [_timeoutKey, true]) then { breakOut "spawnStoreObject" }; // Timeout
 

@@ -99,7 +99,7 @@ storeSellingHandle = _this spawn
 				[format ['The %1 has already been sold!', _objname, VEHICLE_MAX_SELLING_DISTANCE], "Error"] call  BIS_fnc_guiMessage;
 			};
 
-			private _items = _vehicle getVariable "R3F_LOG_objets_charges";
+			private _items = _vehicle getVariable ["R3F_LOG_objets_charges", []];
 			if (count _items > 0) then {
 				{
 					if (!isNull attachedTo _x) then
@@ -126,9 +126,15 @@ storeSellingHandle = _this spawn
 			};
 
 			private _attachedObjs = attachedObjects _vehicle;
+			private _variant = _vehicle getVariable ["A3W_vehicleVariant", ""];
 			deleteVehicle _vehicle;
-
-			{ ["detach", _x] call A3W_fnc_towingHelper } forEach _attachedObjs;
+			{
+				["detach", _x] call A3W_fnc_towingHelper;
+				if (_variant == "flatbed" && typeOf _x == "Truck_01_Rack_F") then
+				{
+					deleteVehicle _x;
+				}
+			} forEach _attachedObjs;
 
 			//player setVariable ["cmoney", (player getVariable ["cmoney",0]) + _price, true];
 			[player, _price] call A3W_fnc_setCMoney;

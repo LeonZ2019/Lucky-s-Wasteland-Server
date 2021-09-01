@@ -12,13 +12,19 @@
 #define PLANE_MISSILE_DMG_SCALE 1.5
 #define IFV_DMG_SCALE 1.5
 #define TANK_DMG_SCALE 2.0
+#define TOUGHER_DMG_SCALE 0.5
 #define NYX_TRACK_DMG_SCALE 0.25
 
-params ["_vehicle", "_selection", "_damage", "_source", "_ammo", "", "_instigator", "_hitPoint"];
+params ["_vehicle", "_selection", "_damage", "_source", "_ammo", "", "_instigator", "_hitPoint", "_toughScale"];
 
 if (_selection != "?") then
 {
 	_isHeli = _vehicle isKindOf "Helicopter";
+	_toughScale = 1;
+	if (_vehicle getVariable ["vehicle_tough", false]) then
+	{
+		_toughScale = TOUGHER_DMG_SCALE;
+	};
 
 	if (_isHeli && _selection == "fuel_hit") exitWith
 	{
@@ -52,7 +58,7 @@ if (_selection != "?") then
 			{
 				if (_isMissile) then
 				{
-					_damage = ((_damage - _oldDamage) * HELI_MISSILE_DMG_SCALE) + _oldDamage;
+					_damage = ((_damage - _oldDamage) * HELI_MISSILE_DMG_SCALE * _toughScale) + _oldDamage;
 				};
 			};
 
@@ -61,7 +67,7 @@ if (_selection != "?") then
 			{
 				if (_isMissile) then
 				{
-					_damage = ((_damage - _oldDamage) * PLANE_MISSILE_DMG_SCALE) + _oldDamage;
+					_damage = ((_damage - _oldDamage) * PLANE_MISSILE_DMG_SCALE * _toughScale) + _oldDamage;
 				};
 			};
 
@@ -80,7 +86,7 @@ if (_selection != "?") then
 				//if (_isMissile) then
 				//{
 					#define TANKTYPE_DMG_SCALE ([TANK_DMG_SCALE, IFV_DMG_SCALE] select ({_vehicle isKindOf _x} count ["APC_Tracked_01_base_F","APC_Tracked_02_base_F","APC_Tracked_03_base_F"] > 0))
-					_damage = ((_damage - _oldDamage) * TANKTYPE_DMG_SCALE) + _oldDamage;
+					_damage = ((_damage - _oldDamage) * TANKTYPE_DMG_SCALE * _toughScale) + _oldDamage;
 				//};
 			};
 
@@ -89,7 +95,7 @@ if (_selection != "?") then
 			{
 				if (_isMissile) then
 				{
-					_damage = ((_damage - _oldDamage) * MRAP_MISSILE_DMG_SCALE) + _oldDamage;
+					_damage = ((_damage - _oldDamage) * MRAP_MISSILE_DMG_SCALE * _toughScale) + _oldDamage;
 				};
 			};
 		};

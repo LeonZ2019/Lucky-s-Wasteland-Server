@@ -52,7 +52,17 @@ if (_uid call isAdmin) then
 				{
 					execVM "client\systems\adminPanel\playerTags.sqf";
 				};
-				case 5: //Teleport
+				case 5: //Teleport me to player
+				{
+					closeDialog 0;
+					execVM "client\systems\adminPanel\tpmeto.sqf";
+				};
+				case 6: //Teleport player to me
+				{
+					closeDialog 0;
+					execVM "client\systems\adminPanel\tptome.sqf";
+				};
+				case 7: //Teleport
 				{
 					closeDialog 0;
 					["A3W_teleport", "onMapSingleClick",
@@ -76,22 +86,11 @@ if (_uid call isAdmin) then
 					hint "Click on map to teleport";
 					if (!visibleMap) then {openMap true;};
 				};
-				case 6: //Teleport player to me
-				{
-					closeDialog 0;
-					execVM "client\systems\adminPanel\tptome.sqf";
-				};
-				case 7: //Teleport me to player
-				{
-					closeDialog 0;
-					execVM "client\systems\adminPanel\tpmeto.sqf";
-				};
 				case 8: //Money
 				{
 					_money = 5000;
-					//player setVariable ["cmoney", (player getVariable ["cmoney",0]) + _money, true];
 					[player, _money] call A3W_fnc_setCMoney;
-					if (!isNil "notifyAdminMenu") then { ["money", _money] call notifyAdminMenu };
+					// if (!isNil "notifyAdminMenu") then { ["money", _money] call notifyAdminMenu };
 				};
 				case 9: //Debug Menu
 				{
@@ -114,10 +113,6 @@ if (_uid call isAdmin) then
 				case 13: // infinite ammo
 				{
 					execVM "client\systems\adminPanel\infiniteAmmo.sqf";
-				};
-				case 14: // ghost mode
-				{
-					execVM "client\systems\adminPanel\toggleGhostMode.sqf";
 				};
 			};
 		};

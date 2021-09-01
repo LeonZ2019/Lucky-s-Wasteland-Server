@@ -113,17 +113,87 @@ player addEventHandler ["WeaponAssembled",
 
 player addEventHandler ["InventoryOpened",
 {
-	_obj = _this select 1;
+    params ["_unit", "_container"];
+    private _isBackpack = getNumber (configFile >> "CfgVehicles" >> (typeOf _container) >> "isBackpack");
+	[_unit, _container, _isBackpack] spawn {
+		if (isNil { missionNamespace getVariable "BL_fnc_LockButton" }) then {
+			BL_fnc_LockButton = compileFinal '
+				if (!isNull ((findDisplay 602) displayCtrl 12346)) then {
+					private _lockState = player getVariable ["BL_lockState", false];
+					if (_lockState) then {
+						["Backpack unlocked", 2] call mf_notify_client;
+						player setVariable ["BL_lockState", false, true];
+					} else {
+						["Backpack locked", 2] call mf_notify_client;
+						player setVariable ["BL_lockState", true, true];
+					};
+					player setVariable ["BL_lockTime", (time + 1)];
+				};
+			';
+		};
+		disableSerialization;
+		params ["_unit", "_container", "_isBackpack"];
+		private ["_BL_buttonCtrl", "_myPicture", "_isOthersBackpack", "_objectParent", "_BL_ctrlCreateArray"];
+		waitUntil {(!isNull (findDisplay 602))};
+		_display = findDisplay 602;
+		_BL_ctrlCreateArray = ["RscPicture", 12345];
+		_myPicture = _display ctrlCreate _BL_ctrlCreateArray;
+		_myPicture ctrlSetPosition [
+			(((ctrlPosition ((findDisplay 602) displayCtrl 6191)) select 0) + ((ctrlPosition ((findDisplay 602) displayCtrl 6191)) select 2)),
+			((ctrlPosition ((findDisplay 602) displayCtrl 6191)) select 1)
+		];
+		_myPicture ctrlShow true;
+		_myPicture ctrlSetScale 0.175;
+		_myPicture ctrlCommit 0;
+		_BL_ctrlCreateArray = ["RscButtonArsenal", 12346];
+		_BL_buttonCtrl = _display ctrlCreate _BL_ctrlCreateArray;
+		_BL_buttonCtrl ctrlSetPosition (ctrlPosition _myPicture);
+		if (player getVariable "BL_lockState") then {
+			_BL_buttonCtrl ctrlSetText "\A3\Modules_f\data\iconLock_ca.paa";
+		} else {
+			_BL_buttonCtrl ctrlSetText "\A3\Modules_f\data\iconUnlock_ca.paa";
+		};
+		_BL_buttonAction = "[] call BL_fnc_LockButton";
+		_BL_buttonCtrl buttonSetAction _BL_buttonAction;
+		_BL_buttonCtrl ctrlShow true;
+		_BL_buttonCtrl ctrlSetScale 0.175;
+		_BL_buttonCtrl ctrlCommit 0;
+		ctrlDelete _myPicture;
+		while {(!isNull (findDisplay 602))} do {
+			if (player getVariable ["BL_lockState", false]) then {
+				_BL_buttonCtrl ctrlSetText "\a3\Modules_f\data\iconlock_ca.paa";
+			} else {
+				_BL_buttonCtrl ctrlSetText "\a3\Modules_f\data\iconunlock_ca.paa";
+			};
+			if (time > (player getVariable "BL_lockTime")) then {
+				if ((backpack player) isEqualTo "") then {
+					if (ctrlEnabled _BL_buttonCtrl) then {
+						_BL_buttonCtrl ctrlShow false;
+						_BL_buttonCtrl ctrlEnable false;
+					};
+				} else {
+					if (!(ctrlEnabled _BL_buttonCtrl)) then {
+						_BL_buttonCtrl ctrlShow true;
+						_BL_buttonCtrl ctrlEnable true;
+					};
+				};
+			} else {
+				if (ctrlEnabled _BL_buttonCtrl) then {
+					_BL_buttonCtrl ctrlEnable false;
+				};
+			};
+			uiSleep 0.01;
+		};
+	};
 	_blocked = false;
-
-	if !(_obj isKindOf "Man") then
+	if !(_container isKindOf "Man") then
 	{
-		if ((locked _obj > 1 && _obj getVariable ["ownerUID","0"] != getPlayerUID player) ||
-		    (_obj getVariable ["A3W_inventoryLockR3F", false] && _obj getVariable ["R3F_LOG_disabled", false])) then
+		if ((locked _container > 1 && _container getVariable ["ownerUID", "0"] != getPlayerUID player) ||
+		    (_container getVariable ["A3W_inventoryLockR3F", false] && _container getVariable ["R3F_LOG_disabled", false])) then
 		{
 			playSound "FD_CP_Not_Clear_F";
 
-			if (_obj isKindOf "AllVehicles") then
+			if (_container isKindOf "AllVehicles") then
 			{
 				["This vehicle is locked.", 5] call mf_notify_client;
 			}
@@ -133,13 +203,24 @@ player addEventHandler ["InventoryOpened",
 			};
 
 			_blocked = true;
-		};
+		} else
+		{
+			if (_isBackpack isEqualTo 1) then {
+				_objectParent = objectParent _container;
+				if (!isNull _objectParent && alive _objectParent && isPlayer _objectParent && _objectParent getVariable ["BL_lockState", false]) then {
+					playSound "FD_CP_Not_Clear_F";
+					[format ["%1's backpack is locked",(name _objectParent)], 5] call mf_notify_client;
+					_blocked = true;
+				};
+			};
+
+		}
 	};
 
 	if (!_blocked) then
 	{
-		if (!simulationEnabled _obj) then { _obj enableSimulation true };
-		_obj setVariable ["inventoryIsOpen", true];
+		if (!simulationEnabled _container) then { _container enableSimulation true };
+		_container setVariable ["inventoryIsOpen", true];
 	};
 
 	_blocked

@@ -66,3 +66,10 @@ STR_R3F_LOG_dlg_CV_btn_decharger = "Unload";
 STR_R3F_LOG_dlg_CV_btn_fermer = "Cancel";
 
 STR_R3F_LOG_nom_pc_arti = "Artillery CQ";
+
+STR_R3F_LOG_action_install = "Install on vehicle";
+STR_R3F_LOG_action_installing = "Installing in progress...";
+STR_R3F_LOG_action_installed = "The object has been installed on vehicle.";
+STR_R3F_LOG_action_uninstall = "Uninstall object";
+STR_R3F_LOG_action_uninstalling = "Uninstalling in progress...";
+STR_R3F_LOG_action_uninstall_empty = "There is no object been installed on vehicle.";

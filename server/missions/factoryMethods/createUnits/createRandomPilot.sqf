@@ -1,4 +1,4 @@
-//	@file Name: createRandomSoldier.sqf
+//	@file Name: createRandomPilot.sqf
 /*
  * Creates a random civilian soldier.
  *

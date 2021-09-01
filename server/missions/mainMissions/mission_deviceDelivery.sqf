@@ -22,11 +22,11 @@ _setupObjects =
 	_missionPos = markerPos _missionLocation;
 
 	_town = markerPos (((call cityList) call BIS_fnc_selectRandom) select 0);
-	while {_town distance _missionPos > 4500} do {
+	while {_town distance _missionPos < 4000 || _town distance _missionPos > 6500} do {
 		_town = markerPos (((call cityList) call BIS_fnc_selectRandom) select 0);
 	};
 	_safePos = [_town, 50, 100, 5, 0, 0, 0] call findSafePos;
-	_nearestRoad = getRoadInfo ((_safePos nearRoads 50) select 0);
+	_nearestRoad = getRoadInfo ((_safePos nearRoads 100) select 0);
 	_startOfRoad = _nearestRoad select 6;
 	_endOfRoad = _nearestRoad select 7;
 	_edgeOfRoad = (round (- ((_nearestRoad select 1) / 2 * 1000))) / 1000;
@@ -43,7 +43,7 @@ _setupObjects =
 	_millerMarker setMarkerType "loc_talk";
 	_millerMarker setMarkerText "Miller";
 	_millerMarker setMarkerColor "ColorWhite";
-	_millerMarker setMarkerSize [0.75, 0.75];
+	_millerMarker setMarkerSize [0.5, 0.5];
 
 	_vehicle = createVehicle ["O_Truck_03_device_F", _missionPos, [], 0, "NONE"]; //unlocked
 	_vehicle setVariable ["ownerName", "Miller", true];
@@ -62,6 +62,7 @@ _setupObjects =
 		};
 		_miller enableAI "MOVE";
 		_miller assignAsDriver _vehicle;
+		_vehicle disableAI "LIGHTS";
 		[_miller] orderGetIn true;
 	};
 };
@@ -85,7 +86,6 @@ _failedExec =
 _successExec =
 {
 	_pos = getPosATL _vehicle;
-	deleteGroup _aiGroup;
 	deleteMarker _millerMarker;
 	{ deleteVehicle _x } forEach [_vehicle, _miller];
 	_cash = createVehicle ["Land_Money_F", _pos, [], 5, "None"];

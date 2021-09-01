@@ -289,13 +289,10 @@ throwputArray = compileFinal str
 	["Smoke Grenade (Yellow)", "SmokeShellYellow", 50],
 	["Smoke Grenade (Orange)", "SmokeShellOrange", 50],
 	["Smoke Grenade (Red)", "SmokeShellRed", 50],
-	["Explosive Charge", "DemoCharge_Remote_Mag", 450],
-	["Explosive Satchel", "SatchelCharge_Remote_Mag", 500],
-	["Small IED (Urban)", "IEDUrbanSmall_Remote_Mag", 1000],
 	//["Small IED (Dug-in)", "IEDLandSmall_Remote_Mag", 1000],
-	["Large IED (Urban)", "IEDUrbanBig_Remote_Mag", 1500],
 	//["Large IED (Dug-in)", "IEDLandBig_Remote_Mag", 1500],
-	["Stone", "HandGrenade_Stone", 5]
+	["Small IED (Urban)", "IEDUrbanSmall_Remote_Mag", 1000],
+	["Large IED (Urban)", "IEDUrbanBig_Remote_Mag", 1500]
 ];
 
 //Gun Store Ammo List
@@ -1110,7 +1107,7 @@ backpackArray = compileFinal str
 	["Leg Strap Bag (Olive)", "B_LegStrapBag_olive_F", 65, "backpack", "noDLC"],
 	
 	["Radio Pack (Black)", "B_RadioBag_01_black_F", 50, "backpack", "noDLC"],
-	["Radio Pack (Digital)[AFF]", "B_RadioBag_01_digi_F", 50, "backpack", "noDLC"],
+	["Radio Pack (Digital)[AAF]", "B_RadioBag_01_digi_F", 50, "backpack", "noDLC"],
 	["Radio Pack (Geometric)[LDF]", "B_RadioBag_01_eaf_F", 50, "backpack", "noDLC"],
 	["Radio Pack (Green Hex)[CSAT]", "B_RadioBag_01_ghex_F", 50, "backpack", "noDLC"],
 	["Radio Pack (Hex)", "B_RadioBag_01_hex_F", 50, "backpack", "noDLC"],
@@ -1410,6 +1407,7 @@ landArray = compileFinal str
 	["Tempest Fuel", "O_Truck_03_fuel_F", 8000, "vehicle"],
 	["Tempest Medical", "O_Truck_03_medical_F", 9000, "vehicle"],
 	["Tempest Repair", "O_Truck_03_repair_F", 10000, "vehicle"],
+	["Tempest Flatbed", "O_Truck_03_transport_F", 10000, "vehicle", "variant_flatbed"],
 
 	["Zamak Resupply", "I_Truck_02_ammo_F", 4000, "vehicle"],
 	["Zamak Transport", "I_Truck_02_transport_F", 4500, "vehicle"],
@@ -1417,6 +1415,7 @@ landArray = compileFinal str
 	["Zamak Fuel", "I_Truck_02_fuel_F", 6000, "vehicle"],
 	["Zamak Medical", "I_Truck_02_medical_F", 7000, "vehicle"],
 	["Zamak Repair", "I_Truck_02_box_F", 8000, "vehicle"],
+	["Zamak Flatbed", "I_Truck_02_fuel_F", 10000, "vehicle", "variant_flatbed"],
 
 	["UGV Stomper (NATO)", "B_UGV_01_F", 2500, "vehicle"],
 	["UGV Stomper RCWS (NATO)", "B_UGV_01_rcws_F", 15000, "vehicle"],
@@ -1475,7 +1474,7 @@ tanksArray = compileFinal str
 	["ZSU-39 Tigris AA", "O_APC_Tracked_02_AA_F", 50000, "vehicle"],
 	["M2A1 Slammer", "B_MBT_01_cannon_F", 50000, "vehicle"],
 	["M2A4 Slammer HMG", "B_MBT_01_TUSK_F", 50000, "vehicle"], // Commander gun variant
-	//["M2A4 Slammer HMG (Extra Tough)", "B_MBT_01_TUSK_F", 75000, "vehicle", "variant_tough" ],
+	["M2A4 Slammer HMG (Extra Tough)", "B_MBT_01_TUSK_F", 75000, "vehicle", "variant_tough"],
 	["T-100 Varsuk", "O_MBT_02_cannon_F", 50000, "vehicle"],
 	["MBT-52 Kuma", "I_MBT_03_cannon_F", 60000, "vehicle"],
 	["T-140 Angara", "O_MBT_04_cannon_F", 75000, "vehicle"],
@@ -1537,25 +1536,26 @@ planesArray = compileFinal str
 [
 	["Caesar BTT", "C_Plane_Civil_01_F", 2500, "vehicle"],
 
-	["A-143 Buzzard AA", "I_Plane_Fighter_03_dynamicLoadout_F", 40000, "vehicle", "variant_buzzardAA"],
-	["A-143 Buzzard CAS", "I_Plane_Fighter_03_dynamicLoadout_F", 50000, "vehicle", "variant_buzzardCAS"],
+	["A-164 Wipeout CAS", "B_Plane_CAS_01_dynamicLoadout_F", 60000, "variant_wipeoutCAS"],
+	["To-199 Neophron CAS", "O_Plane_CAS_02_dynamicLoadout_F", 62000, "variant_neophronCAS"],
+	["A-143 Buzzard CAS", "I_Plane_Fighter_03_dynamicLoadout_F", 58000, "vehicle", "variant_buzzardCAS"],
 
-	["A-149 Gryphon", "I_Plane_Fighter_04_F", 50000, "vehicle"],
+	["F/A-181 Black Wasp (Gun-Only)", "B_Plane_Fighter_01_Stealth_F", 50000, "vehicle"],
+	["F/A-181 Black Wasp AA", "B_Plane_Fighter_01_F", 63000, "vehicle", "variant_blackwaspAA"],
+	["F/A-181 Black Wasp CAS", "B_Plane_Fighter_01_F", 80000, "vehicle", "variant_blackwaspCAS"],
 
-	["F/A-181 Black Wasp (Gun-Only)", "B_Plane_Fighter_01_Stealth_F", 50000, "vehicle"], // no missiles or bombs
-	["F/A-181 Black Wasp AA", "B_Plane_Fighter_01_F", 60000, "vehicle", "variant_blackwaspAA"],
-	["F/A-181 Black Wasp CAS", "B_Plane_Fighter_01_F", 75000, "vehicle", "variant_blackwaspCAS"],
+	["To-201 Shikra (Gun-Only)", "O_Plane_Fighter_02_Stealth_F", 50000, "vehicle"],
+	["To-201 Shikra AA", "O_Plane_Fighter_02_F", 63000, "vehicle", "variant_shikraAA"],
+	["To-201 Shikra CAS", "O_Plane_Fighter_02_F", 80000, "vehicle", "variant_shikraCAS"],
 
-	["To-201 Shikra (Gun-Only)", "O_Plane_Fighter_02_Stealth_F", 50000, "vehicle"], // no missiles or bombs
-	["To-201 Shikra AA", "O_Plane_Fighter_02_F", 60000, "vehicle", "variant_shikraAA"],
-	["To-201 Shikra CAS", "O_Plane_Fighter_02_F", 75000, "vehicle", "variant_shikraCAS"],
-
-	["A-164 Wipeout CAS", "B_Plane_CAS_01_dynamicLoadout_F", 60000, "vehicle"],
-	["To-199 Neophron CAS", "O_Plane_CAS_02_dynamicLoadout_F", 62000, "vehicle"],
+	["A-149 Gryphon AA", "I_Plane_Fighter_04_F", 56000, "variant_gryphonAA"],
+	["A-149 Gryphon CAS", "I_Plane_Fighter_04_F", 63000, "variant_gryphonCAS"],
 
 	["V-44 X Blackfish (Infantry)", "B_T_VTOL_01_infantry_F", 10000, "vehicle"],
+	["V-44 X Blackfish (Vehicle)", "B_T_VTOL_01_vehicle_F", 15000, "vehicle"],
 	["V-44 X Blackfish (Gunship)", "B_T_VTOL_01_armed_F", 45000, "vehicle"],
-	["Y-32 Xi'an", "O_T_VTOL_02_infantry_dynamicLoadout_F", 50000, "vehicle"],
+	["Y-32 Xi'an (Infantry)", "O_T_VTOL_02_infantry_dynamicLoadout_F", 50000, "vehicle"],
+	["Y-32 Xi'an (Vehicle)", "O_T_VTOL_02_vehicle_dynamicLoadout_F", 50000, "vehicle"],
 
 	["KH-3A Fenghuang Missile UAV", "O_T_UAV_04_CAS_F", 60000, "vehicle"],
 
@@ -1642,7 +1642,8 @@ _mh9Dir = "\A3\air_f\Heli_Light_01\Data\";
 _mohawkDir = "\A3\air_f_beta\Heli_Transport_02\Data\";
 _wreckDir = "\A3\structures_f\wrecks\data\";
 _gorgonDir = "\A3\armor_f_gamma\APC_Wheeled_03\data\";
-
+_cheetahDir = "\A3\armor_f_beta\apc_tracked_01\data\";
+_zamakDir = "\A3\soft_f_beta\truck_02\data\";
 colorsArray = compileFinal str
 [
 	[ // Main colors
@@ -1801,34 +1802,68 @@ colorsArray = compileFinal str
 				[2, _texDir + "hemtt_fuel_pertamina_2.paa"]
 			]]
 		]
-	]/*,
+	],
 	[
-		"I_MRAP_03_F",
+		"B_APC_Tracked_01_AA_F",
 		[
-			["Police", [
-				[0, _texDir + "strider_police_0.paa"],
-				[1, _texDir + "strider_police_1.paa"]
+			["Hex", [
+				[0, _cheetahDir + "apc_tracked_01_aa_body_opfor_co.paa"],
+				[1, _cheetahDir + "apc_tracked_01_aa_body_opfor_co.paa"],
+				[2, _cheetahDir + "apc_tracked_01_aa_tower_opfor_co.paa"]
+			]],
+			["AAF", [
+				[0, _cheetahDir + "apc_tracked_01_body_indp_co.paa"],
+				[1, _cheetahDir + "apc_tracked_01_body_indp_co.paa"],
+				[2, _cheetahDir + "apc_tracked_01_body_indp_co.paa"]
 			]]
 		]
 	],
 	[
-		"I_MRAP_03_gmg_F",
+		"B_APC_Tracked_01_CRV_F",
 		[
-			["Police", [
-				[0, _texDir + "strider_police_0.paa"],
-				[1, _texDir + "strider_police_1.paa"]
+			["Hex", [
+				[0, _cheetahDir + "apc_tracked_01_aa_body_opfor_co.paa"],
+				[1, _cheetahDir + "apc_tracked_01_aa_body_opfor_co.paa"],
+				[2, "\A3\data_f\vehicles\turret_opfor_co.paa"],
+				[3, _cheetahDir + "apc_tracked_01_crv_opfor_co.paa"]
+			]],
+			["AAF", [
+				[0, _cheetahDir + "apc_tracked_01_body_indp_co.paa"],
+				[1, _cheetahDir + "apc_tracked_01_body_indp_co.paa"],
+				[2, "\A3\data_f\vehicles\turret_indp_co.paa"]
 			]]
 		]
 	],
 	[
-		"I_MRAP_03_hmg_F",
+		"B_APC_Tracked_01_rcws_F",
 		[
-			["Police", [
-				[0, _texDir + "strider_police_0.paa"],
-				[1, _texDir + "strider_police_1.paa"]
+			["Hex", [
+				[0, _cheetahDir + "apc_tracked_01_aa_body_opfor_co.paa"],
+				[1, _cheetahDir + "apc_tracked_01_aa_body_opfor_co.paa"],
+				[2, "\A3\data_f\vehicles\turret_opfor_co.paa"]
+			]],
+			["AAF", [
+				[0, _cheetahDir + "apc_tracked_01_body_indp_co.paa"],
+				[1, _cheetahDir + "apc_tracked_01_body_indp_co.paa"],
+				[2, "\A3\data_f\vehicles\turret_indp_co.paa"]
 			]]
 		]
-	]*/
+	],
+	[
+		"I_Truck_02_MRL_F",
+		[
+			["Hex", [
+				[0, _zamakDir + "Truck_02_kab_opfor_co.paa"],
+				[1, _zamakDir + "truck_02_int_co.paa"],
+				[2, "\A3\soft_f_gamma\truck_02\data\truck_02_mrl_OPFOR_co.paa"]
+			]],
+			["Green Hex", [
+				[0, "\A3\soft_f_exp\truck_02\data\truck_02_kab_GHEX_co.paa"],
+				[1, _zamakDir + "truck_02_int_co.paa"],
+				[2, "\A3\soft_f_gamma\truck_02\data\truck_02_mrl_OPFOR_co.paa"]
+			]]
+		]
+	]
 ];
 
 //General Store Item List

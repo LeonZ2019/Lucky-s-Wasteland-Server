@@ -1,3 +1,5 @@
+private ["_portalNum", "_portals", "_town", "_playerMoney", "_price", "_towns", "_isCurrentSafe", "_territories", "_territoryText", "_territoryMarker", "_enemyPlayers", "_isSameSide", "_side"];
+
 _portalNum = _this select 3 select 0;
 _portals = call compile preprocessFileLineNumbers "mapConfig\portals.sqf";
 _town = "";
@@ -8,10 +10,10 @@ _town = "";
 	};
 } forEach _portals;
 _playerMoney = player getVariable ["cmoney", 0];
-_price = 500;
+_price = ["A3W_portalAmount", 1000] call getPublicVar;
 if (_price > _playerMoney) exitWith
 {
-	hint "You need $500 money for using teleport";
+	hint format["You need $%1 money for using teleport", _price];
 	playSound "FD_CP_Not_Clear_F";
 	_price = -1;
 };
@@ -81,9 +83,11 @@ if (!_isCurrentSafe) exitWith
 			cutText [format["Teleporting from %1 to %2...", _this select 4 select 2 ,_territoryText], "BLACK", -0.25];
 			if (_enemyPlayers == 0 && _isSameSide) then
 			{
-				[_pos] spawn {
-					params ["_pos"];
-					[player, -500] call A3W_fnc_setCMoney;
+				private _price = _this select 5;
+				[_pos, _price] spawn {
+					params ["_pos", "_price"];
+					private ["_top", "_buildings"];
+					[player, -_price] call A3W_fnc_setCMoney;
 					uiSleep 3;
 					openMap false;
 					if (surfaceIsWater _pos) then
@@ -111,7 +115,7 @@ if (!_isCurrentSafe) exitWith
 		};
 	} forEach _territories;
 	true
-}, [_town]] call BIS_fnc_addStackedEventHandler;
+}, [_town, _price]] call BIS_fnc_addStackedEventHandler;
 if (!visibleMap) then {openMap true};
 hint "Click on any territory your side captured to teleport.";
 

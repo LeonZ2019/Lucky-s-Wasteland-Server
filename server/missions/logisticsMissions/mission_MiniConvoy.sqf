@@ -7,9 +7,9 @@
 //	@file Created: 31/08/2013 18:19
 
 if (!isServer) exitwith {};
-#include "sideMissionDefines.sqf";
+#include "logisticsMissionDefines.sqf";
 
-private ["_convoyVeh", "_veh1", "_veh2", "_veh3", "_createVehicle", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_box1", "_box2", "_boxTypes", "_box1Type", "_box2Type"];
+private ["_convoyVeh", "_veh1", "_veh2", "_veh3", "_camo", "_createVehicle", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_box1", "_box2", "_boxTypes", "_box1Type", "_box2Type"];
 
 _setupVars =
 {
@@ -40,6 +40,7 @@ _setupObjects =
 	_veh1 = _convoyVeh select 0;
 	_veh2 = _convoyVeh select 1;
 	_veh3 = _convoyVeh select 2;
+	_camo = ["MTP", "Tropic", "CTRGUrban", "CTRGArid", "CTRGTropic", "Woodland", "GreenHex", "Hex", "Green", "Taiga", "Digital", "Geometric", "Guerilla"] call BIS_fnc_selectRandom;
 
 	_createVehicle =
 	{
@@ -57,17 +58,17 @@ _setupObjects =
 		_vehicle setDir _direction;
 		_aiGroup addVehicle _vehicle;
 
-		_soldier = [_aiGroup, _position] call createRandomSoldier;
+		_soldier = [_aiGroup, _position, _camo] call createRandomSoldier;
 		_soldier moveInDriver _vehicle;
 
-		_soldier = [_aiGroup, _position] call createRandomSoldier;
+		_soldier = [_aiGroup, _position, _camo] call createRandomSoldier;
 		_soldier moveInCargo [_vehicle, 0];
 
 		switch (true) do
 		{
 			case (_type isKindOf "Offroad_01_armed_base_F"):
 			{
-				_soldier = [_aiGroup, _position] call createRandomSoldier;
+				_soldier = [_aiGroup, _position, _camo] call createRandomSoldier;
 				_soldier moveInGunner _vehicle;
 			};
 			case (_type isKindOf "C_Van_01_box_F"):
@@ -116,7 +117,7 @@ _setupObjects =
 	_missionPicture = getText (configFile >> "CfgVehicles" >> _veh2 >> "picture");
 	_vehicleName = getText (configFile >> "CfgVehicles" >> _veh2 >> "displayName");
 
-	_missionHintText = format ["A <t color='%2'>%1</t> transporting 2 weapon crates is being escorted. Stop the convoy!", _vehicleName, sideMissionColor];
+	_missionHintText = format ["A <t color='%2'>%1</t> transporting 2 weapon crates is being escorted. Stop the convoy!", _vehicleName, logisticsMissionColor];
 
 	_numWaypoints = count waypoints _aiGroup;
 };
@@ -146,4 +147,4 @@ _successExec =
 	_successHintMessage = "The convoy has been stopped, the weapon crates and vehicles are now yours to take.";
 };
 
-_this call sideMissionProcessor;
+_this call logisticsMissionProcessor;

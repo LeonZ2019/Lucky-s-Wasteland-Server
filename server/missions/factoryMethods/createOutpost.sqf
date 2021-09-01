@@ -17,7 +17,7 @@
 	Exsample:
 	["fuelDepot_us", 0, getpos player] execVM "Createcomposition.sqf";
 */
-private ["_fileName", "_dir", "_pos", "_objList", "_objs", "_class", "_relPos", "_relDir", "_fuel", "_damage", "_init"];
+private ["_fileName", "_dir", "_pos", "_objList", "_objs", "_class", "_relPos", "_relDir", "_init", "_finalPos", "_special"];
 _fileName = _this select 0;
 _pos = _this select 1;
 _dir = _this select 2;
@@ -34,13 +34,12 @@ _objs = [];
 	if (count _relPos == 2) then { _relPos set [2, 0] };
 
 	_finalPos = _pos vectorAdd ([_relPos, -(_dir)] call BIS_fnc_rotateVector2D);
-	_obj = createVehicle [_class, _finalPos, [], 0, "None"];
+	_special = "NONE";
+	if (_class == "Land_HBarrier_3_F") then { _special = "CAN_COLLIDE" };
+	_obj = createVehicle [_class, _finalPos, [], 0, _special];
 	_obj setDir (_dir + _relDir);
 	_obj setPos _finalPos;
 	_obj setPosATL _finalPos;
-
-	if (!isNil "_fuel") then {_obj setFuel _fuel };
-	if (!isNil "_damage") then {_obj setDamage _damage };
 	if (!isNil "_init") then { _obj call _init };
 
 	_obj setVariable ["R3F_LOG_disabled", true, true];

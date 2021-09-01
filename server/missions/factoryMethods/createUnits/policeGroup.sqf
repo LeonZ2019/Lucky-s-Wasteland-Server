@@ -52,7 +52,7 @@ for "_i" from 1 to _nbUnits do
 			_unit addWeapon "arifle_Katiba_C_F";
 			_unit addPrimaryWeaponItem "acc_flashlight";
 			_unit addPrimaryWeaponItem "optic_ACO_grn";
-			_weaponsArray = [["launch_NLAW_F","NLAW_F"],["launch_I_Titan_F", "Titan_AA"]];
+			_weaponsArray = [["launch_NLAW_F","NLAW_F"],["launch_Titan_short_F", "Titan_AT"]];
 			_weapon = _weaponsArray call BIS_fnc_selectRandom;
 			_unit addWeapon (_weapon select 0);
 			_unit addSecondaryWeaponItem (_weapon select 1);

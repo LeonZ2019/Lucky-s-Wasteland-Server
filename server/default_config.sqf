@@ -150,6 +150,7 @@ A3W_territoryWarningIcons = 0;     // Show exclamation marks on map for friendly
 A3W_payrollInterval = 15*60;       // Delay in seconds between each payroll
 A3W_payrollAmount = 700;           // Amount of money rewarded per territory on each payroll
 A3W_territoryCaptureBoost = 2;     // Boost capturing for each player
+A3W_portalAmount = 1000;
 
 // Mission settings
 A3W_serverMissions = 1;            // Enable server missions (0 = no, 1 = yes)
@@ -168,3 +169,5 @@ A3W_moneyMissionDelay = 15*60;     // Time in seconds between Money Missions
 A3W_moneyMissionTimeout = 60*60;   // Time in seconds that a Money Mission will run for, unless completed
 A3W_militaryMissionDelay = 10*60;       // Time in seconds between Military Missions
 A3W_militaryMissionTimeout = 60*60;    // Time in seconds that a Military Mission will run for, unless completed
+A3W_logisticsMissionDelay = 5*60;
+A3W_logisticsMissionTimeout = 30*60;

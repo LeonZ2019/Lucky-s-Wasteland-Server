@@ -13,11 +13,13 @@ private ["_vehicle", "_variant", "_safePos", "_vehicleName", "_vehDeterminer", "
 
 _setupVars =
 {
-	_vehicleClass = [
-		["I_Plane_Fighter_03_dynamicLoadout_F", "variant_buzzardCAS"],
-		["B_Plane_CAS_01_dynamicLoadout_F", "vehicle"],
-		["O_Plane_CAS_02_dynamicLoadout_F", "vehicle"]
-	] call BIS_fnc_selectRandom;
+	_vehicleClass = if (random 100 >= 80) then
+	{
+		[["B_Plane_Fighter_01_F","variant_blackwaspCAS"],["O_Plane_Fighter_02_F","variant_shikraCAS"],["I_Plane_Fighter_04_F","variant_gryphonCAS"]] call BIS_fnc_selectRandom;
+	} else
+	{
+		[["I_Plane_Fighter_03_dynamicLoadout_F", "variant_buzzardCAS"], ["B_Plane_CAS_01_dynamicLoadout_F", "variant_wipeoutCAS"],["O_Plane_CAS_02_dynamicLoadout_F", "variant_neophronCAS"]] call BIS_fnc_selectRandom;
+	};
 	_missionType = "Abandoned Jet";
 	_locationsArray = JetMarkers;
 };
@@ -30,9 +32,6 @@ _setupObjects =
 	_safePos = [_missionPos, 0, 30, 5, 0, 0, 0] call findSafePos;
 	_vehicle = [_vehicleClass, _safePos, 0.5, 1, 0.25, "NONE", _variant] call createMissionVehicle;
 	_vehicle setDir (markerDir _missionLocation);
-	_vehicle setHitPointDamage ["HitEngine", 0.8];
-	_vehicle setHitPointDamage ["HitHull", 0.75];
-	_vehicle setHitPointDamage ["HitAvionics", 0.5];
 	reload _vehicle;
 
 	_aiGroup = createGroup CIVILIAN;

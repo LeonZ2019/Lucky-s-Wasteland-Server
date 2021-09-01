@@ -6,11 +6,7 @@
 //	@file Author: [404] Deadbeat, AgentRev
 //	@file Created: 08/12/2012 15:19
 
-// Military Mission Color = #4BC9B0 - Light blue
-// Fail Mission Color = #FF1717 - Light red
-// Success Mission Color = #17FF41 - Light green
-
-#define militaryMissionColor "#4BC9B0"
+#define militaryMissionColor "#7C887E"
 #define failMissionColor "#FF1717"
 #define successMissionColor "#17FF41"
 #define subTextColor "#FFFFFF"

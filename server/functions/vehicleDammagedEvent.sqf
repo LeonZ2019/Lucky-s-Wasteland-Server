@@ -17,6 +17,14 @@ if (local _veh) then
 	};
 	if (!alive _veh) then
 	{
+		// damage flatbed too
+		
+		private _variant = _veh getVariable ["A3W_vehicleVariant", ""];
+		if (_variant == "flatbed") then
+		{
+			private _attachedObjs = attachedObjects _veh;
+			{ if (typeOf _x == "Truck_01_Rack_F") then { _x setDamage 1; }; } forEach _attachedObjs;
+		};
 		_items = _veh getVariable "R3F_LOG_objets_charges";
 		if (count _items > 0) then {
 			{

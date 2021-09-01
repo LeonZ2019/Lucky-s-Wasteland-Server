@@ -75,7 +75,7 @@ _setupObjects =
 	{
 		_waypoint = _aiGroup addWaypoint [markerPos (_x select 0), 0];
 		_waypoint setWaypointType "MOVE";
-		_waypoint setWaypointCompletionRadius 55;
+		_waypoint setWaypointCompletionRadius 90;
 		_waypoint setWaypointCombatMode "RED";
 		_waypoint setWaypointBehaviour "COMBAT";
 		_waypoint setWaypointFormation "STAG COLUMN";

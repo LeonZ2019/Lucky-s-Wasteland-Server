@@ -7,7 +7,7 @@ if (isDedicated) exitWith {};
 	_enemy = _this select 1 select 1;
 	if (IsHostageRescued) exitWith {};
 	if(HostageAction == -1) then {
-		HostageAction = _hostage addAction ["Untie Hostage", {call Hostage_Release}, [_enemy], 10, true, false, "", "alive _this", 5];
+		HostageAction = _hostage addAction ["<img image='\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_unbind_ca.paa'/> <t color='FFD800'>Untie Hostage</t>", {call Hostage_Release}, [_enemy], 10, true, false, "", "alive _this", 5];
 	};
 };
 
@@ -38,6 +38,5 @@ Hostage_Release =
 		[_hostage, "Acts_ExecutionVictim_Unbow"] call switchMoveGlobal;
 	};
 };
-
 
 hostageSetupDone = true;

@@ -84,6 +84,7 @@ va_pull_player_action_available = {
 
 
   if (not(alive _player)) exitWith {false};
+  if (not(isPlayer _target) && _target getVariable ["Mission_Man", false]) exitWith {false};
   if (not(isPlayer _target) && {getText (configFile >> "CfgVehicles" >> typeOf _target >> "simulation") == "UAVPilot"}) exitWith {false};
   if (cursorTarget != _vehicle) exitWith {false};
   if (not(locked _vehicle < 2)) exitWith {false};
@@ -113,9 +114,9 @@ va_flipped = {
 };
 
 va_unflip_action_available = {
-  if (not(cfg_va_unflip_action_on) || damage _vehicle == 1 ) exitWith {false};
+  if (not(cfg_va_unflip_action_on)) exitWith {false};
   ARGVX4(0,_vehicle,objNull,false);
-
+  if (damage _vehicle == 1 || !alive _vehicle) exitWith {false};
 
   ([_vehicle] call va_flipped)
 };
@@ -146,6 +147,9 @@ va_unflip_action = {
 
     if ((_player distance _vehicle) > _dist) exitWith {
       _player groupChat format["Could not unflip the %1, you must stay within %2 meters.", _display_name, _dist];
+    };
+    if (vehicle _player != _player) exitWith {
+      _player groupChat format["Could not unflip the %1, you can't do it in the vehicle.", _display_name];
     };
 
     [[_vehicle,surfaceNormal (getPos _vehicle)],"A3W_fnc_unflip",_vehicle] call BIS_fnc_MP;
@@ -370,6 +374,8 @@ va_lock_action_available = {
   ARGVX4(1,_vehicle,objNull,false);
 
   if ([_vehicle] call va_is_locked) exitWith {false};
+
+  if (not(alive _vehicle)) exitWith {false};
 
   if (not([_vehicle] call va_is_lockable)) exitWith {false};
 

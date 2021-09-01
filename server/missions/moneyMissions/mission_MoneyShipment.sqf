@@ -9,7 +9,7 @@
 if (!isServer) exitwith {};
 #include "moneyMissionDefines.sqf";
 
-private ["_MoneyShipment", "_moneyAmount", "_convoys", "_vehChoices", "_moneyText", "_vehClasses", "_createVehicle", "_vehicles", "_veh2", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_cash"];
+private ["_MoneyShipment", "_moneyAmount", "_convoys", "_vehChoices", "_moneyText", "_vehClasses", "_camo", "_createVehicle", "_vehicles", "_veh2", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_cash"];
 
 _setupVars =
 {
@@ -25,7 +25,7 @@ _setupVars =
 		// Easy
 		[
 			"Small Money Shipment", // Marker text
-			30000, // Money
+			20000, // Money
 			[
 				[ // NATO convoy
 					["B_MRAP_01_hmg_F", "B_MRAP_01_gmg_F"], // Veh 1
@@ -44,7 +44,7 @@ _setupVars =
 		// Medium
 		[
 			"Medium Money Shipment", // Marker text
-			60000, // Money
+			40000, // Money
 			[
 				[ // NATO convoy
 					["B_MRAP_01_hmg_F", "B_MRAP_01_gmg_F"], // Veh 1
@@ -66,7 +66,7 @@ _setupVars =
 		// Hard
 		[
 			"Large Money Shipment", // Marker text
-			90000, // Money
+			60000, // Money
 			[
 				[ // NATO convoy
 					["B_APC_Wheeled_01_cannon_F", "B_APC_Tracked_01_rcws_F", "B_APC_Tracked_01_AA_F", "B_AFV_Wheeled_01_up_cannon_F"], // Veh 1
@@ -88,7 +88,7 @@ _setupVars =
 		// Extreme
 		[
 			"Heavy Money Shipment", // Marker text
-			120000, // Money
+			80000, // Money
 			[
 				[ // NATO convoy
 					["B_APC_Wheeled_01_cannon_F", "B_APC_Tracked_01_rcws_F", "B_APC_Tracked_01_AA_F", "B_MBT_01_cannon_F", "B_MBT_01_TUSK_F"], // Veh 1
@@ -113,7 +113,7 @@ _setupVars =
 		// Extreme
 		[
 			"Extreme Money Shipment", // Marker text
-			150000, // Money
+			100000, // Money
 			[
 				[ // NATO convoy
 					["B_APC_Wheeled_01_cannon_F", "B_APC_Tracked_01_rcws_F", "B_APC_Tracked_01_AA_F", "B_MBT_01_cannon_F", "B_MBT_01_TUSK_F"], // Veh 1
@@ -160,6 +160,7 @@ _setupObjects =
 {
 	private ["_starts", "_startDirs", "_waypoints"];
 	call compile preprocessFileLineNumbers format ["mapConfig\convoys\%1.sqf", _missionLocation];
+	_camo = ["MTP", "Tropic", "CTRGUrban", "CTRGArid", "CTRGTropic", "Woodland", "GreenHex", "Hex", "Green", "Taiga", "Digital", "Geometric", "Guerilla"] call BIS_fnc_selectRandom;
 
 	_createVehicle =
 	{
@@ -186,22 +187,22 @@ _setupObjects =
 		_vehicle setDir _direction;
 		_aiGroup addVehicle _vehicle;
 
-		_soldier = [_aiGroup, _position] call createRandomSoldier;
+		_soldier = [_aiGroup, _position, _camo] call createRandomSoldier;
 		_soldier moveInDriver _vehicle;
 
 		if !(_type isKindOf "LT_01_base_F") then
 		{
-			_soldier = [_aiGroup, _position] call createRandomSoldier;
+			_soldier = [_aiGroup, _position, _camo] call createRandomSoldier;
 			_soldier moveInCargo [_vehicle, 0];
 		};
 
 		if !(_type isKindOf "Truck_F") then
 		{
-			_soldier = [_aiGroup, _position] call createRandomSoldier;
+			_soldier = [_aiGroup, _position, _camo] call createRandomSoldier;
 			_soldier moveInGunner _vehicle;
 			if (_type isKindOf "LT_01_base_F") exitWith {};
 
-			_soldier = [_aiGroup, _position] call createRandomSoldier;
+			_soldier = [_aiGroup, _position, _camo] call createRandomSoldier;
 
 			if (_vehicle emptyPositions "commander" > 0) then
 			{

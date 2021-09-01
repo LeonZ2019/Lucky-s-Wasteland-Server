@@ -31,10 +31,10 @@ switch (toLower _action) do
 		[call FAR_FindTarget] spawn FAR_Drag;
 	};
 
-	/*case "action_drag_body":
+	case "action_carry":
 	{
-		[call FAR_FindDeadbody] spawn FAR_SwimDrag;
-	};*/
+		[call FAR_FindTarget] spawn FAR_Carry;
+	};
 
 	case "action_release":
 	{
@@ -54,5 +54,10 @@ switch (toLower _action) do
 	case "action_eject":
 	{
 		[] call FAR_Eject_Injured;
+	};
+
+	case "action_transfer_to_box":
+	{
+		[call FAR_FindDeadbody] call FAR_Transfer_Box;
 	};
 };

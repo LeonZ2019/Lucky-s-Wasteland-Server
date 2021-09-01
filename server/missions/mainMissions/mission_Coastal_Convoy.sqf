@@ -94,10 +94,10 @@ _setupObjects =
 			case (_type isKindOf "Heli_Transport_01_base_F"):
 			{
 				// these choppers have 2 turrets so we need 2 gunners
-				_soldier = [_aiGroup, _position] call createRandomSoldierC;
+				_soldier = [_aiGroup, _position] call createRandomPilot;
 				_soldier moveInTurret [_vehicle, [1]];
 
-				_soldier = [_aiGroup, _position] call createRandomSoldierC;
+				_soldier = [_aiGroup, _position] call createRandomPilot;
 				_soldier moveInTurret [_vehicle, [2]];
 			};
 

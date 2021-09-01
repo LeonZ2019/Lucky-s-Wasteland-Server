@@ -49,3 +49,4 @@ _legendTop = _legendMarginY + (_markerSpacing * (count _markers - 1));
 	_marker setMarkerShapeLocal "ICON";
 
 } forEach _markers;
+{ _x setMarkerSizeLocal [0.5, 0.5] } forEach ["marker_190", "marker_191", "marker_207", "marker_208", "marker_209"]

@@ -113,11 +113,9 @@ if (_failed) then
 {
 	// Mission failed
 
-	{ moveOut _x; deleteVehicle _x } forEach units _aiGroup;
-
 	if (!isNil "_failedExec") then { call _failedExec };
 
-	if (!isNil "_vehicle" && {typeName _vehicle == "OBJECT"}) then
+	if (!isNil "_vehicle" && {typeName _vehicle == "OBJECT" && alive _vehicle}) then
 	{
 		deleteVehicle _vehicle;
 	};
@@ -125,7 +123,7 @@ if (_failed) then
 	if (!isNil "_vehicles" && {typeName _vehicles == "ARRAY"}) then
 	{
 		{
-			if (!isNil "_x" && {typeName _x == "OBJECT"}) then
+			if (!isNil "_x" && {typeName _x == "OBJECT" && alive _x}) then
 			{
 				deleteVehicle _x;
 			};
@@ -208,7 +206,11 @@ else
 	diag_log format ["WASTELAND SERVER - %1 Mission%2 complete: %3", MISSION_PROC_TYPE_NAME, _controllerSuffix, _missionType];
 };
 
-deleteGroup _aiGroup;
+if (!isNull _aiGroup) then
+{
+	{ moveOut _x; if (alive _x) then { deleteVehicle _x }; } forEach units _aiGroup;
+	deleteGroup _aiGroup;
+};
 deleteMarker _marker;
 
 if (!isNil "_locationsArray") then

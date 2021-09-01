@@ -8,7 +8,7 @@
 if (!isServer) exitwith {};
 #include "militaryMissionDefines.sqf";
 
-private ["_convoyVeh", "_veh1", "_veh2", "_veh3", "_veh4", "_veh5", "_createVehicle", "_vehicles", "_missionPos", "_hostageGroup", "_hostage", "_leader", "_safePos", "_speedMode", "_waypoint", "_missionDifficulty", "_numWaypoints", "_pos", "_cash", "_boxTypes", "_Boxes", "_box"];
+private ["_convoyVeh", "_veh1", "_veh2", "_veh3", "_veh4", "_veh5", "_createVehicle", "_vehicles", "_randomVehicle", "_missionPos", "_hostageGroup", "_hostage", "_leader", "_safePos", "_speedMode", "_waypoint", "_missionDifficulty", "_numWaypoints", "_pos", "_cash", "_boxTypes", "_Boxes", "_box"];
 
 _setupVars =
 {
@@ -77,7 +77,9 @@ _setupObjects =
 	_hostageGroup = createGroup CIVILIAN;
 	_safePos = [_starts select 2, 0, 30, 5, 0, 0, 0] call findSafePos;
 	_hostage = [_hostageGroup, _safePos] call createHostage;
-    _hostage moveInCargo (_vehicles select (selectRandom [1,2,3])); //move in between 1-3, 0 and 4 keep it out
+	_randomVehicle = _vehicles select (selectRandom [1,2,3]); //move in between 1-3, 0 and 4 keep it out
+    _hostage moveInCargo _randomVehicle;
+	_randomVehicle allowCrewInImmobile true;
     _hostage disableAI "ANIM";
 
 	_leader = effectiveCommander (_vehicles select 0);
@@ -116,7 +118,7 @@ _failedExec = {
 _successExec =
 {
 	// Mission completed
-	if (driver _hostage != _hostage) then {
+	if (vehicle _hostage != _hostage) then {
     	_hostage enableAI "ANIM";
 		_hostageMove = _hostageGroup addWaypoint [_hostage modelToWorld [-3,0,0], 0];
 		_hostageMove setWaypointType "GETOUT";

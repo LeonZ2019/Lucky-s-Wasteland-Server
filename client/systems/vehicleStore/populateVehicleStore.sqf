@@ -48,8 +48,7 @@ _playerSideNum = switch (playerSide) do
 
 // Populate the vehicle shop list
 {
-	_x params ["_vehName", "_vehClass"];
-
+	_x params ["_vehName", "_vehClass", "", "", ["_variant", ""]];
 	if ((!_noBuzzard || {!(_vehClass isKindOf "Plane_Fighter_03_base_F")}) && !("HIDDEN" in (_x select [3,999]))) then
 	{
 		_vehCfg = configFile >> "CfgVehicles" >> _vehClass;
@@ -57,6 +56,16 @@ _playerSideNum = switch (playerSide) do
 		if (["UGV_01_base_F","UGV_02_Base_F","UAV_01_base_F","UAV_02_base_F","UAV_06_base_F"] findIf {_vehClass isKindOf _x} == -1 || {getNumber (_vehCfg >> "side") in [3,_playerSideNum]}) then
 		{
 			_vehPicture = getText (configFile >> "CfgVehicles" >> _vehClass >> "picture");
+			if (_variant == "variant_flatbed") then
+			{
+				switch (_vehClass) do
+				{
+					case "I_Truck_02_fuel_F":
+					{ _vehPicture = "client\icons\truck_02_flatbed.paa" };
+					case "O_Truck_03_transport_F":
+					{ _vehPicture = "client\icons\truck_03_flatbed.paa" };
+				};
+			};
 			_vehlistIndex = _vehlist lbAdd format ["%1", [_vehName, getText (_vehCfg >> "displayName")] select (_vehName == "")];
 			_vehlist lbSetPicture [_vehlistIndex, _vehPicture];
 			_vehlist lbSetData [_vehlistIndex, str _x];

@@ -10,6 +10,6 @@
 		_markerName setMarkerShapeLocal "ICON";
 		_markerName setMarkerTypeLocal "mil_dot";
 		_markerName setMarkerColorLocal "ColorGreen";
-		_markerName setMarkerSizeLocal [1,1];
+		_markerName setMarkerSizeLocal [0.75, 0.75];
 	};
 } forEach entities "Land_Laptop_device_F";

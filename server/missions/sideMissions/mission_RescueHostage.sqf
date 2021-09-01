@@ -24,6 +24,7 @@ _setupObjects =
 	_hostage = [_hostageGroup, _safePos] call createHostage;
 	[_hostageGroup, _missionPos, 25, true, false] call moveIntoBuildings;
 	[_hostage, "Acts_ExecutionVictim_Loop"] call switchMoveGlobal;
+	_hostage disableAI "ANIM";
 
 	_aiGroup = createGroup CIVILIAN;
 	[_aiGroup, _missionPos, 10] call createCustomGroup2;
@@ -52,6 +53,7 @@ _failedExec = {
 _successExec =
 {
 	// Mission completed
+	_hostage enableAI "ANIM";
 	_hostage playActionNow "PutDown";
 	sleep 0.5;
 	_obj = createVehicle ["Land_Defibrillator_F", [_hostage, [0,1,0]] call relativePos, [], 0, "CAN_COLLIDE"];

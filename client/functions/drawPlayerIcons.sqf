@@ -73,7 +73,7 @@ drawPlayerIcons_thread = [] spawn
 
 	_noBuiltInThermal = ["A3W_disableBuiltInThermal"] call isConfigOn;
 
-	private ["_dist"];
+	private ["_dist", "_fadeDistance", "_limitDistance"];
 
 	// Execute every frame
 	waitUntil
@@ -84,9 +84,23 @@ drawPlayerIcons_thread = [] spawn
 		{
 			{
 				_unit = _x;
-
+				_speed = (vectorMagnitude velocity vehicle player) * 3.6;
+				_fadeDistance = ICON_fadeDistance;
+				_limitDistance = ICON_limitDistance;
+				if (vehicle player isKindOf "Plane" && _speed >= 250) then
+				{
+					_fadeDistance = ICON_fadeDistance * _speed / 250;
+					_limitDistance = ICON_limitDistance * _speed / 250;
+				} else
+				{
+					if (vehicle player isKindOf "Helicopter" && _speed >= 150) then
+					{
+						_fadeDistance = ICON_fadeDistance * _speed / 150;
+						_limitDistance = ICON_limitDistance * _speed / 150;
+					};
+				};
 				if (side group _unit isEqualTo playerSide && // "side group _unit" instead of "side _unit" is because "setCaptive true" when unconscious changes player side to civ (so AI stops shooting)
-				   {_dist = _unit distance positionCameraToWorld [0,0,0]; _dist < ICON_limitDistance &&
+				   {_dist = _unit distance positionCameraToWorld [0,0,0]; _dist < _limitDistance &&
 				   {alive _unit &&
 				   (_unit != player || cameraOn != vehicle player) &&
 				   {!(_unit getVariable ["playerSpawning", false]) &&
@@ -106,8 +120,7 @@ drawPlayerIcons_thread = [] spawn
 
 						if !(_bluforOpfor || {group _unit == group player || // exclude enemy indie groups
 						     (_isUavUnit && {((objectParent _unit) getVariable ["ownerUID","0"]) in ((units player) apply {getPlayerUID _x})})}) exitWith {}; // but allow friendly indie UAVs
-
-						_alpha = (ICON_limitDistance - _dist) / (ICON_limitDistance - ICON_fadeDistance);
+						_alpha = (_limitDistance - _dist) / (_limitDistance - _fadeDistance);
 						_color = [1,1,1,_alpha];
 						_icon = _teamIcon;
 						_size = 0;
@@ -116,7 +129,7 @@ drawPlayerIcons_thread = [] spawn
 						if (_unit call A3W_fnc_isUnconscious) then
 						{
 							_icon = _reviveIcon;
-							_size = (2 - ((_dist / ICON_limitDistance) * 0.8)) * _uiScale * ([0.8, 1] select showPlayerNames);
+							_size = (2 - ((_dist / _limitDistance) * 0.8)) * _uiScale * ([0.8, 1] select showPlayerNames);
 
 							// Revive icon blinking code
 							if (_unit call A3W_fnc_isBleeding) then
@@ -156,7 +169,7 @@ drawPlayerIcons_thread = [] spawn
 						}
 						else
 						{
-							_size = (1 - ((_dist / ICON_limitDistance) * 0.7)) * _uiScale * ([0.7, 1] select showPlayerNames);
+							_size = (1 - ((_dist / _limitDistance) * 0.7)) * _uiScale * ([0.7, 1] select showPlayerNames);
 						};
 
 						_text = if (showPlayerNames) then

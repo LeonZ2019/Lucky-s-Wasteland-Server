@@ -23,16 +23,15 @@ if ([_uid, 3] call isAdmin) then {
 					"Map Markers Log",
 					"Unstuck player",
 					"Group Leader Markers",
-					"Teleport",
-					"Teleport player to me",
 					"Teleport me to player",
+					"Teleport player to me",
+					"Teleport",
 	                "Money",
 	                "Debug Menu",
 					"Object Search",
 	                "Toggle God-mode",
 					"Vehicle Invincible",
-					"Infinity Ammo",
-	                "Toggle Ghost Mode"
+					"Infinity Ammo"
 	];
 
 	{

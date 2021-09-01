@@ -124,7 +124,8 @@ R3F_LOG_CFG_objets_heliportables =
 	"Plane",
 	"LT_01_base_F",
 	"UAV_03_base_F",
-	"Heli_Light_01_base_F"
+	"Heli_Light_01_base_F",
+	"Land_CargoBox_V1_F"
 ];
 
 /**

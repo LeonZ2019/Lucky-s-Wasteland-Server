@@ -18,6 +18,8 @@ _resetConditions =
 	R3F_LOG_action_charger_deplace_valide = false;
 	R3F_LOG_action_charger_selection_valide = false;
 	R3F_LOG_action_contenu_vehicule_valide = false;
+	R3F_LOG_action_install_valid = false;
+	R3F_LOG_action_uninstall_valid = false;
 	R3F_LOG_action_remorquer_deplace_valide = false;
 	R3F_LOG_action_remorquer_selection_valide = false;
 	R3F_LOG_action_selectionner_objet_remorque_valide = false;
@@ -132,6 +134,7 @@ while {true} do
 						{!(_x getVariable "R3F_LOG_disabled")}
 					} count nearestObjects [_objet_pointe, R3F_LOG_classes_transporteurs, 18] > 0} &&
 					VEHICLE_UNLOCKED(_objet_pointe) &&
+					{!(_objet_pointe getVariable ["Mission_AirdropOnly", false])} &&
 					{!(_objet_pointe getVariable "R3F_LOG_disabled")};
 			};
 
@@ -142,6 +145,7 @@ while {true} do
 				{isNull (_objet_pointe getVariable "R3F_LOG_est_transporte_par")} &&
 				{!alive (_objet_pointe getVariable "R3F_LOG_est_deplace_par")} &&
 				VEHICLE_UNLOCKED(_objet_pointe) &&
+				{!(_objet_pointe getVariable ["Mission_AirdropOnly", false])} &&
 				{!(_objet_pointe getVariable "R3F_LOG_disabled")};
 		};
 
@@ -196,6 +200,7 @@ while {true} do
 				{vectorMagnitude velocity _objet_pointe < 6} &&
 				{(getPos _objet_pointe) select 2 < 2} &&
 				VEHICLE_UNLOCKED(_objet_pointe) &&
+				{!(R3F_LOG_joueur_deplace_objet getVariable ["Mission_AirdropOnly", false])} &&
 				{!(_objet_pointe getVariable "R3F_LOG_disabled")};
 
 			// Condition action charger_selection
@@ -220,6 +225,31 @@ while {true} do
 				{(getPos _objet_pointe) select 2 < 2} &&
 				VEHICLE_UNLOCKED(_objet_pointe) &&
 				{!(_objet_pointe getVariable "R3F_LOG_disabled")};
+
+			// Install valid, mainly will check for target class and install type
+			R3F_LOG_action_install_valid =
+				alive _objet_pointe &&
+				!isNull R3F_LOG_joueur_deplace_objet &&
+				{R3F_LOG_joueur_deplace_objet != _objet_pointe} &&
+				VEHICLE_UNLOCKED(R3F_LOG_joueur_deplace_objet) &&
+				{!(R3F_LOG_joueur_deplace_objet getVariable "R3F_LOG_disabled")} &&
+				{vectorMagnitude velocity _objet_pointe < 6} &&
+				{(getPos _objet_pointe) select 2 < 2} &&
+				VEHICLE_UNLOCKED(_objet_pointe) &&
+				{!(R3F_LOG_joueur_deplace_objet getVariable ["Mission_AirdropOnly", false])} &&
+				{!(_objet_pointe getVariable "R3F_LOG_disabled")} &&
+				isNull (_objet_pointe getVariable ["R3F_LOG_installed_object", objNull]) &&
+				((typeOf R3F_LOG_joueur_deplace_objet == "B_AAA_System_01_F" && typeOf _objet_pointe == "C_Van_01_transport_F") || (typeOf R3F_LOG_joueur_deplace_objet in ["O_SAM_System_04_F", "O_Radar_System_02_F", "B_SAM_System_03_F", "B_Radar_System_01_F", "B_SAM_System_01_F", "B_SAM_System_02_F", "B_AAA_System_01_F"] && typeOf _objet_pointe in ["B_Truck_01_flatbed_F", "O_Truck_03_transport_F", "I_Truck_02_fuel_F"] && _objet_pointe getVariable ["isFlatbed", false]));
+
+				// Install valid, mainly will check for target class and install type
+				R3F_LOG_action_uninstall_valid =
+				alive _objet_pointe &&
+				isNull R3F_LOG_joueur_deplace_objet &&
+				{vectorMagnitude velocity _objet_pointe < 6} &&
+				{(getPos _objet_pointe) select 2 < 2} &&
+				VEHICLE_UNLOCKED(_objet_pointe) &&
+				{!(_objet_pointe getVariable "R3F_LOG_disabled")} &&
+				!isNull (_objet_pointe getVariable ["R3F_LOG_installed_object", objNull])
 		};
 	}
 	else

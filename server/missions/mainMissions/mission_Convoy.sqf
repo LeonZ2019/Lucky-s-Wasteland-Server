@@ -9,7 +9,7 @@
 if (!isServer) exitwith {};
 #include "mainMissionDefines.sqf";
 
-private ["_convoyVeh", "_veh1", "_veh2", "_veh3", "_createVehicle", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_box1", "_box2"];
+private ["_convoyVeh", "_veh1", "_veh2", "_veh3", "_camo", "_createVehicle", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_box1", "_box2"];
 
 _setupVars =
 {
@@ -33,6 +33,7 @@ _setupObjects =
 	_veh1 = _convoyVeh select 0;
 	_veh2 = _convoyVeh select 1;
 	_veh3 = _convoyVeh select 2;
+	_camo = ["MTP", "Tropic", "CTRGUrban", "CTRGArid", "CTRGTropic", "Woodland", "GreenHex", "Hex", "Green", "Taiga", "Digital", "Geometric", "Guerilla"] call BIS_fnc_selectRandom;
 
 	_createVehicle =
 	{
@@ -60,18 +61,18 @@ _setupObjects =
 		_vehicle setDir _direction;
 		_aiGroup addVehicle _vehicle;
 
-		_soldier = [_aiGroup, _position] call createRandomSoldier;
+		_soldier = [_aiGroup, _position, _camo] call createRandomSoldier;
 		_soldier moveInDriver _vehicle;
 
-		_soldier = [_aiGroup, _position] call createRandomSoldier;
+		_soldier = [_aiGroup, _position, _camo] call createRandomSoldier;
 		_soldier moveInCargo [_vehicle, 0];
 
 		if !(_type isKindOf "Truck_F") then
 		{
-			_soldier = [_aiGroup, _position] call createRandomSoldier;
+			_soldier = [_aiGroup, _position, _camo] call createRandomSoldier;
 			_soldier moveInGunner _vehicle;
 
-			_soldier = [_aiGroup, _position] call createRandomSoldier;
+			_soldier = [_aiGroup, _position, _camo] call createRandomSoldier;
 
 			if (_vehicle emptyPositions "commander" > 0) then
 			{

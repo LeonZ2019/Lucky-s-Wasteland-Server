@@ -24,21 +24,21 @@ while {true} do
 		} else
 		{
 			_currWep disableTIEquipment true;
-		};/*
+		};
 		LAYER cutText ["Thermal Imaging OFFLINE", "BLACK", -0.25];
 		playSound "FD_CP_Not_Clear_F";
 		waitUntil {sleep 0.1; currentVisionMode player != 2};
-		LAYER cutText ["", "PLAIN"];*/
+		LAYER cutText ["", "PLAIN"];
 	}
 	else
 	{
 		if (alive getConnectedUAV player) then
 		{
-			getConnectedUAV player disableTIEquipment true;/*
+			getConnectedUAV player disableTIEquipment true;
 			LAYER cutText ["Thermal Imaging OFFLINE while connected to UAV", "BLACK", -0.25];
 			playSound "FD_CP_Not_Clear_F";
 			waitUntil {sleep 0.1; currentVisionMode player != 2};
-			LAYER cutText ["", "PLAIN"];*/
+			LAYER cutText ["", "PLAIN"];
 		};
 	};
 };

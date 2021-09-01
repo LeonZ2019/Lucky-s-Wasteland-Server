@@ -38,8 +38,8 @@ private _unitWeapon = currentWeapon _unit;
 		if (vehicle _unit == _unit) then
 		{
 			_draggedBy = DRAGGED_BY(_unit);
+			_isCarried = IS_CARRIED(_unit);
 			_anim = animationState _unit;
-
 			if (((isTouchingGround _unit || getPos _unit select 2 < 0.5) && vectorMagnitude velocity _unit < 5) || {alive _draggedBy && !UNCONSCIOUS(_draggedBy)}) then
 			{
 				if !(["UnconsciousRevive", _anim] call fn_startsWith) then
@@ -54,7 +54,13 @@ private _unitWeapon = currentWeapon _unit;
 
 					if (isNil "_animTimer" || {diag_tickTime - _animTimer > 7.5}) then
 					{
-						[_unit, "UnconsciousReviveDefault"] call switchMoveGlobal;
+						if (_isCarried) then
+						{
+							[_unit, "ainjpfalmstpsnonwrfldnon_carried_still"] call switchMoveGlobal;
+						} else
+						{
+							[_unit, "UnconsciousReviveDefault"] call switchMoveGlobal;
+						};
 					};
 				}
 				else

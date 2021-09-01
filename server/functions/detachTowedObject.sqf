@@ -20,7 +20,7 @@ if (local _object) then
 	_object enableSimulation true; // FPS fix safeguard
 	_tower enableSimulation true;
 
-	sleep 0.3;
+	uiSleep 0.3;
 
 	if (_airdrop) then
 	{

@@ -7,6 +7,7 @@
 #define ERR_USE_ON_DEAD_BODY "Action Failed! You can't use it on dead body"
 #define ERR_TOO_FAR "You are too far away"
 #define ERR_NO_TARGET "No unconscious player around you"
+#define ERR_MISSION_MAN "You can't use defibrillator on mission character"
 
 mf_items_nearest_unconscious_player = {
     private ["_target", "_targets", "_distances"];
@@ -38,6 +39,7 @@ _hasFailed = {
 		case (vehicle player != player): {_text = ERR_IN_VEHICLE};
 		case (isNull _target): {_text = ERR_NO_TARGET};
 		case (!alive _target): {_text = ERR_USE_ON_DEAD_BODY};
+		case (_target getVariable ["Mission_Man", false]): {_text = ERR_MISSION_MAN};
         case (player distance _target > 5): {_text = ERR_TOO_FAR};
 		default {
 			_text = format["Restoring heartbeat %1%2", round(_progress*100), "%"];

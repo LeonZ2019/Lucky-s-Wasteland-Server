@@ -7,7 +7,7 @@
 if (!isServer) exitwith {};
 #include "militaryMissionDefines.sqf";
 
-private ["_convoyVeh","_veh1","_veh2","_veh3","_veh4","_veh5","_veh6","_createVehicle1","_createVehicle2","_createVehicle3","_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_vehicleName2", "_vehicleName3", "_numWaypoints", "_cash", "_box1Type", "_box2Type", "_box3Type", "_box1", "_box2", "_box3"];
+private ["_convoyVeh","_veh1","_veh2","_veh3","_veh4","_veh5","_veh6","_camo","_createVehicle1","_createVehicle2","_createVehicle3","_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_vehicleName2", "_vehicleName3", "_numWaypoints", "_cash", "_box1Type", "_box2Type", "_box3Type", "_box1", "_box2", "_box3"];
 
 _setupVars =
 {
@@ -33,6 +33,7 @@ _setupObjects =
 	_veh4 = _convoyVeh select 3;
 	_veh5 = _convoyVeh select 4;
 	_veh6 = _convoyVeh select 5;
+	_camo = ["MTP", "Tropic", "CTRGUrban", "CTRGArid", "CTRGTropic", "Woodland", "GreenHex", "Hex", "Green", "Taiga", "Digital", "Geometric", "Guerilla"] call BIS_fnc_selectRandom;
 
 	_createVehicle1 = {
 		private ["_type","_position","_direction","_vehicle","_soldier"];
@@ -47,11 +48,11 @@ _setupObjects =
 		_vehicle setDir _direction;
 		_aiGroup addVehicle _vehicle;
 		
-		_soldier = [_aiGroup, _position] call createRandomSoldier; 
+		_soldier = [_aiGroup, _position, _camo] call createRandomSoldier; 
 		_soldier moveInDriver _vehicle;
-		_soldier = [_aiGroup, _position] call createRandomSoldier; 
+		_soldier = [_aiGroup, _position, _camo] call createRandomSoldier; 
 		_soldier moveInCommander _vehicle;
-		_soldier = [_aiGroup, _position] call createRandomSoldier; 
+		_soldier = [_aiGroup, _position, _camo] call createRandomSoldier; 
 		_soldier moveInCargo [_vehicle, 0];
 
 		//_vehicle setVariable ["R3F_LOG_disabled", false, true]; // force vehicles to be unlocked
@@ -74,11 +75,11 @@ _setupObjects =
 		_vehicle setDir _direction;
 		_aiGroup addVehicle _vehicle;
 
-		_soldier = [_aiGroup, _position] call createRandomSoldier; 
+		_soldier = [_aiGroup, _position, _camo] call createRandomSoldier; 
 		_soldier moveInDriver _vehicle;
-		_soldier = [_aiGroup, _position] call createRandomSoldier; 
+		_soldier = [_aiGroup, _position, _camo] call createRandomSoldier; 
 		_soldier moveInCommander _vehicle;
-		_soldier = [_aiGroup, _position] call createRandomSoldier; 
+		_soldier = [_aiGroup, _position, _camo] call createRandomSoldier; 
 		_soldier moveInGunner _vehicle;
 
 		//_vehicle setVariable ["R3F_LOG_disabled", false, true]; // force vehicles to be unlocked
@@ -101,9 +102,9 @@ _setupObjects =
 		_vehicle setDir _direction;
 		_aiGroup addVehicle _vehicle;
 		
-		_soldier = [_aiGroup, _position] call createRandomSoldier; 
+		_soldier = [_aiGroup, _position, _camo] call createRandomSoldier; 
 		_soldier moveInDriver _vehicle;
-		_soldier = [_aiGroup, _position] call createRandomSoldier; 
+		_soldier = [_aiGroup, _position, _camo] call createRandomSoldier; 
 		_soldier moveInCargo [_vehicle, 0];
 
 		//_vehicle setVariable ["R3F_LOG_disabled", false, true]; // force vehicles to be unlocked

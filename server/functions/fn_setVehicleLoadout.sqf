@@ -18,12 +18,12 @@ if (!local _veh) exitWith
 
 private _class = typeOf _veh;
 private _variant = _veh getVariable ["A3W_vehicleVariant", ""];
-private ["_mags", "_weapons", "_pylons", "_customCode"];
+private ["_mags", "_weapons", "_pylons", "_customCode", "_initCode"];
 
 // Loadouts now in modConfig\vehicleLoadouts.sqf
 call fn_vehicleLoadouts;
 
-if (isNil "_mags" && isNil "_weapons" && isNil "_pylons" && isNil "_customCode") exitWith {};
+if (isNil "_mags" && isNil "_weapons" && isNil "_pylons" && isNil "_customCode" && isNil "_initCode") exitWith {};
 
 // record default non-pylon weapons, so that default pylon weapons are erased
 if (!isNil "_pylons" && isNil "_weapons") then
@@ -77,26 +77,19 @@ if (_brandNew || _resupply) then
 		{
 			_x params ["_mag", "_path"];
 
-			if (/*!isText (configFile >> "CfgMagazines" >> _mag >> "pylonWeapon") && */(toLower getText (configFile >> "CfgMagazines" >> _mag >> "ammo")) find "_minigun_" != -1) then
+			if ((toLower getText (configFile >> "CfgMagazines" >> _mag >> "ammo")) find "_minigun_" != -1) then
 			{
 				_veh addMagazineTurret [_mag, _path];
 			};
 		} forEach magazinesAllTurrets _veh;
 	};
 
-	/*private "_magCfg";
-
-	{
-		_magCfg = configFile >> "CfgMagazines" >> _x;
-
-		if ((toLower getText (_magCfg >> "ammo")) find "_minigun_" != -1) then
-		{
-			_veh setAmmoOnPylon [_forEachIndex + 1, 2 * getNumber (_magCfg >> "count")];
-		};
-	} forEach getPylonMagazines _veh;*/
-
 	if (!isNil "_customCode") then
 	{
 		call _customCode;
 	};
+};
+if (!isNil "_initCode") then
+{
+	call _initCode;
 };

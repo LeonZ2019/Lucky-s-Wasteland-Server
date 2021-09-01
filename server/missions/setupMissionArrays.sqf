@@ -24,13 +24,13 @@ MainMissions =
 SideMissions =
 [
 	["mission_HostileHelicopter", 0.5],
-	["mission_MiniConvoy", 1],
 	["mission_SunkenSupplies", 1],
 	["mission_TownInvasion", 1],
 	["mission_Outpost", 1],
 	["mission_Truck", 1],
 	["mission_geoCache", 0.3],
-	["mission_RescueHostage", 1]
+	["mission_RescueHostage", 1],
+	["mission_Medevac", 1]
 ];
 
 MoneyMissions =
@@ -41,14 +41,22 @@ MoneyMissions =
 
 MilitaryMissions =
 [
-	["mission_HostileJet", 1],
-	["mission_HostileJetFormation", 0.75],
+	["mission_HostileJet", 0.75],
+	["mission_HostileJetFormation", 0.6],
 	["mission_AbandonedJet", 1],
-	["mission_Sniper", 1.5],
-	["mission_Roadblock", 2],
-	["mission_policePatrol", 1.5],
-	["mission_militaryPatrol", 1.5],
-	["mission_RescueWarCrime", 1]
+	["mission_Sniper", 0.95],
+	["mission_Roadblock", 1],
+	["mission_policePatrol", 1.25],
+	["mission_militaryPatrol", 1],
+	["mission_RescueWarCrime", 1],
+	["mission_AntiAir", 1]
+];
+
+LogisticsMissions =
+[
+	["mission_MiniConvoy", 1],
+	["mission_Airdrop", 1],
+	["mission_DeliverySupply", 1]
 ];
 
 MissionSpawnMarkers = (allMapMarkers select {["Mission_", _x] call fn_startsWith}) apply {[_x, false]};
@@ -57,6 +65,7 @@ SunkenMissionMarkers = (allMapMarkers select {["SunkenMission_", _x] call fn_sta
 SniperMissionMarkers = (allMapMarkers select {["Sniper_", _x] call fn_startsWith}) apply {[_x, false]}; // the mission file need create sniper_01 something
 RoadblockMissionMarkers = (allMapMarkers select {["RoadBlock_", _x] call fn_startsWith}) apply {[_x, false]};
 JetMarkers = (allMapMarkers select {["Jet_", _x] call fn_startsWith}) apply {[_x, false]};
+HQSafePosMarkers = (allMapMarkers select {["EvacHQ_", _x] call fn_startsWith}) apply {[_x, false]};
 
 if !(ForestMissionMarkers isEqualTo []) then
 {
@@ -79,3 +88,4 @@ MilitaryMissions = [MilitaryMissions, [["A3W_jetPatrolMissions", ["mission_Hosti
 { _x set [2, false] } forEach SideMissions;
 { _x set [2, false] } forEach MoneyMissions;
 { _x set [2, false] } forEach MilitaryMissions;
+{ _x set [2, false] } forEach LogisticsMissions;

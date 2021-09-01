@@ -47,6 +47,7 @@ if (_textures isEqualType "") then
 	_textures = getObjectTextures _veh;
 };
 
+private _variant = _veh getVariable ["A3W_vehicleVariant", ""];
 // Apply texture to all appropriate parts
 if (_texture isEqualType "") then
 {
@@ -130,6 +131,21 @@ if (_texture isEqualType "") then
 		});
 	};
 
+	if (_variant == "flatbed") then
+	{
+		switch (typeOf _veh) do
+		{
+			case "O_Truck_03_transport_F": { _selections = _selections - [2] };
+			case "I_Truck_02_fuel_F": { _selections = _selections - [1] };
+		};
+		{
+			if (typeOf _x == "Truck_01_Rack_F") then
+			{
+				_x setObjectTextureGlobal [0, _texture];
+				_x setObjectTextureGlobal [1, _texture];
+			};
+		} forEach attachedObjects _veh;
+	};
 	{
 		_veh setObjectTextureGlobal [_x, _texture];
 		_textures set [_x, _texture];
@@ -139,6 +155,22 @@ else
 {
 	if (_texture isEqualTypeAll []) then
 	{
+		if (_variant == "flatbed") then
+		{
+			switch (typeOf _veh) do
+			{
+				case "O_Truck_03_transport_F": { _texture deleteAt 2 };
+				case "I_Truck_02_fuel_F": { _texture deleteAt 1 };
+			};
+			{
+				if (typeOf _x == "Truck_01_Rack_F") then
+				{
+					private _flatbedTextures = getArray (configfile >> "CfgVehicles" >> "Truck_01_Rack_F" >> "hiddenSelectionsTextures");
+					_x setObjectTextureGlobal [0, _flatbedTextures select 0];
+					_x setObjectTextureGlobal [1, _flatbedTextures select 1];
+				};
+			} forEach attachedObjects _veh;
+		};
 		{
 			_x params ["_sel", "_tex"];
 			_veh setObjectTextureGlobal [_sel, _tex];
@@ -147,6 +179,14 @@ else
 	};
 	if (_texture isEqualTypeAll "") then
 	{
+		if (_variant == "flatbed") then
+		{
+			switch (typeOf _veh) do
+			{
+				case "O_Truck_03_transport_F": { _texture set [2, ""] };
+				case "I_Truck_02_fuel_F": { _texture set [1, ""] };
+			};
+		};
 		{
 			_veh setObjectTextureGlobal [_forEachIndex, _x];
 			_textures set [_forEachIndex, _x];
