@@ -114,26 +114,21 @@ storeSellingHandle = _this spawn
 						};
 						_dimension_max = (((boundingBox _x select 1 select 1) max (-(boundingBox _x select 0 select 1))) max ((boundingBox _x select 1 select 0) max (-(boundingBox _x select 0 select 0))));
 						_safePos = [
-							(getPos _veh select 0) - ((_dimension_max+5+(random 10)-(boundingBox _veh select 0 select 1))*sin (getDir _veh - 90+random 180)),
-							(getPos _veh select 1) - ((_dimension_max+5+(random 10)-(boundingBox _veh select 0 select 1))*cos (getDir _veh - 90+random 180)),
+							(getPos _veh select 0) - ((_dimension_max+(random 5)-(boundingBox _veh select 0 select 1))*sin (getDir _veh - 90+random 180)),
+							(getPos _veh select 1) - ((_dimension_max+(random 5)-(boundingBox _veh select 0 select 1))*cos (getDir _veh - 90+random 180)),
 							0
 						];
 						_x setPos _safePos;
 						_x setVelocity [0,0,0];
 					};
 				} forEach _items;
-				_veh setVariable ["R3F_LOG_objets_charges", [], false];
+				_veh setVariable ["R3F_LOG_objets_charges", [], true];
 			};
 
 			private _attachedObjs = attachedObjects _vehicle;
-			private _variant = _vehicle getVariable ["A3W_vehicleVariant", ""];
 			deleteVehicle _vehicle;
 			{
 				["detach", _x] call A3W_fnc_towingHelper;
-				if (_variant == "flatbed" && typeOf _x == "Truck_01_Rack_F") then
-				{
-					deleteVehicle _x;
-				}
 			} forEach _attachedObjs;
 
 			//player setVariable ["cmoney", (player getVariable ["cmoney",0]) + _price, true];

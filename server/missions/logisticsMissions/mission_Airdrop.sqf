@@ -97,7 +97,7 @@ _successExec =
 {
 	if (!isNil "_lastDriver") then
 	{
-		[driver _lastVeh, 7500] call A3W_fnc_setCMoney;
+		[_lastDriver, 7500] call A3W_fnc_setCMoney;
 		_lastDriver globalChat "Your received cash 7,500 for sent airdrop.";
 	} else
 	{

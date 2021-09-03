@@ -16,7 +16,7 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=249;
+		nextID=253;
 	};
 	class Camera
 	{
@@ -7232,7 +7232,6 @@ class Mission
 					};
 					id=2043;
 					type="C_man_1_1_F";
-					atlOffset=0.21434593;
 					class CustomAttributes
 					{
 						class Attribute0
@@ -7281,7 +7280,6 @@ class Mission
 			{
 			};
 			id=2042;
-			atlOffset=0.21434593;
 		};
 		class Item329
 		{
@@ -7757,7 +7755,7 @@ class Mission
 					};
 					id=2084;
 					type="C_man_1_1_F";
-					atlOffset=3.6209984;
+					atlOffset=3.4069519;
 					class CustomAttributes
 					{
 						class Attribute0
@@ -7806,7 +7804,7 @@ class Mission
 			{
 			};
 			id=2083;
-			atlOffset=3.6209984;
+			atlOffset=3.4069519;
 		};
 		class Item347
 		{
@@ -7990,7 +7988,7 @@ class Mission
 		{
 			dataType="Marker";
 			position[]={15251.146,0,26180.186};
-			name="marker_208";
+			name="Carrier_1";
 			text="USS Lucky";
 			type="b_naval";
 			colorName="ColorBlue";
@@ -8418,7 +8416,7 @@ class Mission
 		{
 			dataType="Marker";
 			position[]={3802.8689,0,7520.5952};
-			name="marker_209";
+			name="Carrier_2";
 			text="USS Lee";
 			type="b_naval";
 			colorName="ColorBlue";

@@ -1,15 +1,14 @@
 TTT_Get_Carrier =
 {
 	params ["_plane"];
-	private ["_nearbyCarrier", "_carrier"];
-	_nearbyCarrier = nearestObjects [_plane, ["Land_Carrier_01_hull_08_1_F"], 5000]; // official aircraft carrier only
+	private ["_carrier"];
 	_carrier = objNull;
 	{
-		if (((getPosASL _plane) select 2 > 20) && (speed _plane > 150) && (speed _plane < 500) && ([_x, _plane] call BIS_fnc_relativeDirTo > 290 || [_x, _plane] call BIS_fnc_relativeDirTo < 70)) exitWith
+		if (_plane distance _x < 2500 && ((getPosASL _plane) select 2 > 20) && (speed _plane > 150) && (speed _plane < 500) && ([_x, _plane] call BIS_fnc_relativeDirTo > 290 || [_x, _plane] call BIS_fnc_relativeDirTo < 70)) exitWith
 		{
 			_carrier = _x;
 		};
-	} forEach _nearbyCarrier;
+	} forEach TTT_Carriers;
 	_carrier
 };
 
@@ -29,6 +28,8 @@ TTT_Tailhook_Down =
 {
 	private ["_plane", "_actionID"];
 	_plane = _this select 0;
+	playSound3D ["a3\sounds_f_jets\vehicles\air\shared\FX_Plane_Jet_tailhook_down.wss", _plane];
+	systemChat "Tailhook down, ready to land on carrier";
 	if (isNil {_plane getVariable "TTT_TailhookUp"}) then
 	{
 		_actionID = _plane addAction ["Tailhook Up", {call TTT_Tailhook_Up} , nil, 5, false, true, "", "driver _target == player"];
@@ -43,6 +44,8 @@ TTT_Tailhook_Up =
 	_plane = _this select 0;
 	if (!(isNil {_plane getVariable "TTT_TailhookUp"})) then
 	{
+		systemChat "Tailhook up";
+		playSound3D ["a3\sounds_f_jets\vehicles\air\shared\FX_Plane_Jet_tailhook_up.wss", _plane];
 		_plane removeAction (_plane getVariable "TTT_TailhookUp");
 		_plane setVariable ["TTT_TailhookUp", nil, true];
 	};
@@ -51,7 +54,6 @@ TTT_Tailhook_Up =
 TTT_Use_Tailhook =
 {
 	private ["_plane", "_pilot", "_carrier", "_posWires", "_maxDistZ", "_distZ", "_brakeSpeed", "_slowDown", "_velInitial", "_dirPlane"];
-	systemChat "Tailhook down, ready to land on carrier";
 	_plane = _this select 0;
 	_pilot = driver _plane;
 	_carrier = [_plane] call TTT_Get_Carrier;
@@ -62,7 +64,7 @@ TTT_Use_Tailhook =
 	while {alive _plane} do
 	{
 		_distZ =  (getposASL _plane select 2) - (_posWires select 2);
-		if ((isNil {_plane getVariable "TTT_TailhookUp"}) || _distZ < _maxDistZ) exitWith { [_plane] call TTT_Tailhook_Up };
+		if ((isNil {_plane getVariable "TTT_TailhookUp"}) || _distZ < _maxDistZ) exitWith {};
 		sleep 0.1;
 	};
 	if (_plane distance _posWires > 100 || _distZ > 3) exitWith

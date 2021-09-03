@@ -18,12 +18,12 @@ if (!local _veh) exitWith
 
 private _class = typeOf _veh;
 private _variant = _veh getVariable ["A3W_vehicleVariant", ""];
-private ["_mags", "_weapons", "_pylons", "_customCode", "_initCode"];
+private ["_mags", "_weapons", "_pylons", "_customCode"];
 
 // Loadouts now in modConfig\vehicleLoadouts.sqf
 call fn_vehicleLoadouts;
 
-if (isNil "_mags" && isNil "_weapons" && isNil "_pylons" && isNil "_customCode" && isNil "_initCode") exitWith {};
+if (isNil "_mags" && isNil "_weapons" && isNil "_pylons" && isNil "_customCode") exitWith {};
 
 // record default non-pylon weapons, so that default pylon weapons are erased
 if (!isNil "_pylons" && isNil "_weapons") then
@@ -88,8 +88,4 @@ if (_brandNew || _resupply) then
 	{
 		call _customCode;
 	};
-};
-if (!isNil "_initCode") then
-{
-	call _initCode;
 };

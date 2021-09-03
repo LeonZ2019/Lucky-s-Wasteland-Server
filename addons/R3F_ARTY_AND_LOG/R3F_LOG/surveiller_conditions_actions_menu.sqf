@@ -239,7 +239,7 @@ while {true} do
 				{!(R3F_LOG_joueur_deplace_objet getVariable ["Mission_AirdropOnly", false])} &&
 				{!(_objet_pointe getVariable "R3F_LOG_disabled")} &&
 				isNull (_objet_pointe getVariable ["R3F_LOG_installed_object", objNull]) &&
-				((typeOf R3F_LOG_joueur_deplace_objet == "B_AAA_System_01_F" && typeOf _objet_pointe == "C_Van_01_transport_F") || (typeOf R3F_LOG_joueur_deplace_objet in ["O_SAM_System_04_F", "O_Radar_System_02_F", "B_SAM_System_03_F", "B_Radar_System_01_F", "B_SAM_System_01_F", "B_SAM_System_02_F", "B_AAA_System_01_F"] && typeOf _objet_pointe in ["B_Truck_01_flatbed_F", "O_Truck_03_transport_F", "I_Truck_02_fuel_F"] && _objet_pointe getVariable ["isFlatbed", false]));
+				((typeOf R3F_LOG_joueur_deplace_objet == "B_AAA_System_01_F" && typeOf _objet_pointe == "C_Van_01_transport_F") || (typeOf R3F_LOG_joueur_deplace_objet in ["O_SAM_System_04_F", "O_Radar_System_02_F", "B_SAM_System_03_F", "B_Radar_System_01_F", "B_SAM_System_01_F", "B_SAM_System_02_F", "B_AAA_System_01_F"] && typeOf _objet_pointe in ["B_Truck_01_flatbed_F"]));
 
 				// Install valid, mainly will check for target class and install type
 				R3F_LOG_action_uninstall_valid =

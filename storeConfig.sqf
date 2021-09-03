@@ -1407,7 +1407,6 @@ landArray = compileFinal str
 	["Tempest Fuel", "O_Truck_03_fuel_F", 8000, "vehicle"],
 	["Tempest Medical", "O_Truck_03_medical_F", 9000, "vehicle"],
 	["Tempest Repair", "O_Truck_03_repair_F", 10000, "vehicle"],
-	["Tempest Flatbed", "O_Truck_03_transport_F", 10000, "vehicle", "variant_flatbed"],
 
 	["Zamak Resupply", "I_Truck_02_ammo_F", 4000, "vehicle"],
 	["Zamak Transport", "I_Truck_02_transport_F", 4500, "vehicle"],
@@ -1415,7 +1414,6 @@ landArray = compileFinal str
 	["Zamak Fuel", "I_Truck_02_fuel_F", 6000, "vehicle"],
 	["Zamak Medical", "I_Truck_02_medical_F", 7000, "vehicle"],
 	["Zamak Repair", "I_Truck_02_box_F", 8000, "vehicle"],
-	["Zamak Flatbed", "I_Truck_02_fuel_F", 10000, "vehicle", "variant_flatbed"],
 
 	["UGV Stomper (NATO)", "B_UGV_01_F", 2500, "vehicle"],
 	["UGV Stomper RCWS (NATO)", "B_UGV_01_rcws_F", 15000, "vehicle"],

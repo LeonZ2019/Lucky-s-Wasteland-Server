@@ -161,13 +161,13 @@ A3W_heliPatrolMissions = 1;        // Enable missions involving flying helicopte
 A3W_jetPatrolMissions = 1;        // Enable missions involving flying jet piloted by AI (0 = no, 1 = yes)
 A3W_policeMissions = 1;        // Enable missions which will have police controlling altis (0 = no, 1 = yes)
 A3W_underWaterMissions = 1;        // Enable underwater missions which require diving gear (0 = no, 1 = yes)
-A3W_mainMissionDelay = 10*60;      // Time in seconds between Main Missions
+A3W_mainMissionDelay = 7*60;      // Time in seconds between Main Missions
 A3W_mainMissionTimeout = 60*60;    // Time in seconds that a Main Mission will run for, unless completed
-A3W_sideMissionDelay = 5*60;       // Time in seconds between Side Missions
+A3W_sideMissionDelay = 4*60;       // Time in seconds between Side Missions
 A3W_sideMissionTimeout = 45*60;    // Time in seconds that a Side Mission will run for, unless completed
-A3W_moneyMissionDelay = 15*60;     // Time in seconds between Money Missions
+A3W_moneyMissionDelay = 10*60;     // Time in seconds between Money Missions
 A3W_moneyMissionTimeout = 60*60;   // Time in seconds that a Money Mission will run for, unless completed
-A3W_militaryMissionDelay = 10*60;       // Time in seconds between Military Missions
+A3W_militaryMissionDelay = 7*60;       // Time in seconds between Military Missions
 A3W_militaryMissionTimeout = 60*60;    // Time in seconds that a Military Mission will run for, unless completed
-A3W_logisticsMissionDelay = 5*60;
+A3W_logisticsMissionDelay = 4*60;
 A3W_logisticsMissionTimeout = 30*60;

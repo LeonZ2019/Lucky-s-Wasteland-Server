@@ -44,7 +44,6 @@ _vehicle setVariable ["A3W_hitPointSelections", true, true];*/
 _vehicle setVariable ["A3W_handleDamageEH", _vehicle addEventHandler ["HandleDamage", vehicleHandleDamage]];
 _vehicle setVariable ["A3W_dammagedEH", _vehicle addEventHandler ["Dammaged", vehicleDammagedEvent]];
 _vehicle setVariable ["A3W_engineEH", _vehicle addEventHandler ["Engine", vehicleEngineEvent]];
-_vehicle setVariable ["A3W_deletedEH", _vehicle addEventHandler ["Deleted", vehicleDeletedEvent]];
 
 _vehicle addEventHandler ["GetIn", fn_vehicleGetInOutServer];
 _vehicle addEventHandler ["GetOut", fn_vehicleGetInOutServer];

@@ -67,7 +67,9 @@ if (_uid call isAdmin) then
 					closeDialog 0;
 					["A3W_teleport", "onMapSingleClick",
 					{
-						private "_waterPos";
+						private ["_waterPos", "_oldVelocity", "_alt", "_top", "_buildings"];
+						_oldVelocity = velocity (vehicle player);
+						_alt = getPos (vehicle player) select 2;
 						if (surfaceIsWater _pos) then
 						{
 							_top = +_pos;
@@ -79,7 +81,14 @@ if (_uid call isAdmin) then
 								_waterPos = _buildings select 0 select 0;
 							};
 						};
-						if (isNil "_waterPos") then { vehicle player setPos _pos } else { vehicle player setPosASL _waterPos };
+						if (isNil "_waterPos") then
+						{
+							vehicle player setPos (_pos vectorAdd [0,0, (0 max _alt)]);
+						} else
+						{
+							vehicle player setPosASL (_waterPos vectorAdd [0,0, (0 max _alt)]);
+						};
+						(vehicle player) setVelocity _oldVelocity;
 						["A3W_teleport", "onMapSingleClick"] call BIS_fnc_removeStackedEventHandler;
 						true
 					}] call BIS_fnc_addStackedEventHandler;

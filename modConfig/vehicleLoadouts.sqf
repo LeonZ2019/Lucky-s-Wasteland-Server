@@ -15,43 +15,6 @@
 
 switch (true) do
 {
-	case (_class isKindOf "O_Truck_03_transport_F"):
-	{
-		switch (_variant) do
-		{
-			case "flatbed": { _initCode = {
-				_veh setObjectTextureGlobal [2, ""];
-				_veh setVariable ["isFlatbed", true, true];
-				private _flatbed = createVehicle ["Truck_01_Rack_F", (getPos _veh vectorAdd [0,0,10]), [], 0, "NONE"];
-				_flatbed attachTo [_veh, [.05, -1.9, .2]];
-				private _cargoLock = [1, 12];
-				while {_cargoLock select 0 <= _cargoLock select 1} do
-				{
-					_veh lockCargo [_cargoLock select 0, true];
-					_cargoLock set [0, _cargoLock select 0 + 1];
-				};
-			}};
-		};
-	};
-	case (_class isKindOf "I_Truck_02_fuel_F"):
-	{
-		switch (_variant) do
-		{
-			case "flatbed": { _initCode = {
-				_veh setObjectTextureGlobal [1, ""];
-				_veh setVariable ["isFlatbed", true, true];
-				private _flatbed = createVehicle ["Truck_01_Rack_F", (getPos _veh vectorAdd [0,0,10]), [], 0, "NONE"];
-				_flatbed attachTo [_veh, [-.2, -.7, 0]];
-				_veh setFuelCargo 0;
-			}};
-		};
-	};
-	case (_class isKindOf "B_Truck_01_flatbed_F"):
-	{
-		_initCode = {
-			_veh setVariable ["isFlatbed", true, true];
-		};
-	};
 	// AH-9 Pawnee
 	case (_class isKindOf "B_Heli_Light_01_dynamicLoadout_F"):
 	{

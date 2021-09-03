@@ -84,7 +84,7 @@ if (isServer) then {
         {
           deleteVehicle _x;
         };
-      } forEach nearestObjects [_markerPos, ["LandVehicle","Air","Ship","Truck_01_Rack_Base_F"], 25 max sizeOf _class];
+      } forEach nearestObjects [_markerPos, ["LandVehicle","Air","Ship"], 25 max sizeOf _class];
 
       call fn_restoreSavedVehicle;
 
@@ -150,9 +150,7 @@ if (isServer) then {
 
       private _attachedObjs = attachedObjects _vehicle;
       if (!isNil "fn_untrackSavedVehicle") then { _vehicle call fn_untrackSavedVehicle };
-      def(_items);
-      def(_dimension_max);
-      _items = _vehicle getVariable "R3F_LOG_objets_charges";
+      private _items = _vehicle getVariable ["R3F_LOG_objets_charges", []];
       if (count _items > 0) then
       {
         {
@@ -166,16 +164,17 @@ if (isServer) then {
               [_x, 1] call A3W_fnc_setLockState;
               ["enableDriving", _x] call A3W_fnc_towingHelper;
             };
-            _dimension_max = (((boundingBox _x select 1 select 1) max (-(boundingBox _x select 0 select 1))) max ((boundingBox _x select 1 select 0) max (-(boundingBox _x select 0 select 0))));
-            _x setPos [
+            private _dimension_max = (((boundingBox _x select 1 select 1) max (-(boundingBox _x select 0 select 1))) max ((boundingBox _x select 1 select 0) max (-(boundingBox _x select 0 select 0))));
+            private _safePos = [
               (getPos _vehicle select 0) - ((_dimension_max+(random 5)-(boundingBox _vehicle select 0 select 1))*sin (getDir _vehicle - 90+random 180)),
               (getPos _vehicle select 1) - ((_dimension_max+(random 5)-(boundingBox _vehicle select 0 select 1))*cos (getDir _vehicle - 90+random 180)),
               0
             ];
+            _x setPos _safePos;
             _x setVelocity [0,0,0];
           };
         } forEach _items;
-        _vehicle setVariable ["R3F_LOG_objets_charges", [], false];
+        _vehicle setVariable ["R3F_LOG_objets_charges", [], true];
       };
       deleteVehicle _vehicle;
 

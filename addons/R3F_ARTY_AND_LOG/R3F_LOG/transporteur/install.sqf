@@ -49,29 +49,20 @@ else
 {
 	R3F_LOG_mutex_local_verrou = true;
 
-	private ["_object", "_flatbed_vehicles", "_installable_vehicles", "_vehicle", "_vehicleMatched"];
+	private ["_object", "_installable_vehicles", "_vehicle", "_vehicleMatched"];
 
 	_object = R3F_LOG_joueur_deplace_objet;
-	_flatbed_vehicles = ["B_Truck_01_flatbed_F", "O_Truck_03_transport_F", "I_Truck_02_fuel_F"];
-	_installable_vehicles = _flatbed_vehicles + ["C_Van_01_transport_F"];
+	_installable_vehicles = ["B_Truck_01_flatbed_F", "C_Van_01_transport_F"];
 	_vehicle = nearestObjects [_object, _installable_vehicles, 22];
 
 	if (count _vehicle > 0) then
 	{
 		_vehicle = _vehicle select 0;
 		_vehicleMatched = false;
-		if ({typeOf _vehicle == _x} count _flatbed_vehicles > 0) then
+		if ({typeOf _vehicle == _x} count _installable_vehicles > 0) then
 		{
-			if (_vehicle getVariable ["isFlatbed", false]) then
-			{
-				_vehicleMatched = true; };
-			};
-		} else {
-			if (typeOf _vehicle == "C_Van_01_transport_F") then
-			{
-				_vehicleMatched = true;
-			};
-		};
+			_vehicleMatched = true;
+		}
 		if (_vehicleMatched && alive _vehicle && ((velocity _vehicle) call BIS_fnc_magnitude < 6) && (getPos _vehicle select 2 < 2) && VEHICLE_UNLOCKED(_vehicle) && !(_vehicle getVariable "R3F_LOG_disabled")) then // add support flatbed
 		{
 			private ["_installed_object", "_attachTargets", "_attachPos"];
@@ -91,14 +82,6 @@ else
 					case "B_Truck_01_flatbed_F":
 					{
 						[[0, -1, .05], [0, -.2, 1], [0, -.5, 1.6], [0, -1, .52], [0, -1.5, .95], [0, -2.2, 1.1], [0,-1, 1.7]]
-					};
-					case "O_Truck_03_transport_F":
-					{
-						[[0, -2, .05], [0, -1.2, 1.05], [0, -1.9, 1.8], [0, -2, .73], [0, -3, 1.157], [0, -3, 1.31], [0, -2, 1.91]]
-					};
-					case "I_Truck_02_fuel_F":
-					{
-						[[0, -.7, .06], [0, -.2, .9], [0, -.8, 1.62], [0, -1, .52], [0, -1, .97], [0, -2, 1.11], [0, -.5, 1.71]]
 					};
 					case "C_Van_01_transport_F";
 					default {
