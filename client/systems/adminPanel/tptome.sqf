@@ -46,7 +46,12 @@ if (pselect5 != "exit") then
 			_waterPos = _waterPos vectorAdd [0,0, (0 max _alt)];
 			vehicle _x setPosASL _waterPos;
 		};
-		(vehicle _x) setVelocity _oldVelocity;
+		if (vehicle player != player && vehicle _x == _x) then
+		{
+			_x moveInAny (vehicle player);
+		} else {
+			(vehicle _x) setVelocity _oldVelocity;
+		};
 
 	}
 	} forEach playableUnits;

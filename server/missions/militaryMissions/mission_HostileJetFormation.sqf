@@ -7,7 +7,7 @@
 if (!isServer) exitwith {};
 #include "militaryMissionDefines.sqf"
 
-private ["_planeChoices", "_convoyVeh", "_veh1", "_veh2", "_veh3", "_createVehicle", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_timeDestroyed", "_pos", "_lastVehicle", "_cash", "_boxTypes", "_box1Type", "_box2Type", "_box3Type", "_box4Type", "_Boxes", "_currBox1", "_currBox2", "_currBox3", "_currBox4", "_box1", "_box2", "_box3", "_box4"];
+private ["_planeChoices", "_convoyVeh", "_createVehicle", "_vehicles", "_leader", "_speedMode", "_waypos", "_waypoint", "_vehicleName", "_numWaypoints", "_timeDestroyed", "_pos", "_lastVehicle", "_cash", "_boxTypes", "_box1Type", "_box2Type", "_box3Type", "_box4Type", "_Boxes", "_currBox1", "_currBox2", "_currBox3", "_currBox4", "_box1", "_box2", "_box3", "_box4"];
 
 _setupVars =
 {
@@ -18,24 +18,26 @@ _setupVars =
 _setupObjects =
 {
 	_missionPos = markerPos (((call cityList) call BIS_fnc_selectRandom) select 0);
-	_planeChoices =["B_Plane_Fighter_01_F", "O_Plane_Fighter_02_F","I_Plane_Fighter_04_F"];
+	_planeChoices =[
+		["B_Plane_Fighter_01_F", "blackwaspCAS"],
+		["O_Plane_Fighter_02_F", "shikraCAS"],
+		["I_Plane_Fighter_04_F", "gryphonCAS"]
+	];
 
 	_convoyVeh = _planeChoices call BIS_fnc_selectRandom;
 
-	_veh1 = _convoyVeh;
-	_veh2 = _convoyVeh;
-	_veh3 = _convoyVeh;
-
 	_createVehicle =
 	{
-		private ["_type","_position","_direction","_vehicle","_soldier"];
-		
-		_type = _this select 0;
+		private ["_class","_variant","_position","_direction","_vehicle","_soldier"];
+
+		_class = _this select 0 select 0;
+		_variant = _this select 0 select 1;
 		_position = _this select 1;
 		_direction = _this select 2;
-		
 
-		_vehicle = createVehicle [_type, _position, [], 0, "FLY"]; // Added to make it fly
+		_vehicle = createVehicle [_class, _position, [], 0, "FLY"]; // Added to make it fly
+		_vehicle setVariable ["A3W_vehicleVariant", _variant, true];
+		[_vehicle] call vehicleSetup;
 		_vehicle setVariable ["R3F_LOG_disabled", true, true];
 		_vel = [velocity _vehicle, -(_direction)] call BIS_fnc_rotateVector2D; // Added to make it fly
 		_vehicle setDir _direction;
@@ -66,9 +68,9 @@ _setupObjects =
 	_aiGroup = createGroup CIVILIAN;
 	_vehicles =
 	[
-		[_veh1, _missionPos vectorAdd ([[random 50, 0, 0], random 360] call BIS_fnc_rotateVector2D), 0] call _createVehicle,
-		[_veh2, _missionPos vectorAdd ([[random 50, 0, 0], random 360] call BIS_fnc_rotateVector2D), 0] call _createVehicle,
-		[_veh3, _missionPos vectorAdd ([[random 50, 0, 0], random 360] call BIS_fnc_rotateVector2D), 0] call _createVehicle
+		[_convoyVeh, _missionPos vectorAdd ([[random 50, 0, 0], random 360] call BIS_fnc_rotateVector2D), 0] call _createVehicle,
+		[_convoyVeh, _missionPos vectorAdd ([[random 50, 0, 0], random 360] call BIS_fnc_rotateVector2D), 0] call _createVehicle,
+		[_convoyVeh, _missionPos vectorAdd ([[random 50, 0, 0], random 360] call BIS_fnc_rotateVector2D), 0] call _createVehicle
 	];
 
 	_leader = effectiveCommander (_vehicles select 0);
@@ -85,7 +87,8 @@ _setupObjects =
 
 	// behaviour on waypoints
 	{
-		_waypoint = _aiGroup addWaypoint [markerPos (_x select 0), 0];
+		_waypos = (markerPos (_x select 0)) vectorAdd [0,0,100];
+		_waypoint = _aiGroup addWaypoint [_waypos, 0];
 		_waypoint setWaypointType "MOVE";
 		_waypoint setWaypointCompletionRadius 90;
 		_waypoint setWaypointCombatMode "GREEN";
@@ -95,9 +98,9 @@ _setupObjects =
 	} forEach ((call cityList) call BIS_fnc_arrayShuffle);
 
 	_missionPos = getPosATL leader _aiGroup;
-
-	_missionPicture = getText (configFile >> "CfgVehicles" >> _veh1 >> "picture");
-	_vehicleName = getText (configFile >> "CfgVehicles" >> _veh1 >> "displayName");
+	_class = _convoyVeh select 0;
+	_missionPicture = getText (configFile >> "CfgVehicles" >> _class >> "picture");
+	_vehicleName = getText (configFile >> "CfgVehicles" >> _class >> "displayName");
 	_missionHintText = format ["A formation of Jets containing three <t color='%3'>%1</t> are patrolling the island. Destroy them and recover their cargo!", _vehicleName, _vehicleName, _vehicleName, militaryMissionColor];
 	_numWaypoints = count waypoints _aiGroup;
 };

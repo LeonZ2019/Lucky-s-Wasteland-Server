@@ -320,7 +320,10 @@ pp_retrieve_vehicle_action = {
     {
       if ((_x select 1 select 0 select 1) isKindOf "Plane") then
       {
-        _temp_parkedVehicles pushBack _x;
+        if (!((_x select 1 select 0 select 1) isKindOf "VTOL_01_base_F")) then
+        {
+          _temp_parkedVehicles pushBack _x;
+        };
       };
     } forEach _parked_vehicles;
     _parked_vehicles = _temp_parkedVehicles;

@@ -246,6 +246,46 @@ storePurchaseHandle = _this spawn
 							};
 						};
 					};
+					case "map":
+					{
+						if (!("ItemMap" in (assignedItems player))) then
+						{
+							player linkItem _class;
+						} else
+						{
+							[_itemText] call _showInsufficientSpaceError;
+						};
+					};
+					case "radio":
+					{
+						if (!("ItemRadio" in (assignedItems player))) then
+						{
+							player linkItem _class;
+						} else
+						{
+							[_itemText] call _showInsufficientSpaceError;
+						};
+					};
+					case "watch":
+					{
+						if (!("ItemWatch" in (assignedItems player))) then
+						{
+							player linkItem _class;
+						} else
+						{
+							[_itemText] call _showInsufficientSpaceError;
+						};
+					};
+					case "compass":
+					{
+						if (!("ItemCompass" in (assignedItems player))) then
+						{
+							player linkItem _class;
+						} else
+						{
+							[_itemText] call _showInsufficientSpaceError;
+						};
+					};
 					// Crates transferred to genObjectsArray below
 					/*case "ammocrate":
 					{

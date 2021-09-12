@@ -1231,7 +1231,10 @@ genItemArray = compileFinal str
 	["Square Spectacles", "G_Squares", 10, "gogg"],
 	["Tactical Glasses", "G_Tactical_Clear", 10, "gogg"],
 	["Tactical Shades", "G_Tactical_Black", 10, "gogg"],
-	["Tinted Spectacles", "G_Spectacles_Tinted", 10, "gogg"]
+	["Map", "ItemMap", 10, "map"],
+	["Radio", "ItemRadio", 10, "radio"],
+	["Compass", "ItemCompass", 10, "compass"],
+	["Watch", "ItemWatch", 10, "watch"]
 ];
 
 #define GENSTORE_ITEM_PRICE(CLASS) ((call genItemArray) select {_x select 1 == CLASS} select 0 select 2)
@@ -1525,7 +1528,9 @@ helicoptersArray = compileFinal str
 	["PO-30 Orca (DAGR)", "O_Heli_Light_02_dynamicLoadout_F", 40000, "vehicle", "variant_orcaDAGR"], // Armed Ka-60, add "HIDDEN" if you don't want it, but don't remove the line!
 	["WY-55 Hellcat (Armed)", "I_Heli_light_03_dynamicLoadout_F", 40000, "vehicle"], // Armed AW159
 	["AH-99 Blackfoot", "B_Heli_Attack_01_dynamicLoadout_F", 50000, "vehicle"], // RAH-66 with gunner
+	["AH-99 Blackfoot AT (Extra Tough)", "B_Heli_Attack_01_dynamicLoadout_F", 120000, "vehicle", "variant_toughAT"],
 	["Mi-48 Kajman", "O_Heli_Attack_02_dynamicLoadout_F", 60000, "vehicle"], // Mi-28 with gunner 
+	["Mi-48 Kajman AT (Extra Tough)", "O_Heli_Attack_02_dynamicLoadout_F", 140000, "vehicle", "variant_toughAT"],
 
 	["MQ-12 Falcon UAV", "B_T_UAV_03_F", 75000, "vehicle"] // Do NOT use "B_T_UAV_03_dynamicLoadout_F" (unlees you don't need ASRAAM)
 ];
@@ -1533,21 +1538,22 @@ helicoptersArray = compileFinal str
 planesArray = compileFinal str
 [
 	["Caesar BTT", "C_Plane_Civil_01_F", 2500, "vehicle"],
+	["Caesar BTT (Cannon)", "C_Plane_Civil_01_racing_F", 8000, "vehicle"],
 
-	["A-164 Wipeout CAS", "B_Plane_CAS_01_dynamicLoadout_F", 60000, "variant_wipeoutCAS"],
-	["To-199 Neophron CAS", "O_Plane_CAS_02_dynamicLoadout_F", 62000, "variant_neophronCAS"],
+	["A-164 Wipeout CAS", "B_Plane_CAS_01_dynamicLoadout_F", 60000, "vehicle", "variant_wipeoutCAS"],
+	["To-199 Neophron CAS", "O_Plane_CAS_02_dynamicLoadout_F", 62000, "vehicle", "variant_neophronCAS"],
 	["A-143 Buzzard CAS", "I_Plane_Fighter_03_dynamicLoadout_F", 58000, "vehicle", "variant_buzzardCAS"],
 
-	["F/A-181 Black Wasp (Gun-Only)", "B_Plane_Fighter_01_Stealth_F", 50000, "vehicle"],
+	["F/A-181 Black Wasp Stealth (Gun-Only)", "B_Plane_Fighter_01_Stealth_F", 50000, "vehicle"],
 	["F/A-181 Black Wasp AA", "B_Plane_Fighter_01_F", 63000, "vehicle", "variant_blackwaspAA"],
 	["F/A-181 Black Wasp CAS", "B_Plane_Fighter_01_F", 80000, "vehicle", "variant_blackwaspCAS"],
 
-	["To-201 Shikra (Gun-Only)", "O_Plane_Fighter_02_Stealth_F", 50000, "vehicle"],
+	["To-201 Shikra Stealth (Gun-Only)", "O_Plane_Fighter_02_Stealth_F", 50000, "vehicle"],
 	["To-201 Shikra AA", "O_Plane_Fighter_02_F", 63000, "vehicle", "variant_shikraAA"],
 	["To-201 Shikra CAS", "O_Plane_Fighter_02_F", 80000, "vehicle", "variant_shikraCAS"],
 
-	["A-149 Gryphon AA", "I_Plane_Fighter_04_F", 56000, "variant_gryphonAA"],
-	["A-149 Gryphon CAS", "I_Plane_Fighter_04_F", 63000, "variant_gryphonCAS"],
+	["A-149 Gryphon AA", "I_Plane_Fighter_04_F", 56000, "vehicle", "variant_gryphonAA"],
+	["A-149 Gryphon CAS", "I_Plane_Fighter_04_F", 63000, "vehicle", "variant_gryphonCAS"],
 
 	["V-44 X Blackfish (Infantry)", "B_T_VTOL_01_infantry_F", 10000, "vehicle"],
 	["V-44 X Blackfish (Vehicle)", "B_T_VTOL_01_vehicle_F", 15000, "vehicle"],
@@ -1767,21 +1773,6 @@ colorsArray = compileFinal str
 			["Rusty - Hatchback", [[0, _wreckDir + "civilcar_extwreck_co.paa"]]]
 		]
 	],
-	[ // GOD EMPEROR
-		"B_MBT_01_cannon_F",
-		[
-			["Trump - Slammer", [
-				[0, _texDir + "slammer_trump_0.paa"],
-				[1, _texDir + "slammer_trump_1.paa"]
-			]]
-		]
-	],
-	[
-		"B_MBT_01_TUSK_F",
-		[
-			["Trump - Slammer", [[2, _texDir + "slammer_trump_2.paa"]]]
-		]
-	],
 	[
 		"C_Van_01_fuel_F",
 		[
@@ -1859,6 +1850,32 @@ colorsArray = compileFinal str
 				[0, "\A3\soft_f_exp\truck_02\data\truck_02_kab_GHEX_co.paa"],
 				[1, _zamakDir + "truck_02_int_co.paa"],
 				[2, "\A3\soft_f_gamma\truck_02\data\truck_02_mrl_OPFOR_co.paa"]
+			]]
+		]
+	],
+	[
+		"B_Plane_CAS_01_dynamicLoadout_F",
+		[
+			["Blacksnake", [
+				[0, _texDir + "wipeout_blacksnake_0.paa"],
+				[1, _texDir + "wipeout_blacksnake_1.paa"]
+			]]
+		]
+	],
+	[
+		"B_MRAP_01_F",
+		[
+			["Gendarmerie", [
+				[0, _texDir + "hunter_gendarmerie_0.paa"],
+				[1, _texDir + "hunter_gendarmerie_1.paa"]
+			]]
+		]
+	],
+	[
+		"I_Heli_light_03_unarmed_F",
+		[
+			["Gendarmerie", [
+				[0, _texDir + "hellcat_gendarmerie_0.paa"]
 			]]
 		]
 	]

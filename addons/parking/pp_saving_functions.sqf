@@ -242,7 +242,7 @@ if (isServer) then {
     def(_create_array);
     //if (not([_player,_class,_position] call pp_is_safe_position)) then {
       //we don't have an exact safe position, let the game figure one out
-      _create_array = [_class, if (isNil "_pos") then { getPos _player } else { _pos }, [], [15,50] select (isNil "_pos"), ""];
+      _create_array = [_class, if (isNil "_pos") then { getPos _player } else { _pos }, [], [0,50] select (isNil "_pos"), ""];
     //};
 
     def(_vehicle);

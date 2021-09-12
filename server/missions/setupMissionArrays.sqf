@@ -30,7 +30,7 @@ SideMissions =
 	["mission_Truck", 1],
 	["mission_geoCache", 0.3],
 	["mission_RescueHostage", 1],
-	["mission_Medevac", 1]
+	["mission_Medevac", 0]
 ];
 
 MoneyMissions =

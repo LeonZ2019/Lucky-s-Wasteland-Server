@@ -25,8 +25,8 @@ if (pselect5 != "exit") then
 	{
 	if (isPlayer _x && (name _x == _name)) then {
 		private ["_waterPos", "_oldVelocity", "_alt", "_top", "_buildings"];
-		_oldVelocity = velocity (vehicle _x);
-		_alt = getPos (vehicle _x) select 2;
+		_oldVelocity = velocity (vehicle player);
+		_alt = getPos (vehicle player) select 2;
 		_pos = position _x;
 		if (surfaceIsWater _pos) then
 		{
@@ -40,13 +40,18 @@ if (pselect5 != "exit") then
 		};
 		if (isNil "_waterPos") then {
 			_pos = _pos vectorAdd [0,0, (0 max _alt)];
-			vehicle _x setPos _pos;
+			vehicle player setPos _pos;
 		} else
 		{
 			_waterPos = _waterPos vectorAdd [0,0, (0 max _alt)];
-			vehicle _x setPosASL _waterPos;
+			vehicle player setPosASL _waterPos;
 		};
-		(vehicle _x) setVelocity _oldVelocity;
+		if (vehicle _x != _x && vehicle player == player) then
+		{
+			player moveInAny (vehicle _x);
+		} else {
+			(vehicle player) setVelocity _oldVelocity;
+		};
 	}
 	} forEach playableUnits;
 };

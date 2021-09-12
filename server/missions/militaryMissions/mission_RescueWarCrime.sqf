@@ -112,7 +112,14 @@ _waitUntilExec = nil;
 _waitUntilCondition = {!alive _hostage || currentWaypoint _aiGroup >= _numWaypoints};
 _waitUntilSuccessCondition = { ({alive _x} count units _aiGroup) == 0 && alive _hostage};
 _failedExec = {
-	_failedHintMessage = "War crime killed! Next time try not to destroy the vehicle."
+	if (alive _hostage) then
+	{
+		_failedHintMessage = "War crime has been safety escorted to destination.";
+		deleteVehicle _hostage;
+	} else
+	{
+		_failedHintMessage = "War crime killed! Next time try not to destroy the vehicle.";
+	};
 };
 
 _successExec =

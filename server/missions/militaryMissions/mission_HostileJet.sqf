@@ -7,7 +7,7 @@
 if (!isServer) exitwith {};
 #include "militaryMissionDefines.sqf";
 
-private ["_planeChoices", "_convoyVeh", "_veh1", "_createVehicle", "_vehicle", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_pos", "_cash", "_boxTypes", "_box1Type", "_Boxes", "_currBox1", "_box1", "_hint"];
+private ["_planeChoices", "_convoyVeh", "_veh1", "_createVehicle", "_vehicle", "_leader", "_speedMode", "_waypos", "_waypoint", "_vehicleName", "_numWaypoints", "_pos", "_cash", "_boxTypes", "_box1Type", "_Boxes", "_currBox1", "_box1", "_hint"];
 
 _setupVars =
 {
@@ -21,23 +21,25 @@ _setupObjects =
 
 	_planeChoices =
 	[
-		"B_Plane_CAS_01_F",
-		"O_Plane_CAS_02_F",
-		"I_Plane_Fighter_03_CAS_F"
+		["B_Plane_CAS_01_dynamicLoadout_F", "wipeoutCAS"],
+		["O_Plane_CAS_02_dynamicLoadout_F", "neophronCAS"],
+		["I_Plane_Fighter_03_dynamicLoadout_F", "buzzardCAS"]
 	];
 
 	_veh1 = _planeChoices call BIS_fnc_selectRandom;
 
 	_createVehicle = 
 	{
-		private ["_type","_position","_direction","_vehicle","_soldier"];
-		
-		_type = _this select 0;
+		private ["_class","_variant","_position","_direction","_vehicle","_soldier"];
+
+		_class = _this select 0 select 0;
+		_variant = _this select 0 select 1;
 		_position = _this select 1;
 		_direction = _this select 2;
-		
 
-		_vehicle = createVehicle [_type, _position, [], 0, "FLY"]; // Added to make it fly
+		_vehicle = createVehicle [_class, _position, [], 0, "FLY"]; // Added to make it fly
+		_vehicle setVariable ["A3W_vehicleVariant", _variant, true];
+		[_vehicle] call vehicleSetup;
 		_vehicle setVariable ["R3F_LOG_disabled", true, true];
 		_vel = [velocity _vehicle, -(_direction)] call BIS_fnc_rotateVector2D; // Added to make it fly
 		_vehicle setDir _direction;
@@ -73,7 +75,8 @@ _setupObjects =
 	
 	// behaviour on waypoints
 	{
-		_waypoint = _aiGroup addWaypoint [markerPos (_x select 0), 0];
+		_waypos = (markerPos (_x select 0)) vectorAdd [0,0,100];
+		_waypoint = _aiGroup addWaypoint [_waypos, 0];
 		_waypoint setWaypointType "MOVE";
 		_waypoint setWaypointCompletionRadius 90;
 		_waypoint setWaypointCombatMode "RED";
@@ -84,8 +87,8 @@ _setupObjects =
 
 	_missionPos = getPosATL leader _aiGroup;
 
-	_missionPicture = getText (configFile >> "CfgVehicles" >> _veh1 >> "picture");
-	_vehicleName = getText (configFile >> "CfgVehicles" >> _veh1 >> "displayName");
+	_missionPicture = getText (configFile >> "CfgVehicles" >> (_veh1 select 0) >> "picture");
+	_vehicleName = getText (configFile >> "CfgVehicles" >> (_veh1 select 0) >> "displayName");
 	_missionHintText = format ["An armed <t color='%2'>%1</t> is patrolling the island. Shoot it down and kill the pilot to recover the money and weapons!", _vehicleName, militaryMissionColor];
 
 	_numWaypoints = count waypoints _aiGroup;

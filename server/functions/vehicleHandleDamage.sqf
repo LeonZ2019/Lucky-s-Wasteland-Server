@@ -23,7 +23,12 @@ if (_selection != "?") then
 	_toughScale = 1;
 	if (_vehicle getVariable ["vehicle_tough", false]) then
 	{
-		_toughScale = TOUGHER_DMG_SCALE;
+		if (_isHeli) then
+		{
+			_toughScale = TOUGHER_DMG_SCALE * 0.5;
+		} else {
+			_toughScale = TOUGHER_DMG_SCALE;
+		};
 	};
 
 	if (_isHeli && _selection == "fuel_hit") exitWith
@@ -56,10 +61,7 @@ if (_selection != "?") then
 			// If vehicle is heli and projectile is missile then multiply damage
 			case (_isHeli):
 			{
-				if (_isMissile) then
-				{
-					_damage = ((_damage - _oldDamage) * HELI_MISSILE_DMG_SCALE * _toughScale) + _oldDamage;
-				};
+				_damage = ((_damage - _oldDamage) * HELI_MISSILE_DMG_SCALE * _toughScale) + _oldDamage;
 			};
 
 			// If vehicle is plane and projectile is missile then multiply damage
@@ -83,11 +85,8 @@ if (_selection != "?") then
 			// If vehicle is tank then multiply damage
 			case (_vehicle isKindOf "Tank"): //&& !(_vehicle isKindOf "LT_01_base_F")):
 			{
-				//if (_isMissile) then
-				//{
-					#define TANKTYPE_DMG_SCALE ([TANK_DMG_SCALE, IFV_DMG_SCALE] select ({_vehicle isKindOf _x} count ["APC_Tracked_01_base_F","APC_Tracked_02_base_F","APC_Tracked_03_base_F"] > 0))
-					_damage = ((_damage - _oldDamage) * TANKTYPE_DMG_SCALE * _toughScale) + _oldDamage;
-				//};
+				#define TANKTYPE_DMG_SCALE ([TANK_DMG_SCALE, IFV_DMG_SCALE] select ({_vehicle isKindOf _x} count ["APC_Tracked_01_base_F","APC_Tracked_02_base_F","APC_Tracked_03_base_F"] > 0))
+				_damage = ((_damage - _oldDamage) * TANKTYPE_DMG_SCALE * _toughScale) + _oldDamage;
 			};
 
 			// If vehicle is MRAP and projectile is missile then multiply damage

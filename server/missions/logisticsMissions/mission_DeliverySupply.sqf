@@ -43,9 +43,8 @@ _setupObjects =
 	_enemy setCombatMode "BLUE";
 
 	_type = ["B_Truck_01_ammo_F", "O_Truck_03_ammo_F", "I_Truck_02_ammo_F"] call BIS_fnc_selectRandom;
-	_wreck = [_type, _missionPos, 0, 0, 0] call createMissionVehicle;
+	_wreck = [_type, _missionPos, 0, 0, 1] call createMissionVehicle;
 	_wreck setDir random 360;
-	_wreck setDamage 1;
 
 	_crate = createVehicle ["Land_CargoBox_V1_F", _missionPos, [], 1, "None"];
 	_crate setVariable ["Mission_Crate", true];

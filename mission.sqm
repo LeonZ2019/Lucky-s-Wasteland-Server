@@ -8,7 +8,7 @@ class EditorData
 	toggles=577;
 	class ItemIDProvider
 	{
-		nextID=3014;
+		nextID=3058;
 	};
 	class MarkerIDProvider
 	{
@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=253;
+		nextID=261;
 	};
 	class Camera
 	{
-		pos[]={14484.361,36.142288,16283.369};
-		dir[]={-0.62634265,-0.63597077,0.45081714};
-		up[]={-0.51617056,0.77171308,0.37151957};
-		aside[]={0.58417708,-1.4901161e-008,0.8116262};
+		pos[]={26766.521,33.165577,24643.354};
+		dir[]={-0.73334837,-0.62711358,0.26254299};
+		up[]={-0.59041762,0.7789278,0.21137294};
+		aside[]={0.33705688,1.4901161e-008,0.94148433};
 	};
 };
 binarizationWanted=0;
@@ -5169,13 +5169,13 @@ class Mission
 		class Item225
 		{
 			dataType="Marker";
-			position[]={3922.1943,0,15060.141};
+			position[]={3923.0452,0,15056.526};
 			name="VehStore5_seaSpawn";
 			type="Empty";
 			colorName="ColorBlack";
 			angle=264.60352;
 			id=383;
-			atlOffset=1.3143175;
+			atlOffset=1.1996906;
 		};
 		class Item226
 		{
@@ -6148,17 +6148,18 @@ class Mission
 					colorName="ColorBlack";
 					angle=341.02661;
 					id=2847;
+					atlOffset=0.00031089783;
 				};
 				class Item27
 				{
 					dataType="Marker";
-					position[]={14287.426,19.375,16344.164};
+					position[]={14287.5,19.375,16344};
 					name="Parking9_plane_spawn";
 					type="Empty";
 					colorName="ColorBlack";
-					angle=172.21497;
+					angle=168.19197;
 					id=2848;
-					atlOffset=2.4795532e-005;
+					atlOffset=0.00033569336;
 				};
 				class Item28
 				{
@@ -6174,7 +6175,7 @@ class Mission
 				class Item29
 				{
 					dataType="Marker";
-					position[]={23221.803,3.29,18899.111};
+					position[]={23221.803,3.29,18898.9};
 					name="Parking10_plane_spawn";
 					type="Empty";
 					colorName="ColorBlack";
@@ -6196,13 +6197,13 @@ class Mission
 				class Item31
 				{
 					dataType="Marker";
-					position[]={26760.234,20.507,24651.176};
+					position[]={26757.1,20.507,24652.801};
 					name="Parking11_plane_spawn";
 					type="Empty";
 					colorName="ColorBlack";
-					angle=130.07799;
+					angle=130.53999;
 					id=2887;
-					atlOffset=-0.00017929077;
+					atlOffset=0.014490128;
 				};
 				class Item32
 				{
@@ -6218,24 +6219,24 @@ class Mission
 				class Item33
 				{
 					dataType="Marker";
-					position[]={20948.713,27.804001,7255.001};
+					position[]={20948.746,27.804001,7255};
 					name="Parking12_plane_spawn";
 					type="Empty";
 					colorName="ColorBlack";
-					angle=213.92775;
+					angle=212.34192;
 					id=2889;
-					atlOffset=0.57530022;
+					atlOffset=0.57717514;
 				};
 				class Item34
 				{
 					dataType="Marker";
-					position[]={11560.408,23.677,11969.19};
+					position[]={11562.7,23.677,11967.9};
 					name="Parking13_plane_spawn";
 					type="Empty";
 					colorName="ColorBlack";
-					angle=121.52298;
+					angle=120.747;
 					id=2890;
-					atlOffset=-0.00020217896;
+					atlOffset=0.0011348724;
 				};
 				class Item35
 				{
@@ -6262,17 +6263,17 @@ class Mission
 				class Item37
 				{
 					dataType="Marker";
-					position[]={9098.7783,14.528,21615.992};
+					position[]={9098.9443,14.528,21616.213};
 					name="Parking14_plane_spawn";
 					type="Empty";
 					colorName="ColorBlack";
-					angle=147.15192;
+					angle=142.80499;
 					id=2911;
-					atlOffset=0.00037193298;
+					atlOffset=0.0087127686;
 				};
 			};
 			id=415;
-			atlOffset=-108.93919;
+			atlOffset=-108.91914;
 		};
 		class Item257
 		{
@@ -14429,8 +14430,8 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={20948.746,30.488678,7255.1699};
-				angles[]={0,0.56447643,0};
+				position[]={20948.746,30.488497,7255.1699};
+				angles[]={0,0.56447434,0};
 			};
 			side="Empty";
 			flags=5;
@@ -14439,7 +14440,7 @@ class Mission
 			};
 			id=2855;
 			type="Land_Airport_01_hangar_F";
-			atlOffset=0.0059089661;
+			atlOffset=0.0059108734;
 		};
 		class Item517
 		{
@@ -14452,7 +14453,7 @@ class Mission
 			flags=1;
 			id=2856;
 			type="ModuleHideTerrainObjects_F";
-			atlOffset=1.7942276;
+			atlOffset=0.00018119812;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -14507,7 +14508,7 @@ class Mission
 			flags=1;
 			id=2857;
 			type="ModuleHideTerrainObjects_F";
-			atlOffset=1.5654411;
+			atlOffset=0.00017738342;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -14566,6 +14567,7 @@ class Mission
 			};
 			id=2859;
 			type="Land_ClutterCutter_large_F";
+			atlOffset=0.00018119812;
 		};
 		class Item520
 		{
@@ -16294,8 +16296,8 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={14287.5,24.757702,16344};
-				angles[]={0,6.0770941,0};
+				position[]={14287.5,24.757391,16344};
+				angles[]={0,6.0770965,0};
 			};
 			side="Empty";
 			flags=1;
@@ -16304,7 +16306,7 @@ class Mission
 			};
 			id=2852;
 			type="Land_Hangar_F";
-			atlOffset=0.35431099;
+			atlOffset=0.35400009;
 		};
 		class Item555
 		{
@@ -16317,7 +16319,7 @@ class Mission
 			flags=1;
 			id=2851;
 			type="ModuleHideTerrainObjects_F";
-			atlOffset=5.3888016;
+			atlOffset=5.3888302;
 			class CustomAttributes
 			{
 				class Attribute0

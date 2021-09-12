@@ -24,6 +24,8 @@ _setupObjects =
 	_patient setVariable ["FAR_isStabilized", 1, true];
 	_patient setVariable ["FAR_handleStabilize", true, true];
 	_patient setVariable ["Mission_Man", true, true];
+	removeAllWeapons _patient;
+	{ _patient removeMagazine _x } forEach (magazines _patient);
 	_patient setName "Rhyane";
 	[_patient] spawn FAR_Player_Unconscious;
 
