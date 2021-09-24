@@ -250,6 +250,32 @@ class genstored
 			h = 0.040 * SZ_SCALE;
 		};
 
+		class StoreButton7: w_RscButton
+		{
+			idc = -1;
+			action = "[7] call populateGeneralStore";
+			text = "Buildings";
+			sizeEx = GenStoreButton_textSize;
+
+			x = GenStoreMainBG_X + (0.0167 * SZ_SCALE);
+			y = GenStoreMainBG_Y + (0.425 * SZ_SCALE);
+			w = 0.1173 * SZ_SCALE;
+			h = 0.040 * SZ_SCALE;
+		};
+
+		class StoreButton8: w_RscButton
+		{
+			idc = -1;
+			action = "[8] call populateGeneralStore";
+			text = "Walls";
+			sizeEx = GenStoreButton_textSize;
+
+			x = GenStoreMainBG_X + (0.0167 * SZ_SCALE);
+			y = GenStoreMainBG_Y + (0.475 * SZ_SCALE);
+			w = 0.1173 * SZ_SCALE;
+			h = 0.040 * SZ_SCALE;
+		};
+
 		class SellWeapon: w_RscButton
 		{
 			idc = -1;

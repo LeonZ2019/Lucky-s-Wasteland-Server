@@ -32,7 +32,7 @@ _max = {
 };
 
 mf_jerrycan_nearest_pump = {
-	_pump_objects = ["Land_FuelStation_Feed_F", "Land_MetalBarrel_F", "Land_fs_feed_F", "Land_Tank_rust_F"];
+	_pump_objects = ["Land_FuelStation_Feed_F", "Land_MetalBarrel_F", "Land_fs_feed_F", "Land_Tank_rust_F", "Land_FuelStation_01_pump_malevil_F", "Land_FuelStation_01_pump_F", "Land_FuelStation_03_pump_F", "Land_FuelStation_Feed_F", "Van_01_fuel_base_F", "Truck_02_fuel_base_F", "O_Truck_03_fuel_F", "B_Truck_01_fuel_F", "O_Heli_Transport_04_fuel_F"];
 	_objects = nearestobjects [player, _pump_objects,  3];
 	_object = objNull;
 	if (count _objects > 0) then {_object = _objects select 0;};

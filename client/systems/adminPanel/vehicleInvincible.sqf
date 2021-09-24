@@ -9,7 +9,7 @@ if ((getPlayerUID player) call isAdmin) then
 {
 	if (vehicle player != player) then
 	{
-		if (!(player getVariable ["isAdminsVehicleInvincible", false])) then {
+		if !(player getVariable ["isAdminsVehicleInvincible", false]) then {
 			vehicle player setDamage 0;
 			vehicle player allowDamage false;
 			player setVariable ["isAdminsVehicleInvincible", true, true];

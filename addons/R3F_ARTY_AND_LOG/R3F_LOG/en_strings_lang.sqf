@@ -25,6 +25,8 @@ STR_RELEASE_HORIZONTAL = "Release the object horizontally";
 
 STR_R3F_LOG_action_selectionner_objet_charge = "Load in...";
 STR_R3F_LOG_action_selectionner_objet_charge_fait = "Now select the vehicle in which to load ""%1""...";
+STR_R3F_LOG_action_selectionner_objet_cancel = "... cancel loading";
+STR_R3F_LOG_action_selectionner_objet_cancel_fait = "Deselect the load object ""%1""...";
 
 STR_R3F_LOG_action_charger_selection = "... load the selected object in this vehicle";
 STR_R3F_LOG_action_charger_selection_en_cours = "Loading in progress...";
@@ -41,6 +43,7 @@ STR_R3F_LOG_action_charger_deplace_pas_assez_de_place = "There is not enough spa
 STR_R3F_LOG_action_selectionner_objet_remorque = "Tow to a vehicle";
 STR_R3F_LOG_action_selectionner_objet_remorque_UAV_group = "You must be in the same group as the UAV user to tow it.";
 STR_R3F_LOG_action_selectionner_objet_remorque_fait = "Now select the vehicle which will tow ""%1""...";
+STR_R3F_LOG_action_selectionner_objet_remorque_cancel_fait = "Deselect the tow vehicle ""%1""...";
 
 STR_R3F_LOG_action_remorquer_selection = "... tow the selected object to this vehicle";
 STR_R3F_LOG_action_cancel_remorquer = "... cancel towing";

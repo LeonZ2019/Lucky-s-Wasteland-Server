@@ -60,6 +60,7 @@ while {true} do
 		{
 			// Condition action deplacer_objet
 			R3F_LOG_action_deplacer_objet_valide =
+				alive _objet_pointe &&
 				{getText (configFile >> "CfgVehicles" >> typeOf _x >> "simulation") != "UAVPilot"} count crew _objet_pointe == 0 &&
 				isNull R3F_LOG_joueur_deplace_objet &&
 				{!alive (_objet_pointe getVariable "R3F_LOG_est_deplace_par")} &&
@@ -71,7 +72,7 @@ while {true} do
 		// Si l'objet est un objet remorquable
 		if ({_objet_pointe isKindOf _x} count R3F_LOG_CFG_objets_remorquables > 0) then
 		{
-			// Condition action selectionner_objet_remorque
+			// Condition action selectionner_objet_remorque // edit here
 			R3F_LOG_action_selectionner_objet_remorque_valide =
 				alive _objet_pointe &&
 				isNull R3F_LOG_joueur_deplace_objet &&
@@ -140,7 +141,9 @@ while {true} do
 
 			// Condition action selectionner_objet_charge
 			R3F_LOG_action_selectionner_objet_charge_valide =
+				alive _objet_pointe &&
 				{getText (configFile >> "CfgVehicles" >> typeOf _x >> "simulation") != "UAVPilot"} count crew _objet_pointe == 0 &&
+				isNull R3F_LOG_objet_selectionne &&
 				isNull R3F_LOG_joueur_deplace_objet &&
 				{isNull (_objet_pointe getVariable "R3F_LOG_est_transporte_par")} &&
 				{!alive (_objet_pointe getVariable "R3F_LOG_est_deplace_par")} &&
@@ -154,6 +157,7 @@ while {true} do
 		{
 			// Condition action remorquer_deplace
 			R3F_LOG_action_remorquer_deplace_valide =
+				isNull R3F_LOG_objet_selectionne &&
 				alive _objet_pointe &&
 				alive R3F_LOG_joueur_deplace_objet &&
 				VEHICLE_UNLOCKED(R3F_LOG_joueur_deplace_objet) &&
@@ -245,6 +249,7 @@ while {true} do
 				// Install valid, mainly will check for target class and install type
 			R3F_LOG_action_uninstall_valid =
 				alive (_objet_pointe getVariable "R3F_LOG_installed_object") &&
+				(UAVControl getConnectedUAV player select 1) == "" &&
 				{vectorMagnitude velocity _objet_pointe < 6} &&
 				{(getPos _objet_pointe) select 2 < 2} &&
 				VEHICLE_UNLOCKED(_objet_pointe) &&

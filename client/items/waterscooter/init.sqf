@@ -16,7 +16,7 @@ MF_ITEMS_WATER_SCOOTER_DEPLOYED_TYPE = "C_Scooter_Transport_01_F";
 MF_ITEMS_WATER_SCOOTER_DURATION = 6;
 _deploy = build("deploy.sqf");
 _icon = "\A3\Boat_F_Exp\Scooter_Transport_01\Data\UI\Scooter_Transport_01_CA.paa";
-[MF_ITEMS_WATER_SCOOTER, "Water Scooter", _deploy, "Land_BatteryPack_01_closed_olive_F", _icon, 1] call mf_inventory_create;
+[MF_ITEMS_WATER_SCOOTER, "Water Scooter", _deploy, "Land_BatteryPack_01_closed_olive_F", _icon, 2] call mf_inventory_create;
 
 mf_items_water_scooter_nearest = {
 	_veh = objNull;

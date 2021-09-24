@@ -14,7 +14,7 @@ else
 		player globalChat STR_R3F_LOG_action_uninstall_empty;
 	} else
 	{
-		if (!(isNull (driver _vehicle))) then
+		if !(isNull (driver _vehicle)) then
 		{
 			player globalChat STR_R3F_LOG_action_uninstall_empty_driver;
 		} else

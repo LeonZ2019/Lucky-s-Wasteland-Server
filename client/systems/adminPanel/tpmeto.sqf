@@ -40,11 +40,11 @@ if (pselect5 != "exit") then
 		};
 		if (isNil "_waterPos") then {
 			_pos = _pos vectorAdd [0,0, (0 max _alt)];
-			vehicle player setPos _pos;
+			(vehicle player) setPos _pos;
 		} else
 		{
 			_waterPos = _waterPos vectorAdd [0,0, (0 max _alt)];
-			vehicle player setPosASL _waterPos;
+			(vehicle player) setPosASL _waterPos;
 		};
 		if (vehicle _x != _x && vehicle player == player) then
 		{

@@ -42,7 +42,7 @@ TTT_Tailhook_Up =
 {
 	private ["_plane"];
 	_plane = _this select 0;
-	if (!(isNil {_plane getVariable "TTT_TailhookUp"})) then
+	if !(isNil {_plane getVariable "TTT_TailhookUp"}) then
 	{
 		systemChat "Tailhook up";
 		playSound3D ["a3\sounds_f_jets\vehicles\air\shared\FX_Plane_Jet_tailhook_up.wss", _plane];

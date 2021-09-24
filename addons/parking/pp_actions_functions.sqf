@@ -137,10 +137,10 @@ pp_create_terminals = {
 pp_get_near_vehicles = {
   ARGVX4(0,_player,objNull,[]);
   init(_supportVehicle,[]);
-  _supportVehicle pushBack "Air";
+  _supportVehicle pushBack "Plane";
   if (count (allMapMarkers select {_x select [0,7] == "Parking" && {_x select [count _x - 12, 6] == "_plane" && {_x select [count _x - 6, 6] == "_spawn" && _player distance markerPos _x < 100}}}) == 0) then
   {
-    _supportVehicle append ["LandVehicle","Ship"];
+    _supportVehicle append ["Helicopter","LandVehicle","Ship"];
   };
   def(_vehicles);
   _vehicles = (nearestObjects [_player, _supportVehicle, 50]) select {!(_x getVariable ["A3W_lockpickDisabled",false]) && {!(_x getVariable ["Mission_Vehicle", false])}};

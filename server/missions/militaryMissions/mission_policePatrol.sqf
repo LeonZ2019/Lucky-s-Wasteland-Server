@@ -102,7 +102,7 @@ _setupObjects =
 		_nearestDistance = 9999;
 		_nearestTown = -1;
 		{
-			if (!(_x select 3)) then
+			if !(_x select 3) then
 			{
 				_distance = (markerPos (_x select 0)) distance (_waypointPos select (count _waypointPos - 1));
 				if (_nearestDistance > _distance) then {

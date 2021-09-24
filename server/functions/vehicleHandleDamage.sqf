@@ -99,7 +99,13 @@ if (_selection != "?") then
 			};
 		};
 	};
-
+	if (["LandVehicle", "Air", "Ship", "StaticWeapon"] findIf { _vehicle isKindOf _x} != -1 && !(_vehicle isKindOf "SDV_01_base_F")) then
+	{
+		if (isNull _source && _ammo == "" && surfaceIsWater (getPos _vehicle) && getPosASL _vehicle select 2 < -50 && getPosATL _vehicle select 2 < 5) then
+		{
+			_damage = 1;
+		};
+	};
 	[_vehicle, _selection, _damage, _source, _ammo, _instigator, _hitPoint] call vehicleHitTracking;
 };
 

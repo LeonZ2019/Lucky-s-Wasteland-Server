@@ -15,6 +15,15 @@
 
 switch (true) do
 {
+	case (_class isKindOf "C_IDAP_UAV_06_antimine_F"):
+	{
+		_mags = [
+			["PylonRack_4Rnd_BombDemine_01_F", [-1]],
+			["PylonRack_4Rnd_BombDemine_01_F", [-1]],
+			["PylonRack_4Rnd_BombDemine_01_F", [-1]]
+		];
+		_weapons = [["BombDemine_01_F", [-1]]];
+	};
 	// AH-9 Pawnee
 	case (_class isKindOf "B_Heli_Light_01_dynamicLoadout_F"):
 	{
@@ -323,6 +332,7 @@ switch (true) do
 			case "greyhawkBomber": { _pylons = ["PylonRack_Bomb_GBU12_x2","PylonRack_Bomb_GBU12_x2"] };
 			case "greyhawkCluster": { _pylons = ["PylonRack_2Rnd_BombCluster_01_F","PylonRack_2Rnd_BombCluster_01_F"] };
 			case "greyhawkDAGR":    { _pylons = ["PylonRack_12Rnd_PG_missiles","PylonWeapon_2000Rnd_65x39_belt"] };
+			case "greyhawkUnarmed":    { _pylons = ["", ""] };
 			default
 			{
 				_pylons = ["PylonRack_3Rnd_LG_scalpel","PylonRack_3Rnd_LG_scalpel"];
@@ -368,6 +378,12 @@ switch (true) do
 	};
 
 	// MQ-12 Falcon UAV (non-dynamicLoadout)
+	case (_class isKindOf "B_T_UAV_03_dynamicLoadout_F"):
+	{
+		_pylons = ["", "", "", ""];
+		_mags = [["Laserbatteries", [0]]];
+		_weapons = [["Laserdesignator_mounted", [0]]];
+	};
 	case (_class isKindOf "B_T_UAV_03_F"):
 	{
 		_mags =

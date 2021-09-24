@@ -11,6 +11,7 @@ mf_util_playUntil = "client\functions\playUntil.sqf" call mf_compile;
 // Event handlers
 getInVehicle = "client\clientEvents\getInVehicle.sqf" call mf_compile;
 getOutVehicle = "client\clientEvents\getOutVehicle.sqf" call mf_compile;
+seatSwitchedVehicle = "client\clientEvents\seatSwitchedVehicle.sqf" call mf_compile;
 onRespawn = "client\clientEvents\onRespawn.sqf" call mf_compile;
 onKilled = "client\clientEvents\onKilled.sqf" call mf_compile;
 onKeyPress = "client\clientEvents\onKeyPress.sqf" call mf_compile;
@@ -106,6 +107,7 @@ loadScoreboard = "client\systems\scoreboard\loadScoreboard.sqf" call mf_compile;
 loadVehicleStore = "client\systems\vehicleStore\loadVehicleStore.sqf" call mf_compile;
 gearProperties = "client\functions\gearProperties.sqf" call mf_compile;
 getCapacity = "client\functions\getCapacity.sqf" call mf_compile;
+getItemArmor = "client\functions\getItemArmor.sqf" call mf_compile;
 getItemInfo = "client\functions\getItemInfo.sqf" call mf_compile;
 getInventory = "client\systems\generalStore\getInventory.sqf" call mf_compile;
 getSellPriceList = "client\systems\selling\getSellPriceList.sqf" call mf_compile;

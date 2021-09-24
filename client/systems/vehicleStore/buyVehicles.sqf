@@ -131,6 +131,7 @@ storePurchaseHandle = _this spawn
 
 				if (_crewActive) then
 				{
+					player connectTerminalToUAV objNull; //disconnect better then just switch
 					player connectTerminalToUav _uav;
 				};
 			};
@@ -143,8 +144,8 @@ storePurchaseHandle = _this spawn
 	{
 		_class = _itemData param [1];
 		_price = _itemData param [2];
-		if (ctrlText 5300 == "Vehicle Store (15% tax)") then {
-			_price = _price * 1.15;
+		if (ctrlText 5300 == "Vehicle Store (5% tax)") then {
+			_price = _price * 1.05;
 		} else {
 			if (ctrlText 5300 == "Vehicle Store (5% discount)") then {
 			_price = _price * 0.95;

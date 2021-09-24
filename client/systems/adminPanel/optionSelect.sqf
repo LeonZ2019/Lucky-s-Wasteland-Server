@@ -46,7 +46,6 @@ if (_uid call isAdmin) then
 				{
 					closeDialog 0;
 					execVM "client\systems\adminPanel\unstuck.sqf";
-					if (!isNil "notifyAdminMenu") then { ["UnstuckPlayer", "Used"] call notifyAdminMenu };
 				};
 				case 4: //Tags
 				{
@@ -97,9 +96,9 @@ if (_uid call isAdmin) then
 				};
 				case 8: //Money
 				{
-					_money = 5000;
+					_money = 10000;
 					[player, _money] call A3W_fnc_setCMoney;
-					// if (!isNil "notifyAdminMenu") then { ["money", _money] call notifyAdminMenu };
+					if (!isNil "notifyAdminMenu") then { ["money", _money] call notifyAdminMenu };
 				};
 				case 9: //Debug Menu
 				{

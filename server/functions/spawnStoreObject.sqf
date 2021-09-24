@@ -37,19 +37,19 @@ if (_key != "" && _player isKindOf "Man" && {_isGenStore || _isGunStore || _isVe
 
 		switch (true) do
 		{
-			case _isGenStore: { _objectsArray = genObjectsArray };
-			case _isGunStore: { _objectsArray = staticGunsArray };
-		};
-
-		if (!isNil "_objectsArray") then
-		{
-			_results = (call _objectsArray) select {_x select [1,999] isEqualTo _itemEntrySent};
-
-			if (count _results > 0) then
-			{
-				_itemEntry = _results select 0;
-				_marker = _marker + "_objSpawn";
+			case _isGenStore: {
+				_objectsArray = call genObjectsArray;
+				{ _objectsArray pushBack _x } forEach (call genBuildingsArray);
+				{ _objectsArray pushBack _x } forEach (call genWallsArray);
 			};
+			case _isGunStore: { _objectsArray = call staticGunsArray};
+		};
+		_results = _objectsArray select {_x select [1,999] isEqualTo _itemEntrySent};
+
+		if (count _results > 0) then
+		{
+			_itemEntry = _results select 0;
+			_marker = _marker + "_objSpawn";
 		};
 	};
 
@@ -120,7 +120,7 @@ if (_key != "" && _player isKindOf "Man" && {_isGenStore || _isGunStore || _isVe
 			case "VehStore8";
 			case "VehStore9":
 			{
-				_itemPrice = _itemPrice * 1.15;
+				_itemPrice = _itemPrice * 1.05;
 			};
 			case "VehStore5":
 			{

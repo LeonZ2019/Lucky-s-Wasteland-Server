@@ -16,7 +16,7 @@ MF_ITEMS_QUAD_BIKE_DEPLOYED_TYPE = ["B_Quadbike_01_F", "O_Quadbike_01_F", "I_Qua
 MF_ITEMS_QUAD_BIKE_DURATION = 6;
 _deploy = build("deploy.sqf");
 _icon = "\A3\Soft_F\Quadbike_01\Data\UI\Quadbike_01_CA.paa";
-[MF_ITEMS_QUAD_BIKE, "Quad Bike", _deploy, "Land_MultiScreenComputer_01_closed_olive_F", _icon, 1] call mf_inventory_create;
+[MF_ITEMS_QUAD_BIKE, "Quad Bike", _deploy, "Land_MultiScreenComputer_01_closed_olive_F", _icon, 2] call mf_inventory_create;
 
 mf_items_quad_bike_deloy_in_building = {	
 	_Array = [];

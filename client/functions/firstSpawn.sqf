@@ -216,6 +216,18 @@ player addEventHandler ["InventoryOpened",
 
 		}
 	};
+	if (_container isKindOf "ReammoBox_F") then
+	{
+		if (_container getVariable ["objectLocked", false]) then
+		{
+			if (!isNil {_container getVariable "R3F_Side"} && _container getVariable ["R3F_Side", sideUnknown] != playerSide && _container getVariable ["OwnerUID", "0"] != getPlayerUID player) then
+			{
+				playSound "FD_CP_Not_Clear_F";
+				[format ["%1 crate is locked!", getText (configfile >> "CfgVehicles" >> (typeOf _container) >> "displayName")], 5] call mf_notify_client;
+				_blocked = true;
+			};
+		};
+	};
 
 	if (!_blocked) then
 	{
@@ -299,7 +311,7 @@ if (["A3W_combatAbortDelay", 0] call getPublicVar > 0) then
 
 player addEventHandler ["GetInMan", { [_this select 2] call getInVehicle }];
 player addEventHandler ["GetOutMan", { [_this select 2] call getOutVehicle }];
-
+player addEventHandler ["SeatSwitchedMan", { _this call seatSwitchedVehicle }];
 _uid = getPlayerUID player;
 
 if (playerSide in [BLUFOR,OPFOR] && {{_x select 0 == _uid} count pvar_teamSwitchList == 0}) then

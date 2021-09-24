@@ -639,42 +639,50 @@ call mf_compile;
 
 FAR_Transfer_Box =
 {
-	private ["_target", "_box", "_headgear", "_goggles", "_binocular", "_hmd", "_uniform", "_vest", "_backpack" , "_ammo", "_items", "_weaponHolder", "_weaponsItems"];
+	private ["_target", "_box", "_headgear", "_goggles", "_binocular", "_hmd", "_assignedItems", "_uniform", "_vest", "_backpack" , "_ammo", "_items", "_weaponHolder", "_weaponsItems"];
 	_target = _this select 0;
 
 	_headgear = headgear _target;
 	_goggles = goggles _target;
 	_binocular = binocular _target;
 	_hmd = hmd _target;
-
+	_assignedItems = assignedItems _target;
 	_uniform = uniform _target;
 	_vest = vest _target;
 	_backpack = backpack _target;
 	_ammo = magazinesAmmo _target;
 	_items = items _target;
-	_weaponHolder = nearestObjects [position _target, ["WeaponHolderSimulated"], 5] select 0;
-	_weaponsItems = weaponsItemsCargo _weaponHolder;
+	_weaponHolder = nearestObjects [position _target, ["WeaponHolderSimulated"], 5];
 	{ deleteVehicle _x } forEach [_target, _weaponHolder];
 
 	_box = createVehicle ["Box_AAF_Equip_F", getPos _target, [], 0, "NONE"];
 	clearMagazineCargoGlobal _box;
 	clearWeaponCargoGlobal _box;
 	clearItemCargoGlobal _box;
-	if (_headgear != "") then { _box addItemCargo [_headgear, 1]; };
-	if (_goggles != "") then { _box addItemCargo [_goggles, 1]; };
-	if (_binocular != "") then { _box addItemCargo [_binocular, 1]; };
-	if (_hmd != "") then { _box addItemCargo [_hmd, 1]; };
-	if (_uniform != "") then { _box addItemCargo [_uniform, 1]; };
-	if (_vest != "") then { _box addItemCargo [_vest, 1]; };
-	if (_backpack != "") then { _box addItemCargo [_backpack, 1]; };
+	if (_headgear != "") then { _box addItemCargoGlobal [_headgear, 1]; };
+	if (_goggles != "") then { _box addItemCargoGlobal [_goggles, 1]; };
+	if (_binocular != "") then { _box addItemCargoGlobal [_binocular, 1]; };
+	if (_hmd != "") then { _box addItemCargoGlobal [_hmd, 1]; };
+	if (_uniform != "") then { _box addItemCargoGlobal [_uniform, 1]; };
+	if (_vest != "") then { _box addItemCargoGlobal [_vest, 1]; };
+	if (_backpack != "") then { _box addBackpackCargoGlobal [_backpack, 1]; };
 	{
   		_box addMagazineAmmoCargo [_x select 0, 1, _x select 1];
 	} forEach _ammo;
 	{
-  		_box addItemCargo [_x, 1];
+  		_box addItemCargoGlobal [_x, 1];
 	} forEach _items;
 	{
-  		_box addWeaponWithAttachmentsCargo [_x, 1];
-	} forEach _weaponsItems;
+		_weaponsItems = weaponsItemsCargo _x;
+		{
+  			_box addWeaponWithAttachmentsCargo [_x, 1];
+		} forEach _weaponsItems;
+	} forEach _weaponHolder;
+	{
+		if !(_x in ["ItemMap","ItemCompass","ItemWatch","ItemRadio"]) then
+		{
+			_box addItemCargoGlobal [_x, 1];
+		};
+	} forEach _assignedItems;
 }
 call mf_compile;

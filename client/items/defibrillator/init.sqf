@@ -6,4 +6,4 @@
 MF_ITEMS_AED = "defibrillator";
 MF_ITEMS_AED_DURATION = 5;
 _icon = "client\icons\defibrillator.paa";
-[MF_ITEMS_AED, "Defibrillator", build("useOther.sqf"), "Land_Defibrillator_F", _icon, 2] call mf_inventory_create;
+[MF_ITEMS_AED, "Defibrillator", build("useOther.sqf"), "Land_Defibrillator_F", _icon, 3] call mf_inventory_create;

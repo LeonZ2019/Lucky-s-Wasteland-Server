@@ -8,8 +8,8 @@
 
 if (!hasInterface) exitWith {};
 
-#define ICON_fadeDistance 1250
-#define ICON_limitDistance 2000
+#define ICON_fadeDistance 1500
+#define ICON_limitDistance 2200
 #define ICON_sizeScale 0.75
 
 #define MINE_ICON_MAX_DISTANCE 200 // 200 is Arma 3 default for mine detector
@@ -87,16 +87,16 @@ drawPlayerIcons_thread = [] spawn
 				_speed = (vectorMagnitude velocity vehicle player) * 3.6;
 				_fadeDistance = ICON_fadeDistance;
 				_limitDistance = ICON_limitDistance;
-				if (vehicle player isKindOf "Plane" && _speed >= 250) then
+				if (vehicle player isKindOf "Plane" && _speed >= 200) then
 				{
-					_fadeDistance = ICON_fadeDistance * _speed / 250;
-					_limitDistance = ICON_limitDistance * _speed / 250;
+					_fadeDistance = ICON_fadeDistance * _speed / 200;
+					_limitDistance = ICON_limitDistance * _speed / 200;
 				} else
 				{
-					if (vehicle player isKindOf "Helicopter" && _speed >= 150) then
+					if (vehicle player isKindOf "Helicopter" && _speed >= 125) then
 					{
-						_fadeDistance = ICON_fadeDistance * _speed / 150;
-						_limitDistance = ICON_limitDistance * _speed / 150;
+						_fadeDistance = ICON_fadeDistance * _speed / 125;
+						_limitDistance = ICON_limitDistance * _speed / 125;
 					};
 				};
 				if (side group _unit isEqualTo playerSide && // "side group _unit" instead of "side _unit" is because "setCaptive true" when unconscious changes player side to civ (so AI stops shooting)

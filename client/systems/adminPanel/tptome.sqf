@@ -40,11 +40,11 @@ if (pselect5 != "exit") then
 		};
 		if (isNil "_waterPos") then {
 			_pos = _pos vectorAdd [0,0, (0 max _alt)];
-			vehicle _x setPos _pos;
+			(vehicle _x) setPos _pos;
 		} else
 		{
 			_waterPos = _waterPos vectorAdd [0,0, (0 max _alt)];
-			vehicle _x setPosASL _waterPos;
+			(vehicle _x) setPosASL _waterPos;
 		};
 		if (vehicle player != player && vehicle _x == _x) then
 		{
@@ -52,7 +52,6 @@ if (pselect5 != "exit") then
 		} else {
 			(vehicle _x) setVelocity _oldVelocity;
 		};
-
 	}
 	} forEach playableUnits;
 };

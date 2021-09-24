@@ -16,7 +16,10 @@ moveOut player;
 if (_veh isKindOf "Plane") then
 {
 	player setDir getDir _veh;
-	_push = (vectorUp _veh) vectorMultiply 40; // Simulate rocket seat ejection
+	if (speed player > 5 && position player select 2 > 1) then
+	{
+		_push = (vectorUp _veh) vectorMultiply 40; // Simulate rocket seat ejection
+	};
 }
 else
 {

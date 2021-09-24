@@ -29,7 +29,7 @@ A3W_headshotNoRevive = 0;          // BROKEN - Instant death on fatal headshot b
 
 // Artillery settings
 A3W_artilleryStrike = 1;           // Availability of Artillery Strike item (0 = no, 1 = yes)
-A3W_artilleryShells = 20;          // Number of shells per strike
+A3W_artilleryShells = 15;          // Number of shells per strike
 A3W_artilleryRadius = 50;          // Strike radius in meters within which the shells will randomly hit
 A3W_artilleryCooldown = 30*60;     // Cooldown in seconds between strike uses per individual player - resets on server restart
 A3W_artilleryCrateOdds = 1/15;     // Odds of finding one Artillery Strike in a mission crate (0.0 to 1.0)
@@ -47,8 +47,8 @@ A3W_antiHackMinRecoil = 1.0;       // Mininum recoil coefficient enforced by the
 // Store settings
 A3W_showGunStoreStatus = 1;        // Show enemy and friendly presence at gunstores on map (0 = no, 1 = yes)
 A3W_gunStoreIntruderWarning = 1;   // Warn players in gunstore areas of enemy intruders (0 = no, 1 = yes)
-A3W_remoteBombStoreRadius = 70;    // Prevent players from placing any kind of explosive on the ground within this distance from any store (0 = disabled)
-A3W_poiObjLockDistance = 100;      // Prevent players from locking objects within this distance from points of interest (stores & mission spawns)
+A3W_remoteBombStoreRadius = 50;    // Prevent players from placing any kind of explosive on the ground within this distance from any store (0 = disabled)
+A3W_poiObjLockDistance = 50;      // Prevent players from locking objects within this distance from points of interest (stores & mission spawns)
 A3W_vehiclePurchaseCooldown = 30;  // Number of seconds to wait before allowing someone to purchase another vehicle, don't bother setting it too high because it can be bypassed by rejoining
 
 // ATM settings
@@ -91,7 +91,7 @@ A3W_mineSaving = 1;                // Save player-placed proximity mines between
 A3W_mineLifetime = 14*24;           // Maximum lifetime in hours for saved mines across server restarts (0 = no time limit)
 A3W_privateStorage = 1;            // Enable persistent private storage locations across the map (0 = no, 1 = yes)
 A3W_privateParking = 1;            // If vehicleSaving = 1 and savingMethod = "extDB" or "sock", enable persistent private parking locations across the map (0 = no, 1 = yes)
-A3W_privateParkingLimit = 20;       // Maximum amount of vehicles allowed in private parking (0 = no limit)
+A3W_privateParkingLimit = 50;       // Maximum amount of vehicles allowed in private parking (0 = no limit)
 A3W_privateParkingCost = 1000;     // Cost to retrieve an individual vehicle from private parking
 A3W_vehicleLocking = 1;            // Enable vehicle locking and lockpicking (0 = no, 1 = yes)
 
@@ -148,8 +148,8 @@ A3W_territoryCaptureTime = 3*60;   // Time in seconds needed to capture a territ
 A3W_territoryPayroll = 1;          // Periodically reward sides and indie groups based on how many territories they own (0 = no, 1 = yes)
 A3W_territoryWarningIcons = 0;     // Show exclamation marks on map for friendly territories where enemies are present (0 = no, 1 = yes)
 A3W_payrollInterval = 15*60;       // Delay in seconds between each payroll
-A3W_payrollAmount = 700;           // Amount of money rewarded per territory on each payroll
-A3W_territoryCaptureBoost = 2;     // Boost capturing for each player
+A3W_payrollAmount = 1000;           // Amount of money rewarded per territory on each payroll
+A3W_territoryCaptureBoost = 5;     // Boost capturing for each player
 A3W_portalAmount = 1000;
 
 // Mission settings

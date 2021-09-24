@@ -33,7 +33,7 @@ if (!_uavConnect) then
 {
 		// Eject from vehicle if it is already used by enemies
 		{
-			if (isPlayer _x && alive _x && !([_x, player] call A3W_fnc_isFriendly)) exitWith 
+			if (isPlayer _x && alive _x && !((getPlayerUID _x) call isAdmin) && !([_x, player] call A3W_fnc_isFriendly)) exitWith 
 			{
 				moveOut player;
 				["You can't enter vehicles being used by enemies.", 5] call mf_notify_client;

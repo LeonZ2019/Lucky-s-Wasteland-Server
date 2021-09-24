@@ -50,6 +50,7 @@ switch (_lockState) do
 				case (!alive player): { _text = "" };
 				case (doCancelAction): { doCancelAction = false; _text = "Locking cancelled" };
 				case (vehicle player != player): { _text = "Action failed! You can't do this in a vehicle" };
+				case (!isNil {_object getVariable "R3F_Side"} && (_object getVariable ["R3F_Side", sideUnknown]) != playerSide && _object getVariable ["OwnerUID", "0"] != getPlayerUID player) : { _text = "Action failed! You can't lock other side object" };
 				case (!isNull (_object getVariable ["R3F_LOG_est_transporte_par", objNull])): { _text = "Action failed! Somebody moved the object" };
 				case (_object getVariable ["objectLocked", false]): { _text = "Somebody else locked it before you" };
 				default
@@ -131,6 +132,7 @@ switch (_lockState) do
 				case (!alive player): {};
 				case (doCancelAction): { doCancelAction = false; _text = "Unlocking cancelled" };
 				case (vehicle player != player): { _text = "Action failed! You can't do this in a vehicle" };
+				case (!isNil {_object getVariable "R3F_Side"} && (_object getVariable ["R3F_Side", sideUnknown]) != playerSide && _object getVariable ["OwnerUID", "0"] != getPlayerUID player) : { _text = "Action failed! You can't unlock other side object" };
 				case (!isNull (_object getVariable ["R3F_LOG_est_transporte_par", objNull])): { _text = "Action failed! Somebody moved the object" };
 				case !(_object getVariable ["objectLocked", false]): { _text = "Somebody else unlocked it before you" };
 				default

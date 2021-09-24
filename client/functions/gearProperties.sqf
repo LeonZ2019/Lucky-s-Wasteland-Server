@@ -28,9 +28,15 @@ switch (_type) do
 		if (_oldItem != "") then
 		{
 			_oldCapacity = [_oldItem] call getCapacity;
+			_armorVals = [_oldItem] call getItemArmor;
+			_oldBallArmor = _armorVals select 0;
+			_oldExplArmor = _armorVals select 1;
 		};
 
 		_newCapacity = [_newItem] call getCapacity;
+		_armorVals = [_newItem] call getItemArmor;
+		_newBallArmor = _armorVals select 0;
+		_newExplArmor = _armorVals select 1;
 	};
 	case "vest":
 	{
@@ -95,7 +101,7 @@ if (_type in ["uniform","vest","backpack"]) then
 	_text = _text + "<br/>";
 };
 
-if (_type in ["vest","headgear"]) then
+if (_type in ["uniform","vest","headgear"]) then
 {
 	if (isNil "_oldBallArmor") then { _oldBallArmor = 0 };
 	if (isNil "_oldExplArmor") then { _oldExplArmor = 0 };

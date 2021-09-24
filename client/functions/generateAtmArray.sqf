@@ -52,6 +52,7 @@ if !(["A3W_atmEnabled"] call isConfigOn) then
 				if (_x getVariable ["A3W_atmEditorPlaced", false]) then
 				{
 					hideObject _x; // only hide since it's owned by the server
+					_x allowDamage false;
 				}
 				else
 				{

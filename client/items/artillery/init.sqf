@@ -13,7 +13,7 @@ private _icon = "client\icons\tablet.paa";
 	[_path, "artilleryMenu.sqf"] call mf_compile,
 	"Land_Tablet_02_F",
 	_icon,
-	1
+	2
 ] call mf_inventory_create;
 
 private _take = [_path, "takeFromCrate.sqf"] call mf_compile;

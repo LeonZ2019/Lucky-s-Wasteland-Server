@@ -80,6 +80,16 @@ switch(_switch) do
 		_itemsArray = call genObjectsArray;
 		_showPicture = false;
 	};
+	case 7:
+	{
+		_itemsArray = call genBuildingsArray;
+		_showPicture = false;
+	};
+	case 8:
+	{
+		_itemsArray = call genWallsArray;
+		_showPicture = false;
+	};
 	default
 	{
 		_itemsArray = [];

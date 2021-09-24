@@ -40,8 +40,8 @@ if (isNil "_itemData") exitWith
 
 _itemData params ["_vehName", "_vehClass", "_price"];
 
-if (ctrlText 5300 == "Vehicle Store (15% tax)") then {
-	_vehText ctrlSetText format ["%1Price: $%2", [_vehName + "\n", ""] select isNil "_repaint", [_price * 1.15] call fn_numbersText];	
+if (ctrlText 5300 == "Vehicle Store (5% tax)") then {
+	_vehText ctrlSetText format ["%1Price: $%2", [_vehName + "\n", ""] select isNil "_repaint", [_price * 1.05] call fn_numbersText];	
 } else {
 	if (ctrlText 5300 == "Vehicle Store (5% discount)") then {
 		_vehText ctrlSetText format ["%1Price: $%2", [_vehName + "\n", ""] select isNil "_repaint", [_price * 0.95] call fn_numbersText];

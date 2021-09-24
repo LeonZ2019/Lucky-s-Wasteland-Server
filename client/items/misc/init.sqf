@@ -18,7 +18,7 @@ MF_ITEMS_REPAIR_KIT_RANGE = 5;
 MF_ITEMS_REPAIR_KIT = "repairkit";
 _repair = [_path, "repair.sqf"] call mf_compile;
 _icon = "client\icons\repair.paa";
-[MF_ITEMS_REPAIR_KIT, "Repair Kit", _repair, "Land_SuitCase_F",_icon,2] call mf_inventory_create;
+[MF_ITEMS_REPAIR_KIT, "Repair Kit", _repair, "Land_SuitCase_F",_icon,4] call mf_inventory_create;
 
 mf_nearest_vehicle = {
 	private ["_types", "_obj", "_dist"];

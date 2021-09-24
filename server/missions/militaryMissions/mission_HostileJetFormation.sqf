@@ -59,7 +59,12 @@ _setupObjects =
 				_unit setVariable ["destroyedAt", serverTime, true];
 			};
 		}];
-		_vehicle removeMagazineTurret ["240Rnd_CMFlare_Chaff_Magazine",[-1]];
+		{
+			if (["CMFlare", (_x select 0)] call fn_findString != -1) then
+			{
+				_vehicle removeMagazinesTurret [_x select 0, _x select 1];
+			};
+		} forEach (magazinesAllTurrets _vehicle);
 		_vehicle addMagazineTurret ["60Rnd_CMFlare_Chaff_Magazine",[-1]];
 		_vehicle setMagazineTurretAmmo ["60Rnd_CMFlare_Chaff_Magazine", 31, [-1]];
 		_vehicle

@@ -28,12 +28,12 @@ if (!isNil "pvar_teamKillList" && {playerSide in [BLUFOR,OPFOR]}) then
 		waitUntil {uiNamespace setVariable ["BIS_fnc_guiMessage_status", false]; closeDialog 0; false};
 	};
 };
-//Teamswitcher Kick
+//Teamswitcher Kick, but not admin
 if (!isNil "pvar_teamSwitchList" && playerSide in [BLUFOR,OPFOR]) then
 {
 	_prevSide = [pvar_teamSwitchList, getPlayerUID player, playerSide] call fn_getFromPairs;
 
-	if (_prevSide != playerSide) exitWith
+	if (_prevSide != playerSide && !((getPlayerUID player) call isAdmin)) exitWith
 	{
 		player allowDamage false;
 		player setUnconscious true;

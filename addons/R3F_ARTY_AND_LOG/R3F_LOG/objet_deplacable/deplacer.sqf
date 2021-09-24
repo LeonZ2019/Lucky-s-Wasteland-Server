@@ -44,7 +44,7 @@ else
 	_tempVar = false;
 	if(!isNil {_objet getVariable "R3F_Side"}) then {
 		if(playerSide != (_objet getVariable "R3F_Side")) then {
-			{if(side _x ==  (_objet getVariable "R3F_Side") && alive _x && _x distance _objet < 150) exitwith {_tempVar = true;};} foreach AllUnits;
+			{if(side _x ==  (_objet getVariable "R3F_Side") && alive _x && _x distance _objet < 150) exitwith {_tempVar = true;};} foreach allPlayers;
 		};
 	};
 	if(_tempVar) exitwith {

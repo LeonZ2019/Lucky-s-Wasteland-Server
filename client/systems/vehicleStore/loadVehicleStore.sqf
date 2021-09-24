@@ -40,7 +40,7 @@ if (!isNil "_owner") then
 			case "VehStore8";
 			case "VehStore9":
 			{
-				ctrlSetText [5300,"Vehicle Store (15% tax)"];
+				ctrlSetText [5300,"Vehicle Store (5% tax)"];
 			};
 			case "VehStore5":
 			{

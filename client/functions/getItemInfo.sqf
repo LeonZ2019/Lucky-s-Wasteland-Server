@@ -92,7 +92,7 @@ if (isNil "_itemEntry") then
 				_parentCfg = "CfgVehicles";
 			};
 		} forEach (call _x);
-	} forEach [backpackArray, genObjectsArray, staticGunsArray];
+	} forEach [backpackArray, genObjectsArray, genBuildingsArray, genWallsArray, staticGunsArray];
 };
 
 if (!isNil "_itemEntry") then
@@ -119,27 +119,27 @@ if (!isNil "_itemEntry") then
 					};
 					case (_itemType isKindOf "UGV_02_Demining_backpack_base_F"):
 					{
-						_description = "Remote-controlled robo-shotgun to dispose of trespassers, pre-packaged in a backpack.<br/>UAV Terminal sold separately. Ages 8+";
+						_description = "Remote-controlled robo-shotgun to dispose of trespassers, pre-packaged in a backpack.";
 					};
 					case (_itemType isKindOf "UGV_02_backpack_base_F"):
 					{
-						_description = "Remote-controlled robot to spy on your neighbor's wife, pre-packaged in a backpack.<br/>UAV Terminal sold separately. Ages 8+";
+						_description = "Remote-controlled robot to spy on your neighbor's wife, pre-packaged in a backpack.";
 					};
 					case (["_UAV_06_antimine_backpack_", _itemType] call fn_findString != -1):
 					{
-						_description = "Remote-controlled hexacopter to bomb the shit out of 'em, pre-packaged in a backpack.<br/>UAV Terminal sold separately. Ages 8+";
+						_description = "Remote-controlled hexacopter to bomb the shit out of 'em, pre-packaged in a backpack.";
 					};
 					case (_itemType isKindOf "UAV_06_medical_backpack_base_F"):
 					{
-						_description = "Remote-controlled hexacopter to revive and heal your teammates, pre-packaged in a backpack.<br/>UAV Terminal sold separately. Ages 8+";
+						_description = "Remote-controlled hexacopter to revive and heal your teammates, pre-packaged in a backpack.";
 					};
 					case (_itemType isKindOf "UAV_06_backpack_base_F"):
 					{
-						_description = "Remote-controlled hexacopter to spy on your neighbors, pre-packaged in a backpack.<br/>UAV Terminal sold separately. Ages 8+";
+						_description = "Remote-controlled hexacopter to spy on your neighbors, pre-packaged in a backpack.";
 					};
 					case (["_UAV_01_backpack_", _itemType] call fn_findString != -1):
 					{
-						_description = "Remote-controlled quadcopter to spy on your neighbors, pre-packaged in a backpack.<br/>UAV Terminal sold separately. Ages 8+";
+						_description = "Remote-controlled quadcopter to spy on your neighbors, pre-packaged in a backpack.";
 					};
 					case (["_Static_Designator_", _itemType] call fn_findString != -1):
 					{
@@ -169,7 +169,7 @@ if (!isNil "_itemEntry") then
 					case ([["_Wetsuit","_survival_uniform"], _itemType] call fn_findString != -1):
 					{
 						//_name = _itemText;
-						_description = "Allows faster swimming<br/>Required to fire SDAR underwater";
+						_description = "Allows faster swimming";
 					};
 					case ([["_CTRG_Soldier","_Soldier_Viper"], _itemType] call fn_findString != -1):
 					{

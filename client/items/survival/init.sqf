@@ -113,7 +113,7 @@ _code =
 // Take Water from Well
 
 _label = "<img image='client\icons\water.paa'/> Fill Water Bottle";
-_condition = "player distance cursorObject <= 3 && {{(str cursorObject) find _x != -1} count [': stallwater_f',': water_source_f'] > 0 && !(MF_ITEMS_WATER call mf_inventory_is_full)}";
+_condition = "player distance cursorObject <= 3 && {{(str cursorObject) find _x != -1} count [': stallwater_f',': water_source_f',': waterpump_01_f'] > 0 && !(MF_ITEMS_WATER call mf_inventory_is_full)}";
 _code =
 {
 	//player playMove ([player, "AmovMstpDnon_AinvMstpDnon", "putdown"] call getFullMove);

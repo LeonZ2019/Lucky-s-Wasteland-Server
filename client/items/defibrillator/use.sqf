@@ -2,7 +2,7 @@
 //	@file Author: Leon
 
 if (!alive player) exitWith {};
-if (!(player call A3W_fnc_isUnconscious)) exitWith {};
+if !(player call A3W_fnc_isUnconscious) exitWith {};
 if (((player getVariable "mf_inventory_list") select {(_x select 0) == "defibrillator"}) select 0 select 1 == 0) exitWith {};
 
 if (["Are you sure you want to use defibrillator?", "Confirm", true, true] call BIS_fnc_guiMessage) then

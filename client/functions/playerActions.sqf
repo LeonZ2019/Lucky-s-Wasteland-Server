@@ -36,7 +36,10 @@
 	["<img image='\A3\ui_f\data\igui\cfg\VehicleToggles\LightsIconOn_ca.paa'/> Lights On", fn_driverAssistLightsOn, [], 0.5, false, true, "", "_driver = driver objectParent player; isAgent teamMember _driver && {(_driver getVariable ['A3W_driverAssistOwner', objNull]) in [player,objNull]} && !isLightOn vehicle player"],
 	["<img image='\A3\ui_f\data\igui\cfg\VehicleToggles\LightsIconOn_ca.paa'/> Lights Off", fn_driverAssistLightsOff, [], 0.5, false, true, "", "_driver = driver objectParent player; isAgent teamMember _driver && {(_driver getVariable ['A3W_driverAssistOwner', objNull]) in [player,objNull]} && isLightOn vehicle player"],
 	[format ["<t color='#FF0000'>Emergency eject (Ctrl+%1)</t>", (actionKeysNamesArray "GetOver") param [0,"<'Step over' keybind>"]],  { [[], fn_emergencyEject] execFSM "call.fsm" }, [], -9, false, true, "", "(vehicle player) isKindOf 'Air' && !((vehicle player) isKindOf 'ParachuteBase')"],
-	[format ["<t color='#FF00FF'>Open magic parachute (%1)</t>", (actionKeysNamesArray "GetOver") param [0,"<'Step over' keybind>"]], A3W_fnc_openParachute, [], 20, true, true, "", "vehicle player == player && (getPos player) select 2 > 2.5"]
+	[format ["<t color='#FF00FF'>Open magic parachute (%1)</t>", (actionKeysNamesArray "GetOver") param [0,"<'Step over' keybind>"]], A3W_fnc_openParachute, [], 20, true, true, "", "vehicle player == player && (getPos player) select 2 > 2.5"],
+
+	["Take Uniform", "client\actions\takeUniform.sqf", [0], 100, true, true, "", "getItemCargo cursorObject select 0 findIf { _x isKindOf ['Uniform_Base', configfile >> 'CfgWeapons'] && !(player isUniformAllowed _x) } != -1 && cursorObject distance player <= 3 && (typeOf cursorObject == 'GroundWeaponHolder' || cursorObject isKindOf 'ReammoBox_F')"], // from ground or crate
+	["Steal Uniform", "client\actions\takeUniform.sqf", [1], 100, true, true, "", "cursorObject isKindOf 'CAManBase' && !alive cursorObject && uniform cursorObject != '' && cursorObject distance player <= 3 && !(player isUniformAllowed (uniform cursorObject))"] // from dead body
 ];
 
 if (["A3W_vehicleLocking"] call isConfigOn) then
@@ -45,9 +48,14 @@ if (["A3W_vehicleLocking"] call isConfigOn) then
 };
 
 // Hehehe...
-if !(288520 in getDLCs 1) then
+if (288520 in getDLCs 2) then
 {
 	[player, ["<t color='#00FFFF'>Get in as Driver</t>", "client\actions\moveInDriver.sqf", [], 6, true, true, "", "cursorTarget isKindOf 'Kart_01_Base_F' && player distance cursorTarget < 3.4 && isNull driver cursorTarget"]] call fn_addManagedAction;
+};
+
+if ((getDLCs 2) findIf { _x in [395180, 304380] } != -1) then
+{
+	[player, ["<t color='#00FFFF'>Get in as Passenger</t>", "client\actions\moveInCargo.sqf", [], 6, true, true, "", "['LandVehicle', 'Air', 'Ship'] findIf { cursorTarget isKindOf _x} != -1 && (getText (configfile >> 'CfgVehicles' >> typeOf cursorTarget >> 'DLC')) in ['Expansion', 'Heli'] && locked cursorTarget == 1 && (switch(getText (configfile >> 'CfgVehicles' >> typeOf cursorTarget >> 'DLC')) do {case'Expansion':{395180};case'Heli':{304380};}) in (getDLCs 2) && vehicle player == player && player distance cursorTarget < (3.4 max (sizeOf typeOf cursorTarget * 0.75)) && cursorTarget emptyPositions 'cargo' > 0"]] call fn_addManagedAction;
 };
 
 if (["A3W_savingMethod", "profile"] call getPublicVar == "extDB") then

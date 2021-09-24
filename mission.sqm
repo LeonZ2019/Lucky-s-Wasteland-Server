@@ -8,7 +8,7 @@ class EditorData
 	toggles=577;
 	class ItemIDProvider
 	{
-		nextID=3058;
+		nextID=3062;
 	};
 	class MarkerIDProvider
 	{
@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=261;
+		nextID=269;
 	};
 	class Camera
 	{
-		pos[]={26766.521,33.165577,24643.354};
-		dir[]={-0.73334837,-0.62711358,0.26254299};
-		up[]={-0.59041762,0.7789278,0.21137294};
-		aside[]={0.33705688,1.4901161e-008,0.94148433};
+		pos[]={15193.106,80.95195,14048.78};
+		dir[]={-0.67921162,-0.48218545,0.5533281};
+		up[]={-0.3738358,0.87606752,0.30454937};
+		aside[]={0.63160288,-1.1270458e-007,0.7752943};
 	};
 };
 binarizationWanted=0;
@@ -236,7 +236,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=596;
+		items=598;
 		class Item0
 		{
 			dataType="Group";
@@ -6223,7 +6223,7 @@ class Mission
 					name="Parking12_plane_spawn";
 					type="Empty";
 					colorName="ColorBlack";
-					angle=212.34192;
+					angle=212.34189;
 					id=2889;
 					atlOffset=0.57717514;
 				};
@@ -7233,6 +7233,7 @@ class Mission
 					};
 					id=2043;
 					type="C_man_1_1_F";
+					atlOffset=0.21434593;
 					class CustomAttributes
 					{
 						class Attribute0
@@ -7281,6 +7282,7 @@ class Mission
 			{
 			};
 			id=2042;
+			atlOffset=0.21434593;
 		};
 		class Item329
 		{
@@ -7756,7 +7758,7 @@ class Mission
 					};
 					id=2084;
 					type="C_man_1_1_F";
-					atlOffset=3.4069519;
+					atlOffset=3.6209984;
 					class CustomAttributes
 					{
 						class Attribute0
@@ -7805,7 +7807,7 @@ class Mission
 			{
 			};
 			id=2083;
-			atlOffset=3.4069519;
+			atlOffset=3.6209984;
 		};
 		class Item347
 		{
@@ -17972,6 +17974,56 @@ class Mission
 			angle=206.30244;
 			id=3009;
 			atlOffset=15.065216;
+		};
+		class Item596
+		{
+			dataType="Marker";
+			position[]={15244.244,139.061,14097.64};
+			name="marker_208";
+			text="HMS Black Swan";
+			type="b_naval";
+			colorName="ColorBlue";
+			id=3060;
+			atlOffset=118.05908;
+		};
+		class Item597
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={15244.2,-0.0037231445,14097.6};
+				angles[]={0,1.1974704,0};
+			};
+			side="Empty";
+			class Attributes
+			{
+			};
+			id=3061;
+			type="Land_Destroyer_01_base_F";
+			atlOffset=67.977005;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="CustomShipNameTexture0";
+					expression="([_this, 'Land_Destroyer_01_hull_05_F'] call bis_fnc_destroyer01GetShipPart) setObjectTextureGlobal [0, _value];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"STRING"
+								};
+							};
+							value="client\images\Destroyer_01_tag_05.paa";
+						};
+					};
+				};
+				nAttributes=1;
+			};
 		};
 	};
 };
