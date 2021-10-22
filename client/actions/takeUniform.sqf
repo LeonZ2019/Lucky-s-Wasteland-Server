@@ -95,7 +95,7 @@ _droppedContainer = everyContainer _holder select 0 select 1;
 	};
 	if (_class isKindOf ["CA_Magazine", configfile >> "CfgMagazines"]) then
 	{
-		if (player canAddItemToUniform _class) then
+		if (uniformContainer player canAdd _class) then
 		{
 			(uniformContainer player) addMagazineAmmoCargo [_class, 1, _ammo];
 		} else
@@ -104,7 +104,7 @@ _droppedContainer = everyContainer _holder select 0 select 1;
 		};
 	} else
 	{
-		if (player canAddItemToUniform _class) then
+		if (uniformContainer player canAdd _class) then
 		{
 			player addItemToUniform _class;
 		} else

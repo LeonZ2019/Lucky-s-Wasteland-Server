@@ -458,7 +458,7 @@ storePurchaseHandle = _this spawn
 				player forceAddUniform _class; // configfile >> "CfgWeapons" >> "FirstAidKit"
 				{
 					_container = uniformContainer player;
-					if !(player canAddItemToUniform (_x select 0)) then
+					if !(_container canAdd (_x select 0)) then
 					{
 						_container = _uniformHolder;
 					};
@@ -466,7 +466,7 @@ storePurchaseHandle = _this spawn
 				} forEach _magazines;
 				{
 					if !(_x isKindOf ["CA_Magazine", configfile >> "CfgMagazines"]) then {
-						if (player canAddItemToUniform _x) then {
+						if (uniformContainer player canAdd _x) then {
 							player addItemToUniform _x;
 						} else {
 							_uniformHolder addItemCargoGlobal [_x, 1]; 
@@ -513,7 +513,7 @@ storePurchaseHandle = _this spawn
 				player addVest _class;
 				{
 					_container = vestContainer player;
-					if !(player canAddItemToVest (_x select 0)) then
+					if !(_container canAdd (_x select 0)) then
 					{
 						_container = _vestHolder;
 					};
@@ -521,7 +521,7 @@ storePurchaseHandle = _this spawn
 				} forEach _magazines;
 				{
 					if !(_x isKindOf ["CA_Magazine", configfile >> "CfgMagazines"]) then {
-						if (player canAddItemToVest _x) then {
+						if (vestContainer player canAdd _x) then {
 							player addItemToVest _x;
 						} else {
 							_vestHolder addItemCargoGlobal [_x, 1]; 
@@ -562,7 +562,7 @@ storePurchaseHandle = _this spawn
 				player addBackpack _class;
 				{
 					_container = backpackContainer player;
-					if (!(player canAddItemToBackpack (_x select 0))) then
+					if !(_container canAdd (_x select 0)) then
 					{
 						_container = _backpackHolder;
 					};
@@ -570,7 +570,7 @@ storePurchaseHandle = _this spawn
 				} forEach _magazines;
 				{
 					if !(_x isKindOf ["CA_Magazine", configfile >> "CfgMagazines"]) then {
-						if (player canAddItemToBackpack _x) then {
+						if (backpackContainer player canAdd _x) then {
 							player addItemToBackpack _x;
 						} else {
 							_backpackHolder addItemCargoGlobal [_x, 1]; 
