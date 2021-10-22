@@ -17,6 +17,11 @@ private _crewCount = {round getNumber (_x >> "dontCreateAI") < 1 &&
 private _crewNotReady = {alive _uav && {alive _x && !isPlayer _x} count crew _uav < _crewCount};
 private "_time";
 
+_uav setVehicleReportRemoteTargets true;
+_uav setVehicleReceiveRemoteTargets true;
+_uav setVehicleReportOwnPosition true;
+_uav setVehicleRadar 1;
+
 while _crewNotReady do // bruteforce that shit up because createVehicleCrew is slow and unreliable
 {
 	if (_skipCreate) then { _skipCreate = false } else { createVehicleCrew _uav };

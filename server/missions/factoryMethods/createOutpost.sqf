@@ -37,6 +37,7 @@ _objs = [];
 	_special = "NONE";
 	if (_class == "Land_HBarrier_3_F") then { _special = "CAN_COLLIDE" };
 	_obj = createVehicle [_class, _finalPos, [], 0, _special];
+	_obj allowDamage false;
 	_obj setDir (_dir + _relDir);
 	_obj setPos _finalPos;
 	_obj setPosATL _finalPos;
@@ -44,6 +45,7 @@ _objs = [];
 
 	_obj setVariable ["R3F_LOG_disabled", true, true];
 	[_obj] call basePartSetup;
+	_obj allowDamage true;
 	_objs pushBack _obj;
 } forEach _objList;
 

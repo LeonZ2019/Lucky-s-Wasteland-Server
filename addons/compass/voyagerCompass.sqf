@@ -30,7 +30,6 @@ fnc_saveSettings =
   profileNamespace setVariable ["nc_settings",[_ncX,_ncY,_ncW,_ncSpan,_ncType,_ncFontSize,_ncAlpha,_ncAlphaNr,_ncFontOption,_ncInvert,_ncShadow,_ncMarkerVisibility,_ncMarkerY,_ncFontOptionNr,_ncColorNr,_ncTypeNr,_ncColorCustom,_ncColor]];
   saveProfileNamespace;
 
-  systemchat "saving complete";
 };
 
 fnc_showSettings =
@@ -379,7 +378,6 @@ fnc_showCompass =
 				  currentMarkers pushBack _x;
 				  combMarkers pushBack [_idc, _x];
 				//};
-				systemChat format ["created: %1", _x];
 			};
 		} forEach allUserMarkers;
 		///

@@ -8,7 +8,7 @@ class EditorData
 	toggles=577;
 	class ItemIDProvider
 	{
-		nextID=3062;
+		nextID=3068;
 	};
 	class MarkerIDProvider
 	{
@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=269;
+		nextID=271;
 	};
 	class Camera
 	{
-		pos[]={15193.106,80.95195,14048.78};
-		dir[]={-0.67921162,-0.48218545,0.5533281};
-		up[]={-0.3738358,0.87606752,0.30454937};
-		aside[]={0.63160288,-1.1270458e-007,0.7752943};
+		pos[]={5736.6895,263.86032,20115.637};
+		dir[]={0.56783068,-0.66919762,-0.4793888};
+		up[]={0.51135343,0.74306458,-0.43170786};
+		aside[]={-0.64511484,-6.1004539e-007,-0.76413363};
 	};
 };
 binarizationWanted=0;
@@ -236,7 +236,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=598;
+		items=599;
 		class Item0
 		{
 			dataType="Group";
@@ -5720,7 +5720,7 @@ class Mission
 			name="VanillaLayer";
 			class Entities
 			{
-				items=38;
+				items=42;
 				class Item0
 				{
 					dataType="Marker";
@@ -6271,9 +6271,85 @@ class Mission
 					id=2911;
 					atlOffset=0.0087127686;
 				};
+				class Item38
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={5129.0073,61.581627,11406.189};
+						angles[]={6.2259207,6.2438631,6.2538638};
+					};
+					side="Empty";
+					flags=4;
+					class Attributes
+					{
+						init="[this, true] call A3W_fnc_setupResupplyTruck";
+						name="ResupplyTruck11";
+						textures="Orange";
+					};
+					id=3062;
+					type="C_Truck_02_box_F";
+				};
+				class Item39
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={9664.8945,115.39965,15908.403};
+						angles[]={0.030665435,1.5498873,6.2618575};
+					};
+					side="Empty";
+					flags=4;
+					class Attributes
+					{
+						init="[this, true] call A3W_fnc_setupResupplyTruck";
+						name="ResupplyTruck10";
+						textures="Orange";
+					};
+					id=3063;
+					type="C_Truck_02_box_F";
+				};
+				class Item40
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={19337.912,33.991051,13359.659};
+						angles[]={0.030647982,2.6834962,0.016004669};
+					};
+					side="Empty";
+					flags=4;
+					class Attributes
+					{
+						init="[this, true] call A3W_fnc_setupResupplyTruck";
+						name="ResupplyTruck12";
+						textures="Orange";
+					};
+					id=3064;
+					type="C_Truck_02_box_F";
+				};
+				class Item41
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={5792.1807,225.59229,20089.488};
+						angles[]={0.0066671576,1.692533,0.049288094};
+					};
+					side="Empty";
+					flags=4;
+					class Attributes
+					{
+						init="[this, true] call A3W_fnc_setupResupplyTruck";
+						name="ResupplyTruck13";
+						textures="Orange";
+					};
+					id=3067;
+					type="C_Truck_02_box_F";
+				};
 			};
 			id=415;
-			atlOffset=-108.91914;
+			atlOffset=49.673622;
 		};
 		class Item257
 		{
@@ -7233,7 +7309,6 @@ class Mission
 					};
 					id=2043;
 					type="C_man_1_1_F";
-					atlOffset=0.21434593;
 					class CustomAttributes
 					{
 						class Attribute0
@@ -7282,7 +7357,6 @@ class Mission
 			{
 			};
 			id=2042;
-			atlOffset=0.21434593;
 		};
 		class Item329
 		{
@@ -18023,6 +18097,61 @@ class Mission
 					};
 				};
 				nAttributes=1;
+			};
+		};
+		class Item598
+		{
+			dataType="Logic";
+			class PositionInfo
+			{
+				position[]={19337.578,31.615519,13359.317};
+				angles[]={0.030656165,0,0.015998369};
+			};
+			areaSize[]={5,-1,5};
+			flags=1;
+			id=3066;
+			type="ModuleHideTerrainObjects_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="#filter";
+					expression="_this setVariable [""#filter"",_value]";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=15;
+						};
+					};
+				};
+				class Attribute1
+				{
+					property="#hideLocally";
+					expression="_this setVariable [""#hideLocally"",_value]";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				nAttributes=2;
 			};
 		};
 	};

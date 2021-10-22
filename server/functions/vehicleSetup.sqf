@@ -22,12 +22,6 @@ if !(_class isKindOf "AllVehicles") exitWith {}; // if not actual vehicle, finis
 
 clearBackpackCargoGlobal _vehicle;
 
-// Disable thermal on all manned vehicles
-if (!unitIsUAV _vehicle) then
-{
-	_vehicle disableTIEquipment true;
-};
-
 if ({_vehicle isKindOf _x} count ["StaticMGWeapon","StaticGrenadeLauncher","StaticMortar"] > 0) then
 {
 	_vehicle enableWeaponDisassembly false;

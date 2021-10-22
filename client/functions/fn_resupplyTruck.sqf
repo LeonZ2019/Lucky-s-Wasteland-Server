@@ -4,7 +4,7 @@
 //  @file Name: fn_resupplyTruck.sqf
 //  @file Author: Wiking, AgentRev, micovery
 
-#define RESUPPLY_TRUCK_DISTANCE (10 max (sizeOf typeOf _vehicle * 0.75)) // this must match the addAction condition in fn_setupResupplyTruck.sqf
+#define RESUPPLY_TRUCK_DISTANCE (15 max (sizeOf typeOf _vehicle * 1.25)) // this must match the addAction condition in fn_setupResupplyTruck.sqf
 #define REARM_TIME_SLICE 5
 #define REPAIR_TIME_SLICE 1
 #define REFUEL_TIME_SLICE 1
@@ -92,7 +92,7 @@ _resupplyThread = [_vehicle, _unit] spawn
 			};
 
 			// Abort if no resupply vehicle in proximity
-			_checkCondition = {{alive _x && {_x getVariable ["A3W_resupplyTruck", false]}} count (_vehicle nearEntities ["AllVehicles", RESUPPLY_TRUCK_DISTANCE]) == 0};
+			_checkCondition = {{alive _x && _x getVariable ["A3W_resupplyTruck", false]} count (_vehicle nearEntities [["AllVehicles", "ThingX"], RESUPPLY_TRUCK_DISTANCE]) == 0};
 			if (call _checkCondition) exitWith
 			{
 				_pauseText = "Move closer to a resupply vehicle.";

@@ -23,35 +23,38 @@ if (pselect5 != "exit") then
 {
 	_name = pselect5;
 	{
-	if (isPlayer _x && (name _x == _name)) then {
-		private ["_waterPos", "_oldVelocity", "_alt", "_top", "_buildings"];
-		_oldVelocity = velocity (vehicle player);
-		_alt = getPos (vehicle player) select 2;
-		_pos = position _x;
-		if (surfaceIsWater _pos) then
+		if (isPlayer _x && (name _x == _name)) then
 		{
-			_top = +_pos;
-			_top set [2, (_top select 2) + 1000];
-			_buildings = (lineIntersectsSurfaces [_top, _pos, objNull, objNull, true, -1, "GEOM", "NONE"]) select {(_x select 2) isKindOf "Building"};
-			if !(_buildings isEqualTo []) then
+			private ["_waterPos", "_oldVelocity", "_alt", "_top", "_buildings"];
+			if (vehicle _x != _x && vehicle player == player) then
 			{
-				_waterPos = _buildings select 0 select 0;
+				player moveInAny (vehicle _x);
+			} else
+			{
+				_oldVelocity = velocity (vehicle player);
+				_alt = getPos (vehicle player) select 2;
+				_pos = position _x;
+				if (surfaceIsWater _pos) then
+				{
+					_top = +_pos;
+					_top set [2, (_top select 2) + 1000];
+					_buildings = (lineIntersectsSurfaces [_top, _pos, objNull, objNull, true, -1, "GEOM", "NONE"]) select {(_x select 2) isKindOf "Building"};
+					if !(_buildings isEqualTo []) then
+					{
+						_waterPos = _buildings select 0 select 0;
+					};
+				};
+				if (isNil "_waterPos") then
+				{
+					_pos = _pos vectorAdd [0,0, (0 max _alt)];
+					vehicle player setPos _pos;
+				} else
+				{
+					_waterPos = _waterPos vectorAdd [0,0, (0 max _alt)];
+					vehicle player setPosASL _waterPos;
+				};
+				vehicle player setVelocity _oldVelocity;
 			};
 		};
-		if (isNil "_waterPos") then {
-			_pos = _pos vectorAdd [0,0, (0 max _alt)];
-			(vehicle player) setPos _pos;
-		} else
-		{
-			_waterPos = _waterPos vectorAdd [0,0, (0 max _alt)];
-			(vehicle player) setPosASL _waterPos;
-		};
-		if (vehicle _x != _x && vehicle player == player) then
-		{
-			player moveInAny (vehicle _x);
-		} else {
-			(vehicle player) setVelocity _oldVelocity;
-		};
-	}
 	} forEach playableUnits;
 };

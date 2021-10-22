@@ -639,7 +639,7 @@ call mf_compile;
 
 FAR_Transfer_Box =
 {
-	private ["_target", "_box", "_headgear", "_goggles", "_binocular", "_hmd", "_assignedItems", "_uniform", "_vest", "_backpack" , "_ammo", "_items", "_weaponHolder", "_weaponsItems"];
+	private ["_target", "_box", "_headgear", "_goggles", "_binocular", "_hmd", "_assignedItems", "_uniform", "_vest", "_backpack" , "_ammo", "_items", "_weaponHolder", "_weaponsItems", "_deleteObjects"];
 	_target = _this select 0;
 
 	_headgear = headgear _target;
@@ -653,7 +653,9 @@ FAR_Transfer_Box =
 	_ammo = magazinesAmmo _target;
 	_items = items _target;
 	_weaponHolder = nearestObjects [position _target, ["WeaponHolderSimulated"], 5];
-	{ deleteVehicle _x } forEach [_target, _weaponHolder];
+	_deleteObjects = _weaponHolder;
+	_deleteObjects pushBack _target;
+	{ deleteVehicle _x } forEach _deleteObjects;
 
 	_box = createVehicle ["Box_AAF_Equip_F", getPos _target, [], 0, "NONE"];
 	clearMagazineCargoGlobal _box;

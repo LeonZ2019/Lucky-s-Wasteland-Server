@@ -92,7 +92,7 @@ else
 					};
 					sleep 4;
 
-					_turrets  = [
+					_turrets = [
 						["B_Radar_System_01_F", [0,0.8,0.7]],
 						["O_Radar_System_02_F",[0,1.2,1.2]],
 						["B_SAM_System_03_F", [0,0.8,1.5]],

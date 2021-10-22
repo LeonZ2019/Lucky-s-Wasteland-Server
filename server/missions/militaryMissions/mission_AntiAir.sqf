@@ -6,7 +6,7 @@
 if (!isServer) exitwith {};
 #include "militaryMissionDefines.sqf";
 
-private [ "_markerDir", "_baseToDelete", "_boxTypes", "_box2Type", "_box1", "_box2", "_outpost", "_objects", "_antiAirVehicles"];
+private [ "_markerDir", "_baseToDelete", "_boxTypes", "_box2Type", "_box1", "_box2", "_outpost", "_objects", "_antiAirVehicles", "_soldier"];
 
 _setupVars =
 {
@@ -31,7 +31,7 @@ _setupObjects =
 	_box1 = createVehicle ["Box_NATO_Wps_F", _missionPos, [], 5, "None"];
 	_box1 setDir random 360;
 	[_box1, _box1Type] call fn_refillbox;
-
+	_box1 addItemCargoGlobal ["FileTopSecret", 1];
 	_box2Type = _boxTypes call BIS_fnc_selectRandom;
 	_box2 = createVehicle ["Box_NATO_Wps_F", _missionPos, [], 5, "None"];
 	_box2 setDir random 360;
@@ -44,6 +44,12 @@ _setupObjects =
 		_x setVariable ["R3F_LOG_disabled", true, true];
 		if (typeOf _x in _antiAirVehicles) then
 		{
+			if (!(_x isKindOf "StaticWeapon") && _x isKindOf "LandVehicle") then
+			{
+				_soldier = [_aiGroup, _missionPos] call createRandomPolice;
+				_aiGroup addVehicle _x;
+				_soldier moveInGunner _x;
+			};
 			[_x, _aiGroup] spawn checkMissionVehicleLock;
 			_x setUnloadInCombat [false, false];
 		};

@@ -29,6 +29,13 @@ switch (true) do
 	{
 		_variables pushBack ["water", _obj getVariable ["water", 20]];
 	};
+	case (_obj isKindOf "Land_Cargo10_red_F"):
+	{
+		if (_obj getVariable ["resupplyObject", false]) then
+		{
+			_variables pushBack ["resupplyObject", true];
+		};
+	};
 };
 
 private _artiCount = [_obj getVariable "artillery"] param [0,0,[0]];

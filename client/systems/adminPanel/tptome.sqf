@@ -23,35 +23,38 @@ if (pselect5 != "exit") then
 {
 	_name = pselect5;
 	{
-	if (isPlayer _x && (name _x == _name)) then {
-		private ["_waterPos", "_oldVelocity", "_alt", "_top", "_buildings"];
-		_oldVelocity = velocity (vehicle _x);
-		_alt = getPos (vehicle _x) select 2;
-		_pos = position player;
-		if (surfaceIsWater _pos) then
+		if (isPlayer _x && (name _x == _name)) then 
 		{
-			_top = +_pos;
-			_top set [2, (_top select 2) + 1000];
-			_buildings = (lineIntersectsSurfaces [_top, _pos, objNull, objNull, true, -1, "GEOM", "NONE"]) select {(_x select 2) isKindOf "Building"};
-			if !(_buildings isEqualTo []) then
+			private ["_waterPos", "_oldVelocity", "_alt", "_top", "_buildings"];
+			if (vehicle player != player && vehicle _x == _x) then
 			{
-				_waterPos = _buildings select 0 select 0;
+				_x moveInAny (vehicle player);
+			} else
+			{
+				_oldVelocity = velocity (vehicle _x);
+				_alt = getPos (vehicle _x) select 2;
+				_pos = position player;
+				if (surfaceIsWater _pos) then
+				{
+					_top = +_pos;
+					_top set [2, (_top select 2) + 1000];
+					_buildings = (lineIntersectsSurfaces [_top, _pos, objNull, objNull, true, -1, "GEOM", "NONE"]) select {(_x select 2) isKindOf "Building"};
+					if !(_buildings isEqualTo []) then
+					{
+						_waterPos = _buildings select 0 select 0;
+					};
+				};
+				if (isNil "_waterPos") then
+				{
+					_pos = _pos vectorAdd [0,0, (0 max _alt)];
+					vehicle _x setPos _pos;
+				} else
+				{
+					_waterPos = _waterPos vectorAdd [0,0, (0 max _alt)];
+					vehicle _x setPosASL _waterPos;
+				};
+				vehicle _x setVelocity _oldVelocity;
 			};
 		};
-		if (isNil "_waterPos") then {
-			_pos = _pos vectorAdd [0,0, (0 max _alt)];
-			(vehicle _x) setPos _pos;
-		} else
-		{
-			_waterPos = _waterPos vectorAdd [0,0, (0 max _alt)];
-			(vehicle _x) setPosASL _waterPos;
-		};
-		if (vehicle player != player && vehicle _x == _x) then
-		{
-			_x moveInAny (vehicle player);
-		} else {
-			(vehicle _x) setVelocity _oldVelocity;
-		};
-	}
 	} forEach playableUnits;
 };

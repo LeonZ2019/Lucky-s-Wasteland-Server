@@ -15,10 +15,10 @@ private ["_suspect", "_mags", "_path", "_magAmmo", "_magAmmoExpl"];
 
 {
 	_suspect = _x select 0;
-	_path = if (isManualFire _vehicle && effectiveCommander _vehicle == _suspect) then {
-		(fullCrew [_vehicle, "gunner", true]) param [0,[]] param [3,[0]]
-	} else {
-		_x select 3
+	_path = _x select 3;
+	if (count _path == 0) then
+	{
+		_path = (fullCrew [_vehicle, "gunner", true]) param [0,[]] param [3,[0]];
 	};
 
 	_mags = _vehicle magazinesTurret _path;

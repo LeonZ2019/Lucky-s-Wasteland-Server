@@ -346,7 +346,8 @@ R3F_LOG_CFG_objets_transportables =
 	["Land_LifeguardTower_01_F", 6],
 	["Land_SandbagBarricade_01_half_F", 2],
 	["Land_SandbagBarricade_01_hole_F", 3],
-	["Land_SandbagBarricade_01_F", 3]
+	["Land_SandbagBarricade_01_F", 3],
+	["Land_Cargo10_red_F", 5]
 ];
 
 /****** MOVABLE-BY-PLAYER OBJECTS / OBJETS DEPLACABLES PAR LE JOUEUR ******/
@@ -484,5 +485,6 @@ R3F_LOG_CFG_objets_deplacables =
 	"Land_LifeguardTower_01_F",
 	"Land_SandbagBarricade_01_half_F",
 	"Land_SandbagBarricade_01_hole_F",
-	"Land_SandbagBarricade_01_F"
+	"Land_SandbagBarricade_01_F",
+	"Land_Cargo10_red_F"
 ];

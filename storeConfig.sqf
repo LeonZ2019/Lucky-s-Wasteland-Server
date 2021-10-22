@@ -1237,7 +1237,8 @@ genItemArray = compileFinal str
 	["Map", "ItemMap", 10, "map"],
 	["Radio", "ItemRadio", 10, "radio"],
 	["Compass", "ItemCompass", 10, "compass"],
-	["Watch", "ItemWatch", 10, "watch"]
+	["Watch", "ItemWatch", 10, "watch"],
+	["File (Top Secret)", "FileTopSecret", 25000, "item", "HIDDEN"]
 ];
 
 #define GENSTORE_ITEM_PRICE(CLASS) ((call genItemArray) select {_x select 1 == CLASS} select 0 select 2)
@@ -1249,6 +1250,7 @@ allStoreGear = compileFinal str (call headArray + call uniformArray + call vestA
 genObjectsArray = compileFinal str
 [
 	["Ammo Cache", "Box_FIA_Support_F", 250, "ammocrate"],
+	["Container (Resupply Crate)", "Land_Cargo10_red_F", 4000, "resupplyObject"],
 	["Boom Gate", "Land_BarGate_F", 150, "object"],
 	["Decon Shower (Large)	", "DeconShower_02_F", 200, "object"],
 	["Razor Fence (Gate)", "Land_Mil_WiredFence_Gate_F", 200, "object"],

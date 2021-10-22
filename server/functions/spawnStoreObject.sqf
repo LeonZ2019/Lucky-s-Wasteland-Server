@@ -335,6 +335,11 @@ if (_key != "" && _player isKindOf "Man" && {_isGenStore || _isGunStore || _isVe
 			{
 				_object setVariable ["water", 50, true];
 			};
+			if (typeOf _object == "Land_Cargo10_red_F") then
+			{
+				_object setVariable ["resupplyObject", true, true];
+				[_object, false] call A3W_fnc_setupResupplyTruck;
+			};
 		};
 	};
 };

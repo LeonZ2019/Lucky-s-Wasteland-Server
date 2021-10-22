@@ -66,6 +66,7 @@ while {true} do
 				{!alive (_objet_pointe getVariable "R3F_LOG_est_deplace_par")} &&
 				{isNull (_objet_pointe getVariable "R3F_LOG_est_transporte_par")} &&
 				VEHICLE_UNLOCKED(_objet_pointe) &&
+				UAVControl getConnectedUAV player select 1 == "" &&
 				{!(_objet_pointe getVariable "R3F_LOG_disabled")};
 		};
 
@@ -81,11 +82,13 @@ while {true} do
 				{!alive (_objet_pointe getVariable "R3F_LOG_est_deplace_par")} &&
 				VEHICLE_UNLOCKED(_objet_pointe) &&
 				{!(_objet_pointe getVariable "R3F_LOG_disabled")} &&
+				UAVControl getConnectedUAV player select 1 == "" &&
 				{_objet_pointe call _hasNoProhibitedCargo};
 
 			// Condition action detacher
 			R3F_LOG_action_detacher_valide =
 				isNull R3F_LOG_joueur_deplace_objet &&
+				UAVControl getConnectedUAV player select 1 == "" &&
 				{!isNull (_objet_pointe getVariable "R3F_LOG_est_transporte_par") && {VEHICLE_UNLOCKED(_objet_pointe getVariable "R3F_LOG_est_transporte_par")}} &&
 				{!(_objet_pointe getVariable "R3F_LOG_disabled")};
 
@@ -135,6 +138,7 @@ while {true} do
 						{!(_x getVariable "R3F_LOG_disabled")}
 					} count nearestObjects [_objet_pointe, R3F_LOG_classes_transporteurs, 18] > 0} &&
 					VEHICLE_UNLOCKED(_objet_pointe) &&
+					UAVControl getConnectedUAV player select 1 == "" &&
 					{!(_objet_pointe getVariable ["Mission_AirdropOnly", false])} &&
 					{!(_objet_pointe getVariable "R3F_LOG_disabled")};
 			};
@@ -148,6 +152,7 @@ while {true} do
 				{isNull (_objet_pointe getVariable "R3F_LOG_est_transporte_par")} &&
 				{!alive (_objet_pointe getVariable "R3F_LOG_est_deplace_par")} &&
 				VEHICLE_UNLOCKED(_objet_pointe) &&
+				UAVControl getConnectedUAV player select 1 == "" &&
 				{!(_objet_pointe getVariable ["Mission_AirdropOnly", false])} &&
 				{!(_objet_pointe getVariable "R3F_LOG_disabled")};
 		};
@@ -228,6 +233,7 @@ while {true} do
 				{vectorMagnitude velocity _objet_pointe < 6} &&
 				{(getPos _objet_pointe) select 2 < 2} &&
 				VEHICLE_UNLOCKED(_objet_pointe) &&
+				UAVControl getConnectedUAV player select 1 == "" &&
 				{!(_objet_pointe getVariable "R3F_LOG_disabled")};
 
 			// Install valid, mainly will check for target class and install type

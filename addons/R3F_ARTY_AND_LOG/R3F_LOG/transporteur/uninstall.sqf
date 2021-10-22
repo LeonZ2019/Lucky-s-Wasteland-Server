@@ -51,7 +51,7 @@ else
 							["C_Offroad_01_F",[1,2,3,4]],
 							["C_Van_01_transport_F",[2,3,4,5,6,7,8,9,10,11]]
 						];
-						_cargo = _cargos select (_cargos findIf {_x select 0 == _class});
+						_cargo = _cargos select (_cargos findIf {_x select 0 == (typeOf _vehicle)});
 						{ _vehicle lockCargo [_x, false]; } forEach _cargo;
 					};
 					_vehicle setVariable ["R3F_LOG_transport_uninstalling", false, true];

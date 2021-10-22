@@ -101,7 +101,6 @@ _successExec =
 	_vehicle = ["C_Offroad_01_F", _offroadPos] call createMissionVehicle;
 	[_vehicle, 1] call A3W_fnc_setLockState;
 	_vehicle setDIr (_roadDir + 90);
-	// _vehicle call fn_refilltruck;
 
 	for "_i" from 1 to 5 do
 	{

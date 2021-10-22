@@ -5,7 +5,7 @@
 //	@file Author: AgentRev
 
 params ["_veh"];
-
+private ["_engine1", "_engine2", "_items", "_dimension_max", "_safePos", "_isLifting", "_airdrop", "_isInstalled", "_isInstalledOn", "_installed", "_transport", "_cargos", "_cargo"];
 if (local _veh) then
 {
 	_engine1 = _veh getHitPointDamage "HitEngine";
@@ -42,22 +42,6 @@ if (local _veh) then
 			} forEach _items;
 			_veh setVariable ["R3F_LOG_objets_charges", [], true];
 		};
-		/*_isTowing = _veh getVariable ["R3F_LOG_remorque", objNull];
-		if (!isNull _isTowing) then
-		{
-			_veh setVariable ["R3F_LOG_remorque", objNull, true];
-			_isTowing setVariable ["R3F_LOG_est_transporte_par", objNull, true];
-
-			["enableDriving", _isTowing] call A3W_fnc_towingHelper;
-			if (local _isTowing) then
-			{
-				[_isTowing] call detachTowedObject;
-			} else
-			{
-				pvar_detachTowedObject = [netId _isTowing];
-				publicVariable "pvar_detachTowedObject";
-			};
-		};*/
 		_isLifting = _veh getVariable "R3F_LOG_heliporte";
 		if (!isNull _isLifting) then
 		{
@@ -77,6 +61,43 @@ if (local _veh) then
 			{
 				pvar_detachTowedObject = [netId _isLifting, _airdrop];
 				publicVariable "pvar_detachTowedObject";
+			};
+		};
+		_isInstalled = _veh getVariable ["R3F_LOG_installed_object", objNull];
+		_isInstalledOn = _veh getVariable ["R3F_LOG_transport_installed", objNull];
+		if (!(isNull _isInstalled) || !(isNull _isInstalledOn)) then
+		{
+			_installed = if (!isNull _isInstalled) then { _isInstalled } else { _veh };
+			_transport = if (!isNull _isInstalled) then { _veh } else { _isInstalledOn };
+			_transport setVariable ["R3F_LOG_installed_object", objNull, true];
+			_installed setVariable ["R3F_LOG_transport_installed", objNull, true];
+			_dimension_max = (((boundingBox _installed select 1 select 1) max (-(boundingBox _installed select 0 select 1))) max ((boundingBox _installed select 1 select 0) max (-(boundingBox _installed select 0 select 0))));
+			_safePos = [
+				(getPos _transport select 0) - ((_dimension_max+5+(random 10)-(boundingBox _transport select 0 select 1))*sin (getDir _transport - 90+random 180)),
+				(getPos _transport select 1) - ((_dimension_max+5+(random 10)-(boundingBox _transport select 0 select 1))*cos (getDir _transport - 90+random 180)),
+				0
+			];
+			_texture = _installed getVariable "R3F_Install_texture";
+			if (!isNil "_texture") then
+			{
+				_installed setObjectTextureGlobal [0, _texture];
+			};
+			detach _installed;
+			_installed setPos _safePos;
+			if (typeOf _transport in ["B_Truck_01_cargo_F", "B_Truck_01_flatbed_F"]) then
+			{
+				_transport enableVehicleCargo true;
+			} else
+			{
+				_cargos = [
+					["B_Truck_01_transport_F",[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]],
+					["O_Truck_03_transport_F",[1,2,3,4,5,6,7,8,9,10,11,12]],
+					["I_Truck_02_transport_F",[2,3,4,5,6,7,8,9,10,11,12,13,14,15]],
+					["C_Offroad_01_F",[1,2,3,4]],
+					["C_Van_01_transport_F",[2,3,4,5,6,7,8,9,10,11]]
+				];
+				_cargo = _cargos select (_cargos findIf {_x select 0 == (typeOf _transport)});
+				{ _transport lockCargo [_x, false]; } forEach _cargo;
 			};
 		};
 	};
