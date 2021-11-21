@@ -130,6 +130,10 @@ _exclObjectIDs = [];
 						_uavAuto = _value;
 					};
 				};
+				case "resupplyObject":
+				{
+					[_obj] remoteExecCall ["A3W_fnc_setupResupplyTruck", 0, _obj];
+				};
 			};
 
 			_obj setVariable [_var, _value, true];

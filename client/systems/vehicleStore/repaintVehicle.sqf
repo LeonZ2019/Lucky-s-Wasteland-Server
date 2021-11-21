@@ -24,6 +24,7 @@ if (isNull _vehicle) exitWith
 
 _type = typeOf _vehicle;
 _objName = getText (configFile >> "CfgVehicles" >> _type >> "displayName");
+_isAntiAir = _type in ["B_SAM_System_02_F", "B_SAM_System_01_F", "B_AAA_System_01_F", "B_Radar_System_01_F", "B_SAM_System_03_F", "O_Radar_System_02_F", "O_SAM_System_04_F", "B_Ship_MRLS_01_F", "B_Ship_Gun_01_F"];
 
 _checkAlive =
 {
@@ -51,10 +52,26 @@ _checkValidOwnership =
 {
 	if (!local _vehicle) then
 	{
-		playSound "FD_CP_Not_Clear_F";
-		[format ['You are not the owner of "%1", try getting in the driver seat.', _objName], "Error"] spawn BIS_fnc_guiMessage;
-		_dialog closeDisplay 2;
-		false
+		if (_isAntiAir) then
+		{
+			_currUAV = getConnectedUAV player;
+			if (_currUAV == _vehicle) then
+			{
+				true
+			} else
+			{
+				playSound "FD_CP_Not_Clear_F";
+				[format ['You are not connected to "%1", try connect it.', _objName], "Error"] spawn BIS_fnc_guiMessage;
+				_dialog closeDisplay 2;
+				false
+			};
+		} else
+		{
+			playSound "FD_CP_Not_Clear_F";
+			[format ['You are not the owner of "%1", try getting in the driver seat.', _objName], "Error"] spawn BIS_fnc_guiMessage;
+			_dialog closeDisplay 2;
+			false
+		};
 	} else { true };
 };
 

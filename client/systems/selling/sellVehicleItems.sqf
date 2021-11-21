@@ -34,11 +34,28 @@ storeSellingHandle = _this spawn
 
 	_checkValidOwnership =
 	{
-		if (!local _veh) then
+		if (!local _vehicle) then
 		{
-			playSound "FD_CP_Not_Clear_F";
-			[format ['You are not the owner of "%1", try getting in the driver seat.', _objName], "Error"] call  BIS_fnc_guiMessage;
-			false
+			if (_isAntiAir) then
+			{
+				_currUAV = getConnectedUAV player;
+				if (_currUAV == _vehicle) then
+				{
+					true
+				} else
+				{
+					playSound "FD_CP_Not_Clear_F";
+					[format ['You are not connected to "%1", try connect it.', _objName], "Error"] spawn BIS_fnc_guiMessage;
+					_dialog closeDisplay 2;
+					false
+				};
+			} else
+			{
+				playSound "FD_CP_Not_Clear_F";
+				[format ['You are not the owner of "%1", try getting in the driver seat.', _objName], "Error"] spawn BIS_fnc_guiMessage;
+				_dialog closeDisplay 2;
+				false
+			};
 		} else { true };
 	};
 

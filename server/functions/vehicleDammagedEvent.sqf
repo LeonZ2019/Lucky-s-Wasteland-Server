@@ -18,7 +18,8 @@ if (local _veh) then
 	if (!alive _veh) then
 	{
 		_items = _veh getVariable "R3F_LOG_objets_charges";
-		if (count _items > 0) then {
+		if (count _items > 0) then
+		{
 			{
 				if (!isNull attachedTo _x) then
 				{

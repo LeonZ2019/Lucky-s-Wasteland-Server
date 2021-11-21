@@ -42,6 +42,11 @@ switch (true) do
 		_obj addItemCargoGlobal ["Medikit", 4];
 		_obj addItemCargoGlobal ["ToolKit", 2];
 	};
+	case (_objClass isKindOf "Land_Cargo10_red_F"):
+	{
+		_obj setVariable ["resupplyObject", true, true];
+		[_obj] remoteExecCall ["A3W_fnc_setupResupplyTruck", 0, _obj];
+	};
 	default
 	{
 		_allowDamage = true;

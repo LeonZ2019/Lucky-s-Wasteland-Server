@@ -79,29 +79,7 @@ else
 			};
 		};
 		case "Goggles": { if (_value != "") then { player addGoggles _value } };
-		case "Headgear":
-		{
-			// If wearing one of the default headgears, give the one belonging to actual team instead
-			if (_value != "") then
-			{
-				_defHeadgear = [player, "headgear"] call getDefaultClothing;
-				_defHeadgears =
-				[
-					[typeOf player, "headgear", BLUFOR] call getDefaultClothing,
-					[typeOf player, "headgear", OPFOR] call getDefaultClothing,
-					[typeOf player, "headgear", INDEPENDENT] call getDefaultClothing
-				];
-
-				if (_value != _defHeadgear && {_defHeadgear != ""} && {{_value == _x} count _defHeadgears > 0}) then
-				{
-					player addHeadgear _defHeadgear;
-				}
-				else
-				{
-					player addHeadgear _value;
-				};
-			};
-		};
+		case "Headgear": { if (_value != "") then { player addHeadgear _value } };
 		case "LoadedMagazines":
 		{
 			player addBackpack "B_Carryall_Base"; // temporary backpack to hold mags

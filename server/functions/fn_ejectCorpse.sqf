@@ -27,7 +27,7 @@ waitUntil
 if (!INVALID_CORPSE) then
 {
 	_targetPos = getPosWorld _veh;
-	_targetPos set [2, (_corpse modelToWorld [0,0,0]) select 2];
+	_targetPos set [2, ((_corpse modelToWorld [0,0,0]) select 2) + 5];
 
 	if (_veh != _corpse && damage _veh > 0.99) then
 	{

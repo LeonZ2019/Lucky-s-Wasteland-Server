@@ -7,7 +7,7 @@
 #define LAYER 85125
 private ["_launchers", "_vehicles", "_turrets", "_currWep", "_currVeh", "_currUAV", "_role"];
 
-_launchers = ["launch_Titan_short_base", "launch_Titan_F", "launch_O_Titan_F", "launch_I_Titan_F", "launch_B_Titan_F", "Laserdesignator"];
+_launchers = ["launch_Titan_short_base", "launch_Titan_F", "launch_O_Titan_F", "launch_I_Titan_F", "launch_B_Titan_F", "Laserdesignator", "launch_Vorona_base_F"];
 _vehicles = ["HMG_01_base_F", "GMG_01_base_F", "AA_01_base_F", "AT_01_base_F", "GMG_01_A_base_F", "HMG_01_A_base_F", "LT_01_base_F", "LSV_02_AT_base_F", "LSV_01_armed_base_F", "LSV_01_AT_base_F", "MRAP_01_base_F", "MRAP_02_base_F", "MRAP_03_base_F", "AFV_Wheeled_01_base_F", "APC_Wheeled_01_base_F", "APC_Wheeled_02_base_F", "APC_Wheeled_03_base_F", "APC_Tracked_01_base_F", "APC_Tracked_01_base_F", "APC_Tracked_02_base_F", "APC_Tracked_03_base_F", "MBT_01_base_F", "MBT_02_base_F", "MBT_03_base_F", "MBT_04_base_F", "Heli_Attack_01_base_F", "Heli_Attack_02_base_F", "Heli_light_03_base_F", "Plane_CAS_01_base_F", "Plane_CAS_02_base_F", "Plane_Fighter_01_Base_F", "Plane_Fighter_02_Base_F", "Plane_Fighter_03_base_F", "Plane_Fighter_04_Base_F", "VTOL_01_base_F", "VTOL_02_base_F"];
 _turrets = ["UGV_01_rcws_base_F", "UAV_01_base_F", "UAV_02_base_F", "UAV_03_base_F", "UAV_04_base_F", "UAV_05_Base_F", "SAM_System_01_base_F", "SAM_System_02_base_F", "SAM_System_03_base_F", "SAM_System_04_base_F", "AAA_System_01_base_F", "B_Ship_Gun_01_base_F", "B_Ship_MRLS_01_base_F"];
 

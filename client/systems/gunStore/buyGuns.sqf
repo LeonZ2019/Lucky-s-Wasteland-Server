@@ -160,13 +160,62 @@ storePurchaseHandle = _this spawn
 						{
 							case "item":
 							{
-								if ([player, _class] call fn_fitsInventory) then
+								_weaponClass = lbData [gunshop_WeaponFilterDropdown_IDC, lbCurSel gunshop_WeaponFilterDropdown_IDC];
+								if (isNil "_weaponClass") then
 								{
-									[player, _class] call fn_forceAddItem;
-								}
-								else
+									if ([player, _class] call fn_fitsInventory) then
+									{
+										[player, _class] call fn_forceAddItem;
+									}
+									else
+									{
+										[_itemText] call _showInsufficientSpaceError;
+									};
+								} else
 								{
-									[_itemText] call _showInsufficientSpaceError;
+									_weaponAccessory = player weaponAccessories _weaponClass;
+									if (["muzzle", _class] call fn_startsWith) then
+									{
+										_weaponAccessory = _weaponAccessory select 0;
+									} else {
+										if (["bipod", _class] call fn_startsWith) then
+										{
+										_weaponAccessory = _weaponAccessory select 3;
+										} else {
+											if (["optic", _class] call fn_startsWith) then
+											{
+												_weaponAccessory = _weaponAccessory select 2;
+											} else {
+												if (["acc", _class] call fn_startsWith) then
+												{
+													_weaponAccessory = _weaponAccessory select 1;
+												};
+											};
+										};
+									};
+									if (_weaponAccessory == "") then
+									{
+										if (player addWeaponItem [_weaponClass, _class, true] == false) then
+										{
+											if ([player, _class] call fn_fitsInventory) then
+											{
+												[player, _class] call fn_forceAddItem;
+											}
+											else
+											{
+												[_itemText] call _showInsufficientSpaceError;
+											};
+										};
+									} else {
+										if ([player, _class] call fn_fitsInventory) then
+										{
+											[player, _class] call fn_forceAddItem;
+										}
+										else
+										{
+											[_itemText] call _showInsufficientSpaceError;
+										};
+									};
 								};
 							};
 						};
