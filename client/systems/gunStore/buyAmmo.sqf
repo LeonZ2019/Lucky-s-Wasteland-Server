@@ -68,14 +68,73 @@ storePurchaseHandle = _this spawn
 					{
 						[_itemText] call _showInsufficientFundsError;
 					};
-
-					if ([player, _class] call fn_fitsInventory) then
+					if (count (weaponsItems player) == 0) then
 					{
-						[player, _class] call fn_forceAddItem;
-					}
-					else
+						if ([player, _class] call fn_fitsInventory) then
+						{
+							[player, _class] call fn_forceAddItem;
+						} else
+						{
+							[_itemText] call _showInsufficientSpaceError;
+						};
+					} else
 					{
-						[_itemText] call _showInsufficientSpaceError;
+						_hasAdded = false;
+						{
+							_canAdd = [false, false];
+							{
+								switch (count (_x)) do
+								{
+									case 2: { if (_x select 1 == 0) then { _canAdd set [_forEachIndex, true] }};
+									case 0: { _canAdd set [_forEachIndex, true] };
+								};
+							} forEach [_x select 4, _x select 5];
+							_weapon = configFile >> "CfgWeapons" >> _x select 0;
+							_mainMags = [];
+							_secondMags = [];
+							{
+								if (_x == "this") then
+								{
+									_mainMags append getArray (_weapon >> "magazines");
+									{
+									{ _mainMags append getArray _x } forEach configProperties [configFile >> "CfgMagazineWells" >> _x, "isArray _x"];
+									} forEach getArray (_weapon >> "magazineWell");
+								} else
+								{
+									_secondMags append getArray (_weapon >> _x >> "magazines");
+									{
+									{ _secondMags append getArray _x } forEach configProperties [configFile >> "CfgMagazineWells" >> _x, "isArray _x"];
+									} forEach getArray (_weapon >> _x >> "magazineWell");
+								};
+							} forEach getArray (_weapon >> "muzzles");
+							if (_class in _mainMags) exitWith
+							{
+								if (_canAdd select 0) then
+								{
+									player addWeaponItem [_x select 0, _class, true];
+									_hasAdded = true;
+								};
+							};
+							if (_class in _secondMags) exitWith
+							{
+								if (_canAdd select 1) then
+								{
+									player addWeaponItem [_x select 0, _class, true];
+									_hasAdded = true;
+								};
+							};
+						} forEach (weaponsItems player);
+						if (!_hasAdded) then
+						{
+							if ([player, _class] call fn_fitsInventory) then
+							{
+								[player, _class] call fn_forceAddItem;
+							}
+							else
+							{
+								[_itemText] call _showInsufficientSpaceError;
+							};
+						};
 					};
 				}
 			} forEach (call ammoArray);

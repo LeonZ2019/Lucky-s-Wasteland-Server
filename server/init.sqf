@@ -182,6 +182,7 @@ if (isServer) then
 		"A3W_artilleryAmmo",
 		"A3W_territoryWarningIcons",
 		"A3W_disableBuiltInThermal",
+		"APOC_coolDownTimer",
 		"A3W_headshotNoRevive"
 	];
 

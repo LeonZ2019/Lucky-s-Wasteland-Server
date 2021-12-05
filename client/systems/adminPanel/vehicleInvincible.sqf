@@ -8,7 +8,7 @@ if (isDedicated) exitWith {};
 if ((getPlayerUID player) call isAdmin) then
 {
 	_veh = vehicle player;
-	if (_veh != player && local (_veh)) then
+	if (_veh != player) then
 	{
 		if !(player getVariable ["isAdminsVehicleInvincible", false]) then {
 			_veh setDamage 0;
@@ -19,14 +19,14 @@ if ((getPlayerUID player) call isAdmin) then
 			vehicleId = _veh addEventHandler ["GetOut", { // get the admin only, not everyone
 				if ((_this select 2) == player) then
 				{
-					(_this select 0) allowDamage true;
+					[_this select 0, true] remoteExec ["allowDamage", _this select 0];
 					player setVariable ["isAdminsVehicleInvincible", false, true];
 					hint "You have get out from vehicle, it is no longer invincible";
 				};
 			}];
 		} else
 		{
-			_veh allowDamage false;
+			[_veh, true] remoteExec ["allowDamage", _veh];
 			player setVariable ["isAdminsVehicleInvincible", false, true];
 			_veh removeEventHandler ["GetOut", vehicleId];
 			hint "Your vehicle are no longer invincible";

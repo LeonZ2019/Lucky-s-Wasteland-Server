@@ -172,7 +172,13 @@ if (_uid call isAdmin) then
 				case 8:
 				{
 					closeDialog 0;
-					call ps_access;
+					if (vehicle player == player) then
+					{
+						call ps_access;
+					} else
+					{
+						hint "Can't access storage while in vehicle";
+					};
 				};
 			};
 		};

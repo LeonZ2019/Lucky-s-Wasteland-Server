@@ -1474,23 +1474,23 @@ armoredArray = compileFinal str
 	["Prowler HMG", "B_T_LSV_01_armed_F", 6000, "vehicle"],
 	["Prowler AT", "B_T_LSV_01_AT_F", 10000, "vehicle"],
 	["Qilin", "O_T_LSV_02_unarmed_F", 1500, "vehicle", "SKIPSAVE"],
-	["Qilin Minigun", "O_T_LSV_02_armed_F", 6000, "vehicle"],
+	["Qilin Minigun", "O_T_LSV_02_armed_F", 5000, "vehicle"],
 	["Qilin AT", "O_T_LSV_02_AT_F", 10000, "vehicle"],
 
 	["Hunter", "B_MRAP_01_F", 4000, "vehicle", "SKIPSAVE"],
-	["Hunter HMG", "B_MRAP_01_hmg_F", 10000, "vehicle"],
-	["Hunter GMG", "B_MRAP_01_gmg_F", 12500, "vehicle"],
+	["Hunter HMG", "B_MRAP_01_hmg_F", 7500, "vehicle"],
+	["Hunter GMG", "B_MRAP_01_gmg_F", 10000, "vehicle"],
 	["Ifrit", "O_MRAP_02_F", 4000, "vehicle", "SKIPSAVE"],
-	["Ifrit HMG", "O_MRAP_02_hmg_F", 10000, "vehicle"],
-	["Ifrit GMG", "O_MRAP_02_gmg_F", 12500, "vehicle"],
+	["Ifrit HMG", "O_MRAP_02_hmg_F", 7500, "vehicle"],
+	["Ifrit GMG", "O_MRAP_02_gmg_F", 10000, "vehicle"],
 	["Strider", "I_MRAP_03_F", 4000, "vehicle", "SKIPSAVE"],
-	["Strider HMG", "I_MRAP_03_hmg_F", 10000, "vehicle"],
-	["Strider GMG", "I_MRAP_03_gmg_F", 12500, "vehicle"],
-	["MSE-3 Marid", "O_APC_Wheeled_02_rcws_v2_F", 25000, "vehicle"],
-	["AMV-7 Marshall", "B_APC_Wheeled_01_cannon_F", 30000, "vehicle"],
-	["AFV-4 Gorgon", "I_APC_Wheeled_03_cannon_F", 35000, "vehicle"],
-	["Rhino MGS", "B_AFV_Wheeled_01_cannon_F", 45000, "vehicle"],
-	["Rhino MGS UP", "B_AFV_Wheeled_01_up_cannon_F", 55000, "vehicle"]
+	["Strider HMG", "I_MRAP_03_hmg_F", 7500, "vehicle"],
+	["Strider GMG", "I_MRAP_03_gmg_F", 10000, "vehicle"],
+	["MSE-3 Marid", "O_APC_Wheeled_02_rcws_v2_F", 30000, "vehicle"],
+	["AMV-7 Marshall", "B_APC_Wheeled_01_cannon_F", 27500, "vehicle"],
+	["AFV-4 Gorgon", "I_APC_Wheeled_03_cannon_F", 27500, "vehicle"],
+	["Rhino MGS", "B_AFV_Wheeled_01_cannon_F", 33000, "vehicle"],
+	["Rhino MGS UP", "B_AFV_Wheeled_01_up_cannon_F", 38000, "vehicle"]
 ];
 
 tanksArray = compileFinal str

@@ -100,7 +100,15 @@ else
 						["B_SAM_System_01_F", [0,-0.4,1.1]],
 						["B_SAM_System_02_F",[0,0,1.28]],
 						["B_AAA_System_01_F", [0,0.5,1.9]],
-						["B_Mortar_01_F", [0,-0.4,0.1]]
+						["B_Mortar_01_F", [0,-0.4,0.1]],
+						["O_Mortar_01_F", [0,-0.4,0.1]],
+						["I_Mortar_01_F", [0,-0.4,0.1]],
+						["B_static_AA_F", [0.027,0.5,0.33]],
+						["O_static_AA_F", [0.027,0.5,0.33]],
+						["I_static_AA_F", [0.027,0.5,0.33]],
+						["B_static_AT_F", [0.027,0.5,0.33]],
+						["O_static_AT_F", [0.027,0.5,0.33]],
+						["I_static_AT_F", [0.027,0.5,0.33]]
 					];
 					_attachPos = (_cargos select _cargoIndex) select 2;
 					_attachIndex = _turrets findIf {_x select 0 == (typeOf _object)};
@@ -112,6 +120,14 @@ else
 					};
 					R3F_LOG_joueur_deplace_objet = objNull;
 					_object attachTo [_vehicle, _attachPos];
+					if (typeOf _object in ["B_static_AA_F", "O_static_AA_F", "I_static_AA_F", "B_static_AT_F", "O_static_AT_F", "I_static_AT_F"]) then
+					{
+						_dir = (getDir _vehicle) - 225;
+						if (_dir < 0) then { _dir = _dir + 360 };
+						if (_dir > 360) then { _dir = _dir - 360 };
+						uiSleep 0.2;
+						_object setDir _dir;
+					};
 					_vehicle setVariable ["R3F_LOG_installed_object", _object, true];
 					_object setVariable ["R3F_LOG_transport_installed", _vehicle, true];
 					player globalChat STR_R3F_LOG_action_installed;

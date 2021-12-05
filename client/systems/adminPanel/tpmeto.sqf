@@ -44,6 +44,7 @@ if (pselect5 != "exit") then
 						_waterPos = _buildings select 0 select 0;
 					};
 				};
+				_oldVector = vectorUp (vehicle player);
 				if (isNil "_waterPos") then
 				{
 					_pos = _pos vectorAdd [0,0, (0 max _alt)];
@@ -54,6 +55,10 @@ if (pselect5 != "exit") then
 					vehicle player setPosASL _waterPos;
 				};
 				vehicle player setVelocity _oldVelocity;
+				if (vehicle player isKindOf "Plane") then
+				{
+					vehicle player setVectorUp _oldVector;
+				};
 			};
 		};
 	} forEach playableUnits;

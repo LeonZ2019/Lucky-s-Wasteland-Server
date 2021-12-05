@@ -23,6 +23,8 @@ if (_selection != "?") then
 			case (isNil "_oldDamage"):                         { _damage };
 			case ((vehicle _unit) isKindOf "ParachuteBase"):   { _oldDamage }; // Disable self-collision damage while in parachute
 			case (!isNull objectParent _unit):                 { ((_damage - _oldDamage) * IMPACT_DAMAGE_SEATED_MULTIPLIER) + _oldDamage }; // Greatly reduce in-vehicle unit self-impact damage
+			case (vehicle _unit != _unit && !isNull (_source getVariable ["R3F_LOG_installed_object", objNull]) && _unit in (crew (_source getVariable "R3F_LOG_installed_object"))): // disable damage from installed vehicle
+			{ _damage = 0 };
 			default                                            { ((_damage - _oldDamage) * IMPACT_DAMAGE_MULTIPLIER) + _oldDamage }; // Reduce on-foot self-impact and falling damage
 		};
 	};

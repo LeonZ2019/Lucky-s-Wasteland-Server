@@ -22,7 +22,7 @@ else
 			_uninstalling = _vehicle getVariable ["R3F_LOG_transport_uninstalling", false];
 			if (!_uninstalling) then
 			{
-				if (typeOf _installed_object in ["B_Mortar_01_F", "O_Mortar_01_F", "I_Mortar_01_F"] && !isNull (gunner _installed_object)) then
+				if (typeOf _installed_object in ["B_Mortar_01_F", "O_Mortar_01_F", "I_Mortar_01_F", "B_static_AA_F", "O_static_AA_F", "I_static_AA_F", "B_static_AT_F", "O_static_AT_F", "I_static_AT_F"] && !isNull (gunner _installed_object)) then
 				{
 					player globalChat STR_R3F_LOG_action_uninstall_empty_gunner;
 				} else
@@ -52,7 +52,7 @@ else
 							["C_Van_01_transport_F",[2,3,4,5,6,7,8,9,10,11]]
 						];
 						_cargo = _cargos select (_cargos findIf {_x select 0 == (typeOf _vehicle)});
-						{ _vehicle lockCargo [_x, false]; } forEach _cargo;
+						{ _vehicle lockCargo [_x, false]; } forEach (_cargo select 1);
 					};
 					_vehicle setVariable ["R3F_LOG_transport_uninstalling", false, true];
 				};

@@ -250,9 +250,9 @@ while {true} do
 				{!(R3F_LOG_joueur_deplace_objet getVariable ["Mission_AirdropOnly", false])} &&
 				{!(_objet_pointe getVariable "R3F_LOG_disabled")} &&
 				isNull (_objet_pointe getVariable ["R3F_LOG_installed_object", objNull]) &&
-				((typeOf R3F_LOG_joueur_deplace_objet in ["B_Mortar_01_F", "O_Mortar_01_F", "I_Mortar_01_F", "B_AAA_System_01_F"] && typeOf _objet_pointe == "C_Van_01_transport_F") || (typeOf R3F_LOG_joueur_deplace_objet in ["B_Mortar_01_F", "O_Mortar_01_F", "I_Mortar_01_F"] && typeOf _objet_pointe in "C_Offroad_01_F") || (typeOf R3F_LOG_joueur_deplace_objet in _installable_targets && typeOf _objet_pointe in ["B_Truck_01_transport_F", "O_Truck_03_transport_F", "I_Truck_02_transport_F"]) || (typeOf R3F_LOG_joueur_deplace_objet in _installable_targets && typeOf _objet_pointe in ["B_Truck_01_cargo_F", "B_Truck_01_flatbed_F"]));
+				((typeOf R3F_LOG_joueur_deplace_objet in ["B_Mortar_01_F", "O_Mortar_01_F", "I_Mortar_01_F", "B_AAA_System_01_F", "B_static_AA_F", "O_static_AA_F", "I_static_AA_F", "B_static_AT_F", "O_static_AT_F", "I_static_AT_F"] && typeOf _objet_pointe == "C_Van_01_transport_F") || (typeOf R3F_LOG_joueur_deplace_objet in ["B_Mortar_01_F", "O_Mortar_01_F", "I_Mortar_01_F", "B_static_AA_F", "O_static_AA_F", "I_static_AA_F", "B_static_AT_F", "O_static_AT_F", "I_static_AT_F"] && typeOf _objet_pointe in "C_Offroad_01_F") || (typeOf R3F_LOG_joueur_deplace_objet in _installable_targets && typeOf _objet_pointe in ["B_Truck_01_transport_F", "O_Truck_03_transport_F", "I_Truck_02_transport_F"]) || (typeOf R3F_LOG_joueur_deplace_objet in _installable_targets && typeOf _objet_pointe in ["B_Truck_01_cargo_F", "B_Truck_01_flatbed_F"]));
 
-				// Install valid, mainly will check for target class and install type
+			// Install valid, mainly will check for target class and install type
 			R3F_LOG_action_uninstall_valid =
 				alive (_objet_pointe getVariable "R3F_LOG_installed_object") &&
 				(UAVControl getConnectedUAV player select 1) == "" &&

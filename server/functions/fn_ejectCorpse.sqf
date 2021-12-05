@@ -35,6 +35,7 @@ if (!INVALID_CORPSE) then
 		_targetPos = _targetPos vectorAdd ([[0, _veh call fn_vehSafeDistance, 1], -([_veh, _corpse] call BIS_fnc_dirTo)] call BIS_fnc_rotateVector2D);
 	};
 
+	_targetPos vectorAdd [0, 0, 15];
 	_corpse setPos _targetPos;
 	_corpse setVariable ["A3W_corpseEjected", true, true];
 };

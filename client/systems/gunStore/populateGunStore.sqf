@@ -121,7 +121,7 @@ if (_wepFilter) then
 			_idx = _wepFilterDropdown lbAdd getText (configFile >> "CfgWeapons" >> _x >> "displayName");
 			_wepFilterDropdown lbSetData [_idx, _x];
 		};
-	} forEach (weapons player arrayIntersect (weapons player - [binocular player]));
+	} forEach [primaryWeapon player, secondaryWeapon player, handgunWeapon player];
 
 	_wepFilterDropdown lbSetCurSel ([_wepFilterSel, 0] select (_wepFilterSel == -1));
 	_wepFilterData = _wepFilterDropdown lbData lbCurSel _wepFilterDropdown;

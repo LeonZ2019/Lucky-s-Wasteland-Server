@@ -35,7 +35,7 @@ _setupObjects =
 	_smoke = createVehicle ["SmokeShell", position _crate, [], 0, "NONE"]; 
 	_smoke attachTo [_crate, [0, 0, 0.65]];
 
-	_para = createVehicle [format ["I_parachute_02_F"], [0,0,999999], [], 0, ""];
+	_para = createVehicle ["I_parachute_02_F", position _crate, [], 0, ""];
 
 	_para setDir getDir _crate;
 	_para setPosATL getPosATL _crate;
