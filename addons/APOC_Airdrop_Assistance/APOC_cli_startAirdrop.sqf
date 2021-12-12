@@ -24,7 +24,7 @@ switch (_type) do {
 };
 _selectionName =(_selectionArray select _selectionNumber) select 0;
 _price =(_selectionArray select _selectionNumber) select 2;
-_coolDownTimer =(_selectionArray select _selectionNumber)select 4;
+_coolDownTimer =(_selectionArray select _selectionNumber) select 4;
 
 /////////////  Cooldown Timer ////////////////////////
 if (!isNil "APOC_AA_lastUsedTime") then

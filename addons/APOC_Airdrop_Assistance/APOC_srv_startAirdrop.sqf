@@ -82,7 +82,7 @@ _object = switch (_type) do {
 		_object setVariable ["ownerUID", getPlayerUID _player, true];
 		_object setVariable ["R3F_LOG_Disabled", true, true];
 		_object lock 2;
-		[_object, false] call vehicleSetup;
+		[_object] call vehicleSetup;
 		if (_object getVariable ["A3W_purchasedVehicle", false] && !isNil "fn_manualVehicleSave") then
 		{
 			_object call fn_manualVehicleSave;
@@ -184,13 +184,15 @@ if (_price > _playerMoney) exitWith
 
 //Server Style Money handling
 ["atm", _player, -_price] call A3W_fnc_processTransaction;
+_cmoney = _player getVariable ["cmoney", 0];
+_player setVariable ["cmoney", _cmoney - _price, true];
 
 playSound3D ["a3\sounds_f\air\sfx\SL_rope_break.wss", _heli, false, getPosASL _heli , 3, 1, 500];
 detach _object;
 _heli fire "CMFlareLauncher";
 _heli fire "CMFlareLauncher";
 
-sleep 2;
+sleep 1;
 playSound3D ["a3\sounds_f\sfx\radio\ambient_radio22.wss", _player ,false ,getPosASL _player ,3 ,1 ,25];
 
 //Delete heli once it has proceeded to end point
@@ -214,23 +216,70 @@ playSound3D ["a3\sounds_f\sfx\radio\ambient_radio22.wss", _player ,false ,getPos
 	{
 		{ deleteVehicle _x } forEach units _grp;
 		deleteVehicle _heli;
-		diag_log "AIRDROP SYSTEM - Deleted Heli after Drop";
 	};
 };
 
-WaitUntil { position _object select 2 < (_flyHeight - 20) };
+pvar_parachuteLiftedVehicle = netId _object;
+publicVariableServer "pvar_parachuteLiftedVehicle";
+waitUntil {isNull attachedTo _object};
+if (_type == "picnic") then
+{
+	_objectLandPos = position _object;
+	deleteVehicle _object;
+	_object2 = switch (_selectionClass) do
+	{
+		case "Land_Sacks_goods_F":
+		{
+			_object2 = createVehicle [_selectionClass, _objectLandPos, [], 0, "None"];
+			_object2 setVariable ["food", 50, true];
+			_object2 setVariable ["R3F_LOG_Disabled", false, true];
+			_object2 setVariable ["allowDamage", true, true];
+			_object2 allowDamage true;
+		};
+		case "Land_BarrelWater_F":
+		{
+			_object2 = createVehicle [_selectionClass, _objectLandPos, [], 0, "None"];
+			_object2 setVariable ["water",50, true];
+			_object2 setVariable ["R3F_LOG_Disabled", false, true];
+			_object2 setVariable ["allowDamage", true, true];
+			_object2 allowDamage true;
+		};
+	};
+};
+if (_type == "vehicle") then { _object allowDamage true };
 _heli fire "CMFlareLauncher";
-_para = createVehicle ["B_Parachute_02_F", position _object, [], 0, ""];
-_object attachTo [_para,[0,0,0]];
+
+
+
+
+
+
+
+
+
+
+
+/*_para = createVehicle ["B_Parachute_02_F", position _object, [], 0, "CAN_COLLIDE"];
+_para disableCollisionWith _object;
+
+_objectBB = _object call fn_boundingBoxReal;
+_objectMinBB = _objectBB select 0;
+_objectMaxBB = _objectBB select 1;
+_objectCenterX = (_objectMinBB select 0) + (((_objectMaxBB select 0) - (_objectMinBB select 0)) / 2);
+_objectCenterY = (_objectMinBB select 1) + (((_objectMaxBB select 1) - (_objectMinBB select 1)) / 2);
+
+_object attachTo [_para, [0 - _objectCenterX, 0 - _objectCenterY, 0]];
+
 [_object, _para, _type, _selectionClass] spawn {
 	params ["_object", "_para", "_type", "_selectionClass"];
-	while { (getPos _object) select 2 > 7 && attachedTo _object == _para } do
+	while { (getPos _object) select 2 > 1.5 && attachedTo _object == _para } do
 	{
 		_para setVectorUp [0,0,1];
 		_para setVelocity [0, 0, (velocity _para) select 2];
 		uiSleep 0.1;
 	};
-	detach _object;
+	_object setVectorUp [0,0,1];
+	deleteVehicle _para;
 	if (_type == "picnic") then
 	{
 		_objectLandPos = position _object;
@@ -256,4 +305,4 @@ _object attachTo [_para,[0,0,0]];
 		};
 	};
 	if (_type == "vehicle") then { _object allowDamage true };
-};
+};*/

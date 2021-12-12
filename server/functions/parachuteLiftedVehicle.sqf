@@ -46,7 +46,7 @@ _para setDir getDir _veh;
 _para setPosATL getPosATL _veh;
 
 _para attachTo [_veh, [_objectCenterX, _objectCenterY, 0]];
-uiSleep 2;
+uiSleep 1;
 
 detach _para;
 _veh attachTo [_para, [0 - _objectCenterX, 0 - _objectCenterY, 0]];

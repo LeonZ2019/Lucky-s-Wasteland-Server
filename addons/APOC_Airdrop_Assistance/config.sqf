@@ -22,7 +22,6 @@ APOC_AA_SupOptions =
 // ["stringItemName",   "fn_refillBox crate,                 Price,  "Drop type"]
 ["General Supplies",    "General_supplies",                  10000,  "supply"],
 ["Diving Gear",         "mission_Diving",                    10000,  "supply"],
-["Equitment Gear",      "Ammo_Drop",                         20000,  "supply"],
 ["Assault Rifles (US)", "mission_USRifles",                  15000,  "supply"],
 ["Assault Rifles (RU)", "mission_RURifles",                  15000,  "supply"],
 ["Sniper Rifles (US)",  "mission_Main_A3snipers",            20000,  "supply"],

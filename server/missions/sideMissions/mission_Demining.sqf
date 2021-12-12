@@ -26,7 +26,7 @@ _setupObjects =
     _minesForPedestrian = ["APERSBoundingMine", "APERSMine"];
     _minesForRoad = ["APERSBoundingMine", "APERSMine", "SLAMDirectionalMine"];
     _armedMines = [];
-    _totalMines = (parseNumber ((_buildingRadius * 0.22) toFixed 0)) max 10;
+    _totalMines = (parseNumber ((_buildingRadius * 0.24) toFixed 0)) max 15;
     for "_i" from 1 to _totalMines do
     {
 		_road = (_missionPos nearRoads _buildingRadius) call BIS_fnc_selectRandom;

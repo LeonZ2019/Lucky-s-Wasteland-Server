@@ -38,15 +38,15 @@ switch (_boxType) do
 		[
 			["wep",[
 				"launch_NLAW_F",
-				["launch_Titan_short_F", "launch_O_Titan_short_F", "launch_I_Titan_short_F", "launch_B_Titan_short_tna_F", "launch_O_Titan_short_ghex_F"],
+				["launch_Titan_short_F", "launch_O_Titan_short_F", "launch_I_Titan_short_F", "launch_B_Titan_short_tna_F"],
 				["launch_MRAWS_green_F", "launch_MRAWS_olive_F", "launch_MRAWS_sand_F"]
-			], RANDOM_BETWEEN(2,5), RANDOM_BETWEEN(4,6)],
+			], RANDOM_BETWEEN(1,3), RANDOM_BETWEEN(2,4)],
 
-			["wep", ["launch_Titan_F", "launch_B_Titan_tna_F", "launch_I_Titan_eaf_F"], RANDOM_BETWEEN(2,3), RANDOM_BETWEEN(2,5)],
+			["wep", ["launch_Titan_F", "launch_B_Titan_tna_F", "launch_I_Titan_eaf_F"], RANDOM_BETWEEN(2,3), RANDOM_BETWEEN(1,2)],
 
-			["wep", ["Laserdesignator", "Laserdesignator_02", "Laserdesignator_03"], RANDOM_BETWEEN(1,2), 1],
+			["wep", ["Laserdesignator", "Laserdesignator_01_khk_F", "Laserdesignator_03"], RANDOM_BETWEEN(1,2), 1],
 
-			["itm", "FirstAidKit, RANDOM_BETWEEN(2,5)],
+			["itm", "FirstAidKit", RANDOM_BETWEEN(2,5)],
 
 			["itm", ["B_Kitbag_cbr", "B_Kitbag_rgr", "B_Kitbag_mcamo", "B_Kitbag_sgg", "B_Kitbag_tan"], 3],
 
@@ -63,11 +63,11 @@ switch (_boxType) do
 				["launch_RPG32_F", "launch_RPG32_ghex_F"],
 				["launch_O_Vorona_brown_F", "launch_O_Vorona_green_F"],
 				["launch_MRAWS_green_rail_F", "launch_MRAWS_olive_rail_F", "launch_MRAWS_sand_rail_F"]
-			], RANDOM_BETWEEN(2,5), RANDOM_BETWEEN(4,6)],
+			], RANDOM_BETWEEN(1,3), RANDOM_BETWEEN(2,4)],
 
-			["wep", ["launch_Titan_F", "launch_O_Titan_F", "launch_I_Titan_F", "launch_O_Titan_ghex_F"], RANDOM_BETWEEN(2,3), RANDOM_BETWEEN(2,5)],
+			["wep", ["launch_Titan_F", "launch_O_Titan_F", "launch_I_Titan_F", "launch_O_Titan_ghex_F"], RANDOM_BETWEEN(2,3), RANDOM_BETWEEN(1,2)],
 
-			["wep", ["Laserdesignator", "Laserdesignator_02_ghex_F", "Laserdesignator_03"], RANDOM_BETWEEN(1,2), 1],
+			["wep", ["Laserdesignator", "Laserdesignator_02_ghex_F", "Laserdesignator_02"], RANDOM_BETWEEN(1,2), 1],
 
 			["itm", "FirstAidKit", RANDOM_BETWEEN(2,5)],
 
@@ -92,7 +92,7 @@ switch (_boxType) do
 
 			["itm", ["B_Carryall_green_F", "B_Carryall_taiga_F", "B_Carryall_wdl_F", "B_Carryall_eaf_F"], RANDOM_BETWEEN(4,6)],
 
-			["itm", ["ItemGPS", "Medikit", "ToolKit", "MineDetector", "Laserdesignator", "Laserdesignator_01_khk_F", "Laserdesignator_03", "Laserdesignator_02", "Laserdesignator_02_ghex_F"], RANDOM_BETWEEN(6,8)],
+			["itm", ["Medikit", "ToolKit", "MineDetector", "Laserdesignator", "Laserdesignator_01_khk_F", "Laserdesignator_03", "Laserdesignator_02", "Laserdesignator_02_ghex_F"], RANDOM_BETWEEN(6,8)],
 
 			["itm", "FirstAidKit", RANDOM_BETWEEN(2,5)],
 
@@ -197,7 +197,7 @@ switch (_boxType) do
 
 			["itm", ["optic_ERCO_blk_F", "optic_ERCO_khk_F", "optic_ERCO_snd_F", "optic_Arco", "optic_Arco_arid_F", "optic_Arco_blk_F", "optic_Arco_ghex_F", "optic_Arco_lush_F", "optic_Hamr", "optic_Hamr_khk_F", "optic_Arco_AK_arid_F", "optic_Arco_AK_black_F", "optic_Arco_AK_lush_F", "optic_Holosight", "optic_Holosight_arid_F", "optic_Holosight_blk_F", "optic_Holosight_khk_F", "optic_Holosight_lush_F", "optic_MRCO"], RANDOM_BETWEEN(4,6)],
 
-			["itm", ["ItemGPS", "Binocular"], RANDOM_BETWEEN(1,3)],
+			["itm", ["Rangefinder", "Binocular"], RANDOM_BETWEEN(1,3)],
 
 			["itm", ["muzzle_snds_H", "muzzle_snds_H_khk_F", "muzzle_snds_H_snd_F", "muzzle_snds_M", "muzzle_snds_m_khk_F", "muzzle_snds_m_snd_F", "muzzle_snds_338_black", "muzzle_snds_338_green", "muzzle_snds_338_sand"], RANDOM_BETWEEN(4,6)],
 
@@ -218,7 +218,7 @@ switch (_boxType) do
 
 			["itm", ["optic_ERCO_blk_F", "optic_ERCO_khk_F", "optic_ERCO_snd_F", "optic_Arco", "optic_Arco_arid_F", "optic_Arco_blk_F", "optic_Arco_ghex_F", "optic_Arco_lush_F", "optic_Hamr", "optic_Hamr_khk_F", "optic_Arco_AK_arid_F", "optic_Arco_AK_black_F", "optic_Arco_AK_lush_F", "optic_Holosight", "optic_Holosight_arid_F", "optic_Holosight_blk_F", "optic_Holosight_khk_F", "optic_Holosight_lush_F", "optic_MRCO"], RANDOM_BETWEEN(4,6)],
 
-			["itm", ["ItemGPS", "Binocular"], RANDOM_BETWEEN(1,3)],
+			["itm", ["Rangefinder", "Binocular"], RANDOM_BETWEEN(1,3)],
 
 			["itm", ["muzzle_snds_H", "muzzle_snds_H_khk_F", "muzzle_snds_H_snd_F", "muzzle_snds_M", "muzzle_snds_m_khk_F", "muzzle_snds_m_snd_F", "muzzle_snds_B", "muzzle_snds_B_khk_F", "muzzle_snds_B_snd_F", "muzzle_snds_B_arid_F", "muzzle_snds_B_lush_F", "muzzle_snds_93mmg", "muzzle_snds_93mmg_tan"], RANDOM_BETWEEN(4,6)],
 
@@ -240,7 +240,7 @@ switch (_boxType) do
 
 			["wep", ["srifle_DMR_02_F", "srifle_DMR_02_camo_F", "srifle_DMR_02_sniper_F", "srifle_DMR_06_camo_F", "srifle_DMR_06_olive_F", "srifle_DMR_06_hunter_F", "srifle_DMR_03_F", "srifle_DMR_03_multicam_F", "srifle_DMR_03_khaki_F", "srifle_DMR_03_tan_F", "srifle_DMR_03_woodland_F"], RANDOM_BETWEEN(1,3), RANDOM_BETWEEN(4,6)],
 
-			["wep", ["ItemGPS", "Rangefinder"], RANDOM_BETWEEN(3,6)],
+			["wep", "Rangefinder", RANDOM_BETWEEN(3,6)],
 
 			["itm", ["optic_SOS", "optic_SOS_khk_F", "optic_DMS", "optic_DMS_ghex_F", "optic_DMS_weathered_F", "optic_DMS_weathered_Kir_F"], RANDOM_BETWEEN(2,4)],
 
@@ -263,7 +263,7 @@ switch (_boxType) do
 
 			["wep", ["srifle_DMR_05_blk_F", "srifle_DMR_05_hex_F", "srifle_DMR_05_tan_f", "srifle_DMR_06_camo_F", "srifle_DMR_06_olive_F", "srifle_DMR_06_hunter_F", "srifle_DMR_04_tan_F", "srifle_DMR_01_F", "srifle_EBR_F"], RANDOM_BETWEEN(1,3), RANDOM_BETWEEN(4,6)],
 
-			["wep", ["ItemGPS", "Rangefinder"], RANDOM_BETWEEN(3,6)],
+			["wep", "Rangefinder", RANDOM_BETWEEN(3,6)],
 
 			["itm", ["optic_SOS", "optic_SOS_khk_F", "optic_DMS", "optic_DMS_ghex_F", "optic_DMS_weathered_F", "optic_DMS_weathered_Kir_F"], RANDOM_BETWEEN(2,4)],
 
@@ -336,7 +336,7 @@ switch (_boxType) do
 
 			["itm", ["V_PlateCarrierGL_rgr", "V_PlateCarrierGL_blk", "V_PlateCarrierGL_mtp", "V_PlateCarrierGL_tna_F", "V_PlateCarrierSpec_rgr", "V_PlateCarrierSpec_blk", "V_PlateCarrierSpec_mtp", "V_PlateCarrierSpec_tna_F", "V_PlateCarrierIAGL_dgtl", "V_PlateCarrierIAGL_oli", "V_EOD_blue_F", "V_EOD_IDAP_blue_F", "V_EOD_coyote_F", "V_EOD_olive_F"], RANDOM_ODDS(0.5)],
 
-			["itm", ["B_Parachute", "B_OutdoorPack_blk", "B_OutdoorPack_tan", "B_LegStrapBag_black_F", "B_LegStrapBag_coyote_F", "B_LegStrapBag_olive_F", "B_Messenger_Black_F", "B_Messenger_Coyote_F", "B_Messenger_Gray_F", "B_Messenger_Olive_F", "B_Messenger_IDAP_F", "B_AssaultPack_blk", "B_AssaultPack_rgr", "B_AssaultPack_mcamo", "B_AssaultPack_ocamo", "B_AssaultPack_dgtl", "B_AssaultPack_khk", "B_AssaultPack_cbr", "B_AssaultPack_sgg", "B_AssaultPack_tna_F", "B_AssaultPack_Kerry", "B_Kitbag_cbr", "B_Kitbag_rgr", "B_Kitbag_mcamo", "B_Kitbag_sgg", "B_ViperLightHarness_blk_F", "B_ViperLightHarness_ghex_F", "B_ViperLightHarness_hex_F", "B_ViperLightHarness_khk_F", "B_ViperLightHarness_oli_F", "B_TacticalPack_rgr", "B_TacticalPack_mcamo", "B_TacticalPack_ocamo", "B_TacticalPack_oli", "B_FieldPack_blk", "B_FieldPack_cbr", "B_FieldPack_khk", "B_FieldPack_oucamo", "B_FieldPack_ocamo", "B_FieldPack_ghex_F", "B_Bergen_blk", "B_Bergen_rgr", "B_Bergen_mcamo", "B_Bergen_sgg", "B_ViperHarness_blk_F", "B_ViperHarness_ghex_F", "B_ViperHarness_hex_F", "B_ViperHarness_khk_F", "B_ViperHarness_oli_F", "B_Carryall_khk", "B_Carryall_mcamo", "B_Carryall_oli", "B_Carryall_ocamo", "B_Carryall_oucamo", "B_Carryall_ghex_F", "B_Bergen_dgtl_F", "B_Bergen_hex_F", "B_Bergen_mcamo_F", "B_Bergen_tna_F"], RANDOM_BETWEEN(10,20)],
+			["itm", ["B_OutdoorPack_blk", "B_OutdoorPack_tan", "B_LegStrapBag_black_F", "B_LegStrapBag_coyote_F", "B_LegStrapBag_olive_F", "B_Messenger_Black_F", "B_Messenger_Coyote_F", "B_Messenger_Gray_F", "B_Messenger_Olive_F", "B_Messenger_IDAP_F", "B_AssaultPack_blk", "B_AssaultPack_rgr", "B_AssaultPack_mcamo", "B_AssaultPack_ocamo", "B_AssaultPack_dgtl", "B_AssaultPack_khk", "B_AssaultPack_cbr", "B_AssaultPack_sgg", "B_AssaultPack_tna_F", "B_AssaultPack_Kerry", "B_Kitbag_cbr", "B_Kitbag_rgr", "B_Kitbag_mcamo", "B_Kitbag_sgg", "B_ViperLightHarness_blk_F", "B_ViperLightHarness_ghex_F", "B_ViperLightHarness_hex_F", "B_ViperLightHarness_khk_F", "B_ViperLightHarness_oli_F", "B_TacticalPack_rgr", "B_TacticalPack_mcamo", "B_TacticalPack_ocamo", "B_TacticalPack_oli", "B_FieldPack_blk", "B_FieldPack_cbr", "B_FieldPack_khk", "B_FieldPack_oucamo", "B_FieldPack_ocamo", "B_FieldPack_ghex_F", "B_Bergen_blk", "B_Bergen_rgr", "B_Bergen_mcamo", "B_Bergen_sgg", "B_ViperHarness_blk_F", "B_ViperHarness_ghex_F", "B_ViperHarness_hex_F", "B_ViperHarness_khk_F", "B_ViperHarness_oli_F", "B_Carryall_khk", "B_Carryall_mcamo", "B_Carryall_oli", "B_Carryall_ocamo", "B_Carryall_oucamo", "B_Carryall_ghex_F", "B_Bergen_dgtl_F", "B_Bergen_hex_F", "B_Bergen_mcamo_F", "B_Bergen_tna_F"], RANDOM_BETWEEN(10,20)],
 
 			["itm", ["G_Aviator", "G_Lady_Blue", "G_Lowprofile", "G_Tactical_Clear", "G_Tactical_Black", "G_Spectacles_Tinted", "G_Diving", "G_Combat", "G_Combat_Goggles_tna_F", "G_Balaclava_blk", "G_Balaclava_oli", "G_Balaclava_lowprofile", "G_Balaclava_combat", "G_Balaclava_TI_blk_F", "G_Balaclava_TI_G_blk_F", "G_Balaclava_TI_tna_F", "G_Balaclava_TI_G_tna_F", "G_Bandanna_aviator", "G_Bandanna_shades", "G_Bandanna_beast", "G_Bandanna_blk", "G_Bandanna_khk", "G_Bandanna_oli", "G_Bandanna_tan", "G_Respirator_blue_F", "G_Respirator_white_F", "G_Respirator_yellow_F", "G_EyeProtectors_F", "G_EyeProtectors_Earpiece_F", "G_WirelessEarpiece_F"], 15],
 
@@ -346,7 +346,7 @@ switch (_boxType) do
 
 			["itm", "FirstAidKit", RANDOM_BETWEEN(6,12)],
 
-			["itm", ["ItemGPS", "FirstAidKit", "Medikit", "ToolKit", "MineDetector", "Binocular", "Rangefinder", "Laserdesignator", "Laserdesignator_01_khk_F", "Laserdesignator_03", "Laserdesignator_02", "Laserdesignator_02_ghex_F"], RANDOM_BETWEEN(10,15)]
+			["itm", ["FirstAidKit", "Medikit", "ToolKit", "MineDetector", "Binocular", "Rangefinder", "Laserdesignator", "Laserdesignator_01_khk_F", "Laserdesignator_03", "Laserdesignator_02", "Laserdesignator_02_ghex_F"], RANDOM_BETWEEN(10,15)]
 		];
 	};
 	case "mission_Diving":
