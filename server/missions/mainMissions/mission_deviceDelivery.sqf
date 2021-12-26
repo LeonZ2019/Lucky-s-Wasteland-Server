@@ -58,7 +58,7 @@ _setupObjects =
 		waitUntil
 		{
 			uiSleep 1;
-			(count (crew _vehicle) == 0) && (_miller distance _vehicle) < 8 && ((getPos _vehicle) select 2 < 5) && (vectorMagnitude velocity _vehicle < 1)
+			(count (crew _vehicle) == 0) && (_miller distance2D _vehicle) < 12.5 && ((getPos _vehicle) select 2 < 5) && (vectorMagnitude velocity _vehicle < 1)
 		};
 		_miller enableAI "MOVE";
 		_miller assignAsDriver _vehicle;

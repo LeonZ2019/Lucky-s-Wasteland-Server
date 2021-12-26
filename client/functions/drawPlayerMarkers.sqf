@@ -184,25 +184,25 @@ A3W_mapDraw_thread = [] spawn
 			{
 				if (side _x == CIVILIAN) then
 				{
-					_markerPos = markerPos (_x getVariable ["A3W_missionMarkerName", ""]);
-
-					if !(_markerPos isEqualTo [0,0,0]) then
+					_markerName = _x getVariable ["A3W_missionMarkerName", ""];
+					if !(["mission_DefendTerritory", _markerName] call fn_startsWith) then // miller truck also
 					{
-						_vehs = [];
-
+						_markerPos = markerPos _markerName;
+						if !(_markerPos isEqualTo [0,0,0]) then
 						{
-							_veh = vehicle _x;
-
-							if !(_veh in _vehs) then
+							_vehs = [];
 							{
-								if (alive _veh && _veh distance _markerPos > MISSION_AI_FAR_DISTANCE) then
+								_veh = vehicle _x;
+								if !(_veh in _vehs) then
 								{
-									_newArrayLines pushBack [_markerPos, getPosASLVisual _veh, [1,0,0,1]];
+									if (alive _veh && _veh distance _markerPos > MISSION_AI_FAR_DISTANCE) then
+									{
+										_newArrayLines pushBack [_markerPos, getPosASLVisual _veh, [1,0,0,1]];
+									};
+									_vehs pushBack _veh;
 								};
-
-								_vehs pushBack _veh;
-							};
-						} forEach units _x;
+							} forEach units _x;
+						};
 					};
 				};
 			} forEach allGroups;

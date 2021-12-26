@@ -12,6 +12,7 @@
 	//["Unholster Primary Weapon", { player action ["SwitchWeapon", player, player, 0] }, [], -11, false, false, "", "vehicle player == player && currentWeapon player == '' && primaryWeapon player != ''"],
 
 	["<img image='client\icons\flat_grass.paa'/> Flatten Grass", "client\actions\flat_grass.sqf", [], 1, false, false, "", "vehicle player == player && !surfaceIsWater position player && getPosATL player select 2 <= 0.15"],
+	["<img image='client\icons\chop_tree.paa'/> Chop Tree", "client\actions\tree_cutter.sqf", [], 1, false, false, "", "vehicle player == player && alive player && cursorObject distance2D player <= 4 && (getModelInfo cursorObject select 0) in ['t_broussonetiap1s_f.p3d','t_ficusb1s_f.p3d','t_ficusb2s_f.p3d','t_fraxinusav2s_f.p3d','t_oleae1s_f.p3d','t_oleae2s_f.p3d','t_phoenixc1s_f.p3d','t_phoenixc3s_f.p3d','t_pinusp3s_f.p3d','t_pinuss1s_f.p3d','t_pinuss2s_b_f.p3d','t_pinuss2s_f.p3d','t_poplar2f_dead_f.p3d','t_populusn3s_f.p3d','t_quercusir2s_f.p3d']"],
 
 	[format ["<img image='client\icons\playerMenu.paa' color='%1'/> <t color='%1'>[</t>Player Menu<t color='%1'>]</t>", "#FF8000"], "client\systems\playerMenu\init.sqf", [], -10, false], //, false, "", ""],
 

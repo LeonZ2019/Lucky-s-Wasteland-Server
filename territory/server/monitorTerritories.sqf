@@ -285,6 +285,7 @@ _handleTeamCounts =
 	private ["_currentCounts", "_newCounts", "_currentTeamCounts", "_currentAreaContested", "_currentDominantTeam", "_newTeamCounts", "_newAreaContested", "_newDominantTeam", "_action"];
 	_currentCounts = _this select 0;
 	_newCounts = _this select 1;
+	_blocked = _this select 2;
 
 	_currentTeamCounts = _currentCounts select 0;
 	_currentAreaContested = _currentCounts select 1;
@@ -296,7 +297,7 @@ _handleTeamCounts =
 
 	_action = "";  // CAPTURE, BLOCK, RESET
 
-	if (!_newAreaContested) then
+	if (!_newAreaContested && !_blocked) then
 	{
 		// Territory is currently uncontested. Was the previous state uncontested and the same team?
 		if (_currentAreaContested || (_currentDominantTeam isEqualTo _newDominantTeam && !(_currentDominantTeam isEqualTo sideUnknown))) then
@@ -392,6 +393,8 @@ _handleCapPointTick = {
 	// Known to be the same as _currentTerritoryData
 	_count = count _currentTerritoryData;
 
+	_amm = allMapMarkers;
+	_block = _amm findIf { ["mission_DefendTerritory", _x] call fn_startsWith };
 	for "_i" from 0 to (_count - 1) do
 	{
 		_loopStart = diag_tickTime;
@@ -403,7 +406,14 @@ _handleCapPointTick = {
 		_currentTerritoryOwner = _currentTerritoryDetails select 2;
 		_currentTerritoryChrono = _currentTerritoryDetails select 3;
 		_currentTerritoryTimer = _currentTerritoryDetails select 4;
-
+		_blocked = false;
+		if (_block != -1) then
+		{
+			if ((markerPos _currentTerritoryName) distance2D (markerPos (_amm select _block)) == 0) then
+			{
+				_blocked = true;
+			};
+		};
 		//diag_log format["Processing point %1", _currentTerritoryName];
 
 		// Use BIS_fnc_conditionalSelect since we can't sort arrays using strings FFS.
@@ -441,7 +451,7 @@ _handleCapPointTick = {
 			//diag_log format["  _currentTeamCounts: %1", _currentTeamCounts];
 			//diag_log format["  _newTeamCounts: %1", _newTeamCounts];
 
-			_action = [_currentTeamCounts, _newTeamCounts] call _handleTeamCounts;
+			_action = [_currentTeamCounts, _newTeamCounts, _blocked] call _handleTeamCounts;
 
 			_newCapPointTimer = _currentTerritoryTimer;
 

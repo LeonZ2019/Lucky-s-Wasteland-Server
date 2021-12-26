@@ -192,7 +192,7 @@ detach _object;
 _heli fire "CMFlareLauncher";
 _heli fire "CMFlareLauncher";
 
-sleep 1;
+sleep 0.7;
 playSound3D ["a3\sounds_f\sfx\radio\ambient_radio22.wss", _player ,false ,getPosASL _player ,3 ,1 ,25];
 
 //Delete heli once it has proceeded to end point
@@ -248,61 +248,3 @@ if (_type == "picnic") then
 };
 if (_type == "vehicle") then { _object allowDamage true };
 _heli fire "CMFlareLauncher";
-
-
-
-
-
-
-
-
-
-
-
-/*_para = createVehicle ["B_Parachute_02_F", position _object, [], 0, "CAN_COLLIDE"];
-_para disableCollisionWith _object;
-
-_objectBB = _object call fn_boundingBoxReal;
-_objectMinBB = _objectBB select 0;
-_objectMaxBB = _objectBB select 1;
-_objectCenterX = (_objectMinBB select 0) + (((_objectMaxBB select 0) - (_objectMinBB select 0)) / 2);
-_objectCenterY = (_objectMinBB select 1) + (((_objectMaxBB select 1) - (_objectMinBB select 1)) / 2);
-
-_object attachTo [_para, [0 - _objectCenterX, 0 - _objectCenterY, 0]];
-
-[_object, _para, _type, _selectionClass] spawn {
-	params ["_object", "_para", "_type", "_selectionClass"];
-	while { (getPos _object) select 2 > 1.5 && attachedTo _object == _para } do
-	{
-		_para setVectorUp [0,0,1];
-		_para setVelocity [0, 0, (velocity _para) select 2];
-		uiSleep 0.1;
-	};
-	_object setVectorUp [0,0,1];
-	deleteVehicle _para;
-	if (_type == "picnic") then
-	{
-		_objectLandPos = position _object;
-		deleteVehicle _object;
-		_object2 = switch (_selectionClass) do
-		{
-			case "Land_Sacks_goods_F":
-			{
-				_object2 = createVehicle [_selectionClass, _objectLandPos, [], 0, "None"];
-				_object2 setVariable ["food", 50, true];
-				_object2 setVariable ["R3F_LOG_Disabled", false, true];
-				_object2 setVariable ["allowDamage", true, true];
-				_object2 allowDamage true;
-			};
-			case "Land_BarrelWater_F":
-			{
-				_object2 = createVehicle [_selectionClass, _objectLandPos, [], 0, "None"];
-				_object2 setVariable ["water",50, true];
-				_object2 setVariable ["R3F_LOG_Disabled", false, true];
-				_object2 setVariable ["allowDamage", true, true];
-				_object2 allowDamage true;
-			};
-		};
-	};
-	if (_type == "vehicle") then { _object allowDamage true };
-};*/

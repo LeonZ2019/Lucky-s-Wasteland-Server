@@ -104,6 +104,7 @@ _successExec =
 		_cash = createVehicle ["Land_Money_F", position _crate, [], 0, "None"];
 		_cash setPos (getPos _crate);
 		_cash setVariable ["cmoney", 7500, true];
+		_cash setVariable ["owner", "world", true];
 	};
 	deleteMarker _missionAirdrop;
 	deleteVehicle _crate;

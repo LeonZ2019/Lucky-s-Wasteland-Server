@@ -93,6 +93,17 @@ if (_uid call isAdmin) then
 					}] call BIS_fnc_addStackedEventHandler;
 					hint "Click on map to teleport";
 					if (!visibleMap) then {openMap true;};
+					[] spawn {
+						addMissionEventHandler ["Map",
+						{
+							params ["_isOpened","_isForced"];
+							_isOpened = _this select 0;
+							if (!_isOpened) then
+							{
+								["A3W_teleport", "onMapSingleClick"] call BIS_fnc_removeStackedEventHandler;
+							};
+						}];
+					};
 				};
 				case 8: //Money
 				{

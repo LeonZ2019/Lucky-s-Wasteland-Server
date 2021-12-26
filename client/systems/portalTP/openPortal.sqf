@@ -38,7 +38,7 @@ if (!_isCurrentSafe) exitWith
 {
 	hint "Enemy nearby town, portal has been closed!";
 };
-["A3W_teleport", "onMapSingleClick",
+["A3W_Portal", "onMapSingleClick",
 {
 	_territories = call compile preprocessFileLineNumbers "mapConfig\territories.sqf";
 	{
@@ -90,18 +90,9 @@ if (!_isCurrentSafe) exitWith
 					[player, -_price] call A3W_fnc_setCMoney;
 					uiSleep 3;
 					openMap false;
-					if (surfaceIsWater _pos) then
-					{
-						_top = +_pos;
-						_top set [2, (_top select 2) + 1000];
-						_buildings = (lineIntersectsSurfaces [_top, _pos, objNull, objNull, true, -1, "GEOM", "NONE"]) select {(_x select 2) isKindOf "Building"};
-						if !(_buildings isEqualTo []) then
-						{
-							_waterPos = _buildings select 0 select 0;
-						};
-					};
-					if (isNil "_waterPos") then { player setPos _pos } else { player setPosASL _waterPos };
-					["A3W_teleport", "onMapSingleClick"] call BIS_fnc_removeStackedEventHandler;
+					_pos set [2, 500];
+					player setPos _pos;
+					["A3W_Portal", "onMapSingleClick"] call BIS_fnc_removeStackedEventHandler;
 					cutText ["Teleported finish.", "BLACK IN", 2.5];
 				};
 			} else
@@ -126,7 +117,7 @@ hint "Click on any territory your side captured to teleport.";
 		_isOpened = _this select 0;
 		if (!_isOpened) then
 		{
-			["A3W_teleport", "onMapSingleClick"] call BIS_fnc_removeStackedEventHandler;
+			["A3W_Portal", "onMapSingleClick"] call BIS_fnc_removeStackedEventHandler;
 		};
 	}];
 };

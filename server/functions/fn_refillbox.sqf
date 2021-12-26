@@ -157,7 +157,7 @@ switch (_boxType) do
 
 			["mag", ["1Rnd_HE_Grenade_shell", "3Rnd_HE_Grenade_shell"], RANDOM_BETWEEN(5,10)],
 
-			["mag", ["1Rnd_Smoke_Grenade_shell","1Rnd_SmokePurple_Grenade_shell","1Rnd_SmokeBlue_Grenade_shell","1Rnd_SmokeYellow_Grenade_shell","1Rnd_SmokeOrange_Grenade_shell","1Rnd_SmokeGreen_Grenade_shell","1Rnd_SmokeRed_Grenade_shell","UGL_FlareRed_F","UGL_FlareGreen_F","UGL_FlareYellow_F","UGL_FlareCIR_F","UGL_FlareWhite_F"], RANDOM_BETWEEN(5,20)],
+			["mag", ["1Rnd_Smoke_Grenade_shell","1Rnd_SmokeYellow_Grenade_shell","1Rnd_SmokeOrange_Grenade_shell","1Rnd_SmokeRed_Grenade_shell","UGL_FlareRed_F","UGL_FlareGreen_F","UGL_FlareWhite_F"], RANDOM_BETWEEN(2,5)],
 
 			["mag", "HandGrenade", RANDOM_BETWEEN(5,10)]
 		];
@@ -182,7 +182,7 @@ switch (_boxType) do
 
 			["mag", ["1Rnd_HE_Grenade_shell", "3Rnd_HE_Grenade_shell"], RANDOM_BETWEEN(5,10)],
 
-			["mag", ["1Rnd_Smoke_Grenade_shell","1Rnd_SmokePurple_Grenade_shell","1Rnd_SmokeBlue_Grenade_shell","1Rnd_SmokeYellow_Grenade_shell","1Rnd_SmokeOrange_Grenade_shell","1Rnd_SmokeGreen_Grenade_shell","1Rnd_SmokeRed_Grenade_shell","UGL_FlareRed_F","UGL_FlareGreen_F","UGL_FlareYellow_F","UGL_FlareCIR_F","UGL_FlareWhite_F"], RANDOM_BETWEEN(5,20)],
+			["mag", ["1Rnd_SmokePurple_Grenade_shell","1Rnd_SmokeBlue_Grenade_shell","1Rnd_SmokeGreen_Grenade_shell","UGL_FlareRed_F","UGL_FlareYellow_F"], RANDOM_BETWEEN(2,5)],
 
 			["mag", "HandGrenade", RANDOM_BETWEEN(5,10)]
 		];
@@ -304,9 +304,9 @@ switch (_boxType) do
 	{
 		_boxItems =
 		[
-			["mag", ["UGL_FlareWhite_F", "UGL_FlareGreen_F", "UGL_FlareYellow_F", "UGL_FlareRed_F", "UGL_FlareCIR_F", "1Rnd_Smoke_Grenade_shell", "1Rnd_SmokePurple_Grenade_shell", "1Rnd_SmokeBlue_Grenade_shell", "1Rnd_SmokeGreen_Grenade_shell", "1Rnd_SmokeYellow_Grenade_shell", "1Rnd_SmokeOrange_Grenade_shell", "1Rnd_SmokeRed_Grenade_shell", "1Rnd_HE_Grenade_shell", "1Rnd_HE_Grenade_shell", "1Rnd_HE_Grenade_shell"], RANDOM_BETWEEN(8,16)],
+			["mag", ["1Rnd_HE_Grenade_shell", "1Rnd_HE_Grenade_shell", "1Rnd_HE_Grenade_shell"], RANDOM_BETWEEN(8,16)],
 		
-			["mag", ["3Rnd_Smoke_Grenade_shell", "3Rnd_SmokePurple_Grenade_shell", "3Rnd_SmokeBlue_Grenade_shell", "3Rnd_SmokeGreen_Grenade_shell", "3Rnd_SmokeYellow_Grenade_shell", "3Rnd_SmokeOrange_Grenade_shell", "3Rnd_SmokeRed_Grenade_shell", "3Rnd_UGL_FlareWhite_F", "3Rnd_UGL_FlareGreen_F", "3Rnd_UGL_FlareYellow_F", "3Rnd_UGL_FlareRed_F", "3Rnd_UGL_FlareCIR_F", "3Rnd_HE_Grenade_shell", "3Rnd_HE_Grenade_shell", "3Rnd_HE_Grenade_shell"], RANDOM_BETWEEN(4,8)],
+			["mag", ["3Rnd_HE_Grenade_shell", "3Rnd_HE_Grenade_shell", "3Rnd_HE_Grenade_shell"], RANDOM_BETWEEN(4,8)],
 			
 			["mag", ["APERSTripMine_Wire_Mag", "APERSBoundingMine_Range_Mag", "APERSMine_Range_Mag", "APERSMineDispenser_Mag", "DemoCharge_Remote_Mag", "SatchelCharge_Remote_Mag"], RANDOM_BETWEEN(5,10)],
 
@@ -314,7 +314,7 @@ switch (_boxType) do
 			
 			["mag", ["MiniGrenade", "HandGrenade", "B_IR_Grenade", "O_IR_Grenade", "I_IR_Grenade"], RANDOM_BETWEEN(10,15)],
 
-			["mag", ["Chemlight_blue", "Chemlight_green", "Chemlight_yellow", "Chemlight_red", "SmokeShell", "SmokeShellPurple", "SmokeShellBlue", "SmokeShellGreen", "SmokeShellYellow", "SmokeShellOrange", "SmokeShellRed"], RANDOM_BETWEEN(3,6)],
+			["mag", ["Chemlight_blue", "Chemlight_green", "SmokeShell", "SmokeShellYellow", "SmokeShellOrange", "SmokeShellRed"], RANDOM_BETWEEN(2,5)],
 			
 			["itm", ["Toolkit", "MineDetector"], RANDOM_BETWEEN(2,4)],
 

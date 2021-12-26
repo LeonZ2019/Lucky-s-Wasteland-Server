@@ -954,7 +954,6 @@ camera_create = {
 
   showCinemaBorder false;
   cameraEffectEnableHUD true;
-  clearRadio;
   enableRadio true;
   //_camera camCommand "MANUAL ON";
   _camera camCommand "INERTIA OFF";

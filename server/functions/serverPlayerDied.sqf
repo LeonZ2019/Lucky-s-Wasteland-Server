@@ -44,5 +44,3 @@ if (vehicle _unit != _unit) then
 		_unit remoteExec ["fn_ejectCorpse", _unit];
 	};
 };
-
-//if !(["G_Diving", goggles _unit] call fn_startsWith) then { removeGoggles _unit };

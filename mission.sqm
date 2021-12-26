@@ -217,7 +217,7 @@ class Mission
 {
 	class Intel
 	{
-		briefingName="A3Wasteland Altis v1.4d";
+		briefingName="Wasteland Custom v14.3";
 		overviewText="Visit our discord https://discord.gg/ByZcqZx for more details";
 		resistanceWest=0;
 		timeOfChanges=28800;

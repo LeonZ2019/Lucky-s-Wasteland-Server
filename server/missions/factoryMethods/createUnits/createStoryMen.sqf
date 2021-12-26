@@ -51,13 +51,11 @@ switch (_name) do
 _men disableAI "MOVE";
 _men disableAI "AUTOTARGET";
 _men disableAI "AUTOCOMBAT";
+_men disableAI "WEAPONAIM";
 _men setBehaviour "SAFE";
 _men setCombatMode "BLUE";
 _men setspeedmode "FULL";
-_men setskill ["spotDistance",0.1];
-_men setskill ["spotTime",0.1];
+_men setSkill 0;
 _men setskill ["courage",1];
-_men setskill ["commanding",0.1];
-_men setskill ["general",0.1];
 
 _men

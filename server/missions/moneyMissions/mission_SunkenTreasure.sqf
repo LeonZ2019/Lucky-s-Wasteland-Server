@@ -34,11 +34,6 @@ _setupObjects =
 	{
 		_cash = createVehicle ["Land_Money_F", _missionPos, [], 0, "None"];
 		_cash setVariable ["owner", "mission", true];
-		//_cashPos = getPosATL _cash;
-		//_cashPos set [2, getTerrainHeightASL _cashPos + 1];
-		//_cash setPos _cashPos;
-
-		// Money value is set only when AI are dead
 		_cashObjects pushBack _cash;
 	};
 

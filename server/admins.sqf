@@ -30,12 +30,12 @@ else
 	lowAdmins = compileFinal str
 	[
 		// Put player UIDs here
+		"76561198314253119"
 	];
 
 	// High Administrators: manage & spectate players, remove hacked vehicles, show player tags
 	highAdmins = compileFinal str
 	[
-		"76561198308538093"
 		// Put player UIDs here
 	];
 
@@ -45,7 +45,8 @@ else
 		// Put player UIDs here
 		"76561198167560569",
 		"76561198116661635",
-		"76561198301091480"
+		"76561198301091480",
+		"76561198308538093"
 	];
 
 	/********************************************************/

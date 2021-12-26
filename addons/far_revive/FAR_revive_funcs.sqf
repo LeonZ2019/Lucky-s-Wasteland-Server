@@ -618,13 +618,13 @@ FAR_FindDeadbody =
 			{
 				_relDir = player getRelDir _unit;
 				if (_relDir > 180) then { _relDir = _relDir - 360 };
-				_valid = (abs _relDir <= 90); // medic must have target visible within a 180° horizontal FoV
+				_valid = (abs _relDir <= 120); // medic must have target visible within a 240 horizontal FoV
 			};
 			if (_valid && _isSwim && (getPosATL _unit select 2) < 0.022 && surfaceIsWater (position _unit) && ["deadstate", animationState _unit] call fn_startsWith) exitWith 
 			{
 				_target = _unit;
 			};
-		} forEach nearestObjects [HEALER, ["Man"], 5];
+		} forEach nearestObjects [HEALER, ["Man"], 15];
 	};
 	_target
 }

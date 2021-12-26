@@ -16,7 +16,7 @@ waitUntil
 	if (isNull _veh) then { _veh = _corpse };
 
 	_pos = getPos _veh;
-	{(isTouchingGround _veh || _pos select 2 < 5) && vectorMagnitude velocity _veh < [1,5] select surfaceIsWater _pos}
+	((isTouchingGround _veh || _pos select 2 < 5) && vectorMagnitude velocity _veh < [1,5] select surfaceIsWater _pos)
 };
 
 _targetPos = getPosWorld _veh;
