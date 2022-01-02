@@ -114,7 +114,7 @@ else
 
 			_action_menu_move_upward = player addAction [("<img image='client\icons\r3f_up.paa' color='#06ef00'/> <t color='#06ef00'>Upward object (Page Up)</t>"), "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\elevation.sqf", 0.5, 5.5, true, false, "", '((R3F_LOG_joueur_deplace_objet getVariable ["elevationLevel", 0]) + 0.5) < ((R3F_LOG_joueur_deplace_objet getVariable "elevationLimit") * 0.9)'];
 
-			_action_menu_move_downward = player addAction [("<img image='client\icons\r3f_up.paa' color='#06ef00'/> <t color='#06ef00'>Upward object (Page Down)</t>"), "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\elevation.sqf", -0.5, 5.5, true, false, "",'abs ((R3F_LOG_joueur_deplace_objet getVariable ["elevationLevel", 0]) - 0.5) > ((R3F_LOG_joueur_deplace_objet getVariable "elevationLimit") * 0.9)'];
+			_action_menu_move_downward = player addAction [("<img image='client\icons\r3f_up.paa' color='#06ef00'/> <t color='#06ef00'>DownWard object (Page Down)</t>"), "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\elevation.sqf", -0.5, 5.5, true, false, "",'abs ((R3F_LOG_joueur_deplace_objet getVariable ["elevationLevel", 0]) - 0.5) < ((R3F_LOG_joueur_deplace_objet getVariable "elevationLimit") * 0.9)'];
 
 			_idx_eh_keyDown = (findDisplay 46) displayAddEventHandler ["KeyDown",
 			{
