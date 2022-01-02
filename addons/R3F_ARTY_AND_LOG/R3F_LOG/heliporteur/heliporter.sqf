@@ -51,7 +51,7 @@ else
 
 			if (isNull (_objet getVariable "R3F_LOG_est_transporte_par")) then
 			{
-				if ({isPlayer _x} count crew _objet == 0) then
+				if (isNull (driver _objet)) then
 				{
 					// Si l'objet n'est pas en train d'être déplacé par un joueur
 					if (isNull (_objet getVariable "R3F_LOG_est_deplace_par") || (!alive (_objet getVariable "R3F_LOG_est_deplace_par"))) then
@@ -99,6 +99,7 @@ else
 								0 - _objectCenterY,
 								/*((_objectPos select 2) - (_heliPos select 2) + 2) min*/ _minZ
 							]];
+							["disableDriving", _objet] call A3W_fnc_towingHelper;
 
 							player globalChat format [STR_R3F_LOG_action_heliporter_fait, getText (configFile >> "CfgVehicles" >> (typeOf _objet) >> "displayName")];
 						}
@@ -114,7 +115,7 @@ else
 				}
 				else
 				{
-					player globalChat format [STR_R3F_LOG_action_heliporter_joueur_dans_objet, getText (configFile >> "CfgVehicles" >> (typeOf _objet) >> "displayName")];
+					player globalChat format [STR_R3F_LOG_action_heliporter_empty_driver, getText (configFile >> "CfgVehicles" >> (typeOf _objet) >> "displayName")];
 				};
 			}
 			else

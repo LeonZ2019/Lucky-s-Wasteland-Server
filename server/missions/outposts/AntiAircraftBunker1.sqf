@@ -36,7 +36,7 @@
 	["Land_Mil_WallBig_4m_F",[-15.7543,7.98584,-0.0133815],89.7],
 	["Land_Mil_WallBig_4m_F",[16.3934,-7.88623,-0.0133815],270],
 	["Land_Mil_WallBig_4m_F",[16.4012,7.97656,-0.0133815],270],
-	["B_Heli_Transport_03_unarmed_F",[0.935425,-25.4038,-0.173962],270.2, { _this call fn_refilltruck }]
+	["B_Heli_Transport_03_unarmed_F",[0.935425,-25.4038,0],270.2, { _this call fn_refilltruck }]
 ]
 
 /*

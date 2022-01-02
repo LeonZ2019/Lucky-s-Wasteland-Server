@@ -669,3 +669,14 @@ player createDiaryRecord ["infos",
 <br/>A. Simply go into global chat and get the attention of one of the admins or visit our forums, and make a report if the offense is serious.
 "
 ]];
+
+player createDiaryRecord ["infos",
+[
+"Lucky's Wasteland",
+"
+<br/><font size='18'>Discord Invite link: https://discord.gg/ByZcqZx</font>
+<br/>
+<br/> Admin list:
+<br/> - Lucky, Lee, Papa Kilo, Victor
+"
+]];

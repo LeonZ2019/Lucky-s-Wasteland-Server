@@ -374,6 +374,23 @@ storePurchaseHandle = _this spawn
 
 	if (isNil "_price") then
 	{
+		_storeItem = call genMiscArray select { _itemData == _x select 1 };
+		if (count _storeItem == 1) then
+		{
+			_storeItem = _storeItem select 0;
+			_class = _storeItem select 1;
+			_price = _storeItem select 2;
+			if (_price > _playerMoney) exitWith
+			{
+				[_itemText] call _showInsufficientFundsError;
+			};
+			_requestKey = call A3W_fnc_generateKey;
+			_storeItem call requestStoreObject;
+		};
+	};
+
+	if (isNil "_price") then
+	{
 		{
 			if (_itemData == _x select 1) exitWith
 			{

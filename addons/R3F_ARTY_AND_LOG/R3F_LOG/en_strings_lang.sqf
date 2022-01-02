@@ -13,6 +13,7 @@ STR_R3F_LOG_action_heliporter_objet_remorque = "Can't lift ""%1"" because it's t
 STR_R3F_LOG_action_heliport_larguer = "Drop the object";
 STR_R3F_LOG_action_heliport_parachute = "Paradrop the object";
 STR_R3F_LOG_action_heliport_larguer_fait = "Object ""%1"" dropped.";
+STR_R3F_LOG_action_heliporter_empty_driver = "There is a player in the driver seat ""%1"".";
 
 STR_R3F_LOG_action_deplacer_objet = "Move this object";
 STR_R3F_LOG_action_deplacer_objet_UAV_group = "You must be in the same group as the UAV user to move it.";
@@ -22,6 +23,8 @@ STR_R3F_LOG_courir_trop_vite = "Moving too fast! (Press C to slow down)";
 STR_LOCK_OBJECT = "Lock this object";
 STR_UNLOCK_OBJECT = "Unlock this object";
 STR_RELEASE_HORIZONTAL = "Release the object horizontally";
+STR_R3F_LOG_action_relacher_objet_collide = "Release the object as current position";
+STR_R3F_LOG_action_objet_limit = "Object reach the elevation limit";
 
 STR_R3F_LOG_action_selectionner_objet_charge = "Load in...";
 STR_R3F_LOG_action_selectionner_objet_charge_fait = "Now select the vehicle in which to load ""%1""...";

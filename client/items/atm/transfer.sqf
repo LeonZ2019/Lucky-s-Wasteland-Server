@@ -59,7 +59,7 @@ if (_destBalance >= _maxBalance) exitWith
 	playSound "FD_CP_Not_Clear_F";
 };
 
-if (_destBalance + _total > _maxBalance) exitWith
+if (_destBalance + _amount > _maxBalance) exitWith
 {
 	[format [ERR_MAX_BALANCE_LIMIT, [_maxBalance - _destBalance] call fn_numbersText], 5] call mf_notify_client;
 	playSound "FD_CP_Not_Clear_F";

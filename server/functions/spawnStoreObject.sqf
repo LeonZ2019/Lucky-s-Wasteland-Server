@@ -41,6 +41,7 @@ if (_key != "" && _player isKindOf "Man" && {_isGenStore || _isGunStore || _isVe
 				_objectsArray = call genObjectsArray;
 				{ _objectsArray pushBack _x } forEach (call genBuildingsArray);
 				{ _objectsArray pushBack _x } forEach (call genWallsArray);
+				{ _objectsArray pushBack _x } forEach (call genMiscArray);
 			};
 			case _isGunStore: { _objectsArray = call staticGunsArray};
 		};
@@ -173,7 +174,10 @@ if (_key != "" && _player isKindOf "Man" && {_isGenStore || _isGunStore || _isVe
 				_safePos = _markerPos findEmptyPosition [0, 50, _class];
 				if (count _safePos == 0) then { _safePos = _markerPos };
 				_spawnPosAGL = _safePos;
-				if (_seaSpawn) then { _safePos vectorAdd [0,0,0.05] };
+				if (_seaSpawn) then {
+					_safePos = [_markerPos, 0, 15, 2, (sizeOf _class) + 2.5, 10, 0, []] call BIS_fnc_findSafePos;
+					_safePos = _safePos vectorAdd [0,0,0.4];
+				};
 			};
 
 			// delete wrecks near spawn

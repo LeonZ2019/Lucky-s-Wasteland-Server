@@ -95,6 +95,7 @@ pp_create_terminal = {
   _terminal setVectorDirAndUp [vectorDir _garage, vectorUp _garage];
   //_terminal attachTo [_garage, [0,0,0]];
   _terminal setVariable ["is_parking", true, true];
+  if !(_offset isEqualTo [0,0,0]) then { _terminal setVariable ["is_hangar", true, true] };
   [_terminal, _garage] call pp_setup_terminal;
 
   (_pos)
@@ -364,19 +365,18 @@ pp_is_object_parking = {
 };
 
 pp_is_player_near = {
-  private["_objects"];
+  private["_objects", "_found"];
   _objects = nearestObjects [player, ["Land_CampingTable_small_F"], 2];
   if (isNil "_objects") exitWith {false};
 
-  private["_found"];
-  _found = false;
+  _found = objNull;
   {
     if ([_x] call pp_is_object_parking) exitWith {
-      _found = true;
+      _found = _x;
     };
   } forEach _objects ;
 
-  (_found)
+  _found // let return object if found
 };
 
 pp_actions = OR(pp_actions,[]);
@@ -394,26 +394,29 @@ pp_remove_actions = {
 
 pp_add_actions = {
   if (count pp_actions > 0) exitWith {};
-  private["_player"];
+  private["_player", "_terminal"];
   _player = _this select 0;
-
+  _terminal = _this select 1;
+  _actionNames = ["Park Vehicle", "Retrieve Vehicle"];
+  if (_terminal getVariable ["is_hangar", false]) then
+  {
+    _actionNames = ["Park Plane", "Retrieve Plane"];
+  };
   private["_action_id", "_text"];
-  _action_id = _player addAction ["<img image='addons\parking\icons\parking.paa'/> Park Vehicle", {call pp_park_vehicle_action}];
+  _action_id = _player addAction [format["<img image='addons\parking\icons\parking.paa'/> %1", _actionNames select 0], {call pp_park_vehicle_action}];
   pp_actions = pp_actions + [_action_id];
 
-  _action_id = _player addAction ["<img image='addons\parking\icons\parking.paa'/> Retrieve Vehicle", {call pp_retrieve_vehicle_action}];
+  _action_id = _player addAction [format["<img image='addons\parking\icons\parking.paa'/> %1", _actionNames select 1], {call pp_retrieve_vehicle_action}];
   pp_actions = pp_actions + [_action_id];
 };
 
 pp_check_actions = {
-    private["_player"];
+    private["_player", "_in_vehicle", "_terminal"];
     _player = player;
-    private["_vehicle", "_in_vehicle"];
-    _vehicle = (vehicle _player);
-    _in_vehicle = (_vehicle != _player);
-
-    if (not(_in_vehicle || {not(alive _player) || {not(call pp_is_player_near)}})) exitWith {
-      [_player] call pp_add_actions;
+    _in_vehicle = (vehicle _player != _player);
+    _terminal = call pp_is_player_near;
+    if (not(_in_vehicle || {not(alive _player) || isNull _terminal})) exitWith {
+      [_player, _terminal] call pp_add_actions;
     };
 
    [_player] call pp_remove_actions;

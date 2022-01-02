@@ -23,7 +23,7 @@ switch (_camo) do
 {
 	case "MTP":
 	{
-		_weapons = ["arifle_MX_F", "arifle_MX_GL_F", "launch_NLAW_F"];
+		_weapons = ["arifle_MX_F", "arifle_MX_GL_F", "launch_NLAW_F", "launch_Titan_F"];
 		_magazines = ["30Rnd_65x39_caseless_mag_Tracer", "1Rnd_HE_Grenade_shell", "NLAW_F"];
 		_scope = ["optic_Arco", "optic_ACO_grn", "optic_Aco", "optic_Holosight", "optic_Hamr"];
 		_backpack = "B_Carryall_mcamo";
@@ -33,7 +33,7 @@ switch (_camo) do
 	};
 	case "Tropic":
 	{
-		_weapons = ["arifle_MX_khk_F", "arifle_MX_GL_khk_F", "launch_NLAW_F"];
+		_weapons = ["arifle_MX_khk_F", "arifle_MX_GL_khk_F", "launch_NLAW_F", "launch_Titan_F"];
 		_scope = ["optic_Aco", "optic_ACO_grn", "optic_ERCO_khk_F", "optic_Holosight_khk_F", "optic_Hamr_khk_F"];
 		_magazines = ["30Rnd_65x39_caseless_khaki_mag", "1Rnd_HE_Grenade_shell", "NLAW_F"];
 		_backpack = "B_Carryall_oli";
@@ -43,7 +43,7 @@ switch (_camo) do
 	};
 	case "CTRGArid":
 	{
-		_weapons = ["arifle_SPAR_01_snd_F", "arifle_SPAR_01_GL_snd_F", "launch_MRAWS_sand_F"];
+		_weapons = ["arifle_SPAR_01_snd_F", "arifle_SPAR_01_GL_snd_F", "launch_MRAWS_sand_F", "launch_B_Titan_tna_F"];
 		_scope = ["optic_Aco", "optic_ACO_grn", "optic_Arco", "optic_ERCO_snd_F", "optic_Holosight", "optic_Hamr"];
 		_magazines = ["30Rnd_556x45_Stanag_Sand_red", "1Rnd_HE_Grenade_shell", "MRAWS_HEAT55_F"];
 		_backpack = "B_Carryall_green_F";
@@ -53,7 +53,7 @@ switch (_camo) do
 	};
 	case "CTRGUrban":
 	{
-		_weapons = ["arifle_SPAR_01_khk_F", "arifle_SPAR_01_GL_khk_F", "launch_MRAWS_olive_F"];
+		_weapons = ["arifle_SPAR_01_khk_F", "arifle_SPAR_01_GL_khk_F", "launch_MRAWS_olive_F", "launch_B_Titan_tna_F"];
 		_scope = ["optic_Aco", "optic_ACO_grn", "optic_ERCO_khk_F", "optic_Holosight_khk_F", "optic_Hamr_khk_F"];
 		_magazines = ["30Rnd_556x45_Stanag_red", "1Rnd_HE_Grenade_shell", "MRAWS_HEAT55_F"];
 		_backpack = "B_Carryall_green_F";
@@ -63,7 +63,7 @@ switch (_camo) do
 	};
 	case "CTRGTropic":
 	{
-		_weapons = ["arifle_SPAR_01_blk_F", "arifle_SPAR_01_GL_blk_F", "launch_MRAWS_green_F"];
+		_weapons = ["arifle_SPAR_01_blk_F", "arifle_SPAR_01_GL_blk_F", "launch_MRAWS_green_F", "launch_B_Titan_tna_F"];
 		_scope = ["optic_Aco", "optic_ACO_grn", "optic_Arco_blk_F", "optic_ERCO_blk_F", "optic_Holosight_blk_F", "optic_Hamr"];
 		_magazines = ["30Rnd_556x45_Stanag_red", "1Rnd_HE_Grenade_shell", "MRAWS_HEAT55_F"];
 		_backpack = "B_Carryall_green_F";
@@ -73,7 +73,7 @@ switch (_camo) do
 	};
 	case "Woodland":
 	{
-		_weapons = ["arifle_MX_Black_F", "arifle_MX_GL_Black_F", "launch_NLAW_F"];
+		_weapons = ["arifle_MX_Black_F", "arifle_MX_GL_Black_F", "launch_NLAW_F", "launch_Titan_F"];
 		_scope = ["optic_Aco", "optic_ACO_grn", "optic_Arco_blk_F", "optic_ERCO_blk_F", "optic_Holosight_blk_F", "optic_Hamr"];
 		_magazines = ["30Rnd_65x39_caseless_black_mag_Tracer", "1Rnd_HE_Grenade_shell", "NLAW_F"];
 		_backpack = "B_Carryall_wdl_F";
@@ -83,7 +83,7 @@ switch (_camo) do
 	};
 	case "GreenHex":
 	{
-		_weapons = ["arifle_Katiba_F", "arifle_Katiba_GL_F", "launch_RPG32_ghex_F"];
+		_weapons = ["arifle_Katiba_F", "arifle_Katiba_GL_F", "launch_RPG32_ghex_F", "launch_O_Titan_ghex_F"];
 		_scope = ["optic_Arco_blk_F", "optic_Aco", "optic_ACO_grn"];
 		_magazines = ["30Rnd_65x39_caseless_green", "1Rnd_HE_Grenade_shell", "RPG32_F"];
 		_backpack = "B_Carryall_ghex_F";
@@ -93,7 +93,7 @@ switch (_camo) do
 	};
 	case "Hex":
 	{
-		_weapons = ["arifle_Katiba_F", "arifle_Katiba_GL_F", "launch_RPG32_F"];
+		_weapons = ["arifle_Katiba_F", "arifle_Katiba_GL_F", "launch_RPG32_F", "launch_O_Titan_F"];
 		_scope = ["optic_Arco_blk_F", "optic_Aco", "optic_ACO_grn"];
 		_magazines = ["30Rnd_65x39_caseless_green", "1Rnd_HE_Grenade_shell", "RPG32_F"];
 		_backpack = "B_Carryall_ocamo";
@@ -103,7 +103,7 @@ switch (_camo) do
 	};
 	case "Green":
 	{
-		_weapons = ["arifle_AK12_arid_F", "arifle_AK12_GL_arid_F", "launch_RPG32_green_F"];
+		_weapons = ["arifle_AK12_arid_F", "arifle_AK12_GL_arid_F", "launch_RPG32_green_F", "launch_O_Titan_F"];
 		_scope = ["optic_Arco_AK_arid_F", "optic_Holosight_arid_F", "optic_ACO_grn", "optic_Aco"];
 		_magazines = ["30rnd_762x39_AK12_Arid_Mag_F", "1Rnd_HE_Grenade_shell", "RPG32_F"];
 		_backpack = "B_Carryall_green_F";
@@ -113,7 +113,7 @@ switch (_camo) do
 	};
 	case "Taiga":
 	{
-		_weapons = ["arifle_AK12_lush_F", "arifle_AK12_GL_lush_F", "launch_RPG32_green_F"];
+		_weapons = ["arifle_AK12_lush_F", "arifle_AK12_GL_lush_F", "launch_RPG32_green_F", "launch_O_Titan_F"];
 		_scope = ["optic_Arco_AK_lush_F", "optic_Holosight_lush_F", "optic_ACO_grn", "optic_Aco"];
 		_magazines = ["30rnd_762x39_AK12_Arid_Mag_F", "1Rnd_HE_Grenade_shell", "RPG32_F"];
 		_backpack = "B_Carryall_taiga_F";
@@ -123,7 +123,7 @@ switch (_camo) do
 	};
 	case "Digital":
 	{
-		_weapons = ["arifle_Mk20_F", "arifle_Mk20_GL_F", "launch_NLAW_F"];
+		_weapons = ["arifle_Mk20_F", "arifle_Mk20_GL_F", "launch_NLAW_F", "launch_I_Titan_F"];
 		_scope = ["optic_Aco", "optic_ACO_grn", "optic_MRCO"];
 		_magazines = ["30Rnd_556x45_Stanag", "1Rnd_HE_Grenade_shell", "NLAW_F"];
 		_backpack = "B_Carryall_oli";
@@ -133,7 +133,7 @@ switch (_camo) do
 	};
 	case "Geometric":
 	{
-		_weapons = ["arifle_MSBS65_F", "arifle_MSBS65_GL_F", "launch_NLAW_F"];
+		_weapons = ["arifle_MSBS65_F", "arifle_MSBS65_GL_F", "launch_NLAW_F", "launch_I_Titan_eaf_F"];
 		_scope = ["optic_ico_01_f"];
 		_magazines = ["30Rnd_65x39_caseless_msbs_mag", "1Rnd_HE_Grenade_shell", "NLAW_F"];
 		_backpack = "B_Carryall_eaf_F";
@@ -143,7 +143,7 @@ switch (_camo) do
 	};
 	case "Guerilla":
 	{
-		_weapons = ["arifle_TRG21_F", "arifle_TRG21_GL_F", "launch_RPG32_green_F"];
+		_weapons = ["arifle_TRG21_F", "arifle_TRG21_GL_F", "launch_RPG32_green_F", "launch_I_Titan_F"];
 		_scope = ["optic_Aco", "optic_ACO_grn"];
 		_magazines = ["30Rnd_556x45_Stanag", "1Rnd_HE_Grenade_shell", "RPG32_F"];
 		_backpack = "B_Carryall_khk";
@@ -179,21 +179,21 @@ for "_i" from 1 to _totalUnits do
 			_unit addWeapon (_weapons select 1);
 			_unit addMagazines [(_magazines select 1), 3];
 		};
-		// PCML every 6 units, starting from #6
-		case (_i % 6 == 0):
+		// AA every 14 units
+		case ((_i + 6) % 14 == 0):
+		{
+			_unit addBackpack _backpack;
+			_unit addWeapon (_weapons select 0);
+			_unit addWeapon (_weapons select 3);
+			_unit addMagazines ["Titan_AA", 2];
+		};
+		// AT every 9 units
+		case ((_i + 3) % 9 == 0):
 		{
 			_unit addBackpack _backpack;
 			_unit addWeapon (_weapons select 0);
 			_unit addWeapon (_weapons select 2);
-			_unit addMagazines [(_magazines select 2), 3];
-		};
-		// RPG-42 every 6 units, starting from #3
-		case ((_i + 3) % 6 == 0):
-		{
-			_unit addBackpack _backpack;
-			_unit addWeapon (_weapons select 0);
-			_unit addWeapon "launch_RPG32_green_F";
-			_unit addMagazines ["RPG32_F", 3];
+			_unit addMagazines [(_magazines select 2), 2];
 		};
 		// Rifleman
 		default

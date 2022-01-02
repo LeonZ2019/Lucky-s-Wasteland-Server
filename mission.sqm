@@ -8,22 +8,22 @@ class EditorData
 	toggles=577;
 	class ItemIDProvider
 	{
-		nextID=3068;
+		nextID=3186;
 	};
 	class MarkerIDProvider
 	{
-		nextID=220;
+		nextID=221;
 	};
 	class LayerIndexProvider
 	{
-		nextID=271;
+		nextID=275;
 	};
 	class Camera
 	{
-		pos[]={5736.6895,263.86032,20115.637};
-		dir[]={0.56783068,-0.66919762,-0.4793888};
-		up[]={0.51135343,0.74306458,-0.43170786};
-		aside[]={-0.64511484,-6.1004539e-007,-0.76413363};
+		pos[]={22456.273,58.808636,19473.164};
+		dir[]={0.50584525,-0.82894146,0.23870416};
+		up[]={0.74966568,0.55933452,0.35376093};
+		aside[]={0.42676258,5.5297278e-010,-0.9043653};
 	};
 };
 binarizationWanted=0;
@@ -66,13 +66,16 @@ addons[]=
 	"A3_Structures_F_System",
 	"A3_Structures_F_Exp_Infrastructure_Airports",
 	"A3_Structures_F_Enoch_Military_Airfield",
-	"A3_Structures_F_Ind_AirPort"
+	"A3_Structures_F_Ind_AirPort",
+	"A3_Structures_F_Enoch_Military_Radar",
+	"A3_Soft_F_Exp_LSV_01",
+	"A3_Soft_F_Exp_LSV_02"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=18;
+		items=19;
 		class Item0
 		{
 			className="A3_Characters_F";
@@ -199,6 +202,13 @@ class AddonsMetaData
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
+		class Item18
+		{
+			className="A3_Soft_F_Exp";
+			name="Arma 3 Apex - Unarmored Land Vehicles";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
 	};
 };
 dlcs[]=
@@ -217,7 +227,7 @@ class Mission
 {
 	class Intel
 	{
-		briefingName="Wasteland Custom v14.3";
+		briefingName="Wasteland Custom v14.4";
 		overviewText="Visit our discord https://discord.gg/ByZcqZx for more details";
 		resistanceWest=0;
 		timeOfChanges=28800;
@@ -236,7 +246,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=599;
+		items=605;
 		class Item0
 		{
 			dataType="Group";
@@ -6289,6 +6299,7 @@ class Mission
 					};
 					id=3062;
 					type="C_Truck_02_box_F";
+					atlOffset=-0.0090637207;
 				};
 				class Item39
 				{
@@ -6308,6 +6319,7 @@ class Mission
 					};
 					id=3063;
 					type="C_Truck_02_box_F";
+					atlOffset=-0.0015640259;
 				};
 				class Item40
 				{
@@ -6327,6 +6339,7 @@ class Mission
 					};
 					id=3064;
 					type="C_Truck_02_box_F";
+					atlOffset=-0.0024414063;
 				};
 				class Item41
 				{
@@ -6346,10 +6359,11 @@ class Mission
 					};
 					id=3067;
 					type="C_Truck_02_box_F";
+					atlOffset=-1.5258789e-005;
 				};
 			};
 			id=415;
-			atlOffset=49.673622;
+			atlOffset=49.669518;
 		};
 		class Item257
 		{
@@ -7832,7 +7846,7 @@ class Mission
 					};
 					id=2084;
 					type="C_man_1_1_F";
-					atlOffset=3.6209984;
+					atlOffset=3.4069519;
 					class CustomAttributes
 					{
 						class Attribute0
@@ -7881,7 +7895,7 @@ class Mission
 			{
 			};
 			id=2083;
-			atlOffset=3.6209984;
+			atlOffset=3.4069519;
 		};
 		class Item347
 		{
@@ -18153,6 +18167,98 @@ class Mission
 				};
 				nAttributes=2;
 			};
+		};
+		class Item599
+		{
+			dataType="Marker";
+			position[]={13241.233,0,29214.746};
+			name="marker_220";
+			text="https://discord.gg/ByZcqZx";
+			type="mil_dot";
+			id=3068;
+			atlOffset=185.97;
+		};
+		class Item600
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={23054.443,13.371485,18907.846};
+				angles[]={0,1.5707964,0};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+			};
+			id=3153;
+			type="Land_ControlTower_02_F";
+			atlOffset=-4.7683716e-007;
+		};
+		class Item601
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={22400.1,60.162254,19436.496};
+				angles[]={0,3.4533718,0};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+			};
+			id=3175;
+			type="Land_Radar_01_antenna_base_F";
+		};
+		class Item602
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={22400.4,81.627785,19435.896};
+				angles[]={0,5.024168,0};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+			};
+			id=3176;
+			type="Land_Radar_01_antenna_F";
+			atlOffset=3.8146973e-006;
+		};
+		class Item603
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={22468.365,43.918449,19462.07};
+				angles[]={0.21273139,0,6.0114136};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=3177;
+			type="B_T_LSV_01_AT_F";
+		};
+		class Item604
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={22465.086,44.504971,19462.943};
+				angles[]={0.24058181,0,6.0114136};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=3179;
+			type="O_T_LSV_02_AT_F";
 		};
 	};
 };

@@ -330,3 +330,15 @@ if (playerSide in [BLUFOR,OPFOR] && {{_x select 0 == _uid} count pvar_teamSwitch
 
 	titleText [format ["You have been locked to %1", _side], "PLAIN", 0.5];
 };
+
+player addEventHandler ["HandleHeal", {
+	_this spawn {
+		params ["_injured"];
+		private _damage = damage _injured;
+		waitUntil {damage _injured != _damage};
+		if (damage _injured < _damage) then
+		{
+			_injured setDamage 0;
+		};
+	};
+}];

@@ -37,7 +37,7 @@ else
 	else
 	{
 		_airdrop = (vectorMagnitude velocity _heliporteur > 15 || (getPos _heliporteur) select 2 > 40);
-
+		["enableDriving", _objet] call A3W_fnc_towingHelper;
 		if (local _objet) then
 		{
 			[_objet, _airdrop] call detachTowedObject;

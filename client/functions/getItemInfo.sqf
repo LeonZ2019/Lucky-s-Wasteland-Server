@@ -92,7 +92,7 @@ if (isNil "_itemEntry") then
 				_parentCfg = "CfgVehicles";
 			};
 		} forEach (call _x);
-	} forEach [backpackArray, genObjectsArray, genBuildingsArray, genWallsArray, staticGunsArray];
+	} forEach [backpackArray, genObjectsArray, genBuildingsArray, genWallsArray, staticGunsArray, genMiscArray];
 };
 
 if (!isNil "_itemEntry") then

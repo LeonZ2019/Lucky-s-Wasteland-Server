@@ -1316,6 +1316,8 @@ genBuildingsArray = compileFinal str
 	["Bag Bunker (Small, Green)", "Land_BagBunker_01_small_green_F", 250, "object"],
 	["Bag Bunker (Large, Green)", "Land_BagBunker_01_large_green_F", 500, "object"],
 	["Bag Bunker (Tower, Green)", "Land_HBarrier_01_tower_green_F", 1000, "object"],
+	["Old Bunker", "Land_Bunker_02_light_double_F", 1000, "object"],
+	["Modular Bunker", "Land_Bunker_01_small_F", 1000, "object"],
 	["Guard Tower (Big)", "Land_GuardTower_01_F", 200, "object"],
 	["Guard Tower (Small)", "Land_GuardTower_02_F", 150, "object"],
 	["Slum Canvas (Blue)", "Land_cargo_addon02_V1_F", 30, "object"],
@@ -1400,6 +1402,7 @@ genWallsArray = compileFinal str
 	["Razor Fence", "Land_Mil_WiredFence_F", 30, "object"],
 	["Razorwire Barrier", "Land_Razorwire_F", 75, "object"],
 	["Highway Guardrail", "Land_Crash_barrier_F", 200, "object"],
+	["Modular Bunker (Block)", "Land_Bunker_01_blocks_1_F", 300, "object"],
 	["Concrete Barrier", "Land_CncBarrier_F", 200, "object"],
 	["Concrete Barrier (Stripes)", "Land_CncBarrier_stripes_F", 200, "object"],
 	["Concrete Barrier (Medium)", "Land_CncBarrierMedium_F", 350, "object"],
@@ -1429,7 +1432,30 @@ genWallsArray = compileFinal str
 	["Sandbag Barricade (Tall)", "Land_SandbagBarricade_01_F", 300, "object"]
 ];
 
-allGenStoreVanillaItems = compileFinal str (call genItemArray + call genObjectsArray + call allStoreGear + call genBuildingsArray + call genWallsArray);
+genMiscArray = compileFinal str
+[
+	["Target Human", "TargetBootcampHuman_F", 50, "object"],
+	["Shooting Range Bell", "Land_MysteriousBell_01_F", 30, "object"],
+	["Shoot House - Wall", "Land_Shoot_House_Wall_F", 30, "object"],
+	["Shoot House - Wall (Stand)", "Land_Shoot_House_Wall_Stand_F", 30, "object"],
+	["Shoot House - Wall (Crouch)", "Land_Shoot_House_Wall_Crouch_F", 30, "object"],
+	["Shoot House - Wall (Prone)", "Land_Shoot_House_Wall_Prone_F", 30, "object"],
+	["Shoot House - Corner", "Land_Shoot_House_Corner_F", 30, "object"],
+	["Shoot House - Corner (Stand)", "Land_Shoot_House_Corner_Stand_F", 30, "object"],
+	["Shoot House - Corner (Crouch)", "Land_Shoot_House_Corner_Crouch_F", 30, "object"],
+	["Shoot House - Corner (Prone)", "Land_Shoot_House_Corner_Prone_F", 30, "object"],
+	["Shoot House - Panels", "Land_Shoot_House_Panels_F", 30, "object"],
+	["Shoot House - Panels (Crouch)", "Land_Shoot_House_Panels_Crouch_F", 30, "object"],
+	["Shoot House - Panels (Prone)", "Land_Shoot_House_Panels_Prone_F", 30, "object"],
+	["Shoot House - Panels (Vault)", "Land_Shoot_House_Panels_Vault_F", 30, "object"],
+	["Shoot House - Panels (Window)", "Land_Shoot_House_Panels_Window_F", 30, "object"],
+	["Shoot House - Tunnel", "Land_Shoot_House_Tunnel_F", 30, "object"],
+	["Shoot House - Tunnel (Stand)", "Land_Shoot_House_Tunnel_Stand_F", 30, "object"],
+	["Shoot House - Tunnel (Crouch)", "Land_Shoot_House_Tunnel_Crouch_F", 30, "object"],
+	["Shoot House - Tunnel (Prone)", "Land_Shoot_House_Tunnel_Prone_F", 30, "object"]
+];
+
+allGenStoreVanillaItems = compileFinal str (call genItemArray + call genObjectsArray + call allStoreGear + call genBuildingsArray + call genWallsArray + call genMiscArray);
 
 //Text name, classname, buy cost, spawn type, sell price (selling not implemented) or spawning color
 landArray = compileFinal str
@@ -1743,20 +1769,23 @@ colorsArray = compileFinal str
 			["AAF Green", _texDir + "aaf.paa"], // #(argb,8,8,3)color(0.546,0.59,0.363,0.2)
 			["Bloodshot", _texDir + "bloodshot.paa"],
 			["Carbon", _texDir + "carbon.paa"],
-			["Confederate", _texDir + "confederate.paa"],
-			["Denim", _texDir + "denim.paa"],
 			["US Multicam", _texDir + "us_multicam.paa"],
 			["NATO Woodland", _texDir + "nato_wooldland.paa"],
 			["LDF Woodland", _texDir + "ldf_woodland.paa"],
+			["AAF Digital Green", _texDir + "aaf_digital_green.paa"],
+			["Opfor Hex", _texDir + "opfor_hex.paa"],
+			["Green Hex", _texDir + "ghex.paa"],
+			["Grey Hex", _texDir + "grey.paa"],
 			["Digital", _texDir + "digi.paa"],
 			["Digital Black", _texDir + "digi_black.paa"],
 			["Digital Desert", _texDir + "digi_desert.paa"],
 			["Digital Woodland", _texDir + "digi_wood.paa"],
-			["AAF Digital Green", _texDir + "aaf_digital_green.paa"],
 			["Doritos", _texDir + "doritos.paa"],
 			["Drylands", _texDir + "drylands.paa"],
 			["Hello Kitty", _texDir + "hellokitty.paa"],
 			["Hex", _texDir + "hex.paa"],
+			["Confederate", _texDir + "confederate.paa"],
+			["Denim", _texDir + "denim.paa"],
 			["Hippie", _texDir + "hippie.paa"],
 			["ISIS", _texDir + "isis.paa"],
 			["Leopard", _texDir + "leopard.paa"],
@@ -1977,7 +2006,7 @@ customPlayerItems = compileFinal str
 	["Energy Drink", "energydrink", localize "STR_WL_ShopDescriptions_Energy_Drink", "client\icons\energydrink.paa", 100, 50],
 	["Quadbike", "quadbike", localize "STR_WL_ShopDescriptions_QuadBike", "\A3\Soft_F\Quadbike_01\Data\UI\Quadbike_01_CA.paa", 500, 250],
 	["Water Scooter", "waterscooter", localize "STR_WL_ShopDescriptions_WaterScooter", "\A3\Boat_F_Exp\Scooter_Transport_01\Data\UI\Scooter_Transport_01_CA.paa", 500, 250],
-	["Warchest", "warchest", localize "STR_WL_ShopDescriptions_Warchest", "client\icons\warchest.paa", 1000, 500, "HIDDEN"] 
+	["Warchest", "warchest", localize "STR_WL_ShopDescriptions_Warchest", "client\icons\warchest.paa", 1000, 500] 
 ];
 
 call compile preprocessFileLineNumbers "mapConfig\storeOwners.sqf";

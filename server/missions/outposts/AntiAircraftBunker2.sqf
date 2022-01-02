@@ -19,5 +19,5 @@
 	["Land_HBarrier_Big_F",[3.97888,20.6504,-0.00143862],0],
 	["Land_HBarrier_Big_F",[4.28931,-22.4639,-0.00143862],0],
 	["Land_HBarrier_Big_F",[-4.03577,-22.582,-0.00143862],0],
-	["O_Heli_Transport_04_covered_F",[-21.1565,1.39111,-0.33399],359.9, { _this call fn_refilltruck }]
+	["O_Heli_Transport_04_covered_F",[-21.1565,1.39111,0],359.9, { _this call fn_refilltruck }]
 ]

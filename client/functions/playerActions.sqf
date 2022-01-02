@@ -12,7 +12,7 @@
 	//["Unholster Primary Weapon", { player action ["SwitchWeapon", player, player, 0] }, [], -11, false, false, "", "vehicle player == player && currentWeapon player == '' && primaryWeapon player != ''"],
 
 	["<img image='client\icons\flat_grass.paa'/> Flatten Grass", "client\actions\flat_grass.sqf", [], 1, false, false, "", "vehicle player == player && !surfaceIsWater position player && getPosATL player select 2 <= 0.15"],
-	["<img image='client\icons\chop_tree.paa'/> Chop Tree", "client\actions\tree_cutter.sqf", [], 1, false, false, "", "vehicle player == player && alive player && cursorObject distance2D player <= 4 && (getModelInfo cursorObject select 0) in ['t_broussonetiap1s_f.p3d','t_ficusb1s_f.p3d','t_ficusb2s_f.p3d','t_fraxinusav2s_f.p3d','t_oleae1s_f.p3d','t_oleae2s_f.p3d','t_phoenixc1s_f.p3d','t_phoenixc3s_f.p3d','t_pinusp3s_f.p3d','t_pinuss1s_f.p3d','t_pinuss2s_b_f.p3d','t_pinuss2s_f.p3d','t_poplar2f_dead_f.p3d','t_populusn3s_f.p3d','t_quercusir2s_f.p3d']"],
+	["<img image='client\icons\chop_tree.paa'/> Chop Tree", "client\actions\tree_cutter.sqf", [], 1, false, false, "", "vehicle player == player && alive player && cursorObject distance2D player <= 4 && (getModelInfo cursorObject select 0) in ['t_broussonetiap1s_f.p3d','t_ficusb1s_f.p3d','t_ficusb2s_f.p3d','t_fraxinusav2s_f.p3d','t_oleae1s_f.p3d','t_oleae2s_f.p3d','t_phoenixc1s_f.p3d','t_phoenixc3s_f.p3d','t_pinusp3s_f.p3d','t_pinuss1s_f.p3d','t_pinuss2s_b_f.p3d','t_pinuss2s_f.p3d','t_poplar2f_dead_f.p3d','t_populusn3s_f.p3d','t_quercusir2s_f.p3d'] && alive cursorObject"],
 
 	[format ["<img image='client\icons\playerMenu.paa' color='%1'/> <t color='%1'>[</t>Player Menu<t color='%1'>]</t>", "#FF8000"], "client\systems\playerMenu\init.sqf", [], -10, false], //, false, "", ""],
 
@@ -44,7 +44,12 @@
 	[format ["<t color='#FF00FF'>Open magic parachute (%1)</t>", (actionKeysNamesArray "GetOver") param [0,"<'Step over' keybind>"]], A3W_fnc_openParachute, [], 20, true, true, "", "vehicle player == player && (getPos player) select 2 > 2.5"],
 
 	["Take Uniform", "client\actions\takeUniform.sqf", [0], 100, true, true, "", "getItemCargo cursorObject select 0 findIf { _x isKindOf ['Uniform_Base', configfile >> 'CfgWeapons'] && !(player isUniformAllowed _x) } != -1 && cursorObject distance player <= 3 && (typeOf cursorObject == 'GroundWeaponHolder' || cursorObject isKindOf 'ReammoBox_F')"], // from ground or crate
-	["Steal Uniform", "client\actions\takeUniform.sqf", [1], 100, true, true, "", "cursorObject isKindOf 'CAManBase' && !alive cursorObject && uniform cursorObject != '' && cursorObject distance player <= 3 && !(player isUniformAllowed (uniform cursorObject))"] // from dead body
+	["Steal Uniform", "client\actions\takeUniform.sqf", [1], 100, true, true, "", "cursorObject isKindOf 'CAManBase' && !alive cursorObject && uniform cursorObject != '' && cursorObject distance player <= 3 && !(player isUniformAllowed (uniform cursorObject))"], // from dead body
+	["<t color='#FF0000'>Look in gear</t>", "addons\surrender\surrender_actions.sqf", ["gear"], 1, false, false, "", "alive cursorObject && (cursorObject getVariable ['isSurrender',false]) && {(player distance cursorObject) < 5}"],
+	["<t color='#FF0000'>Grab money</t>", "addons\surrender\surrender_actions.sqf", ["money"], 1, false, false, "", "alive cursorObject && (cursorObject getVariable ['isSurrender',false]) && {(player distance cursorObject) < 5}"],
+	["<t color='#00FF7F'>Untie player</t>", "addons\surrender\surrender_actions.sqf", ["untie"], 1, false, false, "", "alive cursorObject && (cursorObject getVariable ['isSurrender',false]) && cursorObject getVariable ['isTied', false] && {(player distance cursorObject) < 5}"],
+	["<t color='#00FF7F'>Tie player</t>", "addons\surrender\surrender_actions.sqf", ["tie"], 1, false, false, "", "alive cursorObject && (cursorObject getVariable ['isSurrender',false]) && !(cursorObject getVariable ['isTied', false]) && {(player distance cursorObject) < 5}"]
+
 ];
 
 if (["A3W_vehicleLocking"] call isConfigOn) then

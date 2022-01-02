@@ -77,18 +77,5 @@ if (round getNumber (configFile >> "CfgVehicles" >> _uavClass >> "attendant") > 
 	_uav disableTIEquipment true;
 };*/
 
-if (typeOf _uav in ["B_Radar_System_01_F", "O_Radar_System_02_F"]) then
-{
-	_uav spawn
-	{
-		while {alive _this} do
-		{
-			{
-				_this lookAt (_this getRelPos [16000, _x]);
-				uiSleep 2;
-			} forEach [0, 120, 240];
-		};
-	};
-};
 _uav confirmSensorTarget [civilian, true];
 _grp

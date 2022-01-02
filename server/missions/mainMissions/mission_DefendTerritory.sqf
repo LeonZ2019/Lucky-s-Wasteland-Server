@@ -24,7 +24,7 @@ _setupVars =
 	_spawnRadius = selectMax (markerSize (_territory select 0)) * 2.5;
 	_missionPos = markerPos (_territory select 0);
 	_territoryName = _territory select 1;
-	_reward = (_territory select 2) * 20 max 50000;
+	_reward = (_territory select 2) * 25 max 40000;
 };
 
 _setupObjects =
@@ -81,7 +81,7 @@ _setupObjects =
 	_spawnWave =
 	{
 		params ["_trigger"];
-		private ["_aiGroup1", "_aiGroup2", "_aiGroup3", "_createVehicle", "_missionPos", "_attackers", "_attackersPool", "_spawnPositions", "_playerCount", "_triggerArea", "_minDist", "_maxDist", "_ranOff", "_tankClass", "_tank", "_heliClass", "_heli", "_speedMode"];
+		private ["_aiGroup1", "_aiGroup2", "_aiGroup3", "_createVehicle", "_missionPos", "_attackers", "_attackersPool", "_spawnPositions", "_playerCount", "_triggerArea", "_minDist", "_maxDist", "_ranOff", "_tankClass", "_tank", "_heliClass", "_heli", "_speedMode", "_tankPos", "_heliPos"];
 		_trigger setVariable ["Attacking", true, true];
 		_createVehicle = _trigger getVariable "createVehicle";
 		_missionPos = _trigger getVariable "missionPos";
@@ -89,12 +89,12 @@ _setupObjects =
 		_attackersPool = _trigger getVariable "AttackersPool";
 		_camo = _trigger getVariable "camo";
 		_spawnPositions = [];
-		_playerCount = count (allPlayers select { _x inArea _trigger }) max 3 min 1;
 		_triggerArea = triggerArea _trigger;
+		_playerCount = count (allPlayers select { _x inArea [position _trigger, _triggerArea select 0 * 1.5, _triggerArea select 1 * 1.5, _triggerArea select 2, _triggerArea select 3, -1] }) max 1 min 4;
 		_triggerArea resize 2;
-		_minDist = (selectMax _triggerArea) * 3 + 50;
+		_minDist = (selectMax _triggerArea) * 2 + 50;
 		_maxDist = _minDist * 1.5;
-		_perGroup = parseNumber ((_minDist * 0.03) toFixed 0);
+		_perGroup = parseNumber ((_minDist * 0.9) toFixed 0) max 10 min 20;
 		for "_i" from 0 to (_playerCount - 1) do
 		{
 			_pos = [position _trigger, _minDist, _maxDist, 5, 0, 1, 0] call BIS_fnc_findSafePos;
@@ -120,7 +120,9 @@ _setupObjects =
 			_attackers append (units _aiGroup1);
 			_attackersPool = _attackersPool - (count units _aiGroup1);
 			{
-				_waypoint = _aiGroup1 addWaypoint [_missionPos, 0];
+				_tankPos = _missionPos;
+				_tankPos set [2, 0];
+				_waypoint = _aiGroup1 addWaypoint [_tankPos, 0];
 				_waypoint setWaypointType _x;
 			} forEach ["SAD", "CYCLE"];
 			[_aiGroup1, 0] setWaypointCompletionRadius 25;
@@ -136,7 +138,7 @@ _setupObjects =
 				_variant = _heliClass select 1;
 				_heliClass = _heliClass select 0;
 			};
-			_heli = [_aiGroup2, _heliClass, position _trigger, _minDist + 1000, _maxDist + 1500,  "FLY", _variant] call _createVehicle;
+			_heli = [_aiGroup2, _heliClass, position _trigger, _minDist + 750, _maxDist + 1000,  "FLY", _variant] call _createVehicle;
 			_vehs = _trigger getVariable "Vehicles";
 			_vehs pushBack _heli;
 			_trigger setVariable ["Vehicles", _vehs, true];
@@ -149,7 +151,9 @@ _setupObjects =
 				};
 			} forEach getArray (configFile >> "CfgVehicles" >> _heliClass >> "magazines");
 			{
-				_waypoint = _aiGroup2 addWaypoint [_missionPos, 0];
+				_heliPos = _missionPos;
+				_heliPos set [2, 50];
+				_waypoint = _aiGroup2 addWaypoint [_heliPos, 0];
 				_waypoint setWaypointType "_x";
 			} forEach ["MOVE", "LOITER"];
 			[_aiGroup2, 0] setWaypointCompletionRadius 25;
@@ -195,7 +199,7 @@ _setupObjects =
 	_trigger setVariable ["Attackers", [], true];
 	_trigger setVariable ["Vehicles", [], true];
 	_trigger setVariable ["missionPos", _missionPos, true];
-	_trigger setVariable ["AttackersPool", (count allPlayers) * 25 max 100, true];
+	_trigger setVariable ["AttackersPool", (count allPlayers) * 40 max 250, true];
 	_trigger setTriggerActivation ["ANYPLAYER", "PRESENT", false];
 	_triggerArea = markerSize (_territory select 0) + [markerDir (_territory select 0), markerShape (_territory select 0) == "RECTANGLE", 50];
 	_trigger setTriggerArea _triggerArea;
@@ -233,22 +237,29 @@ _successExec =
 		[_x, _reward] call A3W_fnc_setCMoney;
 	} forEach (allPlayers select { _x inArea _trigger });
 
-	// airdrop like GeoCache
-	playSound3D ["A3\data_f_curator\sound\cfgsounds\air_raid.wss", _box1, false, _box1, 15, 1, 1500];
-
 	_randomBox = ["mission_USLaunchers","mission_RULaunchers","mission_USSpecial","mission_Main_A3snipers","mission_RUSniper"];
 	_randomCase = ["Box_FIA_Support_F","Box_FIA_Wps_F","Box_FIA_Ammo_F"] call BIS_fnc_selectRandom;
 
-	_box1 = createVehicle [_randomCase, (position _trigger) vectorAdd [random 30 + 25, random 30 + 25, random 30 + 170], [], 0, "NONE"];
-	_box2 = createVehicle [_randomCase, (position _trigger) vectorAdd [random 30 + 25, random 30 + 25, random 30 + 170], [], 0, "NONE"];
-	_box3 = createVehicle [_randomCase, (position _trigger) vectorAdd [random 30 + 25, random 30 + 25, random 30 + 170], [], 0, "NONE"];
+	_box1 = createVehicle [_randomCase, (position _trigger) vectorAdd [random 30 + 15, random 30 + 35, random 30 + 80], [], 0, "NONE"];
+	_box2 = createVehicle [_randomCase, (position _trigger) vectorAdd [random 30 + 25, random 30 + 25, random 30 + 120], [], 0, "NONE"];
+	_box3 = createVehicle [_randomCase, (position _trigger) vectorAdd [random 30 + 35, random 30 + 15, random 30 + 100], [], 0, "NONE"];
 
 	{
 		_x setDir random 360;
 		[_x, _randomBox call BIS_fnc_selectRandom] call fn_refillbox;
 		_x setVariable ["R3F_LOG_disabled", false, true];
-		pvar_parachuteLiftedVehicle = netId _x;
-		publicVariableServer "pvar_parachuteLiftedVehicle";
+
+		_para = createVehicle [format ["I_parachute_02_F"], [0,0,999999], [], 0, ""];
+		_para setDir getDir _x;
+		_para setPosATL getPosATL _x;
+		_x attachTo [_para, [0, 0, 0]];
+
+		while {(getPos _x) select 2 > 3 && attachedTo _x == _para} do
+		{
+			_para setVectorUp [0,0,1];
+			_para setVelocity [0, 0, (velocity _para) select 2];
+			uiSleep 0.1;
+		};
 	} forEach [_box1, _box2, _box3];
 
 	_successHintMessage = format ["Territory %1 has secured! Grab the reward", _territoryName];

@@ -12,6 +12,7 @@ if (!unitIsUAV _veh) then
 
 	_veh removeEventHandler ["Engine", _veh getVariable ["A3W_engineEH", -1]];
 	_veh setVariable ["A3W_engineEH", nil];
+	if (isEngineOn _veh) then { _veh engineOn false; };
 
 	if ({alive _x} count crew _veh == 0) then
 	{

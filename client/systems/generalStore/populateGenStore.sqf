@@ -90,6 +90,11 @@ switch(_switch) do
 		_itemsArray = call genWallsArray;
 		_showPicture = false;
 	};
+	case 9:
+	{
+		_itemsArray = call genMiscArray;
+		_showPicture = false;
+	};
 	default
 	{
 		_itemsArray = [];

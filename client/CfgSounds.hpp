@@ -10,3 +10,9 @@ class MissileAlarm
 	sound[] = {"client\sounds\alarm_locked_by_missile_4x15.ogg", 0.25, 1};
 	titles[] = {0,""};
 };
+class chopTree
+{
+	name = "chopTree";
+	sound[] = {"client\sounds\chopTree.ogg", 1, 1};
+	titles[] = {0, ""};
+};

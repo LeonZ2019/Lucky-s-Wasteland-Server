@@ -77,7 +77,7 @@ if (_texture isEqualType "") then
 			case (_veh isKindOf "UGV_01_base_F"):                  { [1] };
 			case (_veh isKindOf "UGV_02_Base_F"):                  { [1] };
 
-			case (_veh isKindOf "MRAP_01_base_F"):                 { [0,1] };
+			case (_veh isKindOf "MRAP_01_base_F"):                 { [0] };
 //			case (_veh isKindOf "MRAP_02_base_F"):                 { [] };
 //			case (_veh isKindOf "MRAP_03_base_F"):                 { [] };
 

@@ -30,7 +30,7 @@ _setupObjects =
 	_variant = _vehicleClass select 1;
 	_vehicleClass = _vehicleClass select 0;
 	_safePos = [_missionPos, 0, 30, 5, 0, 0, 0] call findSafePos;
-	_vehicle = [_vehicleClass, _safePos, 0.5, 1, 0.25, "NONE", _variant] call createMissionVehicle;
+	_vehicle = [_vehicleClass, _safePos, 1, 1, 0, "NONE", _variant] call createMissionVehicle;
 	_vehicle setDir (markerDir _missionLocation);
 	reload _vehicle;
 

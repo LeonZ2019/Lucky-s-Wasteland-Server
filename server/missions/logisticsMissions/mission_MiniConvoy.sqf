@@ -30,10 +30,9 @@ _setupObjects =
 	else
 	{
 		[
-			["B_T_LSV_01_unarmed_F", "B_Truck_01_transport_F", "B_T_LSV_01_unarmed_F"],
-			["O_LSV_02_unarmed_F", "O_Truck_02_transport_F", "O_LSV_02_unarmed_F"],
-			["I_C_Offroad_02_unarmed_F", "I_Truck_02_transport_F", "I_C_Offroad_02_unarmed_F"],
-			["I_G_Offroad_01_F", "I_Truck_02_transport_F", "I_G_Offroad_01_F"]
+			["B_MRAP_01_hmg_F", "B_Truck_01_transport_F", "B_MRAP_01_hmg_F"],
+			["O_MRAP_02_hmg_F", "O_Truck_02_transport_F", "O_MRAP_02_hmg_F"],
+			["I_MRAP_03_hmg_F", "I_Truck_02_transport_F", "I_MRAP_03_hmg_F"]
 		] call BIS_fnc_selectRandom;
 	};
 

@@ -9,13 +9,13 @@ if (!isServer) exitWith {};
 MainMissions =
 [
 	// Mission filename, weight
-	["mission_ArmedDiversquad", 1],
-	["mission_Coastal_Convoy", 1],
+	["mission_ArmedDiversquad", 0.7],
+	["mission_Coastal_Convoy", 0.7],
 	["mission_Convoy", 1],
 	["mission_HostileHeliFormation", 0.5],
 	["mission_APC", 1],
 	["mission_MBT", 1],
-	["mission_LightArmVeh", 1],
+	["mission_LightArmVeh", 0.7],
 	["mission_ArmedHeli", 0.5],
 	["mission_CivHeli", 1],
 	["mission_deviceDelivery", 0.8],

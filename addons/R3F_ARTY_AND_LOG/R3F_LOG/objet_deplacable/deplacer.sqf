@@ -33,7 +33,7 @@ else
 
 	R3F_LOG_objet_selectionne = objNull;
 
-	private ["_isSwimming", "_est_calculateur", "_arme_principale", "_arme_principale_accessoires", "_arme_principale_magasines", "_action_menu_release_relative", "_action_menu_release_horizontal" , "_action_menu_45", "_action_menu_90", "_action_menu_180", "_azimut_canon", "_muzzles", "_magazine", "_ammo", "_adjustPOS"];
+	private ["_isSwimming", "_est_calculateur", "_arme_principale", "_arme_principale_accessoires", "_arme_principale_magasines", "_action_menu_release_relative", "_action_menu_release_horizontal", "_action_menu_release_collide", "_action_menu_45", "_action_menu_move_upward", "_action_menu_move_downward", "_idx_eh_keyDown", "_azimut_canon", "_muzzles", "_magazine", "_ammo", "_adjustPOS"];
 
 	if(isNil {_objet getVariable "R3F_Side"}) then {
 		_objet setVariable ["R3F_Side", (playerSide), true];
@@ -98,39 +98,35 @@ else
 			_corner2 = [_objectMinBB select 0, _objectMaxBB select 1, 0] vectorDistance [0,0,0];
 			_corner3 = [_objectMaxBB select 0, _objectMinBB select 1, 0] vectorDistance [0,0,0];
 			_corner4 = [_objectMaxBB select 0, _objectMaxBB select 1, 0] vectorDistance [0,0,0];
-
-			_objet attachTo [player,
-			[
-				0,
-				1 + (_corner1 max _corner2 max _corner3 max _corner4),
-				0.1 - (_objectMinBB select 2)
-			]];
-
-			/*if (count (weapons _objet) > 0) then
-			{
-				// Le canon doit pointer devant nous (sinon on a l'impression de se faire empaler)
-				_azimut_canon = ((_objet weaponDirection (weapons _objet select 0)) select 0) atan2 ((_objet weaponDirection (weapons _objet select 0)) select 1);
-
-				// On est obligé de demander au serveur de tourner le canon pour nous
-				R3F_ARTY_AND_LOG_PUBVAR_setDir = [_objet, (getDir _objet)-_azimut_canon];
-				if (isServer) then
-				{
-					["R3F_ARTY_AND_LOG_PUBVAR_setDir", R3F_ARTY_AND_LOG_PUBVAR_setDir] spawn R3F_ARTY_AND_LOG_FNCT_PUBVAR_setDir;
-				}
-				else
-				{
-					publicVariable "R3F_ARTY_AND_LOG_PUBVAR_setDir";
-				};
-			};*/
-
+			_attachPos = [0, 1 + (_corner1 max _corner2 max _corner3 max _corner4), 0.1 - (_objectMinBB select 2)];
+			_objet attachTo [player, _attachPos];
+			_objet setVariable ["attachPos", _attachPos, true];
+			_objet setVariable ["elevationLimit", abs ((_objectMaxBB select 2) - (_objectMinBB select 2)), true];
+			_objet setVariable ["elevationLevel", 0, true];
 			R3F_LOG_mutex_local_verrou = false;
-			R3F_LOG_force_horizontally = false;
 
-			_action_menu_release_relative = player addAction [("<img image='client\icons\r3f_release.paa' color='#06ef00'/> <t color='#06ef00'>" + STR_R3F_LOG_action_relacher_objet + "</t>"), "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\relacher.sqf", false, 5.5, true, true];
-			_action_menu_release_horizontal = player addAction [("<img image='client\icons\r3f_releaseh.paa' color='#06ef00'/> <t color='#06ef00'>" + STR_RELEASE_HORIZONTAL + "</t>"), "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\relacher.sqf", true, 5.5, true, true];
-			_action_menu_45 = player addAction [("<img image='client\icons\r3f_rotate.paa' color='#06ef00'/> <t color='#06ef00'>Rotate object 45°</t>"), "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\rotate.sqf", 45, 5.5, true, false];
-			//_action_menu_90 = player addAction [("<img image='client\ui\ui_arrow_combo_ca.paa'/> <t color='#dddd00'>Rotate object 90°</t>"), "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\rotate.sqf", 90, 5, true, false];
-			//_action_menu_180 = player addAction [("<img image='client\ui\ui_arrow_combo_ca.paa'/> <t color='#dddd00'>Rotate object 180°</t>"), "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\rotate.sqf", 180, 5, true, false];
+			_action_menu_release_relative = player addAction [("<img image='client\icons\r3f_release.paa' color='#06ef00'/> <t color='#06ef00'>" + STR_R3F_LOG_action_relacher_objet + "</t>"), "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\relacher.sqf", "normal", 5.5, true, true];
+			_action_menu_release_horizontal = player addAction [("<img image='client\icons\r3f_releaseh.paa' color='#06ef00'/> <t color='#06ef00'>" + STR_RELEASE_HORIZONTAL + "</t>"), "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\relacher.sqf", "horizontal", 5.5, true, true];
+
+			_action_menu_release_collide = player addAction [("<img image='client\icons\r3f_releaseh.paa' color='#06ef00'/> <t color='#06ef00'>" + STR_R3F_LOG_action_relacher_objet_collide + "</t>"), "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\relacher.sqf", "collide", 5.5, true, true];
+
+			_action_menu_45 = player addAction [("<img image='client\icons\r3f_rotate.paa' color='#06ef00'/> <t color='#06ef00'>Rotate object 45° (Q/E)</t>"), "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\rotate.sqf", 45, 5.5, true, false];
+
+			_action_menu_move_upward = player addAction [("<img image='client\icons\r3f_up.paa' color='#06ef00'/> <t color='#06ef00'>Upward object (Page Up)</t>"), "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\elevation.sqf", 0.5, 5.5, true, false, "", '((R3F_LOG_joueur_deplace_objet getVariable ["elevationLevel", 0]) + 0.5) < ((R3F_LOG_joueur_deplace_objet getVariable "elevationLimit") * 0.9)'];
+
+			_action_menu_move_downward = player addAction [("<img image='client\icons\r3f_up.paa' color='#06ef00'/> <t color='#06ef00'>Upward object (Page Down)</t>"), "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\elevation.sqf", -0.5, 5.5, true, false, "",'abs ((R3F_LOG_joueur_deplace_objet getVariable ["elevationLevel", 0]) - 0.5) > ((R3F_LOG_joueur_deplace_objet getVariable "elevationLimit") * 0.9)'];
+
+			_idx_eh_keyDown = (findDisplay 46) displayAddEventHandler ["KeyDown",
+			{
+				switch (_this select 1) do
+				{
+					case 16: {[0,0,0,5] execVM "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\rotate.sqf"; true}; //Q
+					case 18: {[0,0,0,-5] execVM "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\rotate.sqf"; true}; //E
+					case 201: {[0,0,0,0.25] execVM "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\elevation.sqf"; true}; //PageUp
+					case 209: {[0,0,0,-0.25] execVM "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\elevation.sqf"; true}; //PageDown
+					default {false};
+				}
+			}];
 
 			// On limite la vitesse de marche et on interdit de monter dans un véhicule tant que l'objet est porté
 			while {attachedTo R3F_LOG_joueur_deplace_objet == player && alive player} do
@@ -179,42 +175,46 @@ else
 					case (_class == "Land_PierLadder_F"):          { 2 };
 					default { 0 };
 				};
-
-				if (R3F_LOG_force_horizontally) then
+				switch (R3F_LOG_release_type) do
 				{
-					R3F_LOG_force_horizontally = false;
-
-					_objectATL = getPosATL _objet;
-
-					if ((_objectATL select 2) - _zOffset < 0) then
+					case "normal":
 					{
-						_objectATL set [2, 0 + _zOffset];
-						_objet setPosATL _objectATL;
-					}
-					else
-					{
-						_objectASL = getPosASL _objet;
-						_objectASL set [2, ((getPosASL player) select 2) + _zOffset];
-						_objet setPosASL _objectASL;
+						_objectPos = _objet call fn_getPos3D;
+						_objectPos set [2, ((player call fn_getPos3D) select 2) + _zOffset];
+						_objet setPos _objectPos;
 					};
-
+					case "horizontal":
+					{
+						_objectATL = getPosATL _objet;
+						if ((_objectATL select 2) - _zOffset < 0) then
+						{
+							_objectATL set [2, 0 + _zOffset];
+							_objet setPosATL _objectATL;
+						} else
+						{
+							_objectASL = getPosASL _objet;
+							_objectASL set [2, ((getPosASL player) select 2) + _zOffset];
+							_objet setPosASL _objectASL;
+						};
 					_objet setVectorUp [0,0,1];
-				}
-				else
-				{
-					_objectPos = _objet call fn_getPos3D;
-					_objectPos set [2, ((player call fn_getPos3D) select 2) + _zOffset];
-					_objet setPos _objectPos;
-				};
 
+					};
+					case "collide":
+					{
+						_objectATL = getPosATL _objet;
+						_objet setPosATL _objectATL;
+					};
+				};
 				_objet setVelocity [0,0,0];
 			};
 
 			player removeAction _action_menu_release_relative;
 			player removeAction _action_menu_release_horizontal;
+			player removeAction _action_menu_release_collide;
 			player removeAction _action_menu_45;
-			//player removeAction _action_menu_90;
-			//player removeAction _action_menu_180;
+			player removeAction _action_menu_move_upward;
+			player removeAction _action_menu_move_downward;
+			(findDisplay 46) displayRemoveEventHandler ["KeyDown", _idx_eh_keyDown];
 
 			if (_objet getVariable ["R3F_LOG_est_deplace_par", objNull] == player) then
 			{

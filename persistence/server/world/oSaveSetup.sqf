@@ -20,7 +20,7 @@ A3W_saveableObjects = [];
 			A3W_saveableObjects pushBack toLower _obj;
 		};
 	} forEach _x;
-} forEach [objectList, essentialsList, call genObjectsArray, call genBuildingsArray, call genWallsArray];
+} forEach [objectList, essentialsList, call genObjectsArray, call genBuildingsArray, call genWallsArray, call genMiscArray];
 
 _savingInterval = (["A3W_serverSavingInterval", 60] call getPublicVar) / 3;
 

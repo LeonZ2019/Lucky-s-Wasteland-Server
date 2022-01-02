@@ -356,6 +356,29 @@ va_unlock_action = {
   [_vehicle] call va_unlock;
 };
 
+va_transfer_action = {
+  ARGVX3(3,_this,[]);
+  ARGVX3(0,_player,objNull);
+  ARGVX3(1,_vehicle,objNull);
+  init(_playerList, []);
+  init(_menu, []);
+  {
+    if (_x != _player && _player distance _vehicle <= 15 && _x distance _vehicle <= 15 && side _player == side _x) then
+    {
+      _playerList pushBack [netId _x, name _x];
+    };
+  } forEach allPlayers;
+  _playerList = [_playerList, [], { _vehicle distance (objectFromNetId (_x select 0)) }, "ASCEND"] call BIS_fnc_sortBy;
+  if (count _playerList > 5) then { _playerList resize 5; };
+  _menu = [["Transfer ownership to",true]];
+  {
+    _menu pushBack [_x select 1, [12], "", -5, [["expression", format['(objectFromNetId %1) setVariable ["OwnerUID", (objectFromNetId %2), true];', str (netId _vehicle), str (_x select 0)]]], "1", "1"];
+  } forEach _playerList;
+  _menu pushBack ["", [-1], "", -5, [["expression", ""]], "1", "0"];
+  _menu pushBack ["Exit", [13], "", -5, [["expression", ""]], "1", "1"];
+  showCommandingMenu "#USER:_menu";
+};
+
 va_is_lockable = {
   ARGVX3(0,_vehicle,objNull);
 
@@ -379,7 +402,7 @@ va_lock_action_available = {
 
   if (not([_vehicle] call va_is_lockable)) exitWith {false};
 
-  if (cfg_va_lock_from_inside &&  {[_player, _vehicle] call va_player_inside}) exitWith {true};
+  if (cfg_va_lock_from_inside && {[_player, _vehicle] call va_player_inside} && (driver _vehicle == _player)) exitWith {true};
 
   if (cfg_va_lock_owner_only && {not([_player, _vehicle] call va_is_player_owner)}) exitWith {false};
 
@@ -403,6 +426,17 @@ va_unlock_action_available = {
   true
 };
 
+va_is_transferable_action = {
+
+  ARGVX4(0,_player,objNull,false);
+  ARGVX4(1,_vehicle,objNull,false);
+
+  if (not(alive _vehicle)) exitWith {false};
+
+  if (cfg_va_lock_owner_only && {[_player, _vehicle] call va_is_player_owner} && {count (allPlayers select {_x != player && _x distance _vehicle <= 15}) > 0}) exitWith {true};
+
+  false
+};
 
 va_outside_actions = OR(va_outside_actions,[]);
 
@@ -474,6 +508,11 @@ va_outside_add_actions = {
   //Add vehicle unlock action
   _action_id = player addaction [format["<img image='addons\vactions\icons\key.paa'/> Unlock %1", _display_name], {_this call va_unlock_action;}, [_player, _vehicle],999,true,false,"",
   format["([objectFromNetId %1, objectFromNetId %2] call va_unlock_action_available)", str(netId _player), str(netId _vehicle)]];
+  va_outside_actions = va_outside_actions + [_action_id];
+
+  //Add transfer owner action
+  _action_id = player addaction ["<img image='addons\vactions\icons\transfer.paa'/> Transfer ownership", {_this call va_transfer_action;}, [_player, _vehicle],1,true,false,"",
+  format["([objectFromNetId %1, objectFromNetId %2] call va_is_transferable_action)", str(netId _player), str(netId _vehicle)]];
   va_outside_actions = va_outside_actions + [_action_id];
 };
 

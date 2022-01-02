@@ -103,6 +103,9 @@ if (hasInterface || isServer) then
 	[] execVM "addons\HvT\HvT.sqf";
 	[] execVM "addons\suicideVest\init.sqf";
 	[] execVM "addons\APOC_Airdrop_Assistance\init.sqf";
+	[] execVM "addons\surrender\init.sqf";
+	[] execVM "addons\scripts\intro.sqf";
+	[] execVM "addons\infoPage\key_press.sqf";
 
 	if (isNil "drn_DynamicWeather_MainThread") then { drn_DynamicWeather_MainThread = [] execVM "addons\scripts\DynamicWeatherEffects.sqf" };
 };

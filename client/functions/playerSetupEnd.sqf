@@ -14,3 +14,4 @@ _player addRating 1e11;
 
 _player groupChat "Wasteland - Initialization Complete";
 playerSetupComplete = true;
+[] execVM "addons\infoPage\infoPage.sqf";
