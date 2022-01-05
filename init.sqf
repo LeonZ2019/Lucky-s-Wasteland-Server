@@ -106,6 +106,7 @@ if (hasInterface || isServer) then
 	[] execVM "addons\surrender\init.sqf";
 	[] execVM "addons\scripts\intro.sqf";
 	[] execVM "addons\infoPage\key_press.sqf";
+	[] execVM "addons\scripts\artilleryRestrictedZone.sqf";
 
 	if (isNil "drn_DynamicWeather_MainThread") then { drn_DynamicWeather_MainThread = [] execVM "addons\scripts\DynamicWeatherEffects.sqf" };
 };

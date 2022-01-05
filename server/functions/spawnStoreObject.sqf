@@ -281,7 +281,13 @@ if (_key != "" && _player isKindOf "Man" && {_isGenStore || _isGunStore || _isVe
 			[_object] call vehicleSetup;
 			_object allowDamage _isDamageable;
 			_object setVariable ["allowDamage", _isDamageable, true];
-
+			if (_object isKindOf "TargetBootcampHuman_F") then
+			{
+				_object addEventHandler ["HandleDamage", {
+					params ["_object"];
+					_object setDamage 0;
+				}];
+			};
 			clearBackpackCargoGlobal _object;
 
 			// give diving gear to RHIB, Speedboat, and SDV

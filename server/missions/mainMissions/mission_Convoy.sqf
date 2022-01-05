@@ -45,7 +45,6 @@ _setupObjects =
 
 		_vehicle = createVehicle [_type, _position, [], 0, "None"];
 		_vehicle setVariable ["R3F_LOG_disabled", true, true];
-		//_vehicle setVariable ["A3W_skipAutoSave", true, true];
 		[_vehicle] call vehicleSetup;
 
 		// apply tropical textures to vehicles on Tanoa
@@ -72,15 +71,14 @@ _setupObjects =
 			_soldier = [_aiGroup, _position, _camo] call createRandomSoldier;
 			_soldier moveInGunner _vehicle;
 
-			_soldier = [_aiGroup, _position, _camo] call createRandomSoldier;
-
-			if (_vehicle emptyPositions "commander" > 0) then
+			if !(_type isKindOf "Offroad_01_base_F") then
 			{
-				_soldier moveInCommander _vehicle;
-			}
-			else
-			{
-				_soldier moveInCargo [_vehicle, 1];
+				_soldier = [_aiGroup, _position, _camo] call createRandomSoldier;
+				_soldier moveInCargo _vehicle;
+				_soldier = [_aiGroup, _position, _camo] call createRandomSoldier;
+				_soldier moveInCargo _vehicle;
+				_soldier = [_aiGroup, _position, _camo] call createRandomSoldier;
+				_soldier moveInCargo _vehicle;
 			};
 		};
 

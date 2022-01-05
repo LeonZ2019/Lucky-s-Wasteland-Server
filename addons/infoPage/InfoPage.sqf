@@ -23,3 +23,5 @@ hint parseText format ["
 <t align='center'><t shadow= 1 shadowColor='#000000'><t size='1.2'><t color='#eda92a'>Lucky's Wasteland</t>%2
 <br/>
 ",name player, _text];
+sleep 5;
+hintSilent "";

@@ -21,6 +21,14 @@ if (["A3W_unlimitedStamina"] call isConfigOn) then
 	_player enableStamina false;
 };
 
+if (["_sniper_", typeOf _player] call fn_findString != -1) then
+{
+	_player setCustomAimCoef 0.45;
+} else
+{
+	_player setCustomAimCoef 0.75;
+};
+
 enableSentences false;
 
 removeAllWeapons _player;

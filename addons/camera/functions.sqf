@@ -974,7 +974,7 @@ camera_create = {
 
     camera_unit commandChat format["waiting!"];
     waitUntil {
-      (not(alive _player) || (isNull ([_player,"camera",objNull] call object_getVariable)))
+      (not(alive _player) || (isNil {[_player,"camera",nil] call object_getVariable}))
     };
 
     [_player] call camera_destroy;

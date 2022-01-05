@@ -57,8 +57,8 @@ _setupObjects =
 		params ["_miller", "_vehicle"];
 		waitUntil
 		{
-			uiSleep 1;
-			(count (crew _vehicle) == 0) && (_miller distance2D _vehicle) < 12.5 && ((getPos _vehicle) select 2 < 5) && (vectorMagnitude velocity _vehicle < 1)
+			sleep 1;
+			(count (crew _vehicle) == 0) && (_miller distance _vehicle) < 12.5 && ((getPos _vehicle) select 2 < 5) && (vectorMagnitude velocity _vehicle < 1)
 		};
 		_miller enableAI "MOVE";
 		_miller assignAsDriver _vehicle;
@@ -94,7 +94,7 @@ _successExec =
 	_cash setVariable ["cmoney", 10000, true];
 
 	_currBox1 = ["Box_East_WpsSpecial_F","Box_NATO_WpsSpecial_F"] call BIS_fnc_selectRandom;
-	_box1 = createVehicle [_currBox1, _pos, [], 1, "None"];
+	_box1 = createVehicle [_currBox1, _pos, [], 0, "None"];
 	_box1 setDir random 360;
 	[_box1, "mission_CTRGGears"] call fn_refillbox;
 

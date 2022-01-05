@@ -6,21 +6,21 @@ switch (_action) do {
 	case ("gear"): {player action ["Gear", _target]};
 	case ("money"):
 	{
-		_targetMoney = _target getVariable ["cmoney",0];
+		_targetMoney = _target getVariable ["cmoney", 0];
 		if (_targetMoney == 0) then
 		{
 			player groupChat "This player is poor.";
 		} else
 		{
-			[player, _targetMoney] call A3W_fnc_setCMoney;
-			[_target, -_targetMoney] call A3W_fnc_setCMoney;
-			player groupChat format ["You have grab $%1 in %2's pockets.", _targetMoney, name _target];
+			player groupChat format ["%1's pockets have $%2.", name _target, _targetMoney];
 		};
 	};
 	case ("untie"): {
 		_target setVariable ["isTied",false,true];
+		playSound3D [getMissionPath "client\sounds\untie.ogg", player, true, getPosASL player, 5, 1, 10];
 	};
 	case ("tie"): {
 		_target setVariable ["isTied",true,true];
+		playSound3D [getMissionPath "client\sounds\zipTie.ogg", player, true, getPosASL player, 5, 1, 10];
 	};
 };

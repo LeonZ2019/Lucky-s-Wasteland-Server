@@ -100,9 +100,6 @@ else
 			_corner4 = [_objectMaxBB select 0, _objectMaxBB select 1, 0] vectorDistance [0,0,0];
 			_attachPos = [0, 1 + (_corner1 max _corner2 max _corner3 max _corner4), 0.1 - (_objectMinBB select 2)];
 			_objet attachTo [player, _attachPos];
-			_objet setVariable ["attachPos", _attachPos, true];
-			_objet setVariable ["elevationLimit", abs ((_objectMaxBB select 2) - (_objectMinBB select 2)), true];
-			_objet setVariable ["elevationLevel", 0, true];
 			R3F_LOG_mutex_local_verrou = false;
 
 			_action_menu_release_relative = player addAction [("<img image='client\icons\r3f_release.paa' color='#06ef00'/> <t color='#06ef00'>" + STR_R3F_LOG_action_relacher_objet + "</t>"), "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\relacher.sqf", "normal", 5.5, true, true];
@@ -112,21 +109,27 @@ else
 
 			_action_menu_45 = player addAction [("<img image='client\icons\r3f_rotate.paa' color='#06ef00'/> <t color='#06ef00'>Rotate object 45° (Q/E)</t>"), "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\rotate.sqf", 45, 5.5, true, false];
 
-			_action_menu_move_upward = player addAction [("<img image='client\icons\r3f_up.paa' color='#06ef00'/> <t color='#06ef00'>Upward object (Page Up)</t>"), "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\elevation.sqf", 0.5, 5.5, true, false, "", '((R3F_LOG_joueur_deplace_objet getVariable ["elevationLevel", 0]) + 0.5) < ((R3F_LOG_joueur_deplace_objet getVariable "elevationLimit") * 0.9)'];
-
-			_action_menu_move_downward = player addAction [("<img image='client\icons\r3f_up.paa' color='#06ef00'/> <t color='#06ef00'>DownWard object (Page Down)</t>"), "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\elevation.sqf", -0.5, 5.5, true, false, "",'abs ((R3F_LOG_joueur_deplace_objet getVariable ["elevationLevel", 0]) - 0.5) < ((R3F_LOG_joueur_deplace_objet getVariable "elevationLimit") * 0.9)'];
-
-			_idx_eh_keyDown = (findDisplay 46) displayAddEventHandler ["KeyDown",
+			_action_menu_move_upward = -1;
+			_action_menu_move_downward = -1;
+			if ({R3F_LOG_joueur_deplace_objet isKindOf _x} count ["Thing","Building"] > 0) then
 			{
-				switch (_this select 1) do
+				_objet setVariable ["attachPos", _attachPos, true];
+				_objet setVariable ["elevationLimit", abs ((_objectMaxBB select 2) - (_objectMinBB select 2)), true];
+				_objet setVariable ["elevationLevel", 0, true];
+				_action_menu_move_upward = player addAction [("<img image='client\icons\r3f_up.paa' color='#06ef00'/> <t color='#06ef00'>Upward object (Page Up)</t>"), "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\elevation.sqf", 0.5, 5.5, true, false, "", '((R3F_LOG_joueur_deplace_objet getVariable ["elevationLevel", 0]) + 0.5) < ((R3F_LOG_joueur_deplace_objet getVariable "elevationLimit") * 0.9)'];
+				_action_menu_move_downward = player addAction [("<img image='client\icons\r3f_up.paa' color='#06ef00'/> <t color='#06ef00'>DownWard object (Page Down)</t>"), "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\elevation.sqf", -0.5, 5.5, true, false, "",'abs ((R3F_LOG_joueur_deplace_objet getVariable ["elevationLevel", 0]) - 0.5) < ((R3F_LOG_joueur_deplace_objet getVariable "elevationLimit") * 0.9)'];
+				_idx_eh_keyDown = (findDisplay 46) displayAddEventHandler ["KeyDown",
 				{
-					case 16: {[0,0,0,5] execVM "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\rotate.sqf"; true}; //Q
-					case 18: {[0,0,0,-5] execVM "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\rotate.sqf"; true}; //E
-					case 201: {[0,0,0,0.25] execVM "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\elevation.sqf"; true}; //PageUp
-					case 209: {[0,0,0,-0.25] execVM "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\elevation.sqf"; true}; //PageDown
-					default {false};
-				}
-			}];
+					switch (_this select 1) do
+					{
+						case 16: {[0,0,0,5] execVM "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\rotate.sqf"; true}; //Q
+						case 18: {[0,0,0,-5] execVM "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\rotate.sqf"; true}; //E
+						case 201: {[0,0,0,0.25] execVM "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\elevation.sqf"; true}; //PageUp
+						case 209: {[0,0,0,-0.25] execVM "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\elevation.sqf"; true}; //PageDown
+						default {false};
+					}
+				}];
+			};
 
 			// On limite la vitesse de marche et on interdit de monter dans un véhicule tant que l'objet est porté
 			while {attachedTo R3F_LOG_joueur_deplace_objet == player && alive player} do
@@ -212,8 +215,11 @@ else
 			player removeAction _action_menu_release_horizontal;
 			player removeAction _action_menu_release_collide;
 			player removeAction _action_menu_45;
-			player removeAction _action_menu_move_upward;
-			player removeAction _action_menu_move_downward;
+			if ({R3F_LOG_joueur_deplace_objet isKindOf _x} count ["Thing","Building"] > 0) then
+			{
+				player removeAction _action_menu_move_upward;
+				player removeAction _action_menu_move_downward;
+			};
 			(findDisplay 46) displayRemoveEventHandler ["KeyDown", _idx_eh_keyDown];
 
 			if (_objet getVariable ["R3F_LOG_est_deplace_par", objNull] == player) then

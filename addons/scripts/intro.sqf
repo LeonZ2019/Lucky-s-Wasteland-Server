@@ -1,4 +1,4 @@
-sleep 90;
+sleep 120;
 
 private ["_messages", "_timeout"];
 

@@ -62,18 +62,10 @@ _setupObjects =
 
 		_soldier = [_aiGroup, _position, _camo] call createRandomSoldier;
 		_soldier moveInCargo [_vehicle, [0,3] select (_type == "I_G_Offroad_01_F")]; // FFV seat
-
-		switch (true) do
+		if !(_type isKindOf "Truck_F") then
 		{
-			case (_type isKindOf "Offroad_01_armed_base_F"):
-			{
-				_soldier = [_aiGroup, _position, _camo] call createRandomSoldier;
-				_soldier moveInGunner _vehicle;
-			};
-			case (_type isKindOf "C_Van_01_box_F"):
-			{
-				[_vehicle, "\A3\Soft_F_Bootcamp\Van_01\Data\Van_01_ext_IG_01_CO.paa", [0]] call applyVehicleTexture; // Apply camo instead of civilian color
-			};
+			_soldier = [_aiGroup, _position, _camo] call createRandomSoldier;
+			_soldier moveInGunner _vehicle;
 		};
 
 		[_vehicle, _aiGroup] spawn checkMissionVehicleLock;
