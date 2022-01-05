@@ -9,7 +9,7 @@
 if (!isServer) exitwith {};
 #include "mainMissionDefines.sqf"
 
-private ["_territories", "_territory", "_spawnRadius", "_territoryName", "_reward", "_createVehicle", "_spawnWave", "_trigger", "_cash", "_pos", "_currBox1", "_box1", "_box2", "_box3", "_randomBox", "_camo"];
+private ["_territories", "_territory", "_spawnRadius", "_territoryName", "_reward", "_createVehicle", "_spawnWave", "_trigger", "_cash", "_pos", "_currBox1", "_box1", "_box2", "_box3", "_randomBox", "_camo", "_totalAttacker"];
 
 _setupVars =
 {
@@ -43,7 +43,7 @@ _setupObjects =
 		for "_i" from 0 to 100 do
 		{
 			_position = [position _trigger, _minDist, _maxDist, 10, 0, 1, 0] call BIS_fnc_findSafePos;
-			if (allplayers findif {_x distance _position < 400 && !(_x inArea _trigger)} == -1) exitwith {};
+			if (allplayers findif {_x distance _position < 400} == -1 && !(_pos inArea _trigger)) exitwith {};
 		};
 		_position set [2, 0];
 		_vehicle = createVehicle [_type, _position, [], 0, "NONE"];
@@ -86,7 +86,7 @@ _setupObjects =
 			for "_i" from 0 to 100 do
 			{
 				_pos = [position _trigger, _minDist, _maxDist, 5, 0, 1, 0] call BIS_fnc_findSafePos;
-				if (allplayers findif {_x distance _pos < 175 && !(_x inArea _trigger)} == -1) exitwith {};
+				if (allplayers findif {_x distance _pos < 175} == -1 && !(_pos inArea _trigger)) exitwith {};
 			};
 			_pos set [2, 0];
 			_spawnPositions pushBack _pos;
@@ -142,12 +142,12 @@ _setupObjects =
 				_aiGroup3 = createGroup civilian;
 				[_aiGroup3, _x, _perGroup, 15, _camo] call createCustomGroup3;
 				_aiGroup3 setCombatMode "RED";
-				_aiGroup3 setBehaviour "COMBAT";
+				_aiGroup3 setBehaviour "AWARE";
 				_aiGroup3 setFormation "WEDGE";
 				_attackers append (units _aiGroup3);
 				_speedMode = if (missionDifficultyHard) then { "NORMAL" } else { "LIMITED" };
 				_aiGroup3 setSpeedMode _speedMode;
-				while {(count (waypoints _aiGroup3)) > 0} do
+				while {count (waypoints _aiGroup3) > 0} do
 				{
 					deleteWaypoint ((waypoints _aiGroup3) select 0);
 				};
@@ -167,9 +167,9 @@ _setupObjects =
 		[_rewardBox, _randomBox] call fn_refillbox;
 		_rewardBox setVariable ["artillery", 0, true];
 		_rewardBox setVariable ["R3F_LOG_disabled", false, true];
-		_para = createVehicle ["I_parachute_02_F", [0,0,999999], [], 0, ""];
-		_para setDir getDir _rewardBox;
-		_para setPosATL getPosATL _rewardBox;
+		_para = createVehicle ["I_parachute_02_F", [0,0,999999], [], 0, "NONE"];
+		_para setDir (getDir _rewardBox);
+		_para setPosATL (getPosATL _rewardBox);
 		_rewardBox attachTo [_para, [0, 0, 0]];
 		if (dayTime <= 20.5 && dayTime > 3.5) then
 		{
@@ -237,8 +237,8 @@ _failedExec =
 		[_x, _failReward] call A3W_fnc_setCMoney;
 	} forEach (allPlayers select { _x inArea [position _trigger, _triggerArea select 0 * 1.5, _triggerArea select 1 * 1.5, _triggerArea select 2, _triggerArea select 3, -1] });
 	{
-		deletevehicle _x;
-	} forEach (((_trigger getVariable "Attackers") select {alive _x}) + (_trigger getVariable ["Vehicles", []] select {alive _x}));
+		deleteVehicle _x;
+	} forEach ((_trigger getVariable "Attackers" select {alive _x}) + (_trigger getVariable ["Vehicles", []] select {alive _x}));
 
 	deleteVehicle _trigger;
 };
@@ -259,9 +259,9 @@ _successExec =
 		_x setDir random 360;
 		[_x, _randomBox call BIS_fnc_selectRandom] call fn_refillbox;
 		_x setVariable ["R3F_LOG_disabled", false, true];
-		private _para = createVehicle ["I_parachute_02_F", [0,0,999999], [], 0, ""];
-		_para setDir getDir _x;
-		_para setPosATL getPosATL _x;
+		private _para = createVehicle ["I_parachute_02_F", [0,0,999999], [], 0, "NONE"];
+		_para setDir (getDir _x);
+		_para setPosATL (getPosATL _x);
 		_x attachTo [_para, [0, 0, 0]];
 		if (dayTime <= 20.5 && dayTime > 3.5) then
 		{

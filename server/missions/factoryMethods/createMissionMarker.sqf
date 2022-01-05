@@ -13,7 +13,7 @@ _marker = format ["mission_%1_%2", [_text] call fn_filterString, call A3W_fnc_ge
 
 _marker = createMarker [_marker, _pos];
 _marker setMarkerType "mil_destroy";
-_marker setMarkerSize [1.25, 1.25];
+_marker setMarkerSize [0.8, 0.8];
 _marker setMarkerColor "ColorRed";
 _marker setMarkerText _text;
 
