@@ -83,7 +83,7 @@ _setupObjects =
 	_airforceOne = createVehicle ["B_T_VTOL_01_infantry_F", [_airportPos select 0, _airportPos select 1, 0], [], 0, "NONE"];
 	_airforceOne allowDamage false;
 	_airforceOne setVariable ["R3F_LOG_disabled", true, true];
-	[_airforceOne, _ssaGroup] spawn checkMissionVehicleLock;
+	_airforceOne lock 3;
 	_planeDir = _airforceOne getRelDir [_airportPos select 2, _airportPos select 3];
 	_airforceOne setDir _planeDir;
 	_extractedPoint = createMarker ["missionAirForceOne", getPos _airforceOne];

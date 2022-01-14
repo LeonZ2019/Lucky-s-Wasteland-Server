@@ -57,7 +57,7 @@ LogisticsMissions =
 	["mission_Airdrop", 1],
 	["mission_DeliverySupply", 1],
 	["mission_deviceDelivery", 0.8],
-	["mission_AltisHasFallen", 100]
+	["mission_AltisHasFallen", 1]
 ];
 
 WaterMissions =
