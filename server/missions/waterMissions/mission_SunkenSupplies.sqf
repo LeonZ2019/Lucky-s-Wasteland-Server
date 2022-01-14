@@ -5,7 +5,7 @@
 //	@file Author: JoSchaap, AgentRev
 
 if (!isServer) exitwith {};
-#include "sideMissionDefines.sqf"
+#include "waterMissionDefines.sqf"
 
 private ["_boxTypes", "_box1Type", "_box1", "_box2Type", "_box2", "_boxPos"];
 
@@ -60,4 +60,4 @@ _successExec =
 	_successHintMessage = "The sunken supplies have been collected, well done.";
 };
 
-_this call sideMissionProcessor;
+_this call waterMissionProcessor;

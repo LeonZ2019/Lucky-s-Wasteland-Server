@@ -11,7 +11,7 @@
 disableSerialization;
 private ["_switch", "_dialog", "_itemlist", "_itemlisttext", "_itemDesc", "_showPicture", "_itemsArray", "_playerSideNum", "_parentCfg", "_weapon", "_picture", "_listIndex", "_showItem", "_factionCfg", "_faction", "_isUniform", "_sideCfg", "_side"];
 _switch = _this select 0;
-
+GeneralStoreSelected = _switch;
 // Grab access to the controls
 _dialog = findDisplay genstore_DIALOG;
 _itemlist = _dialog displayCtrl genstore_item_list;

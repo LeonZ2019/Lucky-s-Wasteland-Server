@@ -11,7 +11,7 @@
 disableSerialization;
 private ["_switch", "_dialog", "_gunlisttext", "_gunlist", "_ammolist", "_ammoBtn", "_ammoLbl", "_gunDesc", "_showAmmo", "_playerSideNum", "_itemsArray", "_parentCfg", "_weaponClass", "_weapon", "_picture", "_gunlistIndex"];
 _switch = _this select 0;
-
+GunStoreSelected = _switch;
 // Grab access to the controls
 _dialog = findDisplay gunshop_DIALOG;
 _gunlisttext = _dialog displayCtrl gunshop_gun_TEXT;

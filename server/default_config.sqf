@@ -157,11 +157,12 @@ A3W_portalAmount = 1000;
 A3W_serverMissions = 1;            // Enable server missions (0 = no, 1 = yes)
 A3W_missionsDifficulty = 0;        // Missions difficulty (0 = normal, 1 = hard)
 A3W_missionFarAiDrawLines = 1;     // Draw small red lines on the map from mission markers to individual units & vehicles which are further away than 75m from the objective (0 = no, 1 = yes)
-A3W_missionsQuantity = 9;          // Number of missions running at the same time (0 to 11)
+A3W_missionsQuantity = 13;          // Number of missions running at the same time (0 to 11)
 A3W_heliPatrolMissions = 1;        // Enable missions involving flying helicopters piloted by AI (0 = no, 1 = yes)
 A3W_jetPatrolMissions = 1;        // Enable missions involving flying jet piloted by AI (0 = no, 1 = yes)
 A3W_policeMissions = 1;        // Enable missions which will have police controlling altis (0 = no, 1 = yes)
 A3W_underWaterMissions = 1;        // Enable underwater missions which require diving gear (0 = no, 1 = yes)
+A3W_rescueMissions = 1;        // Enable rescue missions (0 = no, 1 = yes)
 A3W_mainMissionDelay = 7*60;      // Time in seconds between Main Missions
 A3W_mainMissionTimeout = 60*60;    // Time in seconds that a Main Mission will run for, unless completed
 A3W_sideMissionDelay = 4*60;       // Time in seconds between Side Missions
@@ -172,3 +173,5 @@ A3W_militaryMissionDelay = 7*60;       // Time in seconds between Military Missi
 A3W_militaryMissionTimeout = 60*60;    // Time in seconds that a Military Mission will run for, unless completed
 A3W_logisticsMissionDelay = 4*60;
 A3W_logisticsMissionTimeout = 30*60;
+A3W_waterMissionDelay = 4*60;
+A3W_waterMissionTimeout = 25*60;

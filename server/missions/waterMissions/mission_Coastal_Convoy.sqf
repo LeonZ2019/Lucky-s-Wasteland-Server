@@ -8,7 +8,7 @@
 //	@file Args: none
 
 if (!isServer) exitwith {};
-#include "mainMissionDefines.sqf"
+#include "waterMissionDefines.sqf"
 
 private ["_vehChoices", "_convoyVeh", "_veh1", "_veh2", "_veh3", "_createVehicle", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_vehicleName2", "_numWaypoints", "_box1", "_box2", "_box3"];
 
@@ -161,7 +161,7 @@ _setupObjects =
 	_vehicleName = getText (configFile >> "CfgVehicles" >> (_veh1 param [0,""]) >> "displayName");
 	_vehicleName2 = getText (configFile >> "CfgVehicles" >> (_veh2 param [0,""]) >> "displayName");
 
-	_missionHintText = format ["Two <t color='%3'>%1</t> are patrolling the coasts, escorted by a <t color='%3'>%2</t>.<br/>Intercept them and recover their cargo!", _vehicleName, _vehicleName2, mainMissionColor];
+	_missionHintText = format ["Two <t color='%3'>%1</t> are patrolling the coasts, escorted by a <t color='%3'>%2</t>.<br/>Intercept them and recover their cargo!", _vehicleName, _vehicleName2, waterMissionColor];
 
 	_numWaypoints = count waypoints _aiGroup;
 };
@@ -197,4 +197,4 @@ _successExec =
 	_successHintMessage = "The patrol has been stopped, the ammo crates are yours to take. Find them near the wreck!";
 };
 
-_this call mainMissionProcessor;
+_this call waterMissionProcessor;

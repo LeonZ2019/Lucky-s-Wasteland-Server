@@ -94,6 +94,23 @@ class gunshopd
 
 	class Controls
 	{
+		class weaponFilter: w_RscEdit
+		{
+			idc = gunshop_gun_filter;
+			onKeyDown = "call weaponFilter";
+			autocomplete = "";
+			maxChars = 16;
+			style = "16 + 512";
+			sizeEx = 0.04 * TEXT_SCALE;
+			colorBackground[] = {0, 0, 0, 0.6};
+			colorDisabled[] = {1,1,1,0.25};
+
+			x = GunStoreMainBG_X + (0.1533 * SZ_SCALE);
+			y = GunStoreMainBG_Y + (0.075 * SZ_SCALE);
+			w = 0.276 * SZ_SCALE;
+			h = 0.0225 * SZ_SCALE;
+		};
+
 		class SelectionList: w_RscList
 		{
 			idc = gunshop_gun_list;
@@ -102,9 +119,9 @@ class gunshopd
 			rowHeight = 0.05 * TEXT_SCALE;
 
 			x = GunStoreMainBG_X + (0.1533 * SZ_SCALE);
-			y = GunStoreMainBG_Y + (0.075 * SZ_SCALE);
+			y = GunStoreMainBG_Y + (0.105 * SZ_SCALE);
 			w = 0.276 * SZ_SCALE;
-			h = 0.3382 * SZ_SCALE;
+			h = 0.3082 * SZ_SCALE;
 		};
 
 		class GunDescription: w_RscStructuredTextLeft

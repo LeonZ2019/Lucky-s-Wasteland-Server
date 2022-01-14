@@ -14,3 +14,4 @@
 #define gunshop_but_butammo 2023
 #define gunshop_WeaponFilterText_IDC 2030
 #define gunshop_WeaponFilterDropdown_IDC 2031
+#define gunshop_gun_filter 2032

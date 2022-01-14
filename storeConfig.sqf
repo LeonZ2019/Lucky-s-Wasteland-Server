@@ -1784,17 +1784,12 @@ colorsArray = compileFinal str
 			["Drylands", _texDir + "drylands.paa"],
 			["Hello Kitty", _texDir + "hellokitty.paa"],
 			["Hex", _texDir + "hex.paa"],
-			["Confederate", _texDir + "confederate.paa"],
 			["Denim", _texDir + "denim.paa"],
-			["Hippie", _texDir + "hippie.paa"],
 			["ISIS", _texDir + "isis.paa"],
 			["Leopard", _texDir + "leopard.paa"],
 			["Mountain Dew", _texDir + "mtndew.paa"],
 			["'Murica", _texDir + "murica.paa"],
 			["Nazi", _texDir + "nazi.paa"],
-			["Orange Camo", _texDir + "camo_orange.paa"],
-			["Pink Camo", _texDir + "camo_pink.paa"],
-			["Pride", _texDir + "pride.paa"],
 			["Psych", _texDir + "psych.paa"],
 			["Red Camo", _texDir + "camo_red.paa"],
 			["Rusty", _texDir + "rusty.paa"],
@@ -1805,9 +1800,7 @@ colorsArray = compileFinal str
 			["Stripes 3", _texDir + "stripes3.paa"],
 			["Swamp", _texDir + "swamp.paa"],
 			["Tiger", _texDir + "tiger.paa"],
-			["Trippy", _texDir + "rainbow.paa"],
 			["Union Jack", _texDir + "unionjack.paa"],
-			["Urban", _texDir + "urban.paa"],
 			["Weed", _texDir + "weed.paa"],
 			["Woodland", _texDir + "woodland.paa"],
 			["Woodland Dark", _texDir + "wooddark.paa"],
@@ -1982,6 +1975,16 @@ colorsArray = compileFinal str
 		[
 			["Gendarmerie", [
 				[0, _texDir + "hellcat_gendarmerie_0.paa"]
+			]]
+		]
+	],
+	[
+		"I_Heli_Transport_02_F",
+		[
+			["Marine One", [
+				[0, _texDir + "mohawk_marine_one_0.paa"],
+				[1, _texDir + "mohawk_marine_one_1.paa"],
+				[2, _texDir + "mohawk_marine_one_2.paa"]
 			]]
 		]
 	]

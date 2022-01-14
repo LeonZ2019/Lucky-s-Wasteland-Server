@@ -95,6 +95,22 @@ class genstored
 
 	class Controls
 	{
+		class weaponFilter: w_RscEdit
+		{
+			idc = genstore_item_filter;
+			onKeyDown = "call generalFilter";
+			autocomplete = "";
+			maxChars = 16;
+			style = "16 + 512";
+			sizeEx = 0.04 * TEXT_SCALE;
+			colorBackground[] = {0, 0, 0, 0.6};
+			colorDisabled[] = {1,1,1,0.25};
+
+			x = GenStoreMainBG_X + (0.1533 * SZ_SCALE);
+			y = GenStoreMainBG_Y + (0.075 * SZ_SCALE);
+			w = 0.276 * SZ_SCALE;
+			h = 0.0225 * SZ_SCALE;
+		};
 		class SelectionList: w_RscList
 		{
 			idc = genstore_item_list;
@@ -103,9 +119,9 @@ class genstored
 			rowHeight = 0.05 * TEXT_SCALE;
 
 			x = GenStoreMainBG_X + (0.1533 * SZ_SCALE);
-			y = GenStoreMainBG_Y + (0.075 * SZ_SCALE);
+			y = GenStoreMainBG_Y + (0.105 * SZ_SCALE);
 			w = 0.276 * SZ_SCALE;
-			h = 0.3382 * SZ_SCALE;
+			h = 0.3082 * SZ_SCALE;
 		};
 
 		class ItemDescription: w_RscStructuredTextLeft

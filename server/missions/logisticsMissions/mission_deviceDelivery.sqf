@@ -7,7 +7,7 @@
 //	@file Created: 07/26/2021 01:34
 
 if (!isServer) exitwith {};
-#include "mainMissionDefines.sqf"
+#include "logisticsMissionDefines.sqf"
 
 private ["_safePos", "_nearestRoad", "_startOfRoad", "_endOfRoad", "_roadCenter", "_roadDir", "_millerGrp", "_millerMarker", "_miller", "_vehicle", "_cash", "_box1", "_currBox1", "_pos"];
 
@@ -47,12 +47,12 @@ _setupObjects =
 
 	_vehicle = createVehicle ["O_Truck_03_device_F", _missionPos, [], 0, "NONE"]; //unlocked
 	_vehicle setVariable ["ownerName", "Miller", true];
-	_vehicle setVariable ["Mission_Vehicle", true];
+	_vehicle setVariable ["Mission_Vehicle", true, true];
 
 	_aiGroup = createGroup CIVILIAN;
 	[_aiGroup,_missionPos, 10, 20] spawn createCustomGroup;
 
-	_missionHintText = format ["A <t color='%1'>Tempest (Device)</t> has been found, recover and delivery to Miller!", mainMissionColor];
+	_missionHintText = format ["A <t color='%1'>Tempest (Device)</t> has been found, recover and delivery to Miller!", logisticsMissionColor];
 	[_miller, _vehicle] spawn {
 		params ["_miller", "_vehicle"];
 		waitUntil
@@ -100,4 +100,4 @@ _successExec =
 
 	_successHintMessage = "The Tempest (Device) has been delivered to Miller.";
 };
-_this call mainMissionProcessor;
+_this call logisticsMissionProcessor;

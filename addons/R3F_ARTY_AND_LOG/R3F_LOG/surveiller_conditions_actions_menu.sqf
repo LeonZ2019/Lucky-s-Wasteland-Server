@@ -45,7 +45,7 @@ while {true} do
 {
 	R3F_LOG_objet_addAction = objNull;
 
-	_objet_pointe = cursorTarget;
+	_objet_pointe = getCursorObjectParams select 0;
 
 	if (vehicle player == player && !isNull _objet_pointe && {player distance _objet_pointe < 14 && getObjectType _objet_pointe == 8}) then
 	{
@@ -280,7 +280,7 @@ while {true} do
 		// Condition action heliporter
 		R3F_LOG_action_heliporter_valide =
 			driver R3F_LOG_objet_addAction == player &&
-			{{_x != R3F_LOG_objet_addAction && VEHICLE_UNLOCKED(_x) && !(_x getVariable "R3F_LOG_disabled")} count ((nearestObjects [R3F_LOG_objet_addAction, R3F_LOG_CFG_objets_heliportables, 15]) select {_obj = _x; _x call _hasNoProhibitedCargo && (R3F_LOG_objet_addAction getVariable ["R3F_LOG_heliporteurH",false] || {{_obj isKindOf _x} count R3F_LOG_CFG_objets_heliportablesH == 0})}) > 0} &&
+			{{_x != R3F_LOG_objet_addAction && VEHICLE_UNLOCKED(_x) && !(_x getVariable "R3F_LOG_disabled")} count ((nearestObjects [R3F_LOG_objet_addAction, R3F_LOG_CFG_objets_heliportables, 15]) select {_obj = _x; _x call _hasNoProhibitedCargo && alive _x && (R3F_LOG_objet_addAction getVariable ["R3F_LOG_heliporteurH",false] || {{_obj isKindOf _x} count R3F_LOG_CFG_objets_heliportablesH == 0})}) > 0} &&
 			{isNull (R3F_LOG_objet_addAction getVariable "R3F_LOG_heliporte")} &&
 			{vectorMagnitude velocity R3F_LOG_objet_addAction < 6} &&
 			{(getPos R3F_LOG_objet_addAction) select 2 > 1} &&

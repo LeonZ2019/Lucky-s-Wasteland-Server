@@ -8,7 +8,7 @@
 //	@file Args:
 
 if (!isServer) exitwith {};
-#include "moneyMissionDefines.sqf";
+#include "waterMissionDefines.sqf";
 
 private ["_cashObjects", "_cash", "_cashPos", "_box1", "_boxPos", "_vehicleClass", "_vehicle"];
 
@@ -50,7 +50,7 @@ _setupObjects =
 	[_vehicle, _aiGroup] spawn checkMissionVehicleLock;
 
 	_missionPicture = getText (configFile >> "CfgVehicles" >> _vehicleClass >> "picture");
-	_missionHintText = format ["A treasure containing <t color='%1'>$25,000</t> and weapons is being recovered.<br/>If you want to capture it, you will need diving gear and an underwater weapon.", moneyMissionColor];
+	_missionHintText = format ["A treasure containing <t color='%1'>$25,000</t> and weapons is being recovered.<br/>If you want to capture it, you will need diving gear and an underwater weapon.", waterMissionColor];
 };
 
 _waitUntilMarkerPos = nil;
@@ -81,4 +81,4 @@ _successExec =
 	_successHintMessage = "The treasure has been captured, well done.";
 };
 
-_this call moneyMissionProcessor;
+_this call waterMissionProcessor;

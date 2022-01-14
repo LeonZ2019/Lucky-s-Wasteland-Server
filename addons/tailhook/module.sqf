@@ -1,4 +1,4 @@
-TTT_Get_Carrier =
+LEON_Get_Carrier =
 {
 	params ["_plane"];
 	private ["_carrier"];
@@ -8,55 +8,55 @@ TTT_Get_Carrier =
 		{
 			_carrier = _x;
 		};
-	} forEach TTT_Carriers;
+	} forEach LEON_Carriers;
 	_carrier
 };
 
-TTT_Check_Carrier =
+LEON_Check_Carrier =
 {
 	params ["_plane"];
-	!(isNull ([_plane] call TTT_Get_Carrier)) && (isNil {_plane getVariable "TTT_TailhookUp"})
+	!(isNull ([_plane] call LEON_Get_Carrier)) && (isNil {_plane getVariable "LEON_TailhookUp"})
 };
 
-TTT_Tailhook_Init =
+LEON_Tailhook_Init =
 {
 	params ["_plane"];
-	_plane addAction ["Tailhook Down", {call TTT_Tailhook_Down}, nil, 5, false, true, "", "[_target] call TTT_Check_Carrier"];
+	_plane addAction ["Tailhook Down", {call LEON_Tailhook_Down}, nil, 5, false, true, "", "[_target] call LEON_Check_Carrier"];
 };
 
-TTT_Tailhook_Down =
+LEON_Tailhook_Down =
 {
 	private ["_plane", "_actionID"];
 	_plane = _this select 0;
 	playSound3D ["a3\sounds_f_jets\vehicles\air\shared\FX_Plane_Jet_tailhook_down.wss", _plane];
 	systemChat "Tailhook down, ready to land on carrier";
-	if (isNil {_plane getVariable "TTT_TailhookUp"}) then
+	if (isNil {_plane getVariable "LEON_TailhookUp"}) then
 	{
-		_actionID = _plane addAction ["Tailhook Up", {call TTT_Tailhook_Up} , nil, 5, false, true, "", "driver _target == player"];
-		_plane setVariable ["TTT_TailhookUp", _actionID, true];
+		_actionID = _plane addAction ["Tailhook Up", {call LEON_Tailhook_Up} , nil, 5, false, true, "", "driver _target == player"];
+		_plane setVariable ["LEON_TailhookUp", _actionID, true];
 	};
-	[_plane] call TTT_Use_Tailhook;
+	[_plane] call LEON_Use_Tailhook;
 };
 
-TTT_Tailhook_Up =
+LEON_Tailhook_Up =
 {
 	private ["_plane"];
 	_plane = _this select 0;
-	if !(isNil {_plane getVariable "TTT_TailhookUp"}) then
+	if !(isNil {_plane getVariable "LEON_TailhookUp"}) then
 	{
 		systemChat "Tailhook up";
 		playSound3D ["a3\sounds_f_jets\vehicles\air\shared\FX_Plane_Jet_tailhook_up.wss", _plane];
-		_plane removeAction (_plane getVariable "TTT_TailhookUp");
-		_plane setVariable ["TTT_TailhookUp", nil, true];
+		_plane removeAction (_plane getVariable "LEON_TailhookUp");
+		_plane setVariable ["LEON_TailhookUp", nil, true];
 	};
 };
 
-TTT_Use_Tailhook =
+LEON_Use_Tailhook =
 {
 	private ["_plane", "_pilot", "_carrier", "_posWires", "_maxDistZ", "_distZ", "_brakeSpeed", "_slowDown", "_velInitial", "_dirPlane"];
 	_plane = _this select 0;
 	_pilot = driver _plane;
-	_carrier = [_plane] call TTT_Get_Carrier;
+	_carrier = [_plane] call LEON_Get_Carrier;
 	_posWires = _carrier modelToWorld (_carrier selectionPosition "pos_cable_1");
 	_maxDistZ = 0.4;
 	_distZ = 0;
@@ -64,7 +64,7 @@ TTT_Use_Tailhook =
 	while {alive _plane} do
 	{
 		_distZ =  (getposASL _plane select 2) - (_posWires select 2);
-		if ((isNil {_plane getVariable "TTT_TailhookUp"}) || _distZ < _maxDistZ) exitWith {};
+		if ((isNil {_plane getVariable "LEON_TailhookUp"}) || _distZ < _maxDistZ) exitWith {};
 		sleep 0.1;
 	};
 	if (_plane distance _posWires > 100 || _distZ > 3) exitWith
@@ -79,7 +79,7 @@ TTT_Use_Tailhook =
 				systemChat "Too high from arresting cable, tailhook hook up";
 			};
 		};
-		[_plane] call TTT_Tailhook_Up;
+		[_plane] call LEON_Tailhook_Up;
 	};
 	_plane say3D "Land_Carrier_01_wire_trap_sound";
 	systemChat "Touch down!";
@@ -96,7 +96,7 @@ TTT_Use_Tailhook =
 		if (_slowDown <= 0.2) then {_slowDown = 0.03} else {_slowDown = _slowDown - 0.1};
 	};
 	sleep 2;
-	[_plane] call TTT_Tailhook_Up;
+	[_plane] call LEON_Tailhook_Up;
 };
 
-[_this select 0] call TTT_Tailhook_Init;
+[_this select 0] call LEON_Tailhook_Init;

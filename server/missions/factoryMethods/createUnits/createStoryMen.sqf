@@ -33,19 +33,25 @@ removeGoggles _men;
 
 switch (_name) do
 {
-    case "miller":
-    {
-        _men addWeapon "arifle_SPAR_01_blk_F";
-        _men addPrimaryWeaponItem "acc_pointer_IR";
-        _men addPrimaryWeaponItem "optic_ERCO_blk_F";
-        _men addPrimaryWeaponItem "30Rnd_556x45_Stanag";
-        _men addGoggles "G_Tactical_Black";
-        _men forceAddUniform "U_B_CTRG_Soldier_3_F";
-        _men addVest "V_PlateCarrier2_rgr_noflag_F";
-        for "_i" from 1 to 3 do {_men addItemToUniform "30Rnd_556x45_Stanag";};
-        for "_i" from 1 to 2 do {_men addItemToVest "HandGrenade";};
-        [_men,"Miller","male03engb"] call BIS_fnc_setIdentity;
-    };
+	case "miller":
+	{
+		_men addWeapon "arifle_SPAR_01_blk_F";
+		_men addPrimaryWeaponItem "acc_pointer_IR";
+		_men addPrimaryWeaponItem "optic_ERCO_blk_F";
+		_men addPrimaryWeaponItem "30Rnd_556x45_Stanag";
+		_men addGoggles "G_Tactical_Black";
+		_men forceAddUniform "U_B_CTRG_Soldier_3_F";
+		_men addVest "V_PlateCarrier2_rgr_noflag_F";
+		for "_i" from 1 to 3 do {_men addItemToUniform "30Rnd_556x45_Stanag";};
+		for "_i" from 1 to 2 do {_men addItemToVest "HandGrenade";};
+		[_men,"Miller","male03engb"] call BIS_fnc_setIdentity;
+	};
+	case "president":
+	{
+		_men forceAddUniform "U_C_FormalSuit_01_black_F";
+		[_men,"WhiteHead_14","male11eng"] call BIS_fnc_setIdentity;
+		_men setName "Benjamin Asher";
+	};
 };
 
 _men disableAI "MOVE";

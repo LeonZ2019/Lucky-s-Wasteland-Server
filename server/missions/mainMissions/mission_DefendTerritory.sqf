@@ -39,11 +39,12 @@ _setupObjects =
 		_minDist =  _this select 3;
 		_maxDist =  _this select 4;
 		_trigger =  _this select 5;
+		_camo =  _this select 6;
 
 		for "_i" from 0 to 100 do
 		{
 			_position = [position _trigger, _minDist, _maxDist, 10, 0, 1, 0] call BIS_fnc_findSafePos;
-			if (allplayers findif {_x distance _position < 400} == -1 && !(_pos inArea _trigger)) exitwith {};
+			if (allplayers findif {_x distance _position < 400} == -1 && !(_position inArea _trigger)) exitwith {};
 		};
 		_position set [2, 0];
 		_vehicle = createVehicle [_type, _position, [], 0, "NONE"];
@@ -52,13 +53,16 @@ _setupObjects =
 		[_vehicle] call vehicleSetup;
 		_group addVehicle _vehicle;
 
-		_camo = ["MTP", "Tropic", "CTRGUrban", "CTRGArid", "CTRGTropic", "Woodland", "GreenHex", "Hex", "Green", "Taiga", "Digital", "Geometric", "Guerilla"] call BIS_fnc_selectRandom;
 		_soldier = [_group, _position, _camo] call createRandomSoldier;
 		_soldier moveInDriver _vehicle;
 		_soldier = [_group, _position, _camo] call createRandomSoldier;
 		_soldier moveInGunner _vehicle;
-		_soldier = [_group, _position, _camo] call createRandomSoldier;
-		_soldier moveInCommander  _vehicle;
+		_commander = fullCrew [_vehicle, "commander", true];
+		if (count _commander > 0 && { isNull(_commander select 0 select 0) }) then
+		{
+			_soldier = [_group, _position, _camo] call createRandomSoldier;
+			_soldier moveInCommander  _vehicle;
+		};
 		[_vehicle, _group] spawn checkMissionVehicleLock;
 		_vehicle
 	};
@@ -92,7 +96,7 @@ _setupObjects =
 			_spawnPositions pushBack _pos;
 			sleep 0.3;
 		};
-		_ranOff = selectrandom [0,0,0,1,1,1,2,2]; // nothing, tank, anti air
+		_ranOff = selectrandom [0,0,1,1,2,2,2]; // nothing, tank, anti air
 		_tankPos = _missionPos;
 		_tankPos set [2, 0];
 
@@ -100,7 +104,7 @@ _setupObjects =
 		{
 			_aiGroup1 = createGroup civilian;
 			_tankClass = ["B_MBT_01_cannon_F", "O_MBT_02_cannon_F", "I_MBT_03_cannon_F"] call BIS_fnc_selectRandom;
-			_tank = [_aiGroup1, _tankClass, position _trigger, _minDist + 500, _maxDist + 750, _trigger] call _createVehicle;
+			_tank = [_aiGroup1, _tankClass, position _trigger, _minDist + 500, _maxDist + 750, _trigger, _camo] call _createVehicle;
 			_vehs = _trigger getVariable "Vehicles";
 			_vehs pushBack _tank;
 			_trigger setVariable ["Vehicles", _vehs, true];
@@ -120,7 +124,7 @@ _setupObjects =
 		{
 			_aiGroup2 = createGroup civilian;
 			_aaClass = ["B_APC_Tracked_01_AA_F", "O_APC_Tracked_02_AA_F", "I_LT_01_AA_F"] call BIS_fnc_selectRandom;
-			_aa = [_aiGroup2, _aaClass, position _trigger, _minDist + 750, _maxDist + 1000, _trigger] call _createVehicle;
+			_aa = [_aiGroup2, _aaClass, position _trigger, _minDist + 750, _maxDist + 1000, _trigger, _camo] call _createVehicle;
 			_vehs = _trigger getVariable "Vehicles";
 			_vehs pushBack _aa;
 			_trigger setVariable ["Vehicles", _vehs, true];
@@ -201,7 +205,7 @@ _setupObjects =
 	_trigger setVariable ["Attackers", [], true];
 	_trigger setVariable ["Vehicles", [], true];
 	_trigger setVariable ["missionPos", _missionPos, true];
-	_totalAttacker = (count allPlayers) * 80;
+	_totalAttacker = (count allPlayers) * 30;
 	_trigger setVariable ["AttackersPool", _totalAttacker, true];
 	_trigger setTriggerActivation ["ANYPLAYER", "PRESENT", false];
 	_triggerArea = markerSize (_territory select 0) + [markerDir (_territory select 0), markerShape (_territory select 0) == "RECTANGLE", 50];

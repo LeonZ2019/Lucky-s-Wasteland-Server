@@ -27,6 +27,12 @@ _position = _this select 1;
 _rank = param [2, "", [""]];
 
 _soldier = _group createUnit [_soldierTypes call BIS_fnc_selectRandom, _position, [], 0, "NONE"];
+
+removeAllWeapons _soldier;
+removeAllAssignedItems _soldier;
+removeVest _soldier;
+removeBackpack _soldier;
+
 _soldier addUniform (_uniformTypes call BIS_fnc_selectRandom);
 _soldier addVest (_vestTypes call BIS_fnc_selectRandom);
 _soldier addHeadgear (_headGearTypes call BIS_fnc_selectRandom);

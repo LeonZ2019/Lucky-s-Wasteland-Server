@@ -13,6 +13,7 @@ _pos = _this select 1;
 
 // Sniper
 _leader = _group createUnit ["C_man_polo_1_F", [(_pos select 0) + 10, _pos select 1, 0], [], 1, "Form"];
+removeAllAssignedItems _leader;
 _leader addUniform "U_B_FullGhillie_ard";
 _leader addVest "V_Chestrig_rgr";
 _leader addWeapon "srifle_LRR_camo_F";
@@ -22,6 +23,7 @@ _leader addMagazine "HandGrenade";
 
 // Sniper
 _man1 = _group createUnit ["C_man_polo_2_F", [(_pos select 0) - 30, _pos select 1, 0], [], 1, "Form"];
+removeAllAssignedItems _man1;
 _man1 addUniform "U_B_FullGhillie_ard";
 _man1 addVest "V_Chestrig_rgr";
 _man1 addWeapon "srifle_LRR_camo_F";
@@ -31,6 +33,7 @@ _man1 addMagazine "HandGrenade";
 
 // Sniper
 _man2 = _group createUnit ["C_man_polo_2_F", [(_pos select 0) - 30, _pos select 1, 0], [], 1, "Form"];
+removeAllAssignedItems _man2;
 _man2 addUniform "U_B_FullGhillie_ard";
 _man2 addVest "V_Chestrig_rgr";
 _man2 addWeapon "srifle_GM6_LRPS_F";
@@ -40,6 +43,7 @@ _man2 addMagazine "HandGrenade";
 
 // Sniper
 _man3 = _group createUnit ["C_man_polo_2_F", [(_pos select 0) - 30, _pos select 1, 0], [], 1, "Form"];
+removeAllAssignedItems _man3;
 _man3 addUniform "U_B_FullGhillie_ard";
 _man3 addVest "V_Chestrig_rgr";
 _man3 addWeapon "srifle_GM6_LRPS_F";
@@ -49,6 +53,7 @@ _man3 addMagazine "HandGrenade";
 
 // Spotter
 _man4 = _group createUnit ["C_man_polo_3_F", [_pos select 0, (_pos select 1) + 30, 0], [], 1, "Form"];
+removeAllAssignedItems _man4;
 _man4 addUniform "U_B_FullGhillie_ard";
 _man4 addVest "V_Chestrig_rgr";
 _man4 addWeapon "srifle_EBR_SOS_F";
@@ -58,6 +63,7 @@ _man4 addItem "Rangefinder";
 
 // Spotter
 _man5 = _group createUnit ["C_man_polo_3_F", [_pos select 0, (_pos select 1) + 30, 0], [], 1, "Form"];
+removeAllAssignedItems _man5;
 _man5 addUniform "U_B_FullGhillie_ard";
 _man5 addVest "V_Chestrig_rgr";
 _man5 addWeapon "srifle_EBR_SOS_F";
@@ -67,6 +73,7 @@ _man5 addItem "Rangefinder";
 
 // Spotter
 _man6 = _group createUnit ["C_man_polo_3_F", [_pos select 0, (_pos select 1) + 30, 0], [], 1, "Form"];
+removeAllAssignedItems _man6;
 _man6 addUniform "U_B_FullGhillie_ard";
 _man6 addVest "V_Chestrig_rgr";
 _man6 addWeapon "srifle_EBR_SOS_F";
@@ -76,6 +83,7 @@ _man6 addItem "Rangefinder";
 
 // Spotter
 _man7 = _group createUnit ["C_man_polo_3_F", [_pos select 0, (_pos select 1) + 30, 0], [], 1, "Form"];
+removeAllAssignedItems _man7;
 _man7 addUniform "U_B_FullGhillie_ard";
 _man7 addVest "V_Chestrig_rgr";
 _man7 addWeapon "srifle_EBR_SOS_F";
@@ -85,6 +93,7 @@ _man7 addItem "Rangefinder";
 
 //AA Defender
 _man8 = _group createUnit ["C_man_polo_3_F", [_pos select 0, (_pos select 1) + 30, 0], [], 1, "Form"];
+removeAllAssignedItems _man8;
 _man8 addUniform "U_B_FullGhillie_ard";
 _man8 addVest "V_Chestrig_rgr";
 _man8 addBackpack "B_Carryall_oli";
@@ -98,6 +107,7 @@ for "_i" from 1 to 3 do {_man8 addMagazine "Titan_AA";};
 
 //AT Defender
 _man9 = _group createUnit ["C_man_polo_3_F", [_pos select 0, (_pos select 1) + 30, 0], [], 1, "Form"];
+removeAllAssignedItems _man9;
 _man9 addUniform "U_B_FullGhillie_ard";
 _man9 addVest "V_Chestrig_rgr";
 _man9 addBackpack "B_Carryall_oli";
@@ -108,8 +118,6 @@ _man9 addMagazine "HandGrenade";
 _man9 selectWeapon "launch_RPG32_F";
 for "_i" from 1 to 3 do {_man9 addMagazine "10Rnd_762x51_Mag";};
 for "_i" from 1 to 4 do {_man9 addMagazine "RPG32_F";};
-
-sleep 0.1; // Without this delay, headgear doesn't get removed properly
 
 _leader = leader _group;
 

@@ -62,7 +62,7 @@ if ({_objet isKindOf _x} count R3F_LOG_CFG_objets_deplacables > 0) then
 	_objet addAction [("<img image='client\icons\r3f_unlock.paa' color='#06ef00'/> <t color='#06ef00'>" + STR_UNLOCK_OBJECT + "</t>"), "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\objectLockStateMachine.sqf", _doUnlock, -5, false, true, "", "R3F_LOG_objet_addAction == _target && R3F_LOG_action_deplacer_objet_valide && !Object_canLock && !(cursorObject getVariable ['Mission_Crate', false])"];
 	if (_objet isKindOf "TargetBootcampHuman_F") then
 	{
-		_objet addAction [("<img image='client\icons\reset.paa' color='#4082F5'/> <t color='#4082F5'>Reset scoreboard</t>"), "['resetShootersData', [_this select 0]] call BIS_fnc_target;", nil, -5, false, true, "", true];
+		_objet addAction [("<img image='client\icons\reset.paa' color='#40BEF5'/> <t color='#40BEF5'>Reset scoreboard</t>"), "['resetShootersData', [_this select 0]] call BIS_fnc_target; _this select 0 setDamage 0;", nil, -5, false, true, "", "true"];
 	};
 };
 

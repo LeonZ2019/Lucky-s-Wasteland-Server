@@ -46,7 +46,6 @@ switch (_weapon) do {
 for "_i" from 1 to 3 do {_soldier addItemToVest _ammo;};
 for "_i" from 1 to 2 do {_soldier addItemToUniform "9Rnd_45ACP_Mag";};
 
-sleep 0.1; // Without this delay, headgear doesn't get removed properly
 _soldier addHeadgear (_headGearTypes call BIS_fnc_selectRandom);
 _soldier addWeaponItem [_weapon, _ammo];
 

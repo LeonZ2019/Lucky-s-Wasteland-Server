@@ -34,12 +34,12 @@ storeSellingHandle = _this spawn
 
 	_checkValidOwnership =
 	{
-		if (!local _vehicle) then
+		if (!local _veh) then
 		{
 			if (_isAntiAir) then
 			{
 				_currUAV = getConnectedUAV player;
-				if (_currUAV == _vehicle) then
+				if (_currUAV == _veh) then
 				{
 					true
 				} else

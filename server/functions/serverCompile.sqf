@@ -42,6 +42,7 @@ createsniperGroup = [_path, "createUnits\sniperGroup.sqf"] call mf_compile;
 createpoliceGroup = [_path, "createUnits\policeGroup.sqf"] call mf_compile;
 createRandomPolice = [_path, "createUnits\createRandomPolice.sqf"] call mf_compile;
 createRandomPilot = [_path, "createUnits\createRandomPilot.sqf"] call mf_compile;
+createAASoldier = [_path, "createUnits\createAASoldier.sqf"] call mf_compile;
 
 //Function Compiles
 _path = "server\functions";

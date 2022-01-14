@@ -6,7 +6,7 @@
 //	@file Author: JoSchaap, AgentRev
 
 if (!isServer) exitwith {};
-#include "mainMissionDefines.sqf";
+#include "waterMissionDefines.sqf";
 
 private ["_box1", "_box2", "_boxPos", "_vehicleClass", "_vehicle"];
 
@@ -84,4 +84,4 @@ _successExec =
 	_successHintMessage = "The sunken crates have been captured, well done.";
 };
 
-_this call mainMissionProcessor;
+_this call waterMissionProcessor;

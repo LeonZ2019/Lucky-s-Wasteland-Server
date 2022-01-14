@@ -71,7 +71,7 @@ _hgunMags append getArray (_hgunConfig >> "magazines");
 _hgunMags = _hgunMags call BIS_fnc_selectRandom;
 _player addWeapon _pistol;
 for "_i" from 1 to 2 do {_player addItem _hgunMags ;};
-_player addSecondaryWeaponItem _hgunMags;
+_player addHandgunItem _hgunMags;
 
 _player addItem "FirstAidKit";
 _player addItem "FirstAidKit";
