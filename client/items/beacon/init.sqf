@@ -34,6 +34,8 @@ mf_items_spawn_beacon_nearest = {
 mf_items_spawn_beacon_can_pack = build("can_pack.sqf");
 mf_items_spawn_beacon_can_steal = build("can_steal.sqf");
 mf_items_spawn_beacon_can_use = build("can_use.sqf");
+mf_items_spawn_beacon_can_rename = build("can_rename.sqf");
+mf_items_spawn_beacon_can_repair = build("can_repair.sqf");
 
 private "_condition";
 _condition = "'' == [] call mf_items_spawn_beacon_can_pack;";
@@ -45,5 +47,13 @@ _steal = [format ["<img image='%1'/> Steal Spawn Beacon", _icon], path("steal.sq
 ["beacon-steal", _steal] call mf_player_actions_set;
 
 _condition = "'' == [] call mf_items_spawn_beacon_can_pack && {playerSide != independent}";
-_pack =[format ["<img image='%1'/> Change Spawn Permissions", _icon], path("toggle_spawn_permissions.sqf"), [], 1, true, false, "", _condition];
-["beacon-spawn-toggle", _pack] call mf_player_actions_set;
+_permission =[format ["<img image='%1'/> Change Spawn Permissions", _icon], path("toggle_spawn_permissions.sqf"), [], 1, true, false, "", _condition];
+["beacon-spawn-toggle", _permission] call mf_player_actions_set;
+
+_condition = "'' == [] call mf_items_spawn_beacon_can_rename;";
+_rename = [format ["<img image='%1'/> Rename Spawn Beacon", _icon], 'createDialog "beaconRenameDialog";', [], 1, true, false, "", _condition];
+["beacon-spawn-rename", _rename] call mf_player_actions_set;
+
+_condition = "'' == [] call mf_items_spawn_beacon_can_repair;";
+_repair = [format ["<img image='%1'/> Repair Spawn Beacon", _icon], path("repair.sqf"), [], 1, true, false, "", _condition];
+["beacon-spawn-repair", _repair] call mf_player_actions_set;

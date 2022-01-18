@@ -43,7 +43,7 @@ _setupObjects =
 
 		for "_i" from 0 to 100 do
 		{
-			_position = [position _trigger, _minDist, _maxDist, 10, 0, 1, 0] call BIS_fnc_findSafePos;
+			_position = [position _trigger, _minDist, _maxDist, 8, 0, 1, 0] call BIS_fnc_findSafePos;
 			if (allplayers findif {_x distance _position < 400} == -1 && !(_position inArea _trigger)) exitwith {};
 		};
 		_position set [2, 0];
@@ -70,7 +70,7 @@ _setupObjects =
 	_spawnWave =
 	{
 		params ["_trigger"];
-		private ["_aiGroup1", "_aiGroup2", "_aiGroup3", "_createVehicle", "_missionPos", "_attackers", "_attackersPool", "_spawnPositions", "_playerCount", "_triggerArea", "_minDist", "_maxDist", "_ranOff", "_tankClass", "_tank", "_aaClass", "_aa", "_speedMode", "_tankPos", "_randomBox", "_rewardBox", "_para"];
+		private ["_aiGroup1", "_aiGroup2", "_aiGroup3", "_aiGroup4", "_createVehicle", "_missionPos", "_attackers", "_attackersPool", "_spawnPositions", "_playerCount", "_triggerArea", "_minDist", "_maxDist", "_ranOff", "_tankClass", "_tank", "_aaClass", "_aa", "_speedMode", "_tankPos", "_randomBox", "_rewardBox", "_para", "_apc", "_apcClass"];
 		_trigger setVariable ["Attacking", true, true];
 		_createVehicle = _trigger getVariable "createVehicle";
 		_missionPos = _trigger getVariable "missionPos";
@@ -79,7 +79,7 @@ _setupObjects =
 		_camo = _trigger getVariable "camo";
 		_spawnPositions = [];
 		_triggerArea = triggerArea _trigger;
-		_playerCount = count (allPlayers select { _x inArea [position _trigger, _triggerArea select 0 * 1.5, _triggerArea select 1 * 1.5, _triggerArea select 2, _triggerArea select 3, -1] }) max 3 min 6;
+		_playerCount = count (allPlayers select { _x inArea [position _trigger, _triggerArea select 0 * 1.5, _triggerArea select 1 * 1.5, _triggerArea select 2, _triggerArea select 3, -1] }) max 5 min 10;
 		_triggerArea resize 2;
 		_minDist = (selectMax _triggerArea) * 1.75 + 150 min 300;
 		_maxDist = _minDist + 50;
@@ -87,18 +87,38 @@ _setupObjects =
 		for "_i" from 0 to (_playerCount - 1) do
 		{
 			_pos = [position _trigger, _minDist, _maxDist, 5, 0, 1, 0] call BIS_fnc_findSafePos;
-			for "_i" from 0 to 100 do
+			for "_j" from 0 to 100 do
 			{
 				_pos = [position _trigger, _minDist, _maxDist, 5, 0, 1, 0] call BIS_fnc_findSafePos;
 				if (allplayers findif {_x distance _pos < 175} == -1 && !(_pos inArea _trigger)) exitwith {};
 			};
 			_pos set [2, 0];
 			_spawnPositions pushBack _pos;
-			sleep 0.3;
 		};
-		_ranOff = selectrandom [0,0,1,1,2,2,2]; // nothing, tank, anti air
+		_ranOff = selectrandom [0,0,1,1,1,2,2]; // apc, tank, anti air
 		_tankPos = _missionPos;
 		_tankPos set [2, 0];
+
+		if (_ranOff == 0) then
+		{
+			_aiGroup4 = createGroup civilian;
+			_apcClass = ["B_APC_Tracked_01_rcws_F", "I_APC_tracked_03_cannon_F", "O_APC_Tracked_02_cannon_F"] call BIS_fnc_selectRandom;
+			_apc = [_aiGroup4, _apcClass, position _trigger, _minDist + 500, _maxDist + 750, _trigger, _camo] call _createVehicle;
+			_vehs = _trigger getVariable "Vehicles";
+			_vehs pushBack _apc;
+			_trigger setVariable ["Vehicles", _vehs, true];
+			_attackers append (units _aiGroup4);
+			_attackersPool = _attackersPool - (count units _aiGroup4);
+			{
+				_waypoint = _aiGroup4 addWaypoint [_tankPos, 0];
+				_waypoint setWaypointType _x;
+				_waypoint setWaypointSpeed "NORMAL";
+				_waypoint setWaypointBehaviour "CARELESS";
+				_waypoint setWaypointCompletionRadius 10;
+				_waypoint setWaypointCombatMode "YELLOW";
+			} forEach ["MOVE", "SAD"];
+			sleep 2;
+		};
 
 		if (_ranOff == 1) then
 		{
@@ -138,6 +158,7 @@ _setupObjects =
 				_waypoint setWaypointCompletionRadius 10;
 				_waypoint setWaypointCombatMode "YELLOW";
 			} forEach ["MOVE", "SAD"];
+			sleep 2;
 		};
 		{
 			if (_attackersPool - _perGroup >= 0) then
@@ -149,7 +170,7 @@ _setupObjects =
 				_aiGroup3 setBehaviour "AWARE";
 				_aiGroup3 setFormation "WEDGE";
 				_attackers append (units _aiGroup3);
-				_speedMode = if (missionDifficultyHard) then { "NORMAL" } else { "LIMITED" };
+				_speedMode = if (missionDifficultyHard) then { "FULL" } else { "NORMAL" };
 				_aiGroup3 setSpeedMode _speedMode;
 				while {count (waypoints _aiGroup3) > 0} do
 				{
@@ -205,7 +226,7 @@ _setupObjects =
 	_trigger setVariable ["Attackers", [], true];
 	_trigger setVariable ["Vehicles", [], true];
 	_trigger setVariable ["missionPos", _missionPos, true];
-	_totalAttacker = (count allPlayers) * 20;
+	_totalAttacker = (count allPlayers) * 25;
 	_trigger setVariable ["AttackersPool", _totalAttacker, true];
 	_trigger setTriggerActivation ["ANYPLAYER", "PRESENT", false];
 	_triggerArea = markerSize (_territory select 0) + [markerDir (_territory select 0), markerShape (_territory select 0) == "RECTANGLE", 50];
@@ -263,6 +284,7 @@ _successExec =
 		_x setDir random 360;
 		[_x, _randomBox call BIS_fnc_selectRandom] call fn_refillbox;
 		_x setVariable ["R3F_LOG_disabled", false, true];
+		_x setVariable ["cmoney", _totalAttacker * 1000, true];
 		private _para = createVehicle ["I_parachute_02_F", [0,0,999999], [], 0, "NONE"];
 		_para setDir (getDir _x);
 		_para setPosATL (getPosATL _x);

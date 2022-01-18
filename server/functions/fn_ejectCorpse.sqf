@@ -27,7 +27,9 @@ if (_veh != _corpse && !(alive _veh)) then
 	_targetPos = _targetPos vectorAdd ([[0, _veh call fn_vehSafeDistance, 1], -([_veh, _corpse] call BIS_fnc_dirTo)] call BIS_fnc_rotateVector2D);
 };
 
-_targetPos = [_targetPos, 1, 6, 1, 1, 10, 0] call BIS_fnc_findSafePos; 
-_targetPos set [2, ((_corpse modelToWorld [0,0,0]) select 2)];
-_corpse setPos _targetPos;
+_targetPos = [_targetPos, 1, 6, 1, 1, 10, 0] call BIS_fnc_findSafePos;
+_targetPos set [2, worldSize];
+_corpse setPosASL _targetPos;
+_targetPos set [2, vectorMagnitude (_targetPos vectorDiff getPosVisual _corpse)];
+_corpse setPosASL _targetPos;
 _corpse setVariable ["A3W_corpseEjected", true, true];

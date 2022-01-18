@@ -57,26 +57,26 @@ _sideGears = [
 	[ // blufor gear
 		["U_B_GhillieSuit", "U_B_T_Sniper_F", "U_B_FullGhillie_ard", "U_B_FullGhillie_lsh", "U_B_FullGhillie_sard", "U_B_T_FullGhillie_tna_F"], // sniper ghillie
 		[ // normal uniform
-			["H_HelmetB", ["U_B_CombatUniform_mcam", "U_B_CombatUniform_mcam_tshirt", "U_B_CombatUniform_mcam_vest"]], //MTP
-			["H_HelmetB_plain_wdl", ["U_B_CombatUniform_mcam_wdl_f", "U_B_CombatUniform_tshirt_mcam_wdL_f", "U_B_CombatUniform_vest_mcam_wdl_f"]], //woodland
-			["H_HelmetB_tna_F", ["U_B_T_Soldier_F", "U_B_T_Soldier_AR_F", "U_B_T_Soldier_SL_F"]], //Tropic
-			["H_HelmetB_TI_tna_F", ["U_B_CTRG_1", "U_B_CTRG_2", "U_B_CTRG_3", "U_B_CTRG_Soldier_F", "U_B_CTRG_Soldier_3_F", "U_B_CTRG_Soldier_2_F"]] //CTRG
+			["H_HelmetB", ["U_B_CombatUniform_mcam", "U_B_CombatUniform_mcam_tshirt", "U_B_CombatUniform_mcam_vest"], "V_PlateCarrier1_rgr", "B_AssaultPack_rgr"], //MTP
+			["H_HelmetB_plain_wdl", ["U_B_CombatUniform_mcam_wdl_f", "U_B_CombatUniform_tshirt_mcam_wdL_f", "U_B_CombatUniform_vest_mcam_wdl_f"], "V_PlateCarrier1_wdl", "B_AssaultPack_wdl_F"], //woodland
+			["H_HelmetB_tna_F", ["U_B_T_Soldier_F", "U_B_T_Soldier_AR_F", "U_B_T_Soldier_SL_F"], "V_PlateCarrier1_tna_F", "B_AssaultPack_tna_F"], //Tropic
+			["H_HelmetB_TI_tna_F", ["U_B_CTRG_1", "U_B_CTRG_2", "U_B_CTRG_3", "U_B_CTRG_Soldier_F", "U_B_CTRG_Soldier_3_F", "U_B_CTRG_Soldier_2_F"], "V_TacVest_oli", "B_AssaultPack_rgr"] //CTRG
 		]
 	],
 	[ // opfor gear
 		["U_O_GhillieSuit", "U_O_T_Sniper_F", "U_O_FullGhillie_ard", "U_O_FullGhillie_lsh", "U_O_FullGhillie_sard", "U_O_T_FullGhillie_tna_F"], // sniper ghillie
 		[ // normal uniform
-			["H_HelmetO_ocamo", ["U_O_V_Soldier_Viper_hex_F", "U_O_officer_noInsignia_hex_F", "U_O_SpecopsUniform_ocamo", "U_O_CombatUniform_ocamo"]], //Hex
-			["H_HelmetO_ghex_F", ["U_O_V_Soldier_Viper_F", "U_O_T_Soldier_F"]], //Green Hex
-			["H_HelmetAggressor_F", ["U_O_R_Gorka_01_F", "U_O_R_Gorka_01_brown_F", "U_O_R_Gorka_01_camo_F", "U_O_R_Gorka_01_black_F"]] //Granit
+			["H_HelmetO_ocamo", ["U_O_V_Soldier_Viper_hex_F", "U_O_officer_noInsignia_hex_F", "U_O_SpecopsUniform_ocamo", "U_O_CombatUniform_ocamo"], "V_TacVest_khk", "B_AssaultPack_cbr"], //Hex
+			["H_HelmetO_ghex_F", ["U_O_V_Soldier_Viper_F", "U_O_T_Soldier_F"], "V_TacVest_oli", "B_FieldPack_ghex_OTAA_F"], //Green Hex
+			["H_HelmetAggressor_F", ["U_O_R_Gorka_01_F", "U_O_R_Gorka_01_brown_F", "U_O_R_Gorka_01_camo_F", "U_O_R_Gorka_01_black_F"], "V_SmershVest_01_radio_F", "B_FieldPack_green_F"] //Granit
 		]
 	],
 	[ // indi gear
 		["U_I_GhillieSuit", "U_I_FullGhillie_ard", "U_I_FullGhillie_lsh", "U_I_FullGhillie_sard", "U_B_T_FullGhillie_tna_F"], // sniper ghillie
 		[ // normal uniform
-			["H_HelmetIA", ["U_I_CombatUniform", "U_I_CombatUniform_shortsleeve"]], //Digital
-			["H_HelmetHBK_headset_F", ["U_I_E_Uniform_01_shortsleeve_F", "U_I_E_Uniform_01_sweater_F", "U_I_E_Uniform_01_tanktop_F", "U_I_E_Uniform_01_F"]], //Geometric
-			["H_HelmetIA", ["U_IG_leader", "U_BG_Guerilla2_1", "U_IG_Guerilla1_1", "U_BG_Guerilla2_2", "U_BG_Guerilla2_3", "U_BG_Guerrilla_6_1", "U_BG_Guerilla1_1", "U_BG_Guerilla3_1", "U_I_G_resistanceLeader_F"]] //Guerilla
+			["H_HelmetIA", ["U_I_CombatUniform", "U_I_CombatUniform_shortsleeve"], "V_PlateCarrierIA1_dgtl", "B_AssaultPack_dgtl"], //Digital
+			["H_HelmetHBK_headset_F", ["U_I_E_Uniform_01_shortsleeve_F", "U_I_E_Uniform_01_sweater_F", "U_I_E_Uniform_01_tanktop_F", "U_I_E_Uniform_01_F"], "V_CarrierRigKBT_01_light_EAF_F", "B_AssaultPack_eaf_F"], //Geometric
+			["H_HelmetIA", ["U_IG_leader", "U_BG_Guerilla2_1", "U_IG_Guerilla1_1", "U_BG_Guerilla2_2", "U_BG_Guerilla2_3", "U_BG_Guerrilla_6_1", "U_BG_Guerilla1_1", "U_BG_Guerilla3_1", "U_I_G_resistanceLeader_F"], "V_TacVest_camo", "B_AssaultPack_khk"] //Guerilla
 		]
 	]
 ];
@@ -97,9 +97,8 @@ switch (_side) do
 						_ownedUniform = _sideGears select 0 select 0 call BIS_fnc_selectRandom;
 						_dlcOwned = getAssetDLCInfo [_ownedUniform, configFile >> "CfgWeapons"] select 1;
 					};
-					_result pushBack _ownedUniform;
+					_result append [_ownedUniform, "V_PlateCarrier1_rgr", "B_AssaultPack_rgr"];
 				};
-				if (_item == "vest") then { _result = "V_PlateCarrier1_rgr" };
 				if (_item == "weapon") then
 				{
 					while {!_dlcOwned } do
@@ -109,16 +108,13 @@ switch (_side) do
 					};
 				};
 				if (_item == "weaponItem") then { _result = [_longRangeOptics call BIS_fnc_selectRandom] };
-				if (_item == "backpack") then { _result = "B_AssaultPack_mcamo" };
 			};
 			case (_isDiver):
 			{
-				if (_item == "uniform") then { _result pushBack "U_B_Wetsuit" };
-				if (_item == "vest") then { _result = "V_RebreatherB" };
+				if (_item == "uniform") then { _result append ["U_B_Wetsuit", "V_RebreatherB", "B_AssaultPack_blk"] };
 				if (_item == "goggles") then { _result = "G_Diving" };
 				if (_item == "weapon") then { _result = "arifle_SDAR_F" };
 				if (_item == "weaponItem") then { _result = ["", "20Rnd_556x45_UW_mag"] };
-				if (_item == "backpack") then { _result = "B_AssaultPack_blk" };
 			};
 			default
 			{
@@ -130,9 +126,8 @@ switch (_side) do
 						_ownedUniform = _ownedSet select 1 call BIS_fnc_selectRandom;
 						_dlcOwned = getAssetDLCInfo [_ownedUniform, configFile >> "CfgWeapons"] select 1;
 					};
-					_result = [_ownedSet select 0, _ownedUniform];
+					_result = [_ownedSet select 0, _ownedUniform, _ownedSet select 2, _ownedSet select 3];
 				};
-				if (_item == "vest") then { _result = "V_PlateCarrier1_rgr" };
 				if (_item == "weapon") then
 				{
 					while {!_dlcOwned } do
@@ -142,7 +137,6 @@ switch (_side) do
 					};
 				};
 				if (_item == "weaponItem") then { _result = [_mediumRangeOptics call BIS_fnc_selectRandom] };
-				if (_item == "backpack") then { _result = "B_AssaultPack_mcamo" };
 				
 			};
 		};
@@ -162,9 +156,8 @@ switch (_side) do
 						_ownedUniform = _sideGears select 1 select 0 call BIS_fnc_selectRandom;
 						_dlcOwned = getAssetDLCInfo [_ownedUniform, configFile >> "CfgWeapons"] select 1;
 					};
-					_result pushBack _ownedUniform;
+					_result append [_ownedUniform, "V_TacVest_khk", "B_AssaultPack_cbr"];
 				};
-				if (_item == "vest") then { _result = "V_TacVest_khk" };
 				if (_item == "weapon") then
 				{
 					while {!_dlcOwned } do
@@ -174,16 +167,13 @@ switch (_side) do
 					};
 				};
 				if (_item == "weaponItem") then { _result = [_longRangeOptics call BIS_fnc_selectRandom] };
-				if (_item == "backpack") then { _result = "B_AssaultPack_ocamo" };
 			};
 			case (_isDiver):
 			{
-				if (_item == "uniform") then { _result pushBack "U_O_Wetsuit" };
-				if (_item == "vest") then { _result = "V_RebreatherIR" };
+				if (_item == "uniform") then { _result append ["U_O_Wetsuit", "V_RebreatherIR", "B_AssaultPack_blk"] };
 				if (_item == "goggles") then { _result = "G_Diving" };
 				if (_item == "weapon") then { _result = "arifle_SDAR_F" };
 				if (_item == "weaponItem") then { _result = ["", "20Rnd_556x45_UW_mag"] };
-				if (_item == "backpack") then { _result = "B_AssaultPack_blk" };
 			};
 			default
 			{
@@ -195,9 +185,8 @@ switch (_side) do
 						_ownedUniform = _ownedSet select 1 call BIS_fnc_selectRandom;
 						_dlcOwned = getAssetDLCInfo [_ownedUniform, configFile >> "CfgWeapons"] select 1;
 					};
-					_result = [_ownedSet select 0, _ownedUniform];
+					_result = [_ownedSet select 0, _ownedUniform, _ownedSet select 2, _ownedSet select 3];
 				};
-				if (_item == "vest") then { _result = "V_TacVest_khk" };
 				if (_item == "weapon") then
 				{
 					while {!_dlcOwned } do
@@ -207,7 +196,6 @@ switch (_side) do
 					};
 				};
 				if (_item == "weaponItem") then { _result = [_mediumRangeOptics call BIS_fnc_selectRandom] };
-				if (_item == "backpack") then { _result = "B_AssaultPack_ocamo" };
 			};
 		};
 		if (_item == "headgear") then { _result = "H_HelmetO_ocamo" };
@@ -227,9 +215,8 @@ switch (_side) do
 						_ownedUniform = _sideGears select 2 select 0 call BIS_fnc_selectRandom;
 						_dlcOwned = getAssetDLCInfo [_ownedUniform, configFile >> "CfgWeapons"] select 1;
 					};
-					_result pushBack _ownedUniform;
+					_result append [_ownedUniform, "V_PlateCarrierIA1_dgtl", "B_AssaultPack_dgtl"];
 				};
-				if (_item == "vest") then { _result = "V_TacVest_camo" };
 				if (_item == "weapon") then
 				{
 					while {!_dlcOwned } do
@@ -239,16 +226,13 @@ switch (_side) do
 					};
 				};
 				if (_item == "weaponItem") then { _result = [_longRangeOptics call BIS_fnc_selectRandom] };
-				if (_item == "backpack") then { _result = "B_AssaultPack_dgtl" };
 			};
 			case (_isDiver):
 			{
-				if (_item == "uniform") then { _result pushBack "U_I_Wetsuit" };
-				if (_item == "vest") then { _result = "V_RebreatherIA" };
+				if (_item == "uniform") then { _result append ["U_I_Wetsuit", "V_RebreatherIA", "B_AssaultPack_blk"] };
 				if (_item == "goggles") then { _result = "G_Diving" };
 				if (_item == "weapon") then { _result = "arifle_SDAR_F" };
 				if (_item == "weaponItem") then { _result = ["", "20Rnd_556x45_UW_mag"] };
-				if (_item == "backpack") then { _result = "B_AssaultPack_blk" };
 			};
 			default
 			{
@@ -260,9 +244,8 @@ switch (_side) do
 						_ownedUniform = _ownedSet select 1 call BIS_fnc_selectRandom;
 						_dlcOwned = getAssetDLCInfo [_ownedUniform, configFile >> "CfgWeapons"] select 1;
 					};
-					_result = [_ownedSet select 0, _ownedUniform];
+					_result = [_ownedSet select 0, _ownedUniform, _ownedSet select 2, _ownedSet select 3];
 				};
-				if (_item == "vest") then { _result = "V_TacVest_camo" };
 				if (_item == "weapon") then
 				{
 					while {!_dlcOwned } do
@@ -272,7 +255,6 @@ switch (_side) do
 					};
 				};
 				if (_item == "weaponItem") then { _result = [_mediumRangeOptics call BIS_fnc_selectRandom] };
-				if (_item == "backpack") then { _result = "B_AssaultPack_dgtl" };
 			};
 		};
 		if (_item == "nvg") then { _result = "NVGoggles_INDEP" };

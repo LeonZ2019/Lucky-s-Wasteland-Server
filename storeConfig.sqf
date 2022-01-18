@@ -1580,12 +1580,12 @@ tanksArray = compileFinal str
 	["IFV-6a Cheetah AA", "B_APC_Tracked_01_AA_F", 50000, "vehicle"],
 	["ZSU-39 Tigris AA", "O_APC_Tracked_02_AA_F", 50000, "vehicle"],
 	["M2A1 Slammer", "B_MBT_01_cannon_F", 50000, "vehicle"],
-	["M2A4 Slammer HMG", "B_MBT_01_TUSK_F", 50000, "vehicle"], // Commander gun variant
+	["M2A4 Slammer HMG", "B_MBT_01_TUSK_F", 57000, "vehicle"], // Commander gun variant
 	["M2A4 Slammer HMG (Extra Tough)", "B_MBT_01_TUSK_F", 75000, "vehicle", "variant_tough"],
 	["T-100 Varsuk", "O_MBT_02_cannon_F", 50000, "vehicle"],
 	["MBT-52 Kuma", "I_MBT_03_cannon_F", 60000, "vehicle"],
-	["T-140 Angara", "O_MBT_04_cannon_F", 75000, "vehicle"],
-	["T-140K Angara", "O_MBT_04_command_F", 85000, "vehicle"],
+	["T-140 Angara", "O_MBT_04_cannon_F", 70000, "vehicle"],
+	["T-140K Angara", "O_MBT_04_command_F", 77000, "vehicle"],
 
 	["Zamak MRL", "I_Truck_02_MRL_F", 75000, "vehicle"],
 	["M5 Sandstorm MLRS", "B_MBT_01_mlrs_F", 120000, "vehicle"],
@@ -1635,7 +1635,7 @@ helicoptersArray = compileFinal str
 	["Mi-48 Kajman", "O_Heli_Attack_02_dynamicLoadout_F", 55000, "vehicle"], // Mi-28 with gunner 
 	["Mi-48 Kajman AT (Extra Tough)", "O_Heli_Attack_02_dynamicLoadout_F", 100000, "vehicle", "variant_toughAT"],
 
-	["MQ-12 Falcon (Unarmed)", "B_T_UAV_03_dynamicLoadout_F", 15000, "vehicle"],
+	["MQ-12 Falcon (Unarmed)", "B_T_UAV_03_dynamicLoadout_F", 15000, "vehicle", "variant_falconUnarmed"],
 	["MQ-12 Falcon UAV", "B_T_UAV_03_F", 45000, "vehicle"] // Do NOT use "B_T_UAV_03_dynamicLoadout_F" (unlees you don't need ASRAAM)
 ];
 

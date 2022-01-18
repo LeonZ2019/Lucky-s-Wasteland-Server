@@ -145,6 +145,12 @@ _getPlayerThreshold =
 	((_friendlyPlayers + _friendlyNPCs) * 100 - (_enemyPlayers + _enemyNPCs) + (if (typeName _this != "OBJECT" && _enemyPlayers > _friendlyPlayers) then { -99999 } else { 0 }))
 };
 
+_getBeaconDistance =
+{
+	_lastPos = position (player getVariable ["A3W_oldCorpse", player]);
+	_lastPos distance _this
+};
+
 // Function to determine if a beacon is allowed for use with BIS_fnc_conditionalSelect
 _isBeaconAllowed =
 {
@@ -451,7 +457,7 @@ while {!isNull _display} do
 
 	_locations = if (showBeacons) then
 	{
-		[_beacons, [], {_x call _getPlayerThreshold}, "DESCEND", {alive _x}] call BIS_fnc_sortBy
+		[_beacons, [], {_x call _getBeaconDistance}, "ASCEND", {alive _x}] call BIS_fnc_sortBy
 	}
 	else
 	{
@@ -469,7 +475,7 @@ while {!isNull _display} do
 
 		if (_isBeacon) then
 		{
-			_text = _location getVariable ["ownerName", "[Beacon]"];
+			_text = _location getVariable ["beaconName", (_location getVariable ["ownerName", "[Beacon]"])];
 			_data = "objectFromNetId " + str netId _location;
 		}
 		else

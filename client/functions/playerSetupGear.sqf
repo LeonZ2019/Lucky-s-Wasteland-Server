@@ -4,25 +4,24 @@
 //	@file Name: playerSetupGear.sqf
 //	@file Author: [GoT] JoSchaap, AgentRev
 
-private ["_player", "_uniform", "_vest", "_backpack", "_goggles", "_nvg", "_weapon", "_weaponItem", "_pistol"];
+private ["_player", "_uniform", "_goggles", "_nvg", "_weapon", "_weaponItem", "_pistol"];
 _player = _this;
 
 // Clothing is now defined in "client\functions\getDefaultClothing.sqf"
 
 _uniform = [_player, "uniform"] call getDefaultClothing;
-_vest = [_player, "vest"] call getDefaultClothing;
 _goggles = [_player, "goggles"] call getDefaultClothing;
-_backpack = [_player, "backpack"] call getDefaultClothing;
 _weapon = [_player, "weapon"] call getDefaultClothing;
 _weaponItem = [_player, "weaponItem"] call getDefaultClothing;
 _nvg = [_player, "nvg"] call getDefaultClothing;
 
-if (count _uniform == 2) then
+if (count _uniform == 4) then
 {
 	_player addHeadgear (_uniform select 0);
 	_player forceAddUniform (_uniform select 1);
+	_player addVest (_uniform select 2);
+	_player addBackpack (_uniform select 3);
 };
-if (_vest != "") then { _player addVest _vest };
 if (_goggles != "") then { _player addGoggles _goggles };
 
 sleep 0.1;
@@ -38,8 +37,6 @@ if (hmd _player != "") then { _player unlinkItem hmd _player };
 
 // Add NVG
 _player linkItem _nvg;
-
-_player addBackpack _backpack;
 
 for "_i" from 1 to 2 do {_player addItem "HandGrenade";};
 if (count _weaponItem == 2) then { for "_i" from 1 to 3 do {_player addItem (_weaponItem select 1);}; };

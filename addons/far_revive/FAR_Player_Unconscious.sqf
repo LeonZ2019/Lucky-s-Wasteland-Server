@@ -471,11 +471,23 @@ if (alive _unit && !UNCONSCIOUS(_unit)) then // Player got revived
 	{
 		{ _unit enableAI _x } forEach ["MOVE","FSM","TARGET","AUTOTARGET"];
 	};
-
-	// prevent rocket launcher switch because of annoying position freeze
-	if (_unitWeapon == secondaryWeapon _unit) then { _unitWeapon = primaryWeapon _unit };
-	if (_unitWeapon == "") then { _unitWeapon = handgunWeapon _unit };
-	_unit selectWeapon _unitWeapon;
+	if (_unit getVariable ["isSurrender", false]) then
+	{
+		player action ["Surrender", player];
+	} else
+	{
+		_unit setCaptive true;
+		// prevent rocket launcher switch because of annoying position freeze
+		if (_unitWeapon == secondaryWeapon _unit) then { _unitWeapon = primaryWeapon _unit };
+		if (_unitWeapon == "") then { _unitWeapon = handgunWeapon _unit };
+		_unit selectWeapon _unitWeapon;
+		uiSleep 2;
+		if (animationState _unit == "unconsciousrevivedefault") then
+		{
+			_unit switchMove "";
+		};
+		_unit setCaptive false;
+	};
 }
 else // Player bled out
 {

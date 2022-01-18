@@ -35,7 +35,7 @@ _setupObjects =
 		_pilot moveInDriver _heli;
 		moveOut _pilot;
 		_pilot setDamage 1;
-		_boxes = [];
+		/*_boxes = [];
 		for "_i" from 1 to 2 do
 		{
 			_box = createVehicle [["Box_East_WpsSpecial_F","Box_NATO_WpsSpecial_F"] call BIS_fnc_selectRandom, position _heli, [], 3, "NONE"];
@@ -55,7 +55,7 @@ _setupObjects =
 			_box setVariable ["R3F_LOG_est_transporte_par", _heli, true];
 			_boxes = _boxes + [_box];
 		};
-		_heli setVariable ["R3F_LOG_objets_charges", _boxes, true];
+		_heli setVariable ["R3F_LOG_objets_charges", _boxes, true];*/
 		_heli setVariable ["Mission_Vehicle", true, true];
 		_heli allowCrewInImmobile true;
 		_heli
@@ -96,18 +96,18 @@ _setupObjects =
 	_AAgroup setBehaviour "COMBAT";
 	_AAgroup setCombatMode "RED";
 	[_heli, _AAgroup, _president, _airforceOne] spawn {
-		params ["_heli", "_AAgroup", "_president", "_airforceOne"];
+		params ["_heli", "_AAgroup", "_president", "_airforceOne", "_boxes", "_box", "_attachedPos", "_loopPos"];
 		private ["_alive", "_aiPos"];
 		waitUntil
 		{
 			sleep 0.5;
 			(getPos _heli select 2 >= 10) && ((vectorMagnitude velocity _heli) * 3.6 >= 50)
 		};
-		while {!(isNull _president) && {alive _president}} do
+		while {!(isNull _president) && {alive _president} && _heli distance _airforceOne >= 800} do
 		{
 			sleep 2.5;
 			_alive = units _AAgroup select {alive _x};
-			if ((count _alive == 0) || (count _alive > 0 && {((_alive select 0) distance _heli) > 800})) then
+			if ((count _alive == 0) || (count _alive > 0 && {((_alive select 0) distance _heli) > 550})) then
 			{
 				{ deleteVehicle _x } forEach _alive;
 				
@@ -119,6 +119,28 @@ _setupObjects =
 				_AAgroup reveal [_heli, 1];
 			};
 		};
+		_boxes = [];
+		for "_i" from 1 to 2 do
+		{
+			_box = createVehicle [["Box_East_WpsSpecial_F","Box_NATO_WpsSpecial_F"] call BIS_fnc_selectRandom, position _heli, [], 3, "NONE"];
+			[_box, ["mission_USLaunchers","mission_RULaunchers"] call BIS_fnc_selectRandom] call fn_refillbox;
+			_box setVariable ["cmoney", 25000, true];
+			_box setVariable ["R3F_LOG_disabled", false, true];
+			_attachedPos = [random 3000, random 3000, (10000 + (random 3000))];
+			_loopPos = 1;
+			while {(!isNull (nearestObject _attachedPos)) && (_loopPos < 10)} do
+			{
+				_attachedPos = [random 3000, random 3000, (10000 + (random 3000))];
+				_loopPos = _loopPos + 1;
+			};
+			[R3F_LOG_PUBVAR_point_attache, true] call fn_enableSimulationGlobal;
+			[_box, true] call fn_enableSimulationGlobal;
+			_box attachTo [R3F_LOG_PUBVAR_point_attache, _attachedPos];
+			_box setVariable ["R3F_LOG_est_transporte_par", _heli, true];
+			_boxes = _boxes + [_box];
+		};
+		_heli setVariable ["R3F_LOG_objets_charges", _boxes, true];
+		{ deleteVehicle _x } forEach ((units _AAgroup) select {alive _x});
 	};
 	//_missionPicture = getText (configFile >> "CfgVehicles" >> _vehicleClass >> "picture");
 	_missionHintText = "A terrorist group is ambusing the President and his heli, the pilot is dead, take control of the heli and take him back to his aircraft";
@@ -139,7 +161,7 @@ _failedExec =
 	_failedhintMessage = "POTUS didn't survive on the way back to his aircraft";
 	deleteMarker _extractedPoint;
 	_heli setVariable ["Mission_Vehicle", false, true];
-	{ if (alive _x) then { deleteVehicle _x }; } forEach ([_president, _airforceOne] + (units _AAgroup));
+	{ if (alive _x) then { deleteVehicle _x }; } forEach [_president, _airforceOne];
 };
 
 _successExec =
@@ -150,7 +172,7 @@ _successExec =
 	{
 		[_heli, driver _heli] call A3W_fnc_takeOwnership;
 	};
-	{ if (alive _x) then { deleteVehicle _x }; } forEach ([_president, _airforceOne] + (units _AAgroup));
+	{ if (alive _x) then { deleteVehicle _x }; } forEach [_president, _airforceOne];
 	_heli setVariable ["Mission_Vehicle", false, true];
 	_successHintMessage = "The president is safe, well done.";
 };

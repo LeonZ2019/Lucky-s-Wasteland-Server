@@ -33,10 +33,16 @@ if (!_uavConnect) then
 {
 		// Eject from vehicle if it is already used by enemies
 		{
-			if (isPlayer _x && alive _x && !((getPlayerUID _x) call isAdmin) && !([_x, player] call A3W_fnc_isFriendly)) exitWith 
+			if (isPlayer _x && alive _x && ((!((getPlayerUID _x) call isAdmin) && !([_x, player] call A3W_fnc_isFriendly)) || _x getVariable ["isSurrender", false])) exitWith 
 			{
 				moveOut player;
-				["You can't enter vehicles being used by enemies.", 5] call mf_notify_client;
+				_text = "You can't enter vehicles being used by enemies.";
+				if (_x getVariable ["isSurrender", false]) then
+				{
+					_text = "You can't enter vehicles while surrender.";
+					player action ["Surrender", player];
+				};
+				[_text, 5] call mf_notify_client;
 
 				// ejection bug workaround
 				if (!alive player || lifeState player == "INCAPACITATED") then

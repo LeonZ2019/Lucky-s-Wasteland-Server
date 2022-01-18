@@ -17,7 +17,7 @@ if (!isServer && hasInterface) exitWith {};
 #define MONEY_CLEANUP_TIME (60*60) // Dropped money cleanup time
 #define STORE_CLEANUP_TIME (30*60) // Dropped store items cleanup time
 #define STORE_CLEANUP_RADIUS 7.5 // Radius in meters to scan near store NPCs for dropped items
-#define DEBRIS_CLEANUP_TIME (10*60) // Vehicle crash crater/debris cleanup time (actual vehicle wreck cleanup is handled through description.ext parameters)
+#define DEBRIS_CLEANUP_TIME (20*60) // Vehicle crash crater/debris cleanup time (actual vehicle wreck cleanup is handled through description.ext parameters)
 #define GROUP_CLEANUP_TIME (1*60) // How long a group must have been empty before deleting it
 
 // Corpse cleanup is handled through description.ext parameters
