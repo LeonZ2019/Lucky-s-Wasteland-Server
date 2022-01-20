@@ -8,7 +8,7 @@ class EditorData
 	toggles=586;
 	class ItemIDProvider
 	{
-		nextID=3228;
+		nextID=3236;
 	};
 	class MarkerIDProvider
 	{
@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=281;
+		nextID=283;
 	};
 	class Camera
 	{
-		pos[]={22364.576,64.916588,19446.84};
-		dir[]={0.8401522,-0.47694442,-0.25827637};
-		up[]={0.45590165,0.87892765,-0.14015219};
-		aside[]={-0.29385161,3.0035153e-008,-0.95587331};
+		pos[]={22385.9,72.398651,19372.266};
+		dir[]={0,-0.70710683,0.70710671};
+		up[]={0,0.70710665,0.70710677};
+		aside[]={0.99999994,0,-0};
 	};
 };
 binarizationWanted=0;
@@ -68,13 +68,15 @@ addons[]=
 	"A3_Structures_F_Enoch_Military_Airfield",
 	"A3_Structures_F_Ind_AirPort",
 	"A3_Structures_F_Enoch_Military_Radar",
-	"A3_Structures_F_Training"
+	"A3_Structures_F_Training",
+	"A3_Structures_F_Naval_Piers",
+	"A3_Boat_F_EPC_Submarine_01"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=18;
+		items=19;
 		class Item0
 		{
 			className="A3_Characters_F";
@@ -201,6 +203,13 @@ class AddonsMetaData
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
+		class Item18
+		{
+			className="A3_Boat_F_EPC";
+			name="Arma 3 Win Episode - Boats and Submersibles";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
 	};
 };
 dlcs[]=
@@ -238,7 +247,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=609;
+		items=613;
 		class Item0
 		{
 			dataType="Group";
@@ -6749,7 +6758,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={7900.5,283.95413,14627.25};
+				position[]={7900.5,283.0918,14627.25};
 			};
 			side="Empty";
 			flags=5;
@@ -6758,6 +6767,7 @@ class Mission
 			};
 			id=544;
 			type="Land_Radar_Small_F";
+			atlOffset=-0.86233521;
 		};
 		class Item288
 		{
@@ -7315,7 +7325,6 @@ class Mission
 					};
 					id=2043;
 					type="C_man_1_1_F";
-					atlOffset=0.21434593;
 					class CustomAttributes
 					{
 						class Attribute0
@@ -7364,7 +7373,6 @@ class Mission
 			{
 			};
 			id=2042;
-			atlOffset=0.21434593;
 		};
 		class Item329
 		{
@@ -7840,7 +7848,7 @@ class Mission
 					};
 					id=2084;
 					type="C_man_1_1_F";
-					atlOffset=3.6209984;
+					atlOffset=3.4069519;
 					class CustomAttributes
 					{
 						class Attribute0
@@ -7889,7 +7897,7 @@ class Mission
 			{
 			};
 			id=2083;
-			atlOffset=3.6209984;
+			atlOffset=3.4069519;
 		};
 		class Item347
 		{
@@ -18323,6 +18331,72 @@ class Mission
 			id=3227;
 			type="BlockConcrete_F";
 			atlOffset=-1.0034332;
+		};
+		class Item609
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={11880.944,-22.295998,11729.83};
+				angles[]={0,0.87266463,0};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+			};
+			id=3228;
+			type="Land_nav_pier_m_F";
+			atlOffset=-4.224957;
+		};
+		class Item610
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={11891.229,-1.1149514,11724.619};
+				angles[]={0,4.0142574,0};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+			};
+			id=3232;
+			type="Land_PierLadder_F";
+			atlOffset=-0.09708035;
+		};
+		class Item611
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={11887.167,-1.0055974,11729.625};
+				angles[]={0,4.0142574,0};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+			};
+			id=3234;
+			type="Land_PierLadder_F";
+			atlOffset=-0.35764933;
+		};
+		class Item612
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={16026.014,-2.3649769,6761.6797};
+			};
+			side="Empty";
+			class Attributes
+			{
+			};
+			id=3235;
+			type="Submarine_01_F";
+			atlOffset=171.88052;
 		};
 	};
 };

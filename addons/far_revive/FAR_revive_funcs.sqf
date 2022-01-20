@@ -91,7 +91,7 @@ FAR_HandleTreating =
 				if (CAN_PERFORM) then
 				{
 					_failed = false;
-					_text = format [["Stabilizing %1%2 complete","Reviving %1%2 complete"] select _isRevive, floor (_progress * 100), "%"];
+					_text = format [["Stabilizing %3 %1%2 complete","Reviving %3 %1%2 complete"] select _isRevive, floor (_progress * 100), "%", name _target];
 				};
 
 				[_failed, _text];

@@ -42,7 +42,7 @@ _hasFailed = {
 		case (_target getVariable ["Mission_Man", false]): {_text = ERR_MISSION_MAN};
         case (player distance _target > 5): {_text = ERR_TOO_FAR};
 		default {
-			_text = format["Restoring heartbeat %1%2", round(_progress*100), "%"];
+			_text = format["Restoring %3 heartbeat %1%2", round(_progress*100), "%", name _target];
 			_failed = false;
 		};
 	};

@@ -17,24 +17,313 @@ player createDiarySubject ["infos", "Infos and Help"];
 player createDiarySubject ["changelog", "Changelog"];
 player createDiarySubject ["credits", "Credits"];
 
-player createDiaryRecord ["changelog",
+player createDiarySubject ["customupdate", "Lucky's Wasteland"];
+player createDiaryRecord ["customupdate",
+[
+"Custom Update Build 14",
+"
+<br/>[Updated] Wasteland official
+<br/>[Added] New item in general Store
+<br/>[Added] Demining mission
+<br/>[Added] Airdrop system from APOC
+<br/>[Added] Beacon detector
+<br/>[Added] Titan Static mountable to offroad and Truck
+<br/>[Added] 'Tree Cutter' for allow helicopter take off
+<br/>[Added] Defend territory mission
+<br/>[Added] Containers and objects from Apex DLC
+<br/>[Added] Transfer ownership action
+<br/>[Added] New category in general store
+<br/>[Added] Sell object in every store
+<br/>[Added] Surrender feature - `Shift + H`
+<br/>[Added] Info page for shortcut key
+<br/>[Added] welcome message
+<br/>[Added] Artillery Computer restricted area
+<br/>[Added] Texture for Mohawk
+<br/>[Added] Item filter for Gun Store and General Store
+<br/>[Added] Altis Has Fallen mission
+<br/>[Added] Beacon rename feature and repair feature
+<br/>[Added] Map usage for Remote designator
+<br/>[Adjusted] Limit on ATM now up to 2mil
+<br/>[Adjusted] refillbox to balance the game
+<br/>[Adjusted] Price on vehicle store
+<br/>[Adjusted] Transfer to box max direction
+<br/>[Adjusted] Default clothing
+<br/>[Adjusted] view distance range from 8500 to 10000
+<br/>[Adjusted] Mission config
+<br/>[Adjusted] Mission line for custom distance
+<br/>[Adjusted] Thermal for few equitment
+<br/>[Retextured] Vehicle texture for digital green, wooldland and multicam
+<br/>[Retextured] AAF and OPFOR vehicle paint
+<br/>[Modifed] Vehicle textures
+<br/>[Modified] Tailhook prefix
+<br/>[Modified] Territory name
+<br/>[Modified] Corpse missing problem
+<br/>[Enabled] Warchest
+<br/>[Moved] water mission to New Water mission
+<br/>[Removed] Unused texture
+<br/>[Improved] Gun store direct load magazine to weapon
+<br/>[Improved] UAV issue, could be exist in server
+<br/>[Improved] R3F Helicopter lift
+<br/>[Improved] Vehicle get out for turn off engine
+<br/>[Improved] Heal soldier problem
+<br/>[Improved] R3F object move
+<br/>[Improved] Help hint
+<br/>[Improved] Human target scoreboard problem
+<br/>[Improved] Weapon swap issue
+<br/>[Improved] R3F object select
+<br/>[Improved] UAV take control
+<br/>[Improved] Revive message
+<br/>[Fixed] Thermal on vorona
+<br/>[Fixed] Admin tool
+<br/>[Fixed] Mission abandoned jet
+<br/>[Fixed] Sell and Repaint on turret
+<br/>[Fixed] Resupply crate
+<br/>[Fixed] Uninstall cargo problem
+<br/>[Fixed] player will not get damage from installed vehicle
+<br/>[Fixed] Eject corpse script
+<br/>[Fixed] Park Plane instead of Park Vehicle
+<br/>[Fixed] Land convoy path
+<br/>[Fixed] Boat spawn position
+<br/>[Fixed] Condition and action text
+<br/>[Fixed] Duplicated R3F action
+<br/>[Fixed] Scoreboard reset
+<br/>[Fixed] Take uniform problem
+<br/>[Fixed] Handgun magazine missing
+<br/>[Fixed] Sell vehicle problem
+<br/>[Fixed] Create unit
+<br/>[Fixed] Animation stuck on unconscious
+<br/>[Fixed] Block artillery restricted zone on store location
+"
+]];
+
+player createDiaryRecord ["customupdate",
 [
 "Custom Update Build 13",
+"
+<br/>[Added] Carry action for unconcious player
+<br/>[Added] 'transfer to box' action for dead body in underwater
+<br/>[Added] Icon for hostage action
+<br/>[Added] Box into config for helicopter lift object
+<br/>[Added] Tailhook action for every aircraft, result with able to land on aircraft carrier
+<br/>[Added] Backpack lock feature
+<br/>[Added] Missions include Airdrop, Delivery Supply, Anti Air and Medevac
+<br/>[Added] Tougher tank
+<br/>[Added] Textures for Blufor APC with AAF and Hex style
+<br/>[Added] Texture for hunter, hellcat and wipeout
+<br/>[Added] Transport anti-air also support
+<br/>[Added] Basic item to general store
+<br/>[Added] More object to general store
+<br/>[Added] Get in as cargo for apex and helicopter DLCs
+<br/>[Added] Take uniform from other side
+<br/>[Added] Destroyer at Pyrgos gulf
+<br/>[Added] Unarmed vehicle
+<br/>[Added] Feature to destroy vehicle after get bottom of sea
+<br/>[Added] Tailhook for UAV
+<br/>[Added] Resupply truck marker on map
+<br/>[Added] Install handler at vehicle damaged
+<br/>[Added] Resupply object in general store
+<br/>[Fixed] Medkit problem for helping player
+<br/>[Fixed] Unflip problem with destoryed vehicle
+<br/>[Fixed] Admin tool
+<br/>[Fixed] Parking spawn problem
+<br/>[Fixed] teleport problem
+<br/>[Fixed] weapon and magazine loadout on vehicle resupply
+<br/>[Fixed] Thermal problem
+<br/>[Fixed] Transfer to box missing items
+<br/>[Fixed] R3F uav control problem
+<br/>[Fixed] Admin tool
+<br/>[Fixed] AA radar problem on spawn
+<br/>[Improved] Player icon depends on speed and helicopter/plane, the faster of speed, the farther player fetch
+<br/>[Improved] Portal for better coding
+<br/>[Improved] R3F addon
+<br/>[Improved] Suicide vest no longer gone after armed
+<br/>[Improved] General store purchasing function
+<br/>[Improved] Store action
+<br/>[Adjusted] Helicopter minimum paradrop from 40m to 25m
+<br/>[Adjusted] Marker size for custom made stuff
+<br/>[Adjusted] Planes loadout for balancing plane between side
+<br/>[Adjusted] Random soldier spawn for random side
+<br/>[Adjusted] police group from AA to AT
+<br/>[Adjusted] Mission config
+<br/>[Adjusted] Planes loadout for balancing plane between side
+<br/>[Adjusted] Helicopter loadout
+<br/>[Adjusted] Inventory limit
+<br/>[Adjusted] Vehicle store tax for aircraft carrier
+<br/>[Adjusted] Price of vehicle in vehicle store
+"
+]];
+
+player createDiaryRecord ["customupdate",
+[
+"Custom Update Build 12",
+"
+<br/>[Removed] All required Mod
+<br/>[Fixed] Far revive addon
+<br/>[Fixed] Parking marker problem
+<br/>[Fixed] Suicide Vest still valid to detonate when unconscious
+<br/>[Adjusted] Hostile Jet Cash spawn
+"
+]];
+
+player createDiaryRecord ["customupdate",
+[
+"Custom Update Build 11",
 "
 <br/>[Added] HVT - High Value Target for carry 150k, refresh time is 30 seconds
 <br/>[Added] Items Strap-on Bomb and Defibrillator
 <br/>[Added] Civilians cloth in general store
-<br/>[Added] More gear to general store
 <br/>[Added] Mission Rescue War Crime, Rescue Hostage and Miller's Truck
-<br/>[Added] Parking lot in airport for plane only
-<br/>[Added] Small territory boost
 <br/>[Fixed] Vehicle light on driver assist
-<br/>[Fixed] Convoy path up to 6 start location
-<br/>[Fixed] Private variable for most of the mission
+<br/>[Fixed] Mission variable
 <br/>[Fixed] Server restart message
-<br/>[Adjusted] Start up gear
-<br/>[Adjusted] Mission setup
+<br/>[Adjusted] Parking lot in airport for plane only
+<br/>[Adjusted] Small territory boost
+<br/>[Adjusted] Mission config
+<br/>[Adjusted] Player start up gear
 <br/>[Adjusted] Mission AI loadout
+"
+]];
+
+player createDiaryRecord ["customupdate",
+[
+"Custom Update Build 10",
+"
+<br/>[Added] Parking in airport
+<br/>[Added] Small territory boost
+<br/>[Added] Mission - Miller's Truck
+<br/>[Replaced] Restart message
+<br/>[Adjusted] Few small problem for vehicle
+<br/>[Adjusted] Server properties wreck, corpse and respawn
+<br/>[Adjusted] Mission config
+<br/>[Adjusted] Mission AI loadout
+"
+]];
+
+player createDiaryRecord ["customupdate",
+[
+"Custom Update Build 9",
+"
+<br/>[Added] More objects in general store
+<br/>[Removed] Driver assist lights control
+<br/>[Reduced] size of vehicle texture
+<br/>[Adjusted] Forbidden items for refill box
+<br/>[Adjusted] Connection to uav terminal after dead
+<br/>[Adjusted] Mission config
+"
+]];
+
+player createDiaryRecord ["customupdate",
+[
+"Custom Update Build 8",
+"
+<br/>[Added] New ATM
+<br/>[Fixed] Admin panel problem
+<br/>[Fixed] Indi able to teleport with portal
+<br/>[Fixed] Portal small problem
+<br/>[Adjusted] Mission config
+<br/>[Adjusted] description message
+"
+]];
+
+player createDiaryRecord ["customupdate",
+[
+"Custom Update Build 7",
+"
+<br/>[Added] Compass gui
+<br/>[Added] More type of crates for mission
+<br/>[Added] Portal system which can teleport from town to territory
+<br/>[Added] few feature for driver assist
+<br/>[Added] Admin tool
+<br/>[Adjusted] Mission config
+<br/>[Adjusted] Default cloth and weapon on spawn
+<br/>[Adjusted] Parking with crate will left crate outside
+"
+]];
+
+player createDiaryRecord ["customupdate",
+[
+"Custom Update Build 6",
+"
+<br/>[Added] Texture for hemtt fuel and fuel truck
+<br/>[Fixed] Restart server message
+<br/>[Adjusted] Map object for few things
+<br/>[Adjusted] Artillery strike
+<br/>[Adjusted] Object spawn on store
+<br/>[Adjusted] Territory payroll
+<br/>[Adjusted] Mission config
+"
+]];
+
+player createDiaryRecord ["customupdate",
+[
+"Custom Update Build 5",
+"
+<br/>[Added] Server restart message
+<br/>[Fixed] Resupply for anti-air turret
+<br/>[Fixed] Spawn error on carrier
+<br/>[Adjusted] Territory payroll
+<br/>[Adjusted] Mission config
+"
+]];
+
+player createDiaryRecord ["customupdate",
+[
+"Custom Update Build 4",
+"
+<br/>[Added] Custom tax/discount based on each vehicle store
+<br/>[Fixed] Resupply function for anti-air turret
+<br/>[Fixed] Deploy beacon in water/sea
+<br/>[Fixed] packable vehicle problem
+<br/>[Fixed] Boat option in vehicle store
+<br/>[Adjusted] Thermal on UAV and vehicles
+<br/>[Adjusted] Push vehicle extend distance from 2.5 to 4
+<br/>[Adjusted] List of selling crate content
+<br/>[Adjusted] Moonlight is back on night, visible see at night
+<br/>[Adjusted] Longer night time
+<br/>[Adjusted] Mission config
+"
+]];
+
+player createDiaryRecord ["customupdate",
+[
+"Custom Update Build 3",
+"
+<br/>[Added] More gear on general store
+<br/>[Removed] Holster weapon option in swimming
+<br/>[Removed] Admin tool - Virtual Arsenal and Virtual Garage
+<br/>[Fixed] Admin tool - teleport and tpmeto and tptome and unstuck player
+<br/>[Fixed] Vehicle not spawn on vehicle store
+<br/>[Adjusted] Flat grass move to front of player
+<br/>[Adjusted] General store item and gear will not replace after purchase
+<br/>[Adjusted] Vehicle store with Anti air and Gun store with Sniper
+<br/>[Adjusted] View distance set to 8500m
+<br/>[Adjusted] Mission config
+"
+]];
+
+player createDiaryRecord ["customupdate",
+[
+"Custom Update Build 2",
+"
+<br/>[Added] Territories and towns
+<br/>[Added] Gun store, general store, vehicle store and atm
+<br/>[Added] Import military mission from LouD
+<br/>[Added] Mission convoy path
+<br/>[Added] More admin tool
+<br/>[Fixed] Parking system (profile -> extDB)
+<br/>[Fixed] Quadbike and waterscooter pack if damaged
+<br/>[Adjusted] Remove fog for good
+<br/>[Adjusted] Default config
+"
+]];
+
+player createDiaryRecord ["customupdate",
+[
+"Custom Update Build 1",
+"
+<br/>[Added] Flatten Grass
+<br/>[Added] Deployable quad bike
+<br/>[Added] Deployable water scooter
 "
 ]];
 
@@ -611,11 +900,15 @@ player createDiaryRecord ["infos",
 <br/>
 <br/>" + NKEYNAME(41) + " (open player menu)
 <br/>" + NKEYNAME(207) + " (toggle earplugs)
-<br/>" + NKEYNAME(199) + ", " + NKEYNAME(219) + ", " + NKEYNAME(220) + " (toggle player names)
+<br/>" + NKEYNAME(219) + ", " + NKEYNAME(220) + " (toggle player names)
 <br/>Ctrl + " + AKEYNAME("GetOut") + " (emergency eject)
 <br/>" + AKEYNAME("GetOver") + " (open parachute)
 <br/>Shift + " + NKEYNAME(201) + " / " + NKEYNAME(209) + " (adjust nightvision)
 <br/>" + NKEYNAME(22) + " (admin menu)
+<br/>Shift + H (surrender)
+<br/>Home (Help message
+<br/>Backspace (Detonate suicide vest or bomb)
+<br/>Enter (Defibrillator revive player)
 "
 ]];
 

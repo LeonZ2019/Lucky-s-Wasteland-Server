@@ -11,6 +11,7 @@
 
 #define ERR_NOT_FRIENDLY "You cannot repair enemy beacon!"
 #define ERR_TOO_FAR_AWAY "You need to be less that 5 metres from it"
+#define ERR_STILL_ALIVE "The beacon is not damage"
 private ["_beacon", "_beacons", "_error"];
 _beacon = objNull;
 
@@ -24,7 +25,8 @@ _error = "failed";
 switch (true) do {
 	case (!alive player): {_error = " "}; // Player is dead, no need for a error message
 	case (player distance _beacon > 5): {_error = ERR_TOO_FAR_AWAY};
-	case (![_beacon] call mf_items_spawn_beacon_can_use): {_error = ERR_NOT_FRIENDLY};
+	case (!([_beacon] call mf_items_spawn_beacon_can_use)): {_error = ERR_NOT_FRIENDLY};
+	case (alive _beacon): {_error = ERR_STILL_ALIVE};
 	default {_error = ""};
 };
 _error;

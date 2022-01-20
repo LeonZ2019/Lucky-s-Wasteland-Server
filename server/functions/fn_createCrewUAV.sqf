@@ -59,6 +59,8 @@ _uav setVehicleReceiveRemoteTargets true;
 _uav setVehicleReportOwnPosition true;
 _uav setVehicleRadar 1;
 ((crew _uav) select 0) action ["ActiveSensorsOn", true];
+if ({_uav isKindOf _x} count ["Static_Designator_01_base_F", "Static_Designator_02_base_F"] != -1) then {((crew _uav) select 0) addWeapon "ItemMap";};
+
 _uav spawn
 {
 	{
