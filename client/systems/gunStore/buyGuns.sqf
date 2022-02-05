@@ -161,7 +161,7 @@ storePurchaseHandle = _this spawn
 							case "item":
 							{
 								_weaponClass = lbData [gunshop_WeaponFilterDropdown_IDC, lbCurSel gunshop_WeaponFilterDropdown_IDC];
-								if (isNil "_weaponClass") then
+								if (_weaponClass == "") then
 								{
 									if ([player, _class] call fn_fitsInventory) then
 									{

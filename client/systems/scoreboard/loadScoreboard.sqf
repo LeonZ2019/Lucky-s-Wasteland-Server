@@ -95,6 +95,10 @@ _code =
 				_entryName ctrlSetText name _player;
 				_entryName ctrlSetTextColor _textColor;
 
+				_entryWarCrime = _display displayCtrl scoreGUI_PListEntry_WarCrime(_id);
+				_entryWarCrime ctrlSetText str ([_player, "warCrimes"] call fn_getScore);
+				_entryWarCrime ctrlSetTextColor _textColor;
+
 				_entryPKills = _display displayCtrl scoreGUI_PListEntry_PKills(_id);
 				_entryPKills ctrlSetText str (([_player, "playerKills"] call fn_getScore) - ([_player, "teamKills"] call fn_getScore));
 				_entryPKills ctrlSetTextColor _textColor;

@@ -149,6 +149,8 @@ switch (_lockState) do
 
 		if (_success) then
 		{
+			pvar_logPlayerAction = [getPlayerUID player, name player, side player, "Unlock Object", _object getVariable ["A3W_objectID","0"], "", position _object, typeOf _object, ""];
+			publicVariableServer "pvar_logPlayerAction";
 			_object setVariable ["objectLocked", false, true];
 			_object setVariable ["ownerUID", nil, true];
 			_object setVariable ["baseSaving_hoursAlive", nil, true];

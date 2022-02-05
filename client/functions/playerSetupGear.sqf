@@ -4,7 +4,7 @@
 //	@file Name: playerSetupGear.sqf
 //	@file Author: [GoT] JoSchaap, AgentRev
 
-private ["_player", "_uniform", "_goggles", "_nvg", "_weapon", "_weaponItem", "_pistol"];
+private ["_player", "_uniform", "_goggles", "_nvg", "_weapon", "_weaponItem", "_pistol", "_primaryGunConfig", "_primaryGunMags", "_hgunConfig", "_hgunMags", "_terminal"];
 _player = _this;
 
 // Clothing is now defined in "client\functions\getDefaultClothing.sqf"
@@ -72,7 +72,8 @@ _player addHandgunItem _hgunMags;
 
 _player addItem "FirstAidKit";
 _player addItem "FirstAidKit";
-_player selectWeapon "_weapon";
+_player selectWeapon _weapon;
+_player addWeapon "Binocular";
 
 switch (true) do
 {
@@ -101,6 +102,26 @@ switch (true) do
 		_player addItemToBackpack "NLAW_F";
 		_player addItem "SmokeShellGreen";
 		_player addItem "SmokeShellRed";
+	};
+	case (["_soldier_UAV_", typeOf _player] call fn_findString != -1):
+	{
+		_terminal = switch (side _player) do
+		{
+			case BLUFOR: { "B_UavTerminal" };
+			case OPFOR:  { "O_UavTerminal" };
+			default      { "I_UavTerminal" };
+		};
+		_player linkItem _terminal;
+	};
+	case (["_Pilot_", typeOf _player] call fn_findString != -1):
+	{
+		_player addHeadgear (_uniform select 0);
+		_player addItem "SmokeShellGreen";
+		_player addItem "SmokeShellGreen";
+		_player addItem "SmokeShellRed";
+		_player addItem "SmokeShellRed";
+		_player addItem "Chemlight_green";
+		_player addItem "Chemlight_red";
 	};
 };
 

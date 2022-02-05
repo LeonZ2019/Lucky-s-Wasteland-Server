@@ -31,7 +31,8 @@ _hpDamage = getAllHitPointsDamage _player;
 [
 	["Damage", damage _player],
 	["HitPoints", _hitPoints],
-	["Money", _player getVariable ["cmoney", 0]] // Money is always saved, but only restored if A3W_moneySaving = 1
+	["Money", _player getVariable ["cmoney", 0]], // Money is always saved, but only restored if A3W_moneySaving = 1
+	["OldWCScore", _player getVariable ["OldWCScore", 0]]
 ];
 
 // Only save those when on ground or underwater (you probably wouldn't want to spawn 500m in the air if you get logged off in flight)

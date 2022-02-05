@@ -7,10 +7,12 @@
 //	@file Created: 20/11/2012 05:19
 //	@file Args:
 
+_teambalance = ["A3W_teamBalanceThreshold", 3] call getPublicVar;
+
 playerSpawning = true;
 
 //Teamkiller Kick
-if (!isNil "pvar_teamKillList" && {playerSide in [BLUFOR,OPFOR]}) then
+if (!isNil "pvar_teamKillList" && {playerSide in [BLUFOR,OPFOR]} && !((getPlayerUID player) call isAdmin)) then
 {
 	if ([pvar_teamKillList, getPlayerUID player, 0] call fn_getFromPairs >= 2) exitWith
 	{
@@ -28,12 +30,47 @@ if (!isNil "pvar_teamKillList" && {playerSide in [BLUFOR,OPFOR]}) then
 		waitUntil {uiNamespace setVariable ["BIS_fnc_guiMessage_status", false]; closeDialog 0; false};
 	};
 };
+
+//Teambalance
+if (playerSide in [BLUFOR,OPFOR] && !((getPlayerUID player) call isAdmin)) then
+{
+	_opside = switch (playerSide) do
+	{
+		case west: {east};
+		case east: {west};
+	};
+	if ((playerSide countSide allPlayers) - (_opside countSide allPlayers) > _teambalance) exitWith
+	{
+		pvar_teamSwitchUnlock = getPlayerUID player;
+		publicVariableServer "pvar_teamSwitchUnlock";
+
+		player allowDamage false;
+		player setUnconscious true;
+		9999 cutText ["", "BLACK", 0.01];
+		0 fadeSound 0;
+
+		uiNamespace setVariable ["BIS_fnc_guiMessage_status", false];
+		_opsideName = switch (playerSide) do
+		{
+			case west: {"Opfor"};
+			case east: {"Blufor"};
+		};
+
+		_msgBox = [format [localize "STR_WL_Teamstack", _opsideName]] spawn BIS_fnc_guiMessage;
+		_time = diag_tickTime;
+
+		waitUntil {scriptDone _msgBox || diag_tickTime - _time >= 20};
+		endMission "LOSER";
+		waitUntil {uiNamespace setVariable ["BIS_fnc_guiMessage_status", false]; closeDialog 0; false};
+	};
+};
+
 //Teamswitcher Kick, but not admin
-if (!isNil "pvar_teamSwitchList" && playerSide in [BLUFOR,OPFOR]) then
+if (!isNil "pvar_teamSwitchList" && playerSide in [BLUFOR,OPFOR] && !((getPlayerUID player) call isAdmin)) then
 {
 	_prevSide = [pvar_teamSwitchList, getPlayerUID player, playerSide] call fn_getFromPairs;
 
-	if (_prevSide != playerSide && !((getPlayerUID player) call isAdmin)) exitWith
+	if (_prevSide != playerSide) exitWith
 	{
 		player allowDamage false;
 		player setUnconscious true;

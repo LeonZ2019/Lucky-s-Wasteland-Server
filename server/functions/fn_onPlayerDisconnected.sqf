@@ -8,6 +8,7 @@ params ["_id", "_uid", "_name", "_owner", "_jip"];
 
 diag_log format ["Player disconnected: %1 (%2)", _name, _uid];
 if (_uid isEqualTo "") exitWith {};
+[_uid, _name, civilian, "Player Disconnected", "", "", "", "", ""] call fn_logPlayerAction;
 
 private _resend = false;
 

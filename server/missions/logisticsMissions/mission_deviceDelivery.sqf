@@ -48,6 +48,7 @@ _setupObjects =
 	_vehicle = createVehicle ["O_Truck_03_device_F", _missionPos, [], 0, "NONE"]; //unlocked
 	_vehicle setVariable ["ownerName", "Miller", true];
 	_vehicle setVariable ["Mission_Vehicle", true, true];
+	[_vehicle] call vehicleSetup;
 
 	_aiGroup = createGroup CIVILIAN;
 	[_aiGroup,_missionPos, 10, 20] spawn createCustomGroup;

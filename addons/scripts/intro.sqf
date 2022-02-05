@@ -1,4 +1,5 @@
-sleep 120;
+waitUntil {["playerSetupComplete", false] call getPublicVar};
+sleep 20;
 
 private ["_messages", "_timeout"];
 

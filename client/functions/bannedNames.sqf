@@ -8,7 +8,7 @@
 
 if (isServer) exitWith {};
 
-private ["_bannedNames", "_name", "_trueName"];
+private ["_bannedNames", "_name", "_trueName", "_time", "_msgBox"];
 
 waitUntil {sleep 1; !isNil "bannedPlayerNames"};
 
@@ -19,7 +19,11 @@ _trueName = [];
 {
 	if (_name == _x) exitWith
 	{
-		[format ['The name "%1" is not allowed, please change it or you may get kicked.', name player], "Notice"] spawn BIS_fnc_guiMessage;
+		_msgBox = [format ['The name "%1" is not allowed, please change it or you may get kicked.', name player], "Notice"] spawn BIS_fnc_guiMessage;
+		_time = diag_tickTime;
+
+		waitUntil {scriptDone _msgBox || diag_tickTime - _time >= 20};
+		endMission "LOSER";
 	}
 } forEach _bannedNames;
 

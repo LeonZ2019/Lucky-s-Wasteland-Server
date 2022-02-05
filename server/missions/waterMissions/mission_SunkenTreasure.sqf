@@ -30,7 +30,7 @@ _setupObjects =
 
 	_cashObjects = [];
 
-	for "_i" from 1 to 10 do
+	for "_i" from 1 to 5 do
 	{
 		_cash = createVehicle ["Land_Money_F", _missionPos, [], 0, "None"];
 		_cash setVariable ["owner", "mission", true];
@@ -45,6 +45,7 @@ _setupObjects =
 	_vehicle lockDriver true;
 
 	_aiGroup = createGroup CIVILIAN;
+	[_aiGroup, _missionPos] call createLargeDivers;
 	[_aiGroup, _missionPos] call createLargeDivers;
 
 	[_vehicle, _aiGroup] spawn checkMissionVehicleLock;
@@ -74,7 +75,7 @@ _successExec =
 
 	// Give the rewards
 	{
-		_x setVariable ["cmoney", 2500, true];
+		_x setVariable ["cmoney", 1000, true];
 		_x setVariable ["owner", "world", true];
 	} forEach _cashObjects;
 

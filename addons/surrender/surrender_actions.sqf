@@ -17,10 +17,12 @@ switch (_action) do {
 	};
 	case ("untie"): {
 		_target setVariable ["isTied",false,true];
+		_target setVariable ["timeoutUntie", diag_tickTime, true];
 		playSound3D [getMissionPath "client\sounds\untie.ogg", player, true, getPosASL player, 5, 1, 10];
 	};
 	case ("tie"): {
 		_target setVariable ["isTied",true,true];
+		_target setVariable ["timeoutUntie", diag_tickTime + 30, true];
 		playSound3D [getMissionPath "client\sounds\zipTie.ogg", player, true, getPosASL player, 5, 1, 10];
 	};
 };

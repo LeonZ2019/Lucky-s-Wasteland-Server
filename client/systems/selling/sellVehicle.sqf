@@ -143,11 +143,12 @@ storeSellingHandle = _this spawn
 			};
 
 			private _attachedObjs = attachedObjects _vehicle;
+			pvar_logPlayerAction = [getPlayerUID player, name player, side player, "Sold Vehicle", _vehicle getVariable ["A3W_vehicleID", "0"], _price, position _vehicle, typeOf _vehicle, ""];
+			publicVariableServer "pvar_logPlayerAction";
 			deleteVehicle _vehicle;
 			{
 				["detach", _x] call A3W_fnc_towingHelper;
 			} forEach _attachedObjs;
-
 			//player setVariable ["cmoney", (player getVariable ["cmoney",0]) + _price, true];
 			[player, _price] call A3W_fnc_setCMoney;
 			[format ['The %1 has been sold!', _objname, VEHICLE_MAX_SELLING_DISTANCE], "Thank You"] call  BIS_fnc_guiMessage;

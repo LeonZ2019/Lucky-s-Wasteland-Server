@@ -42,19 +42,19 @@ MilitaryMissions =
 [
 	["mission_HostileJet", 0.75],
 	["mission_HostileJetFormation", 0.6],
-	["mission_AbandonedJet", 1],
+	["mission_AbandonedJet", 0.8],
 	["mission_Sniper", 0.95],
 	["mission_Roadblock", 1],
 	["mission_policePatrol", 1.25],
 	["mission_militaryPatrol", 1],
-	["mission_RescueWarCrime", 0.8],
-	["mission_AntiAir", 1]
+	["mission_RescueWarCrime", 0.9],
+	["mission_AntiAir", 0.75]
 ];
 
 LogisticsMissions =
 [
 	["mission_MiniConvoy", 1],
-	["mission_Airdrop", 1],
+	["mission_Airdrop", 1.1],
 	["mission_DeliverySupply", 1],
 	["mission_deviceDelivery", 0.8],
 	["mission_AltisHasFallen", 1]

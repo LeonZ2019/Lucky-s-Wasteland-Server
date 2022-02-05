@@ -15,8 +15,8 @@
 #define successMissionColor "#17FF41"
 #define subTextColor "#FFFFFF"
 
-#define AI_GROUP_SMALL 4
-#define AI_GROUP_MEDIUM 7
-#define AI_GROUP_LARGE 10
+#define AI_GROUP_SMALL 10
+#define AI_GROUP_MEDIUM 15
+#define AI_GROUP_LARGE 25
 
 #define missionDifficultyHard (["A3W_missionsDifficulty", 0] call getPublicVar >= 1)

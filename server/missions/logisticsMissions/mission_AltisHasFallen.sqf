@@ -35,27 +35,6 @@ _setupObjects =
 		_pilot moveInDriver _heli;
 		moveOut _pilot;
 		_pilot setDamage 1;
-		/*_boxes = [];
-		for "_i" from 1 to 2 do
-		{
-			_box = createVehicle [["Box_East_WpsSpecial_F","Box_NATO_WpsSpecial_F"] call BIS_fnc_selectRandom, position _heli, [], 3, "NONE"];
-			[_box, ["mission_USLaunchers","mission_RULaunchers"] call BIS_fnc_selectRandom] call fn_refillbox;
-			_box setVariable ["cmoney", 25000, true];
-			_box setVariable ["R3F_LOG_disabled", false, true];
-			_attachedPos = [random 3000, random 3000, (10000 + (random 3000))];
-			_loopPos = 1;
-			while {(!isNull (nearestObject _attachedPos)) && (_loopPos < 10)} do
-			{
-				_attachedPos = [random 3000, random 3000, (10000 + (random 3000))];
-				_loopPos = _loopPos + 1;
-			};
-			[R3F_LOG_PUBVAR_point_attache, true] call fn_enableSimulationGlobal;
-			[_box, true] call fn_enableSimulationGlobal;
-			_box attachTo [R3F_LOG_PUBVAR_point_attache, _attachedPos];
-			_box setVariable ["R3F_LOG_est_transporte_par", _heli, true];
-			_boxes = _boxes + [_box];
-		};
-		_heli setVariable ["R3F_LOG_objets_charges", _boxes, true];*/
 		_heli setVariable ["Mission_Vehicle", true, true];
 		_heli allowCrewInImmobile true;
 		_heli

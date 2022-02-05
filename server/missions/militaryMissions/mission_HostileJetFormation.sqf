@@ -140,12 +140,12 @@ _successExec =
 		_pos = getPosATL _lastVehicle;
 	};
 	//Money
-	for "_i" from 1 to 10 do
+	for "_i" from 1 to 5 do
 	{
 		_cash = createVehicle ["Land_Money_F", _pos, [], 15, "None"];
 		_cash setPos ([_pos, [[2 + random 3,0,0], random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd);
 		_cash setDir random 360;
-		_cash setVariable ["cmoney", 5000, true]; //50k
+		_cash setVariable ["cmoney", 3500, true]; //50k
 		_cash setVariable ["owner", "world", true];
 	};
 

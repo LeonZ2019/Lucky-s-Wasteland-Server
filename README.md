@@ -14,7 +14,7 @@ Mod: no mod required
 
 Map: Altis
 
-Restart time: 5AM GMT +8
+Restart time: 5AM, 11AM, 5PM, 11PM GMT +8
 
 Max Player: 20
 
@@ -108,4 +108,5 @@ Max Player: 20
 * Sunken Supplies
 * Sunken Treasure
 
+This Github Repo page: [Lucky's Wasteland](https://github.com/LeonZ2019/Lucky-s-Wasteland-Server)
 This project is licensed under the [GNU Affero GPL v3](http://tldrlegal.com/l/agpl3). Copyright © 2013 - 2015 [A3Wasteland.com](http://a3wasteland.com/)

@@ -133,12 +133,12 @@ _successExec =
 		_hostageMove setWaypointBehaviour "CARELESS";
 	};
 	_pos = getPosATL _hostage;
-	for "_i" from 1 to 10 do
+	for "_i" from 1 to 5 do
 	{
 		_cash = createVehicle ["Land_Money_F", _pos, [], 5, "None"];
 		_cash setPos ([_pos, [[2 + random 3,0,0], random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd);
 		_cash setDir random 360;
-	    _value = if (missionDifficultyHard) then { 4000 } else { 2000 };
+	    _value = if (missionDifficultyHard) then { 3000 } else { 1500 };
 		_cash setVariable ["cmoney", _value, true];
 		_cash setVariable ["owner", "world", true];
 	};

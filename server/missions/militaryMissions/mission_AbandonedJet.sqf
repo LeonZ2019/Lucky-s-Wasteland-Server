@@ -35,7 +35,7 @@ _setupObjects =
 	reload _vehicle;
 
 	_aiGroup = createGroup CIVILIAN;
-	[_aiGroup,_safePos,12,15] spawn createCustomGroup;
+	[_aiGroup,_safePos, (if (missionDifficultyHard) then { AI_GROUP_LARGE } else { AI_GROUP_MEDIUM }) * 1.5, 15] spawn createCustomGroup;
 
 	_missionPicture = getText (configFile >> "CfgVehicles" >> _vehicleClass >> "picture");
 	_vehicleName = getText (configFile >> "CfgVehicles" >> _vehicleClass >> "displayName");

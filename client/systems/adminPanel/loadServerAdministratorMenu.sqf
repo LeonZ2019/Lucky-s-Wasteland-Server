@@ -25,6 +25,7 @@ if ([_uid, 3] call isAdmin) then {
 					"Group Leader Markers",
 					"Teleport me to player",
 					"Teleport player to me",
+					"Unit Markers",
 					"Teleport",
 	                "Money",
 	                "Debug Menu",

@@ -205,7 +205,7 @@ if (!isNil "_itemEntry") then
 				if (_price < 0) then
 				{
 					([_itemType] call fn_getItemArmor) params ["_ballArmor", "_explArmor"];
-					_price = CEIL_PRICE(([_itemType] call getCapacity) / 2 + _ballArmor*3 + _explArmor*2); // price formula also defined in buyItems.sqf
+					_price = CEIL_PRICE(([_itemType] call getCapacity) / 2 + _ballArmor*6 + _explArmor*4); // price formula also defined in buyItems.sqf
 				};
 			};
 			case "hat":

@@ -41,7 +41,7 @@ _setupObjects =
 	{ _x setVariable ["R3F_LOG_disabled", true, true] } forEach [_box1, _box2];
 
 	_aiGroup = createGroup CIVILIAN;
-	[_aiGroup,_missionPos,12,15] spawn createpoliceGroup;
+	[_aiGroup, _missionPos, if (missionDifficultyHard) then { AI_GROUP_LARGE } else { AI_GROUP_MEDIUM }, 15] spawn createpoliceGroup;
 	
 	_missionHintText = format ["Enemies have set up an illegal roadblock and are stopping all vehicles! They need to be stopped!", militaryMissionColor];
 };

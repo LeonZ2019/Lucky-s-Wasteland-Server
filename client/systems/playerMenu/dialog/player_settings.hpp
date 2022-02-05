@@ -205,5 +205,13 @@ class playerSettings {
 			x = 0.158; y = 0.57;
 			w = 0.125; h = 0.033 * safezoneH;
 		};
+
+		class btnEnvironment : w_RscButton {
+			idc = -1;
+			text = "Environment";
+			onButtonClick = "[] execVM 'addons\scripts\environmentSwitch.sqf'";
+			x = 0.296; y = 0.57;
+			w = 0.15; h = 0.033 * safezoneH;
+		};
 	};
 };

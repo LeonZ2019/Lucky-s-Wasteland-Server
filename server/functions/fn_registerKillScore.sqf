@@ -71,6 +71,14 @@ if !(_unit getVariable ["A3W_killScoreRegistered", false]) then
 			_scoreValue = [1,0] select _friendlyFire;
 		};
 
+		// warcrime check here
+		// _victim getVariable ["A3W_deathCause_local", nil]; // ["slay",nil,_killer]
+		_unarmed = (primaryweapon _unit == "") && (secondaryWeapon _unit == "") && (handgunWeapon _unit == "");
+		if (_unit getVariable ["isSurrender",false] || _unarmed) then
+		{
+			[_killer, "warCrimes", 1] call fn_addScore;
+		};
+
 		[_killer, _scoreColumn, _scoreValue] call fn_addScore;
 
 		if (isPlayer _presumedKiller && _presumedKiller != _unit) then // cancel score for presumed killer designated by game engine

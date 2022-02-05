@@ -183,7 +183,8 @@ if (isServer) then
 		"A3W_territoryWarningIcons",
 		"A3W_disableBuiltInThermal",
 		"APOC_coolDownTimer",
-		"A3W_headshotNoRevive"
+		"A3W_headshotNoRevive",
+		"A3W_teamBalanceThreshold"
 	];
 
 	addMissionEventHandler ["PlayerConnected", fn_onPlayerConnected];

@@ -280,13 +280,14 @@ pp_park_allowed = {
 
 
 pp_park_vehicle_action = {
+  ARGVX4(3,_titleName,"", nil);
   init(_player,player);
 
   def(_vehicles);
   _vehicles = [_player] call pp_get_near_vehicles;
 
   def(_vehicle_id);
-  _vehicle_id = ["Park Vehicle", _vehicles] call pp_interact_park_vehicle_wait;
+  _vehicle_id = [_titleName, _vehicles] call pp_interact_park_vehicle_wait;
 
   if (!isSTRING(_vehicle_id)) exitWith {
     //_player groupChat format["%1, you did not select any vehicle to park", (name _player)];
@@ -309,6 +310,7 @@ pp_park_vehicle_action = {
 };
 
 pp_retrieve_vehicle_action = {
+  ARGVX4(3,_titleName,"", nil);
   init(_player,player);
 
   def(_parked_vehicles);
@@ -331,7 +333,7 @@ pp_retrieve_vehicle_action = {
   };
 
   def(_vehicle_id);
-  _vehicle_id = ["Retrieve Vehicle", _parked_vehicles] call pp_interact_park_vehicle_wait;
+  _vehicle_id = [_titleName, _parked_vehicles] call pp_interact_park_vehicle_wait;
 
 
   if (!isSTRING(_vehicle_id)) exitWith {
@@ -394,7 +396,7 @@ pp_remove_actions = {
 
 pp_add_actions = {
   if (count pp_actions > 0) exitWith {};
-  private["_player", "_terminal"];
+  private["_player", "_terminal", "_actionNames"];
   _player = _this select 0;
   _terminal = _this select 1;
   _actionNames = ["Park Vehicle", "Retrieve Vehicle"];
@@ -403,10 +405,10 @@ pp_add_actions = {
     _actionNames = ["Park Plane", "Retrieve Plane"];
   };
   private["_action_id", "_text"];
-  _action_id = _player addAction [format["<img image='addons\parking\icons\parking.paa'/> %1", _actionNames select 0], {call pp_park_vehicle_action}];
+  _action_id = _player addAction [format["<img image='addons\parking\icons\parking.paa'/> %1", _actionNames select 0], {call pp_park_vehicle_action}, _actionNames select 0];
   pp_actions = pp_actions + [_action_id];
 
-  _action_id = _player addAction [format["<img image='addons\parking\icons\parking.paa'/> %1", _actionNames select 1], {call pp_retrieve_vehicle_action}];
+  _action_id = _player addAction [format["<img image='addons\parking\icons\parking.paa'/> %1", _actionNames select 1], {call pp_retrieve_vehicle_action}, _actionNames select 1];
   pp_actions = pp_actions + [_action_id];
 };
 

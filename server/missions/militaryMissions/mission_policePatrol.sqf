@@ -50,6 +50,7 @@ _setupObjects =
 			_texture = _colors select _indexC select 1;
 			[_vehicle, _texture] call applyVehicleTexture;
 		};
+		[_vehicle] call vehicleSetup;
 	
 		_vehicle setDir _direction;
 		_aiGroup addVehicle _vehicle;
@@ -155,7 +156,7 @@ _failedExec = nil;
 _successExec =
 {
 	// Mission completed
-	for "_x" from 1 to 10 do
+	for "_x" from 1 to 5 do
 	{
 		_cash = createVehicle ["Land_Money_F", _lastPos, [], 5, "None"];
 		_cash setPos ([_lastPos, [[2 + random 3,0,0], random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd);

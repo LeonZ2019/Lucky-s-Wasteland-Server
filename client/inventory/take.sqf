@@ -47,6 +47,11 @@ if not(isNull _obj) then {
 		else
 		{
 			sleep 0.25;
+			if (_id == "wccard") then
+			{
+				_oldScore = _obj getVariable ["OldWCScore", 0];
+				player setVariable ["OldWCScore", _oldScore, true];	
+			};
 			deleteVehicle _obj;
 			[_id,1] call mf_inventory_add;
 			titleText [format ['You have picked up "%1"', (_id call mf_inventory_get) select NAME], "PLAIN DOWN", 0.5];

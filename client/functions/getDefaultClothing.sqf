@@ -6,7 +6,7 @@
 //	@file Author: AgentRev
 //	@file Created: 22/12/2013 22:04
 
-private ["_unit", "_item", "_side", "_isSniper", "_isDiver", "_result", "_ownedUniform", "_ownedSet", "_dlcOwned"];
+private ["_unit", "_item", "_side", "_isSniper", "_isDiver", "_isPilot", "_result", "_ownedUniform", "_ownedSight", "_ownedSet", "_dlcOwned"];
 
 _unit = _this select 0;
 _item = _this select 1;
@@ -23,8 +23,10 @@ else
 
 _isSniper = (["_sniper_", _unit] call fn_findString != -1);
 _isDiver = (["_diver_", _unit] call fn_findString != -1);
+_isPilot = (["_Pilot_", _unit] call fn_findString != -1);
 
 _ownedUniform = "";
+_ownedSight = "";
 _ownedSet = [];
 _dlcOwned = false;
 
@@ -107,7 +109,14 @@ switch (_side) do
 						_dlcOwned = getAssetDLCInfo [_result, configFile >> "CfgWeapons"] select 1;
 					};
 				};
-				if (_item == "weaponItem") then { _result = [_longRangeOptics call BIS_fnc_selectRandom] };
+				if (_item == "weaponItem") then {
+					while {!_dlcOwned } do
+					{
+						_ownedSight = _longRangeOptics call BIS_fnc_selectRandom;
+						_dlcOwned = getAssetDLCInfo [_ownedSight, configFile >> "CfgWeapons"] select 1;
+					};
+					_result = [_ownedSight];
+				};
 			};
 			case (_isDiver):
 			{
@@ -115,6 +124,20 @@ switch (_side) do
 				if (_item == "goggles") then { _result = "G_Diving" };
 				if (_item == "weapon") then { _result = "arifle_SDAR_F" };
 				if (_item == "weaponItem") then { _result = ["", "20Rnd_556x45_UW_mag"] };
+			};
+			case (_isPilot):
+			{
+				if (_item == "uniform") then { _result = ["H_PilotHelmetFighter_B", "U_B_PilotCoveralls", "V_PlateCarrier1_blk", "B_FieldPack_blk"] };
+				if (_item == "goggles") then { _result = "G_Aviator" };
+				if (_item == "weapon") then { _result = "SMG_02_F" };
+				if (_item == "weaponItem") then {
+					while {!_dlcOwned } do
+					{
+						_ownedSight = _mediumRangeOptics call BIS_fnc_selectRandom;
+						_dlcOwned = getAssetDLCInfo [_ownedSight, configFile >> "CfgWeapons"] select 1;
+					};
+					_result = [_ownedSight];
+				};
 			};
 			default
 			{
@@ -136,8 +159,14 @@ switch (_side) do
 						_dlcOwned = getAssetDLCInfo [_result, configFile >> "CfgWeapons"] select 1;
 					};
 				};
-				if (_item == "weaponItem") then { _result = [_mediumRangeOptics call BIS_fnc_selectRandom] };
-				
+				if (_item == "weaponItem") then {
+					while {!_dlcOwned } do
+					{
+						_ownedSight = _mediumRangeOptics call BIS_fnc_selectRandom;
+						_dlcOwned = getAssetDLCInfo [_ownedSight, configFile >> "CfgWeapons"] select 1;
+					};
+					_result = [_ownedSight];
+				};
 			};
 		};
 		if (_item == "nvg") then { _result = "NVGoggles" };
@@ -166,7 +195,14 @@ switch (_side) do
 						_dlcOwned = getAssetDLCInfo [_result, configFile >> "CfgWeapons"] select 1;
 					};
 				};
-				if (_item == "weaponItem") then { _result = [_longRangeOptics call BIS_fnc_selectRandom] };
+				if (_item == "weaponItem") then {
+					while {!_dlcOwned } do
+					{
+						_ownedSight = _longRangeOptics call BIS_fnc_selectRandom;
+						_dlcOwned = getAssetDLCInfo [_ownedSight, configFile >> "CfgWeapons"] select 1;
+					};
+					_result = [_ownedSight];
+				};
 			};
 			case (_isDiver):
 			{
@@ -174,6 +210,20 @@ switch (_side) do
 				if (_item == "goggles") then { _result = "G_Diving" };
 				if (_item == "weapon") then { _result = "arifle_SDAR_F" };
 				if (_item == "weaponItem") then { _result = ["", "20Rnd_556x45_UW_mag"] };
+			};
+			case (_isPilot):
+			{
+				if (_item == "uniform") then { _result = ["H_PilotHelmetFighter_O", "U_O_PilotCoveralls", "V_TacVest_brn", "B_FieldPack_cbr"] };
+				if (_item == "goggles") then { _result = "G_Aviator" };
+				if (_item == "weapon") then { _result = "SMG_02_F" };
+				if (_item == "weaponItem") then {
+					while {!_dlcOwned } do
+					{
+						_ownedSight = _mediumRangeOptics call BIS_fnc_selectRandom;
+						_dlcOwned = getAssetDLCInfo [_ownedSight, configFile >> "CfgWeapons"] select 1;
+					};
+					_result = [_ownedSight];
+				};
 			};
 			default
 			{
@@ -195,7 +245,14 @@ switch (_side) do
 						_dlcOwned = getAssetDLCInfo [_result, configFile >> "CfgWeapons"] select 1;
 					};
 				};
-				if (_item == "weaponItem") then { _result = [_mediumRangeOptics call BIS_fnc_selectRandom] };
+				if (_item == "weaponItem") then {
+					while {!_dlcOwned } do
+					{
+						_ownedSight = _mediumRangeOptics call BIS_fnc_selectRandom;
+						_dlcOwned = getAssetDLCInfo [_ownedSight, configFile >> "CfgWeapons"] select 1;
+					};
+					_result = [_ownedSight];
+				};
 			};
 		};
 		if (_item == "headgear") then { _result = "H_HelmetO_ocamo" };
@@ -225,7 +282,14 @@ switch (_side) do
 						_dlcOwned = getAssetDLCInfo [_result, configFile >> "CfgWeapons"] select 1;
 					};
 				};
-				if (_item == "weaponItem") then { _result = [_longRangeOptics call BIS_fnc_selectRandom] };
+				if (_item == "weaponItem") then {
+					while {!_dlcOwned } do
+					{
+						_ownedSight = _longRangeOptics call BIS_fnc_selectRandom;
+						_dlcOwned = getAssetDLCInfo [_ownedSight, configFile >> "CfgWeapons"] select 1;
+					};
+					_result = [_ownedSight];
+				};
 			};
 			case (_isDiver):
 			{
@@ -233,6 +297,20 @@ switch (_side) do
 				if (_item == "goggles") then { _result = "G_Diving" };
 				if (_item == "weapon") then { _result = "arifle_SDAR_F" };
 				if (_item == "weaponItem") then { _result = ["", "20Rnd_556x45_UW_mag"] };
+			};
+			case (_isPilot):
+			{
+				if (_item == "uniform") then { _result = ["H_PilotHelmetFighter_I", "U_I_pilotCoveralls", "V_TacVest_oli", "B_FieldPack_oli"] };
+				if (_item == "goggles") then { _result = "G_Aviator" };
+				if (_item == "weapon") then { _result = "SMG_02_F" };
+				if (_item == "weaponItem") then {
+					while {!_dlcOwned } do
+					{
+						_ownedSight = _mediumRangeOptics call BIS_fnc_selectRandom;
+						_dlcOwned = getAssetDLCInfo [_ownedSight, configFile >> "CfgWeapons"] select 1;
+					};
+					_result = [_ownedSight];
+				};
 			};
 			default
 			{
@@ -254,7 +332,14 @@ switch (_side) do
 						_dlcOwned = getAssetDLCInfo [_result, configFile >> "CfgWeapons"] select 1;
 					};
 				};
-				if (_item == "weaponItem") then { _result = [_mediumRangeOptics call BIS_fnc_selectRandom] };
+				if (_item == "weaponItem") then {
+					while {!_dlcOwned } do
+					{
+						_ownedSight = _mediumRangeOptics call BIS_fnc_selectRandom;
+						_dlcOwned = getAssetDLCInfo [_ownedSight, configFile >> "CfgWeapons"] select 1;
+					};
+					_result = [_ownedSight];
+				};
 			};
 		};
 		if (_item == "nvg") then { _result = "NVGoggles_INDEP" };

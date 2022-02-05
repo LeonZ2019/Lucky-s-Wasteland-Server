@@ -2,7 +2,7 @@
 //	@file Name: HvT.sqf
 //	@file Author: Cael817, CRE4MPIE, LouD, AgentRev
 
-#define HVT_AMOUNT 150000  // how much a player needs to be carrying to become a HvT
+#define HVT_AMOUNT 100000  // how much a player needs to be carrying to become a HvT
 #define HINT_DELAY 60  // number of seconds between each HvT reminder hint
 #define MARKER_REFRESH 30  // number of seconds between each HvT marker refresh
 
@@ -51,7 +51,7 @@ while {true} do
 			_markerName setMarkerText format ["HVT: %1", profileName];
 			_markerName setMarkerSize [0.75, 0.75];
 			_markerName setMarkerShape "ICON";
-			_markerName setMarkerType "mil_warning";
+			_markerName setMarkerType "hd_unknown_noShadow";
 
 			_lastMarker = diag_tickTime;
 			_markerTarget = player;

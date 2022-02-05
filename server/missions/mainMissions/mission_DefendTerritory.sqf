@@ -79,11 +79,11 @@ _setupObjects =
 		_camo = _trigger getVariable "camo";
 		_spawnPositions = [];
 		_triggerArea = triggerArea _trigger;
-		_playerCount = count (allPlayers select { _x inArea [position _trigger, _triggerArea select 0 * 1.5, _triggerArea select 1 * 1.5, _triggerArea select 2, _triggerArea select 3, -1] }) max 5 min 10;
+		_playerCount = count (allPlayers select { _x inArea [position _trigger, _triggerArea select 0 * 1.5, _triggerArea select 1 * 1.5, _triggerArea select 2, _triggerArea select 3, -1] }) max 2 min 4;
 		_triggerArea resize 2;
 		_minDist = (selectMax _triggerArea) * 1.75 + 150 min 300;
 		_maxDist = _minDist + 50;
-		_perGroup = parseNumber ((_minDist * 0.06) toFixed 0) max 10 min 20;
+		_perGroup = parseNumber ((_minDist * 0.06) toFixed 0) max 20 min 30;
 		for "_i" from 0 to (_playerCount - 1) do
 		{
 			_pos = [position _trigger, _minDist, _maxDist, 5, 0, 1, 0] call BIS_fnc_findSafePos;
@@ -226,7 +226,7 @@ _setupObjects =
 	_trigger setVariable ["Attackers", [], true];
 	_trigger setVariable ["Vehicles", [], true];
 	_trigger setVariable ["missionPos", _missionPos, true];
-	_totalAttacker = (count allPlayers) * 25;
+	_totalAttacker = (count allPlayers) * 30;
 	_trigger setVariable ["AttackersPool", _totalAttacker, true];
 	_trigger setTriggerActivation ["ANYPLAYER", "PRESENT", false];
 	_triggerArea = markerSize (_territory select 0) + [markerDir (_territory select 0), markerShape (_territory select 0) == "RECTANGLE", 50];

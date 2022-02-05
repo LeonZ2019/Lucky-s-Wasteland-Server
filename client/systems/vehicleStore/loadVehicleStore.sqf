@@ -35,25 +35,15 @@ if (!isNil "_owner") then
 {
 	if (_x select 0 == currentOwnerName) exitWith
 	{
-		switch (currentOwnerName) do
+		_friendly = allPlayers select { side _x == playerSide};
+		if (playerSide == Independent) then
 		{
-			case "VehStore8";
-			case "VehStore9":
-			{
-				ctrlSetText [5300,"Vehicle Store (5% tax)"];
-			};
-			case "VehStore5":
-			{
-				ctrlSetText [5300,"Vehicle Store (10% discount)"];
-			};
-			case "VehStore1";
-			case "VehStore2";
-			case "VehStore3";
-			case "VehStore6";
-			case "VehStore7":
-			{
-				ctrlSetText [5300,"Vehicle Store (5% discount)"];
-			};
+			_friendly = units (group player);
+		};
+		vehicleStore_tax = ((count _friendly) - 1) min 5;
+		if (vehicleStore_tax > 0) then
+		{
+			ctrlSetText [5300, format ["Vehicle Store (%1%2 tax)", vehicleStore_tax, "%"]];
 		};
 		// The array of which vehicle types are unvailable at this store
 		{

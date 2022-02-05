@@ -30,13 +30,14 @@ else
 	lowAdmins = compileFinal str
 	[
 		// Put player UIDs here
-		"76561198314253119"
 	];
 
 	// High Administrators: manage & spectate players, remove hacked vehicles, show player tags
 	highAdmins = compileFinal str
 	[
 		// Put player UIDs here
+		"76561198314253119",
+		"76561198308538093"
 	];
 
 	// Server Owners: access to everything, including god mode, money, guns, and vehicles
@@ -45,8 +46,7 @@ else
 		// Put player UIDs here
 		"76561198167560569",
 		"76561198116661635",
-		"76561198301091480",
-		"76561198308538093"
+		"76561198301091480"
 	];
 
 	/********************************************************/

@@ -56,6 +56,7 @@ _setupObjects =
 
 	_aiGroup = createGroup CIVILIAN;
 	[_aiGroup, _missionPos] call createLargeDivers;
+	[_aiGroup, _missionPos] call createLargeDivers;
 
 	[_vehicle, _aiGroup] spawn checkMissionVehicleLock;
 

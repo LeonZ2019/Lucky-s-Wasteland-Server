@@ -129,6 +129,8 @@ mutexScriptInProgress = false;
 
 if (_success) then
 {
+	pvar_logPlayerAction = [getPlayerUID player, name player, str (side player), "Salvaged Vehicle", _vehicle getVariable ["A3W_vehicleID", "0"], _money, position _vehicle, typeOf _vehicle, format ["Owner was %1", _vehicle getVariable ["ownerUID","None"]]];
+	publicVariableServer "pvar_logPlayerAction";
 	deleteVehicle _vehicle;
 	//player setVariable ["cmoney", (player getVariable ["cmoney", 0]) + _money, true];
 	[player, _money] call A3W_fnc_setCMoney;

@@ -28,6 +28,8 @@ private _success = [[DURATION, 5] select (_vehicle getVariable ["ownerUID","0"] 
 
 if (_success) then
 {
+	pvar_logPlayerAction = [getPlayerUID player, name player, side player, "Acquired Vehicle", _vehicle getVariable ["A3W_vehicleID", "0"], "", position _vehicle, typeOf _vehicle, format ["Owner was %1", _vehicle getVariable ["ownerUID","None"]]];
+	publicVariableServer "pvar_logPlayerAction";
 	[_vehicle, player] call A3W_fnc_takeOwnership;
 	["Acquiring complete!", 5] call mf_notify_client;
 };

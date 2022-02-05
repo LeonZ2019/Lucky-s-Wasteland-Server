@@ -107,6 +107,21 @@ class ScoreGUI : IGUIBack
 			h = PListHead_H;
 		};
 
+		#define PListHead_WarCrime_W PListHead_W
+		#define PListHead_WarCrime_X (PListEntry_X + (0.325 * X_SCALE))
+
+		class PListHead_WarCrime : w_RscStructuredText
+		{
+			idc = -1;
+			text = "<t underline='true' shadow='0'>War Crimes</t>"; // Alt + 255
+			size = PListHead_textSize;
+
+			x = PListHead_WarCrime_X;
+			y = PListHead_Y;
+			w = PListHead_WarCrime_W;
+			h = PListHead_H;
+		};
+
 		#define PListHead_PKills_W PListHead_W
 		#define PListHead_PKills_X (PListEntry_X + (0.4 * X_SCALE))
 
@@ -195,6 +210,7 @@ class ScoreGUI : IGUIBack
 		#define PListEntryText2_Y PListEntry_Name_Y
 
 		#define PListEntry_TColor_W (0.01 * X_SCALE)
+		#define PListEntry_WarCrime_W (0.06 * X_SCALE)
 		#define PListEntry_PKills_W (0.06 * X_SCALE)
 		#define PListEntry_AIKills_W (0.06 * X_SCALE)
 		#define PListEntry_Deaths_W (0.06 * X_SCALE)
@@ -251,6 +267,16 @@ class ScoreGUI : IGUIBack
 					y = PListEntry_Name_Y; \
 					w = PListEntry_Name_W; \
 					h = PListEntry_Name_H; \
+				}; \
+				class PListEntry##PListEntry_NUM##_WarCrime : w_RscTextCenter \
+				{ \
+					idc = scoreGUI_PListEntry_WarCrime(PListEntry_NUM); \
+					text = "57"; \
+					sizeEx = PListEntry_textSize; \
+					x = (PListHead_WarCrime_X + CENTER(PListHead_WarCrime_W, PListEntry_WarCrime_W)) - TListEntryControls_X; \
+					y = PListEntryText2_Y; \
+					w = PListEntry_WarCrime_W; \
+					h = PListEntryText2_H; \
 				}; \
 				class PListEntry##PListEntry_NUM##_PKills : w_RscTextCenter \
 				{ \

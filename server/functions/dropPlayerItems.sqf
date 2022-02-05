@@ -41,7 +41,7 @@ if (_money > 0) then
 	_m = createVehicle ["Land_Money_F", _targetPos, [], 1, "CAN_COLLIDE"];
 	_m setDir random 360;
 	_m setVariable ["cmoney", _money, true];
-	_m setVariable ["owner", "world", true];
+	_m setVariable ["owner", getPlayerUID _corpse, true];
 	_m call A3W_fnc_setItemCleanup;
 };
 

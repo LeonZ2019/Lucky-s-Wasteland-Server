@@ -38,6 +38,7 @@ _setupObjects =
 
 	_aiGroup = createGroup CIVILIAN;
 	[_aiGroup, _missionPos] call createSmallDivers;
+	[_aiGroup, _missionPos] call createSmallDivers;
 
 	_missionHintText = "Sunken supplies have been spotted in the ocean near the marker, and are heavily guarded. Diving gear and an underwater weapon are recommended.";
 };

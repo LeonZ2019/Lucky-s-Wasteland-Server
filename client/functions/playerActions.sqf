@@ -48,8 +48,10 @@
 	["<t color='#FF0000'>Look in gear</t>", "addons\surrender\surrender_actions.sqf", ["gear"], 1, false, false, "", "alive cursorObject && (cursorObject getVariable ['isSurrender',false]) && {(player distance cursorObject) < 5}"],
 	["<t color='#FF0000'>Extort money</t>", "addons\surrender\surrender_actions.sqf", ["money"], 1, false, false, "", "alive cursorObject && (cursorObject getVariable ['isSurrender',false]) && {(player distance cursorObject) < 5}"],
 	["<t color='#00FF7F'>Untie player</t>", "addons\surrender\surrender_actions.sqf", ["untie"], 1, false, false, "", "alive cursorObject && (cursorObject getVariable ['isSurrender',false]) && cursorObject getVariable ['isTied', false] && {(player distance cursorObject) < 5}"],
-	["<t color='#00FF7F'>Tie player</t>", "addons\surrender\surrender_actions.sqf", ["tie"], 1, false, false, "", "alive cursorObject && (cursorObject getVariable ['isSurrender',false]) && !(cursorObject getVariable ['isTied', false]) && {(player distance cursorObject) < 5}"]
+	["<t color='#00FF7F'>Tie player</t>", "addons\surrender\surrender_actions.sqf", ["tie"], 1, false, false, "", "alive cursorObject && (cursorObject getVariable ['isSurrender',false]) && !(cursorObject getVariable ['isTied', false]) && {(player distance cursorObject) < 5}"],
 
+	["<img image='\A3\ui_f\data\Map\VehicleIcons\pictureHeal_ca.paa'/> Treat yourself", "player action ['HealSoldierSelf', player];", [], 200, true, true, "", "damage player <= 0.2 && damage player != 0 && 'FirstAidKit' in (items player) && count (['abswp', 'abdvp', 'advep', 'asdvp', 'asswp', 'aswmp'] select {[_x, animationState player] call fn_startsWith}) == 0 && vehicle player == player"],
+	["<img image='\A3\ui_f\data\Map\VehicleIcons\pictureHeal_ca.paa'/> Treat unit", "player action ['HealSoldier', cursorObject];", [], 200, true, true, "", "cursorObject distance player < 2.5 && cursorObject isKindOf 'CAManBase' && damage cursorObject <= 0.2 && damage cursorObject != 0 && 'FirstAidKit' in (items player) && count (['abswp', 'abdvp', 'advep', 'asdvp', 'asswp', 'aswmp'] select {[_x, animationState player] call fn_startsWith}) == 0 && vehicle player == player"]
 ];
 
 if (["A3W_vehicleLocking"] call isConfigOn) then

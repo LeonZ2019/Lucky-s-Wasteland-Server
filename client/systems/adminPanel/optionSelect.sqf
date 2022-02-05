@@ -61,7 +61,12 @@ if (_uid call isAdmin) then
 					closeDialog 0;
 					execVM "client\systems\adminPanel\tptome.sqf";
 				};
-				case 7: //Teleport
+				case 7: //Unit markers
+				{
+					closeDialog 0;
+					execVM "client\systems\adminPanel\unitMarkers.sqf";
+				};
+				case 8: //Teleport
 				{
 					closeDialog 0;
 					["A3W_teleport", "onMapSingleClick",
@@ -105,31 +110,31 @@ if (_uid call isAdmin) then
 						}];
 					};
 				};
-				case 8: //Money
+				case 9: //Money
 				{
 					_money = 10000;
 					[player, _money] call A3W_fnc_setCMoney;
 					if (!isNil "notifyAdminMenu") then { ["money", _money] call notifyAdminMenu };
 				};
-				case 9: //Debug Menu
+				case 10: //Debug Menu
 				{
 					closeDialog 0;
 					execVM "client\systems\adminPanel\loadDebugMenu.sqf";
 				};
-				case 10: //Object search menu
+				case 11: //Object search menu
 				{
 					closeDialog 0;
 					execVM "client\systems\adminPanel\loadObjectSearch.sqf";
 				};
-				case 11: // toggle God mode
+				case 12: // toggle God mode
 				{
 					execVM "client\systems\adminPanel\toggleGodMode.sqf";
 				};
-				case 12: // vehicle invincible
+				case 13: // vehicle invincible
 				{
 					execVM "client\systems\adminPanel\vehicleInvincible.sqf";
 				};
-				case 13: // infinite ammo
+				case 14: // infinite ammo
 				{
 					execVM "client\systems\adminPanel\infiniteAmmo.sqf";
 				};

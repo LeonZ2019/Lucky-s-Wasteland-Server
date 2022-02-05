@@ -24,7 +24,8 @@ if ([_uid, 2] call isAdmin) then {
 					"Unstuck player",
 					"Group Leader Markers",
 					"Teleport me to player",
-					"Teleport player to me"
+					"Teleport player to me",
+					"Unit Markers"
 	];
 
 	{

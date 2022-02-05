@@ -116,26 +116,6 @@ if (_key != "" && _player isKindOf "Man" && {_isGenStore || _isGunStore || _isVe
 			};
 		};
 		_itemPrice = _itemEntry select 2;
-		switch (_npcName) do
-		{
-			case "VehStore8";
-			case "VehStore9":
-			{
-				_itemPrice = _itemPrice * 1.05;
-			};
-			case "VehStore5":
-			{
-				_itemPrice = _itemPrice * 0.9;
-			};
-			case "VehStore1";
-			case "VehStore2";
-			case "VehStore3";
-			case "VehStore6";
-			case "VehStore7":
-			{
-				_itemPrice = _itemPrice * 0.95;
-			};
-		};
 		_itemEntry set [2, _itemPrice];
 	};
 
@@ -349,6 +329,10 @@ if (_key != "" && _player isKindOf "Man" && {_isGenStore || _isGunStore || _isVe
 			{
 				_object setVariable ["resupplyObject", true, true];
 				[_object] remoteExecCall ["A3W_fnc_setupResupplyTruck", 0, _object];
+			};
+			if (_isVehStore) then
+			{
+				[getPlayerUID _player, name _player, side _player, "Buy Vehicle", netId _object, _itemPrice, position _object, typeOf _object, ""] call fn_logPlayerAction;
 			};
 		};
 	};

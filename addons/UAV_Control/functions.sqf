@@ -14,7 +14,7 @@ while {true} do
 	waitUntil {_uav = getConnectedUAV player; !isNull _uav};
 
 	// ignore remote designators and autoturrets unless indie
-	_blacklist = ["O_SAM_System_04_F", "B_SAM_System_03_F", "B_AAA_System_01_F", "B_SAM_System_01_F", "B_Ship_Gun_01_F", "B_Ship_MRLS_01_F", "B_SAM_System_02_F", "B_HMG_01_A_F", "O_HMG_01_A_F", "I_HMG_01_A_F", "B_GMG_01_A_F", "O_GMG_01_A_F", "I_GMG_01_A_F"];
+	_blacklist = ["O_SAM_System_04_F", "B_SAM_System_03_F", "B_AAA_System_01_F", "B_SAM_System_01_F", "B_Ship_Gun_01_F", "B_Ship_MRLS_01_F", "B_SAM_System_02_F", "B_HMG_01_A_F", "O_HMG_01_A_F", "I_HMG_01_A_F", "B_GMG_01_A_F", "O_GMG_01_A_F", "I_GMG_01_A_F", "B_UGV_01_rcws_F"];
 	if ((_blacklist findIf {typeOf _uav == _x} != -1) || (playerSide == INDEPENDENT)) then
 	{
 		_ownerUID = _uav getVariable ["ownerUID", "0"];
