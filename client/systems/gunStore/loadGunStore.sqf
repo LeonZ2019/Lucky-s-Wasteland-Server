@@ -16,6 +16,13 @@ _gunshopDialog = createDialog "gunshopd";
 _Dialog = findDisplay gunshop_DIALOG;
 _playerMoney = _Dialog displayCtrl gunshop_money;
 _playerMoney ctrlSetText format["Cash: $%1", [player getVariable ["cmoney", 0]] call fn_numbersText];
+
+GenGun_discount = (player getVariable ["donator", 0]) * 5;
+if (GenGun_discount > 0) then
+{
+	ctrlSetText [2050, format ["Gun Store (%1%2 Discount)", GenGun_discount, "%"]];
+};
+
 if (!isNil "_this") then { _owner = _this select 0 };
 if (!isNil "_owner") then
 {

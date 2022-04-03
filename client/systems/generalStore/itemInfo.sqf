@@ -35,6 +35,7 @@ _itemlisttext ctrlSetText "";
 _itemConfigInfo = [_itemText, _itemData] call getItemInfo;
 
 _price = _itemConfigInfo select 1;
+_price = _price - ([(_price * GenGun_discount / 100), 0] call BIS_fnc_cutDecimals);
 _description = _itemConfigInfo select 2;
 
 _itemlisttext ctrlSetText format ["Price: $%1", [_price] call fn_numbersText];

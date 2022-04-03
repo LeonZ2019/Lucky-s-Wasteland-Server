@@ -30,7 +30,7 @@ while {true} do
 	if !(isNull player) then
 	{
 		// Récupération des tout les nouveaux véhicules de la carte et des nouveaux objets dérivant de "Static" (caisse de mun, drapeau, ...) proches du joueur
-		_liste_vehicules = nearestObjects [player, ["LandVehicle", "Ship", "Air", "Thing", "Static"], 75];
+		_liste_vehicules = nearestObjects [player, ["LandVehicle", "Ship", "Air", "Thing", "Static"], 30];
 
 		_count_liste_vehicules = count _liste_vehicules;
 
@@ -86,7 +86,7 @@ while {true} do
 		}
 		else
 		{
-			sleep 10;
+			sleep 5;
 		};
 	}
 	else

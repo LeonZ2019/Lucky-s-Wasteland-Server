@@ -9,7 +9,7 @@
 if (!isServer) exitwith {};
 #include "mainMissionDefines.sqf"
 
-private ["_territories", "_territory", "_spawnRadius", "_territoryName", "_reward", "_createVehicle", "_spawnWave", "_trigger", "_cash", "_pos", "_currBox1", "_box1", "_box2", "_box3", "_randomBox", "_camo", "_totalAttacker"];
+private ["_territories", "_territory", "_spawnRadius", "_territoryName", "_reward", "_createVehicle", "_spawnWave", "_trigger", "_cash", "_pos", "_currBox1", "_box1", "_box2", "_box3", "_randomBox", "_camo", "_totalAttacker", "_totalDead"];
 
 _setupVars =
 {
@@ -254,7 +254,7 @@ _failedExec =
 		_failedHintMessage = "Enemy have made through in final area";
 	};
 	
-	_totalDead = count (_trigger getVariable ["Attackers", []] select {!alive _x});
+	_totalDead = count ((_trigger getVariable ["Attackers", []]) select {!alive _x});
 	_failReward = [_reward * (_totalDead / _totalAttacker) * 0.75, 0] call BIS_fnc_cutDecimals;
 	_triggerArea = triggerArea _trigger;
 	{

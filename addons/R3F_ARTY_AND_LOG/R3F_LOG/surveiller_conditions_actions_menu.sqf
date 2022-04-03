@@ -26,6 +26,11 @@ _resetConditions =
 	R3F_LOG_action_selectionner_objet_charge_valide = false;
 	R3F_LOG_action_heliporter_valide = false;
 	R3F_LOG_action_heliport_larguer_valide = false;
+	R3F_LOG_action_objet_platform_rotate_up = false;
+	R3F_LOG_action_objet_platform_rotate_down = false;
+	R3F_LOG_action_objet_platform_add = false;
+	R3F_LOG_action_objet_platform_remove = false;
+	R3F_LOG_action_objet_platform_panel = [];
 };
 
 _hasNoProhibitedCargo =
@@ -261,6 +266,57 @@ while {true} do
 				VEHICLE_UNLOCKED(_objet_pointe) &&
 				{!(_objet_pointe getVariable "R3F_LOG_disabled")} &&
 				!isNull (_objet_pointe getVariable ["R3F_LOG_installed_object", objNull]);
+		};
+		if (_objet_pointe isKindOf "CargoPlatform_01_base_F") then
+		{
+			_cursorPos = ASLToAGL (lineIntersectsSurfaces [eyePos player, (ATLtoASL screenToWorld [0.5,0.5]), player, objNull, true,1] select 0 select 0);
+			if (isNil "_cursorPos") exitWith {}; // distance more than 5km?
+			_distance = worldSize;
+			_panels = [["panel1","panel2"],["panel2","panel3"],["panel3","panel4"],["panel4","panel1"]];
+			_panel = "";  
+			{
+			_betweenSelection = _x;
+			_prev = _objet_pointe selectionPosition (_betweenSelection select 0);
+			_next = _objet_pointe selectionPosition (_betweenSelection select 1);
+			_panelOffset = _prev vectorAdd _next;
+			{
+				_panelOffset set [_forEachIndex, _x / 2];
+			} forEach _panelOffset;
+			_modelDist = (_objet_pointe modelToWorld _panelOffset) distance _cursorPos;
+			if (_modelDist < _distance) then
+			{
+				_panel = _betweenSelection select 0;
+				_distance = _modelDist;
+			};
+			} forEach _panels;
+			_animPart = switch (_panel) do
+			{
+			case "panel1":
+			{
+				["panel_1_rotate", "panel_1_hide"]
+			};
+			case "panel2":
+			{
+				["panel_2_rotate", "panel_2_hide"]
+			};
+			case "panel3":
+			{
+				["panel_3_rotate", "panel_3_hide"]
+			};
+			case "panel4":
+			{
+				["panel_4_rotate", "panel_4_hide"]
+			};
+			default
+			{
+				[]
+			};
+			};
+			R3F_LOG_action_objet_platform_panel = _animPart;
+			R3F_LOG_action_objet_platform_rotate_up = (alive _objet_pointe && _cursorPos distance player < 5 && count _animPart == 2 && _objet_pointe animationPhase (_animPart select 0) > 0 && _objet_pointe animationPhase (_animPart select 1) == 0);
+			R3F_LOG_action_objet_platform_rotate_down = (alive _objet_pointe && _cursorPos distance player < 5 && count _animPart == 2 && _objet_pointe animationPhase (_animPart select 0) < pi && _objet_pointe animationPhase (_animPart select 1) == 0);
+			R3F_LOG_action_objet_platform_add = (alive _objet_pointe && _cursorPos distance player < 5 && count _animPart == 2 && _objet_pointe animationPhase (_animPart select 1) == 1);
+			R3F_LOG_action_objet_platform_remove = (alive _objet_pointe && _cursorPos distance player < 5 && count _animPart == 2 && _objet_pointe animationPhase (_animPart select 1) == 0);
 		};
 	}
 	else

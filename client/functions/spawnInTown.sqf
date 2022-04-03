@@ -7,25 +7,19 @@
 //	@file Created: 20/11/2012 05:19
 //	@file Args:
 
-private ["_marker", "_preload", "_pos", "_rad", "_townName", "_playerPos"];
+private ["_marker", "_towns", "_index", "_preload", "_pos", "_rad", "_townName", "_playerPos"];
 _marker = _this select 0;
 _preload = param [1, false, [false]];
+_towns = call cityList;
+_index = _towns findIf { _x select 0 == _marker };
+_townName = _towns select _index select 1;
+_rad = selectMax (markerSize _marker);
+_pos = getMarkerPos _marker;
 
-{
-	if (_x select 0 == _marker) exitWith
-	{
-		_pos = getMarkerPos _marker;
-		_rad = _x select 1;
-		_townName = _x select 2;
-
-		_playerPos = [_pos,5,_rad,1,0,0,0] call findSafePos;
-		if (_preload) then { waitUntil {sleep 0.1; preloadCamera _playerPos} };
-
-		waitUntil {!isNil "bis_fnc_init" && {bis_fnc_init}};
-
-		player setPos _playerPos;
-	};
-} forEach (call cityList);
+_playerPos = [_pos,5,_rad,1,0,0,0] call findSafePos;
+if (_preload) then { waitUntil {sleep 0.1; preloadCamera _playerPos} };
+waitUntil {!isNil "bis_fnc_init" && {bis_fnc_init}};
+player setPos _playerPos;
 
 player setVariable [_marker + "_lastSpawn", diag_tickTime];
 [player, _marker] remoteExecCall ["A3W_fnc_updateSpawnTimestamp", 2];

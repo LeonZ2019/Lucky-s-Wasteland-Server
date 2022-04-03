@@ -123,6 +123,11 @@ _playerSideNum = switch (playerSide) do
 
 	_showItem = !("HIDDEN" in (_x select [3,999]));
 
+	if (player getVariable ["donator", 0] == 0 && "donatorOnly" in (_x select [3,999])) then
+	{
+		_showItem = false;
+	};
+
 	// Side-based filtering
 	if (!isNil "_parentCfg") then
 	{
@@ -160,9 +165,12 @@ _playerSideNum = switch (playerSide) do
 				{
 					case (_isUniform):
 					{
-						if !(["U_C_", _weaponClass] call fn_startsWith || (player isUniformAllowed _weaponClass || (playerSide == INDEPENDENT && {{_weaponClass == _x} count ["U_B_CTRG_Soldier_F","U_B_T_FullGhillie_tna_F"] > 0}))) then
+						if (player getVariable ["donator", 0] == 0) then
 						{
-							_showItem = false;
+							if !(["U_C_", _weaponClass] call fn_startsWith || (player isUniformAllowed _weaponClass || (playerSide == INDEPENDENT && {{_weaponClass == _x} count ["U_B_CTRG_Soldier_F","U_B_T_FullGhillie_tna_F"] > 0}))) then
+							{
+								_showItem = false;
+							};
 						};
 					};
 					case (isNumber _sideCfg):

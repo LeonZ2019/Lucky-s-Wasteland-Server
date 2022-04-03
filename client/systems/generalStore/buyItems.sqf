@@ -127,13 +127,13 @@ storePurchaseHandle = _this spawn
 				if (_x select 3 == "vest") then
 				{
 					([_class] call fn_getItemArmor) params ["_ballArmor", "_explArmor"];
-					_price = CEIL_PRICE(([_class] call getCapacity) / 2 + _ballArmor*3 + _explArmor*2); // price formula also defined in getItemInfo.sqf
+					_price = CEIL_PRICE(([_class] call getCapacity) / 2 + _ballArmor*6 + _explArmor*4); // price formula also defined in getItemInfo.sqf
 				}
 				else
 				{
 					_price = _x select 2;
 				};
-
+				_price = _price - (_price * GenGun_discount / 100);
 				// Ensure the player has enough money
 				if (_price > _playerMoney) exitWith
 				{
@@ -320,6 +320,7 @@ storePurchaseHandle = _this spawn
 				_class = _x select 1;
 				_price = _x select 2;
 
+				_price = _price - (_price * GenGun_discount / 100);
 				// Ensure the player has enough money
 				if (_price > _playerMoney) exitWith
 				{
@@ -340,6 +341,7 @@ storePurchaseHandle = _this spawn
 				_class = _x select 1;
 				_price = _x select 2;
 
+				_price = _price - (_price * GenGun_discount / 100);
 				// Ensure the player has enough money
 				if (_price > _playerMoney) exitWith
 				{
@@ -360,6 +362,7 @@ storePurchaseHandle = _this spawn
 				_class = _x select 1;
 				_price = _x select 2;
 
+				_price = _price - (_price * GenGun_discount / 100);
 				// Ensure the player has enough money
 				if (_price > _playerMoney) exitWith
 				{
@@ -380,6 +383,7 @@ storePurchaseHandle = _this spawn
 			_storeItem = _storeItem select 0;
 			_class = _storeItem select 1;
 			_price = _storeItem select 2;
+			_price = _price - (_price * GenGun_discount / 100);
 			if (_price > _playerMoney) exitWith
 			{
 				[_itemText] call _showInsufficientFundsError;
@@ -396,6 +400,7 @@ storePurchaseHandle = _this spawn
 			{
 				_price = _x select 4;
 
+				_price = _price - (_price * GenGun_discount / 100);
 				// Ensure the player has enough money
 				if (_price > _playerMoney) exitWith
 				{
@@ -430,6 +435,7 @@ storePurchaseHandle = _this spawn
 					["headgear"] call _showAlreadyHaveItemMessage;
 				};
 
+				_price = _price - (_price * GenGun_discount / 100);
 				// Ensure the player has enough money
 				if (_price > _playerMoney) exitWith
 				{
@@ -458,6 +464,7 @@ storePurchaseHandle = _this spawn
 					["uniform"] call _showAlreadyHaveItemMessage;
 				};
 
+				_price = _price - (_price * GenGun_discount / 100);
 				// Ensure the player has enough money
 				if (_price > _playerMoney) exitWith
 				{
@@ -512,6 +519,7 @@ storePurchaseHandle = _this spawn
 					["vest"] call _showAlreadyHaveItemMessage;
 				};
 
+				_price = _price - (_price * GenGun_discount / 100);
 				// Ensure the player has enough money
 				if (_price > _playerMoney) exitWith
 				{
@@ -562,6 +570,7 @@ storePurchaseHandle = _this spawn
 					["backpack"] call _showAlreadyHaveItemMessage;
 				};
 
+				_price = _price - (_price * GenGun_discount / 100);
 				// Ensure the player has enough money
 				if (_price > _playerMoney) exitWith
 				{

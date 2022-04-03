@@ -13,6 +13,7 @@
 #define DISABLE_ALL_BUTTONS format ["{ ctrlEnable [_x, false] } forEach %1;", [respawn_Random_Button, respawn_Spawn_Button, respawn_Locations_Type, respawn_Locations_List, respawn_Preload_Checkbox, respawn_GroupMgmt_Button]]
 #define TOWN_SPAWN_COOLDOWN (["A3W_townSpawnCooldown", 5*60] call getPublicVar)
 #define SPAWN_BEACON_COOLDOWN (["A3W_spawnBeaconCooldown", 5*60] call getPublicVar)
+#define TERRITORY_SPAWN_COOLDOWN (["A3W_territorySpawnCooldown", 5*60] call getPublicVar)
 #define BEACON_CHECK_RADIUS 250
 
 disableSerialization;
@@ -38,6 +39,7 @@ _locList = _display displayCtrl respawn_Locations_List;
 _locMap = _display displayCtrl respawn_Locations_Map;
 
 _townSpawnCooldown = TOWN_SPAWN_COOLDOWN;
+_territorySpawnCooldown = TERRITORY_SPAWN_COOLDOWN;
 _spawnBeaconCooldown = SPAWN_BEACON_COOLDOWN;
 
 _side = switch (playerSide) do
@@ -58,35 +60,18 @@ _randomButton buttonSetAction format ["%1 [%2,[0,nil]] execVM 'client\functions\
 
 _setPlayersInfo =
 {
-	private ["_location", "_maxRad", "_centerPos", "_maxRad", "_townEntry"];
+	private ["_location"];
 
 	_location = _this; // spawn beacon object or town marker name
 	_isBeacon = (typeName _location == "OBJECT");
-	_maxRad = 0;
 	_friendlyUnits = [];
 	_friendlyPlayers = 0;
 	_friendlyNPCs = 0;
 	_enemyPlayers = 0;
 	_enemyNPCs = 0;
 
-	if (_isBeacon) then
 	{
-		_centerPos = _location call fn_getPos3D;
-		_maxRad = BEACON_CHECK_RADIUS;
-	}
-	else // town
-	{
-		_centerPos = markerPos _location;
-		{
-			if (_x select 0 == _location) exitWith
-			{
-				_maxRad = _x select 1;
-			};
-		} forEach (call cityList);
-	};
-
-	{
-		if (alive _x && {_x isKindOf "CAManBase" && {!(_x call A3W_fnc_isUnconscious) && _x distance _centerPos <= _maxRad}}) then
+		if (alive _x && {_x isKindOf "CAManBase" && {!(_x call A3W_fnc_isUnconscious) && _x inArea _location}}) then
 		{
 			if (FRIENDLY_CONDITION) then
 			{
@@ -133,6 +118,65 @@ _setPlayersInfo =
 		missionNamespace setVariable [format ["%1_friendlyNPCs", _location], _friendlyNPCs];
 		missionNamespace setVariable [format ["%1_enemyPlayers", _location], _enemyPlayers];
 		missionNamespace setVariable [format ["%1_enemyNPCs", _location], _enemyNPCs];
+	};
+};
+
+_isTerritoryCaptured =
+{
+	private ["_location", "_index"];
+	_location = _this;
+	_index = A3W_currentTerritoryOwners findIf { (_x select 0) == _location };
+	_friendlyUnits = [];
+	_friendlyPlayers = 0;
+	_friendlyNPCs = 0;
+	_enemyPlayers = 0;
+	_enemyNPCs = 0;
+	{
+		if (alive _x && {_x isKindOf "CAManBase" && {!(_x call A3W_fnc_isUnconscious) && _x inArea _location}}) then
+		{
+			if (FRIENDLY_CONDITION) then
+			{
+				if (isPlayer _x) then
+				{
+					_friendlyPlayers = _friendlyPlayers + 1;
+					_friendlyUnits pushBack _x;
+				}
+				else
+				{
+					_friendlyNPCs = _friendlyNPCs + 1;
+				};
+			}
+			else
+			{
+				if (isPlayer _x) then
+				{
+					_enemyPlayers = _enemyPlayers + 1;
+				}
+				else
+				{
+					if (side _x != sideLogic) then
+					{
+						_enemyNPCs = _enemyNPCs + 1;
+					};
+				};
+			};
+		};
+	} forEach allUnits;
+
+	missionNamespace setVariable [format ["%1_friendlyUnits", _location], _friendlyUnits];
+	missionNamespace setVariable [format ["%1_friendlyPlayers", _location], _friendlyPlayers];
+	missionNamespace setVariable [format ["%1_friendlyNPCs", _location], _friendlyNPCs];
+	missionNamespace setVariable [format ["%1_enemyPlayers", _location], _enemyPlayers];
+	missionNamespace setVariable [format ["%1_enemyNPCs", _location], _enemyNPCs];
+
+	_playerGroup = group player;
+	_territoryOwner = A3W_currentTerritoryOwners select _index select 1;
+	if (_territoryOwner isEqualType grpNull) then
+	{
+		(_playerGroup == _territoryOwner)
+	} else
+	{
+		(playerSide == _territoryOwner)
 	};
 };
 
@@ -253,10 +297,10 @@ _selLocChanged =
 
 				if (!isNil "_lastSpawn") then
 				{
-					_townSpawnCooldown = TOWN_SPAWN_COOLDOWN;
-					_remaining = _townSpawnCooldown - (diag_tickTime - _lastSpawn);
+					_spawnCooldown = if (["TERRITORY_", _location] call fn_startsWith) then { TERRITORY_SPAWN_COOLDOWN } else { TOWN_SPAWN_COOLDOWN };
+					_remaining = _spawnCooldown - (diag_tickTime - _lastSpawn);
 
-					if (_townSpawnCooldown > 0 && _remaining > 0) then
+					if (_spawnCooldown > 0 && _remaining > 0) then
 					{
 						_textStr = _textStr + format ["[<t color='#ffff00'>%1</t>] ", _remaining call fn_formatTimer];
 						_cooldown = true;
@@ -308,7 +352,13 @@ _selLocChanged =
 			else
 			{
 				_pos = markerPos _location;
-				_data = [1, _location];
+				if (["TERRITORY_", _location] call fn_startsWith) then
+				{
+					_data = [3, _location];
+				} else
+				{
+					_data = [1, _location];
+				};
 			};
 
 			_spawnBtnAction = format ["%1 %2 execVM 'client\functions\spawnAction.sqf'", DISABLE_ALL_BUTTONS, [respawn_Spawn_Button, _data]];
@@ -373,6 +423,7 @@ _locMap ctrlAddEventHandler ["Draw",
 
 _locType lbAdd "Towns";
 _locType lbAdd "Beacons";
+_locType lbAdd "Territories";
 _locType lbSetCurSel 0;
 
 _locType ctrlAddEventHandler ["LBSelChanged",
@@ -381,7 +432,12 @@ _locType ctrlAddEventHandler ["LBSelChanged",
 	_curSel = _this select 1;
 
 	_display = ctrlParent _locType;
-	showBeacons = (_curSel > 0);
+	showBeacons = switch (_curSel) do
+	{
+		case 0: { "Town" };
+		case 1: { "Beacon" };
+		case 2: { "Territory" };
+	};
 
 	_locList = _display displayCtrl respawn_Locations_List;
 	lbClear _locList;
@@ -396,7 +452,7 @@ _locType ctrlAddEventHandler ["LBSelChanged",
 uiNamespace setVariable ["RespawnSelectionDialog_lastSelLoc", nil];
 uiNamespace setVariable ["RespawnSelectionDialog_selLocPos", nil];
 
-showBeacons = false;
+showBeacons = "Town";
 _oldLocArray = [];
 _typeAutoSel = false;
 
@@ -422,11 +478,8 @@ _typeAutoSel = false;
 while {!isNull _display} do
 {
 	_time = diag_tickTime;
-	//_timeText = [serverTime/60/60] call BIS_fnc_timeToString;
-	//_missionUptimeText ctrlSetText format ["Mission uptime: %1", _timeText];
 
 	_locations = [];
-
 	_towns = [];
 	{
 		private "_friendlyPlayers";
@@ -439,6 +492,16 @@ while {!isNull _display} do
 		};
 	} forEach (call cityList);
 
+	_territories = [];
+	{
+		private "_friendlyPlayers";
+		_territory = _x select 0;
+		if (_territory call _isTerritoryCaptured) then
+		{
+			_territories pushBack _territory;
+		};
+	} forEach (call compile preprocessFileLineNumbers "mapConfig\territories.sqf");
+
 	_beacons = [];
 	{
 		if (_x call _isBeaconAllowed) then
@@ -450,18 +513,26 @@ while {!isNull _display} do
 
 	if (!_typeAutoSel && ctrlEnabled _randomButton) then
 	{
-		if (count _towns > 0 && count _beacons == 0 && showBeacons) then { _locType lbSetCurSel 0 };
-		if (count _beacons > 0 && count _towns == 0 && !showBeacons) then { _locType lbSetCurSel 1 };
+		if (count _towns > 0 && count _beacons == 0 && showBeacons == "Towns") then { _locType lbSetCurSel 0 };
+		if (count _beacons > 0 && count _towns == 0 && showBeacons == "Beacons") then { _locType lbSetCurSel 1 };
+		if (count _territories > 0 && count _beacons == 0 && showBeacons == "Territories") then { _locType lbSetCurSel 2 };
 		_typeAutoSel = true;
 	};
 
-	_locations = if (showBeacons) then
+	_locations = switch (showBeacons) do
 	{
-		[_beacons, [], {_x call _getBeaconDistance}, "ASCEND", {alive _x}] call BIS_fnc_sortBy
-	}
-	else
-	{
-		[_towns, [], {_x call _getPlayerThreshold}, "DESCEND"] call BIS_fnc_sortBy
+		case "Town":
+		{
+			[_towns, [], {_x call _getPlayerThreshold}, "DESCEND"] call BIS_fnc_sortBy
+		};
+		case "Territory":
+		{
+			[_territories, [], {_x call _getPlayerThreshold}, "DESCEND"] call BIS_fnc_sortBy
+		};
+		case "Beacon":
+		{
+			[_beacons, [], {_x call _getBeaconDistance}, "ASCEND", {alive _x}] call BIS_fnc_sortBy
+		};
 	};
 
 	_newLocArray = []; // Location, Text, Data, Picture, Enabled
@@ -480,16 +551,18 @@ while {!isNull _display} do
 		}
 		else
 		{
+			_citiesTerritories = call cityList;
+			_citiesTerritories append (call compile preprocessFileLineNumbers "mapConfig\territories.sqf");
+			_index = _citiesTerritories findIf { _x select 0 == _location };
+			if (["TERRITORY_", _location] call fn_startsWith) then
 			{
-				if (_x select 0 == _location) exitWith
-				{
-					_text = (_x select 2);
-					_data = str _location;
-				};
-			} forEach (call cityList);
+				_text = _citiesTerritories select _index select 1;
+			} else
+			{
+				_text = _citiesTerritories select _index select 2;
+			};
+			_data = str _location;
 		};
-
-		_isBeacon = (typeName _location == "OBJECT");
 
 		private ["_friendlyUnits", "_friendlyPlayers", "_enemyPlayers", "_enemyNPCs"];
 		_location call _getPlayersInfo;
@@ -519,9 +592,10 @@ while {!isNull _display} do
 
 			if (!isNil "_lastSpawn") then
 			{
-				_remaining = _townSpawnCooldown - (diag_tickTime - _lastSpawn);
+				_spawnCooldown = if (["TERRITORY_", _location] call fn_startsWith) then { _territorySpawnCooldown } else { _townSpawnCooldown };
+				_remaining = _spawnCooldown - (diag_tickTime - _lastSpawn);
 
-				if (_townSpawnCooldown > 0 && _remaining > 0) then
+				if (_spawnCooldown > 0 && _remaining > 0) then
 				{
 					_picture = "\A3\ui_f\Data\gui\Rsc\RscDisplayMultiplayer\sessions_locked_ca.paa";
 					_cooldown = true;

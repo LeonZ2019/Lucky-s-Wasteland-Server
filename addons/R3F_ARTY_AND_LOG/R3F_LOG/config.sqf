@@ -417,7 +417,11 @@ R3F_LOG_CFG_objets_transportables =
 	["Land_Shoot_House_Tunnel_F", 2],
 	["Land_Shoot_House_Tunnel_Stand_F", 2],
 	["Land_Shoot_House_Tunnel_Crouch_F", 2],
-	["Land_Shoot_House_Tunnel_Prone_F", 2]
+	["Land_Shoot_House_Tunnel_Prone_F", 2],
+	["CargoPlaftorm_01_green_F", 2],
+	["CargoPlaftorm_01_rusty_F", 2],
+	["CargoPlaftorm_01_brown_F", 2],
+	["CargoPlaftorm_01_jungle_F", 2]
 ];
 
 /****** MOVABLE-BY-PLAYER OBJECTS / OBJETS DEPLACABLES PAR LE JOUEUR ******/
@@ -626,5 +630,9 @@ R3F_LOG_CFG_objets_deplacables =
 	"Land_Shoot_House_Tunnel_F",
 	"Land_Shoot_House_Tunnel_Stand_F",
 	"Land_Shoot_House_Tunnel_Crouch_F",
-	"Land_Shoot_House_Tunnel_Prone_F"
+	"Land_Shoot_House_Tunnel_Prone_F",
+	"CargoPlaftorm_01_green_F",
+	"CargoPlaftorm_01_rusty_F",
+	"CargoPlaftorm_01_brown_F",
+	"CargoPlaftorm_01_jungle_F"
 ];

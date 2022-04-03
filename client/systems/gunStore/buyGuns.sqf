@@ -93,6 +93,7 @@ storePurchaseHandle = _this spawn
 						_price = _x select 2;
 						_weapon = configFile >> "CfgWeapons" >> _class;
 
+						_price = _price - (_price * GenGun_discount / 100);
 						// Ensure the player has enough money
 						if (_price > _playerMoney) exitWith
 						{
@@ -104,6 +105,10 @@ storePurchaseHandle = _this spawn
 							{!([_class, 4] call isWeaponType) || secondaryWeapon player == ""}) then
 						{
 							player addWeapon _class;
+							if (_class == "hgun_esd_01_F") then
+							{
+								player addHandgunItem "muzzle_antenna_01_f";
+							};
 						}
 						else
 						{
@@ -124,6 +129,7 @@ storePurchaseHandle = _this spawn
 						_class = _x select 1;
 						_price = _x select 2;
 
+						_price = _price - (_price * GenGun_discount / 100);
 						// Ensure the player has enough money
 						if (_price > _playerMoney) exitWith
 						{
@@ -150,6 +156,7 @@ storePurchaseHandle = _this spawn
 						_class = _x select 1;
 						_price = _x select 2;
 
+						_price = _price - (_price * GenGun_discount / 100);
 						// Ensure the player has enough money
 						if (_price > _playerMoney) exitWith
 						{
@@ -231,6 +238,7 @@ storePurchaseHandle = _this spawn
 						_class = _x select 1;
 						_price = _x select 2;
 
+						_price = _price - (_price * GenGun_discount / 100);
 						// Ensure the player has enough money
 						if (_price > _playerMoney) exitWith
 						{
@@ -252,6 +260,7 @@ storePurchaseHandle = _this spawn
 						_class = _x select 1;
 						_price = _x select 2;
 
+						_price = _price - (_price * GenGun_discount / 100);
 						// Ensure the player has enough money
 						if (_price > _playerMoney) exitWith
 						{

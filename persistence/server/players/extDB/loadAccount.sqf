@@ -143,12 +143,15 @@ if (["A3W_atmBounties"] call isConfigOn) then
 	_bounty = _result param [1,0];
 	_bountyKills = _result param [2,[]];
 };
-
+_reputations = _result param [3,0];
+_donator = _result param [4,0];
 _data append
 [
 	["BankMoney", _bank],
 	["Bounty", _bounty],
-	["BountyKills", _bountyKills]
+	["BountyKills", _bountyKills],
+	["Reputations", _reputations],
+	["Donator", _donator]
 ];
 
 if (["A3W_privateParking"] call isConfigOn) then

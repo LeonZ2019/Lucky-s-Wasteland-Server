@@ -16,6 +16,14 @@ _genshopDialog = createDialog "genstored";
 _Dialog = findDisplay genstore_DIALOG;
 _playerMoney = _Dialog displayCtrl genstore_money;
 _playerMoney ctrlSetText format["Cash: $%1", [player getVariable ["cmoney", 0]] call fn_numbersText];
+
+GenGun_discount = (player getVariable ["donator", 0]) * 5;
+player setVariable ["GenGun_discount", GenGun_discount, true];
+if (GenGun_discount > 0) then
+{
+	ctrlSetText [2051, format ["General Store (%1%2 Discount)", GenGun_discount, "%"]];
+};
+
 if (!isNil "_this") then { _owner = _this select 0 };
 if (!isNil "_owner") then
 {

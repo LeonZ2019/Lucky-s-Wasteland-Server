@@ -28,7 +28,7 @@ storePurchaseHandle = _this spawn
 {
 	disableSerialization;
 
-	private ["_switch", "_playerMoney", "_price", "_dialog", "_playerMoneyText", "_itemlist", "_itemIndex", "_itemText", "_itemData", "_colorlist", "_colorIndex", "_colorText", "_colorData", "_applyVehProperties", "_class", "_price", "_requestKey", "_vehicle"];
+	private ["_switch", "_playerMoney", "_price", "_dialog", "_playerMoneyText", "_itemlist", "_itemIndex", "_itemText", "_itemData", "_colorlist", "_colorIndex", "_colorText", "_colorData", "_applyVehProperties", "_class", "_requestKey", "_vehicle"];
 
 	//Initialize Values
 	_switch = _this select 0;
@@ -143,7 +143,7 @@ storePurchaseHandle = _this spawn
 	if (_itemData isEqualType []) then
 	{
 		_class = _itemData param [1];
-		_price = ((_itemData param [2]) * vehicleStore_tax / 100);
+		_price = (_itemData param [2]) + ((_itemData param [2]) * vehicleStore_tax / 100);
 		// Ensure the player has enough money
 		if (_price > _playerMoney) exitWith
 		{

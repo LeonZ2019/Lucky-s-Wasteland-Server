@@ -63,6 +63,7 @@ storePurchaseHandle = _this spawn
 					_price = _x select 2;
 					_mag = configFile >> "CfgMagazines" >> _class;
 
+					_price = _price - (_price * GenGun_discount / 100);
 					//ensure the player has enough money
 					if (_price > _playerMoney) exitWith
 					{

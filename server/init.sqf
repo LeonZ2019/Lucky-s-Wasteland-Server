@@ -134,6 +134,7 @@ if (isServer) then
 	forEach
 	[
 		"A3W_startingMoney",
+		"A3W_donatorMoney",
 		"A3W_showGunStoreStatus",
 		"A3W_gunStoreIntruderWarning",
 		"A3W_playerSaving",
@@ -160,6 +161,7 @@ if (isServer) then
 		"A3W_uavControl",
 		"A3W_disableUavFeed",
 		"A3W_townSpawnCooldown",
+		"A3W_territorySpawnCooldown",
 		"A3W_survivalSystem",
 		"A3W_extDB_GhostingAdmins",
 		"A3W_extDB_SaveUnlockedObjects",

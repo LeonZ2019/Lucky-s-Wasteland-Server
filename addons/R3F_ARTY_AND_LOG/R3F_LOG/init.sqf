@@ -81,6 +81,12 @@ if !(isServer && isDedicated) then
 	R3F_LOG_action_detacher_valide = false;
 	R3F_LOG_action_selectionner_objet_charge_valide = false;
 
+	R3F_LOG_action_objet_platform_panel = [];
+	R3F_LOG_action_objet_platform_rotate_up = false;
+	R3F_LOG_action_objet_platform_rotate_down = false;
+	R3F_LOG_action_objet_platform_add = false;
+	R3F_LOG_action_objet_platform_remove = false;
+
 	/** Ce fil d'exécution permet de diminuer la fréquence des vérifications des conditions normalement faites dans les addAction (~60Hz) */
 	execVM "addons\R3F_ARTY_AND_LOG\R3F_LOG\surveiller_conditions_actions_menu.sqf";
 };

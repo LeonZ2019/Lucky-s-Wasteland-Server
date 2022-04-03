@@ -103,7 +103,7 @@ _setupObjects =
 		{
 			_box = createVehicle [["Box_East_WpsSpecial_F","Box_NATO_WpsSpecial_F"] call BIS_fnc_selectRandom, position _heli, [], 3, "NONE"];
 			[_box, ["mission_USLaunchers","mission_RULaunchers"] call BIS_fnc_selectRandom] call fn_refillbox;
-			_box setVariable ["cmoney", 25000, true];
+			_box setVariable ["cmoney", 7500, true];
 			_box setVariable ["R3F_LOG_disabled", false, true];
 			_attachedPos = [random 3000, random 3000, (10000 + (random 3000))];
 			_loopPos = 1;

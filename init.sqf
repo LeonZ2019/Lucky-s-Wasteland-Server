@@ -110,6 +110,10 @@ if (hasInterface || isServer) then
 	[] execVM "addons\scripts\artilleryRestrictedZone.sqf";
 	[] execVM "addons\scripts\swimFaster.sqf";
 	[] execVM "addons\scripts\planeRestrictedRole.sqf";
+	[] execVM "addons\contactScripts\LightSwitch.sqf";
+	[] execVM "addons\contactScripts\gps.sqf";
+	[] execVM "addons\contactScripts\switchAntenna.sqf";
+	[] execVM "addons\contactScripts\fn_grenadeThrowback.sqf";
 
 	if (isNil "drn_DynamicWeather_MainThread") then { drn_DynamicWeather_MainThread = [] execVM "addons\scripts\DynamicWeatherEffects.sqf" };
 };

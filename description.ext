@@ -75,6 +75,66 @@ briefing = 0; // if 0, skip Continue button
 #include "addons\parking\list_simple_menu.hpp"
 #include "addons\CHVD\dialog.hpp"
 
+#define ST_LEFT 0x00
+#define ST_RIGHT 0x01
+
+#define GUI_GRID_OLD_OPTICS_W (0.01875 * SafezoneH)
+#define GUI_GRID_OLD_OPTICS_H (0.025 * SafezoneH)
+
+class VScrollbar;
+class HScrollbar;
+class RscCtrlGPS_base
+{
+	deletable			= 0;
+	fade				= 0;
+	access				= 0;
+	type				= 0;
+	idc					= -1;
+	colorBackground[]	= {0, 0, 0, 0};
+	colorText[]			= {0, 0, 0, 0};
+	text				= "";
+	fixedWidth			= 0;
+	x					= 0;
+	y					= 0;
+	h					= 0.037;
+	w					= 0.3;
+	style				= 0;
+	shadow				= 0;
+	colorShadow[]		= {0, 0, 0, 0.5};
+	font				= EtelkaMonospacePro;
+	sizeEx				= 0.038*SafezoneH;
+	linespacing			= 1;
+	tooltipColorText[]	= {1, 1, 1, 1};
+	tooltipColorBox[]	= {1, 1, 1, 1};
+	tooltipColorShade[]	= {0, 0, 0, 0.65};
+};
+class RscCtrlGPS_Static: RscCtrlGPS_base
+{
+	style = ST_LEFT;
+};
+class RscCtrlGPS_Name: RscCtrlGPS_base
+{
+	style = ST_RIGHT;
+};
+class CA_IGUI_elements_group: RscControlsGroup
+{
+	idc=170;
+	onLoad="['onLoad',_this,'RscControlsGroup','GUI'] call (uinamespace getvariable 'BIS_fnc_initDisplay')";
+	onUnload = "['onUnload',_this,'RscControlsGroup','GUI'] call (uinamespace getvariable 'BIS_fnc_initDisplay')";
+	class VScrollbar: VScrollbar
+	{
+		width=0;
+	};
+	class HScrollbar: HScrollbar
+	{
+		height=0;
+	};
+	x="-4 * (0.01875 * SafezoneH) + (safezoneX)";
+	y="0 * (0.025 * SafezoneH) + (SafezoneY)";
+	w="61.5 * (0.01875 * SafezoneH)";
+	h="40 * (0.025 * SafezoneH)";
+};
+
 class RscTitles
 {
 	#include "addons\proving_ground\PG_rsctitles.hpp"

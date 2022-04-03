@@ -38,9 +38,9 @@ if (!isNil "_sender" && {side _newGroup == playerSide}) then
 		_eastSide = east countSide allPlayers;
 		_westSide = west countSide allPlayers;
 		_groupSide = count (units _newGroup);
-		if ((_groupSide - _eastSide > _teambalance) && (_groupSide - _eastSide > _teambalance) exitWith
+		if ((_groupSide - _westSide > _teambalance) && (_groupSide - _eastSide > _teambalance)) exitWith
 		{
-		if (!isNil "_senderUID") then
+			if (!isNil "_senderUID") then
 			{
 				pvar_processGroupInvite = ["decline", _senderUID, _playerUID];
 				publicVariableServer "pvar_processGroupInvite";

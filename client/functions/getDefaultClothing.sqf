@@ -6,10 +6,11 @@
 //	@file Author: AgentRev
 //	@file Created: 22/12/2013 22:04
 
-private ["_unit", "_item", "_side", "_isSniper", "_isDiver", "_isPilot", "_result", "_ownedUniform", "_ownedSight", "_ownedSet", "_dlcOwned"];
+private ["_unit", "_item", "_isDonator", "_side", "_isSniper", "_isDiver", "_isPilot", "_result", "_ownedUniform", "_ownedSight", "_ownedSet", "_dlcOwned", "_goggles"];
 
 _unit = _this select 0;
 _item = _this select 1;
+_isDonator = _unit getVariable ["donator", 0] != 0;
 
 if (typeName _unit == "OBJECT") then
 {
@@ -32,9 +33,12 @@ _dlcOwned = false;
 
 _result = "";
 
-_sniperWeapons =
-	[
+_sniperWeapons = [
 		"srifle_DMR_04_F", "srifle_DMR_04_tan_F", "srifle_DMR_02_F", "srifle_DMR_02_camo_F", "srifle_DMR_02_sniper_F", "srifle_DMR_03_F", "srifle_DMR_03_multicam_F", "srifle_DMR_03_khaki_F", "srifle_DMR_03_tan_F", "srifle_DMR_03_woodland_F", "srifle_DMR_05_blk_F", "srifle_DMR_05_hex_F", "srifle_DMR_05_tan_f", "srifle_DMR_06_camo_F", "srifle_DMR_06_olive_F", "srifle_EBR_F", "srifle_DMR_01_F", "srifle_DMR_07_blk_F", "srifle_DMR_07_hex_F", "srifle_DMR_07_ghex_F", "srifle_LRR_LRPS_F", "srifle_LRR_camo_LRPS_F", "srifle_LRR_tna_LRPS_F", "srifle_GM6_LRPS_F", "srifle_GM6_camo_LRPS_F", "srifle_GM6_ghex_LRPS_F"
+];
+
+_donatorSniperWeapons = [
+	"srifle_DMR_02_F", "srifle_DMR_02_camo_F", "srifle_DMR_02_sniper_F", "srifle_DMR_03_F", "srifle_DMR_03_multicam_F", "srifle_DMR_03_khaki_F", "srifle_DMR_03_tan_F", "srifle_DMR_03_woodland_F", "srifle_DMR_05_blk_F", "srifle_DMR_05_hex_F", "srifle_DMR_05_tan_f", "srifle_LRR_LRPS_F", "srifle_LRR_camo_LRPS_F", "srifle_LRR_tna_LRPS_F", "srifle_GM6_LRPS_F", "srifle_GM6_camo_LRPS_F", "srifle_GM6_ghex_LRPS_F"
 ];
 
 _bluforRifles = [
@@ -83,6 +87,41 @@ _sideGears = [
 	]
 ];
 
+if (_isDonator) then
+{
+	if (_isSniper) then
+	{
+		_sniperWeapons = _donatorSniperWeapons;
+	};
+	_sideGears = [
+		[ // blufor gear
+			["U_B_FullGhillie_ard", "U_B_FullGhillie_lsh", "U_B_FullGhillie_sard", "U_B_T_FullGhillie_tna_F"],
+			[
+				["H_HelmetSpecB", ["U_B_CombatUniform_mcam"], "V_PlateCarrierSpec_rgr", "B_Carryall_mcamo", "G_Bandanna_khk"], //MTP
+				["H_HelmetSpecB_wdl", ["U_B_CombatUniform_mcam_wdl_f"], "V_PlateCarrierSpec_wdl", "B_Carryall_wdl_F", "G_Balaclava_TI_G_tna_F"], //woodland
+				["H_HelmetB_Enh_tna_F", ["U_B_T_Soldier_F"], "V_PlateCarrierSpec_tna_F", "B_Carryall_oli", "G_Balaclava_oli"], //Tropic
+				["H_HelmetSpecB_snakeskin", ["U_B_CTRG_Soldier_F"], "V_PlateCarrierSpec_rgr", "B_Carryall_oli", "G_Balaclava_TI_G_tna_F"] //CTRG
+			]
+		],
+		[ // opfor gear
+			["U_O_FullGhillie_ard", "U_O_FullGhillie_lsh", "U_O_FullGhillie_sard", "U_O_T_FullGhillie_tna_F"],
+			[
+				["H_HelmetLeaderO_ocamo", ["U_O_V_Soldier_Viper_hex_F"], "V_TacVest_brn", "B_Carryall_khk", "G_Balaclava_blk"], //Hex
+				["H_HelmetLeaderO_ghex_F", ["U_O_V_Soldier_Viper_F"], "V_TacVest_oli", "B_Carryall_ghex_F", "G_Balaclava_TI_blk_F"], //Green Hex
+				["H_HelmetAggressor_F", ["U_O_R_Gorka_01_F"], "V_CarrierRigKBT_01_light_Olive_F", "B_Carryall_green_F", "G_AirPurifyingRespirator_02_olive_F"] //Granit
+			]
+		],
+		[ // indi gear
+			["U_I_FullGhillie_lsh", "U_I_FullGhillie_sard", "U_B_T_FullGhillie_tna_F"],
+			[
+				["H_HelmetSpecB_paint1", ["U_I_CombatUniform"], "V_PlateCarrierIAGL_dgtl", "B_Carryall_oli", "G_Balaclava_oli"], //Digital
+				["H_HelmetHBK_chops_F", ["U_I_E_Uniform_01_F"], "V_CarrierRigKBT_01_heavy_EAF_F", "B_Carryall_eaf_F", "G_Balaclava_TI_G_tna_F"], //Geometric
+				["H_HelmetSpecB_blk", ["U_IG_Guerilla2_1", "U_IG_Guerilla2_2", "U_IG_Guerilla2_3"], "V_PlateCarrierSpec_blk", "B_Carryall_oli", "G_Bandanna_blk"] //Guerilla
+			]
+		]
+	];
+};
+
 switch (_side) do
 {
 	case BLUFOR:
@@ -94,23 +133,31 @@ switch (_side) do
 			{
 				if (_item == "uniform") then
 				{
-					while {!_dlcOwned } do
+					while { !_dlcOwned } do
 					{
 						_ownedUniform = _sideGears select 0 select 0 call BIS_fnc_selectRandom;
 						_dlcOwned = getAssetDLCInfo [_ownedUniform, configFile >> "CfgWeapons"] select 1;
 					};
-					_result append [_ownedUniform, "V_PlateCarrier1_rgr", "B_AssaultPack_rgr"];
+					if (_isDonator) then
+					{
+						_goggles = if (getAssetDLCInfo ["G_Balaclava_TI_G_tna_F", configFile >> "CfgGlasses"] select 1) then { "G_Balaclava_TI_G_tna_F" } else { "G_Balaclava_oli" };
+						_result = ["H_HelmetSpecB", _ownedUniform, "V_PlateCarrierGL_rgr", "B_Carryall_mcamo", _goggles];
+					} else
+					{
+						_result append [_ownedUniform, "V_PlateCarrier1_rgr", "B_AssaultPack_rgr"];
+					};
+					// G_Balaclava_oli
 				};
 				if (_item == "weapon") then
 				{
-					while {!_dlcOwned } do
+					while { !_dlcOwned } do
 					{
 						_result = _sniperWeapons call BIS_fnc_selectRandom;
 						_dlcOwned = getAssetDLCInfo [_result, configFile >> "CfgWeapons"] select 1;
 					};
 				};
 				if (_item == "weaponItem") then {
-					while {!_dlcOwned } do
+					while { !_dlcOwned } do
 					{
 						_ownedSight = _longRangeOptics call BIS_fnc_selectRandom;
 						_dlcOwned = getAssetDLCInfo [_ownedSight, configFile >> "CfgWeapons"] select 1;
@@ -131,7 +178,7 @@ switch (_side) do
 				if (_item == "goggles") then { _result = "G_Aviator" };
 				if (_item == "weapon") then { _result = "SMG_02_F" };
 				if (_item == "weaponItem") then {
-					while {!_dlcOwned } do
+					while { !_dlcOwned } do
 					{
 						_ownedSight = _mediumRangeOptics call BIS_fnc_selectRandom;
 						_dlcOwned = getAssetDLCInfo [_ownedSight, configFile >> "CfgWeapons"] select 1;
@@ -143,24 +190,28 @@ switch (_side) do
 			{
 				if (_item == "uniform") then
 				{
-					while {!_dlcOwned } do
+					while { !_dlcOwned } do
 					{
 						_ownedSet = _sideGears select 0 select 1 call BIS_fnc_selectRandom;
 						_ownedUniform = _ownedSet select 1 call BIS_fnc_selectRandom;
 						_dlcOwned = getAssetDLCInfo [_ownedUniform, configFile >> "CfgWeapons"] select 1;
 					};
 					_result = [_ownedSet select 0, _ownedUniform, _ownedSet select 2, _ownedSet select 3];
+					if (_isDonator) then
+					{
+						_result pushBack (_ownedSet select 4);
+					};
 				};
 				if (_item == "weapon") then
 				{
-					while {!_dlcOwned } do
+					while { !_dlcOwned } do
 					{
 						_result = _bluforRifles call BIS_fnc_selectRandom;
 						_dlcOwned = getAssetDLCInfo [_result, configFile >> "CfgWeapons"] select 1;
 					};
 				};
 				if (_item == "weaponItem") then {
-					while {!_dlcOwned } do
+					while { !_dlcOwned } do
 					{
 						_ownedSight = _mediumRangeOptics call BIS_fnc_selectRandom;
 						_dlcOwned = getAssetDLCInfo [_ownedSight, configFile >> "CfgWeapons"] select 1;
@@ -180,23 +231,30 @@ switch (_side) do
 			{
 				if (_item == "uniform") then
 				{
-					while {!_dlcOwned } do
+					while { !_dlcOwned } do
 					{
 						_ownedUniform = _sideGears select 1 select 0 call BIS_fnc_selectRandom;
 						_dlcOwned = getAssetDLCInfo [_ownedUniform, configFile >> "CfgWeapons"] select 1;
 					};
-					_result append [_ownedUniform, "V_TacVest_khk", "B_AssaultPack_cbr"];
+					if (_isDonator) then
+					{
+						_goggles = if (getAssetDLCInfo ["G_Balaclava_TI_G_tna_F", configFile >> "CfgGlasses"] select 1) then { "G_Balaclava_TI_G_tna_F" } else { "G_Balaclava_oli" };
+						_result = ["H_HelmetLeaderO_ocamo", _ownedUniform, "V_I_G_resistanceLeader_F", "B_Carryall_cbr", _goggles];
+					} else
+					{
+						_result append [_ownedUniform, "V_TacVest_khk", "B_AssaultPack_cbr"];
+					};
 				};
 				if (_item == "weapon") then
 				{
-					while {!_dlcOwned } do
+					while { !_dlcOwned } do
 					{
 						_result = _sniperWeapons call BIS_fnc_selectRandom;
 						_dlcOwned = getAssetDLCInfo [_result, configFile >> "CfgWeapons"] select 1;
 					};
 				};
 				if (_item == "weaponItem") then {
-					while {!_dlcOwned } do
+					while { !_dlcOwned } do
 					{
 						_ownedSight = _longRangeOptics call BIS_fnc_selectRandom;
 						_dlcOwned = getAssetDLCInfo [_ownedSight, configFile >> "CfgWeapons"] select 1;
@@ -217,7 +275,7 @@ switch (_side) do
 				if (_item == "goggles") then { _result = "G_Aviator" };
 				if (_item == "weapon") then { _result = "SMG_02_F" };
 				if (_item == "weaponItem") then {
-					while {!_dlcOwned } do
+					while { !_dlcOwned } do
 					{
 						_ownedSight = _mediumRangeOptics call BIS_fnc_selectRandom;
 						_dlcOwned = getAssetDLCInfo [_ownedSight, configFile >> "CfgWeapons"] select 1;
@@ -229,24 +287,28 @@ switch (_side) do
 			{
 				if (_item == "uniform") then
 				{
-					while {!_dlcOwned } do
+					while { !_dlcOwned } do
 					{
 						_ownedSet = _sideGears select 1 select 1 call BIS_fnc_selectRandom;
 						_ownedUniform = _ownedSet select 1 call BIS_fnc_selectRandom;
 						_dlcOwned = getAssetDLCInfo [_ownedUniform, configFile >> "CfgWeapons"] select 1;
 					};
 					_result = [_ownedSet select 0, _ownedUniform, _ownedSet select 2, _ownedSet select 3];
+					if (_isDonator) then
+					{
+						_result pushBack (_ownedSet select 4);
+					};
 				};
 				if (_item == "weapon") then
 				{
-					while {!_dlcOwned } do
+					while { !_dlcOwned } do
 					{
 						_result = _opforRifles call BIS_fnc_selectRandom;
 						_dlcOwned = getAssetDLCInfo [_result, configFile >> "CfgWeapons"] select 1;
 					};
 				};
 				if (_item == "weaponItem") then {
-					while {!_dlcOwned } do
+					while { !_dlcOwned } do
 					{
 						_ownedSight = _mediumRangeOptics call BIS_fnc_selectRandom;
 						_dlcOwned = getAssetDLCInfo [_ownedSight, configFile >> "CfgWeapons"] select 1;
@@ -267,23 +329,30 @@ switch (_side) do
 			{
 				if (_item == "uniform") then
 				{
-					while {!_dlcOwned } do
+					while { !_dlcOwned } do
 					{
 						_ownedUniform = _sideGears select 2 select 0 call BIS_fnc_selectRandom;
 						_dlcOwned = getAssetDLCInfo [_ownedUniform, configFile >> "CfgWeapons"] select 1;
 					};
-					_result append [_ownedUniform, "V_PlateCarrierIA1_dgtl", "B_AssaultPack_dgtl"];
+					if (_isDonator) then
+					{
+						_goggles = if (getAssetDLCInfo ["G_Balaclava_TI_G_tna_F", configFile >> "CfgGlasses"] select 1) then { "G_Balaclava_TI_G_tna_F" } else { "G_Balaclava_oli" };
+						_result = ["H_HelmetSpecB_blk", _ownedUniform, "V_PlateCarrierIAGL_oli", "B_Carryall_oli", _goggles];
+					} else
+					{
+						_result append [_ownedUniform, "V_PlateCarrierIA1_dgtl", "B_AssaultPack_dgtl"];
+					};
 				};
 				if (_item == "weapon") then
 				{
-					while {!_dlcOwned } do
+					while { !_dlcOwned } do
 					{
 						_result = _sniperWeapons call BIS_fnc_selectRandom;
 						_dlcOwned = getAssetDLCInfo [_result, configFile >> "CfgWeapons"] select 1;
 					};
 				};
 				if (_item == "weaponItem") then {
-					while {!_dlcOwned } do
+					while { !_dlcOwned } do
 					{
 						_ownedSight = _longRangeOptics call BIS_fnc_selectRandom;
 						_dlcOwned = getAssetDLCInfo [_ownedSight, configFile >> "CfgWeapons"] select 1;
@@ -304,7 +373,7 @@ switch (_side) do
 				if (_item == "goggles") then { _result = "G_Aviator" };
 				if (_item == "weapon") then { _result = "SMG_02_F" };
 				if (_item == "weaponItem") then {
-					while {!_dlcOwned } do
+					while { !_dlcOwned } do
 					{
 						_ownedSight = _mediumRangeOptics call BIS_fnc_selectRandom;
 						_dlcOwned = getAssetDLCInfo [_ownedSight, configFile >> "CfgWeapons"] select 1;
@@ -316,24 +385,28 @@ switch (_side) do
 			{
 				if (_item == "uniform") then
 				{
-					while {!_dlcOwned } do
+					while { !_dlcOwned } do
 					{
 						_ownedSet = _sideGears select 2 select 1 call BIS_fnc_selectRandom;
 						_ownedUniform = _ownedSet select 1 call BIS_fnc_selectRandom;
 						_dlcOwned = getAssetDLCInfo [_ownedUniform, configFile >> "CfgWeapons"] select 1;
 					};
 					_result = [_ownedSet select 0, _ownedUniform, _ownedSet select 2, _ownedSet select 3];
+					if (_isDonator) then
+					{
+						_result pushBack (_ownedSet select 4);
+					};
 				};
 				if (_item == "weapon") then
 				{
-					while {!_dlcOwned } do
+					while { !_dlcOwned } do
 					{
 						_result = _independentRifles call BIS_fnc_selectRandom;
 						_dlcOwned = getAssetDLCInfo [_result, configFile >> "CfgWeapons"] select 1;
 					};
 				};
 				if (_item == "weaponItem") then {
-					while {!_dlcOwned } do
+					while { !_dlcOwned } do
 					{
 						_ownedSight = _mediumRangeOptics call BIS_fnc_selectRandom;
 						_dlcOwned = getAssetDLCInfo [_ownedSight, configFile >> "CfgWeapons"] select 1;

@@ -13,7 +13,6 @@ private _data = _this;
 
 	switch (_name) do
 	{
-		case "Donator": { player setVariable ["Donator", _value > 0] }; // not used in vanilla
 		case "PrivateStorage": { player setVariable ["private_storage", _value] };
 		case "ParkedVehicles": { player setVariable ["parked_vehicles", _value] }; // parked vehicles are mostly handled server-side, this is just a ghost copy to populate UI
 	};

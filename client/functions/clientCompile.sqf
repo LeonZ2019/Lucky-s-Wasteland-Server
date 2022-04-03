@@ -82,6 +82,7 @@ playerSetupEnd = "client\functions\playerSetupEnd.sqf" call mf_compile;
 spawnAction = "client\functions\spawnAction.sqf" call mf_compile;
 spawnInTown = "client\functions\spawnInTown.sqf" call mf_compile;
 spawnOnBeacon = "client\functions\spawnOnBeacon.sqf" call mf_compile;
+spawnOnTerritory = "client\functions\spawnOnTerritory.sqf" call mf_compile;
 spawnRandom = "client\functions\spawnRandom.sqf" call mf_compile;
 // placeSpawnBeacon = "client\systems\playerMenu\placeSpawnBeacon.sqf" call mf_compile;
 // refuelVehicle = "client\systems\playerMenu\refuel.sqf" call mf_compile;

@@ -9,6 +9,7 @@
 #define REPAIR_TIME_SLICE 1
 #define REFUEL_TIME_SLICE 1
 #define PRICE_RELATIONSHIP 1.5 // resupply price = brand-new store price divided by PRICE_RELATIONSHIP
+#define DONATOR_PRICE 4
 #define RESUPPLY_TIMEOUT 30
 
 // Check if mutex lock is active.
@@ -47,7 +48,8 @@ _resupplyThread = [_vehicle, _unit] spawn
 		if (_vehClass == _x select 1 && (_variant == "" || {_variant in _x})) exitWith
 		{
 			_price = _x select 2;
-			_price = round (_price / PRICE_RELATIONSHIP);
+			_offer = if (player getVariable ["donator", 0] == 0) then { PRICE_RELATIONSHIP } else { DONATOR_PRICE };
+			_price = round (_price / _offer);
 		};
 	} forEach (call allVehStoreVehicles + call staticGunsArray);
 

@@ -30,6 +30,10 @@ spawnActionHandle = (_this select 1) spawn
 	{
 		// Deal with money here
 		_baseMoney = ["A3W_startingMoney", 100] call getPublicVar;
+		if (player getVariable ["donator", 0] != 0) then
+		{
+			_baseMoney = ["A3W_donatorMoney", 100] call getPublicVar;
+		};
 		//player setVariable ["cmoney", _baseMoney, true];
 		[player, _baseMoney, true] call A3W_fnc_setCMoney;
 
@@ -71,6 +75,7 @@ spawnActionHandle = (_this select 1) spawn
 	{
 		case 1: { _data call spawnInTown };
 		case 2: { _data call spawnOnBeacon };
+		case 3: { _data call spawnOnTerritory }; // skydive
 		default { _data call spawnRandom };
 	};
 

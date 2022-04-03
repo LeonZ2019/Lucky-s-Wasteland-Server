@@ -4,7 +4,7 @@
 //	@file Name: playerSetupGear.sqf
 //	@file Author: [GoT] JoSchaap, AgentRev
 
-private ["_player", "_uniform", "_goggles", "_nvg", "_weapon", "_weaponItem", "_pistol", "_primaryGunConfig", "_primaryGunMags", "_hgunConfig", "_hgunMags", "_terminal"];
+private ["_player", "_uniform", "_goggles", "_nvg", "_weapon", "_weaponItem", "_pistol", "_primaryGunConfig", "_primaryGunMags", "_hgunConfig", "_hgunMags", "_terminal", "_weaponItems"];
 _player = _this;
 
 // Clothing is now defined in "client\functions\getDefaultClothing.sqf"
@@ -15,12 +15,16 @@ _weapon = [_player, "weapon"] call getDefaultClothing;
 _weaponItem = [_player, "weaponItem"] call getDefaultClothing;
 _nvg = [_player, "nvg"] call getDefaultClothing;
 
-if (count _uniform == 4) then
+if (count _uniform >= 4) then
 {
 	_player addHeadgear (_uniform select 0);
 	_player forceAddUniform (_uniform select 1);
 	_player addVest (_uniform select 2);
 	_player addBackpack (_uniform select 3);
+	if (count _uniform == 5) then
+	{
+		_player addGoggles (_uniform select 4);
+	};
 };
 if (_goggles != "") then { _player addGoggles _goggles };
 
@@ -67,13 +71,28 @@ _hgunMags append getArray (_hgunConfig >> "magazines");
 } forEach getArray (_hgunConfig >> "magazineWell");
 _hgunMags = _hgunMags call BIS_fnc_selectRandom;
 _player addWeapon _pistol;
-for "_i" from 1 to 2 do {_player addItem _hgunMags ;};
+for "_i" from 1 to 2 do {_player addItem _hgunMags;};
 _player addHandgunItem _hgunMags;
 
 _player addItem "FirstAidKit";
 _player addItem "FirstAidKit";
 _player selectWeapon _weapon;
-_player addWeapon "Binocular";
+if (_player getVariable ["donator", 0] != 0) then
+{
+	_player linkItem "ItemGPS";
+	_player addItem "FirstAidKit";
+	_player addWeapon "Rangefinder";
+	for "_i" from 1 to 3 do {_player addMagazine _primaryGunMags;};
+	for "_i" from 1 to 3 do {_player addItem _hgunMags;};
+	for "_i" from 1 to 2 do {_player addItem "HandGrenade";};
+	_weaponItems = _weapon call BIS_fnc_compatibleItems;
+	_muzzle = _weaponItems findIf { ["muzzle_", _x] call fn_startsWith };
+	if ("acc_pointer_IR" in _weaponItems) then { _player addPrimaryWeaponItem "acc_pointer_IR" };
+	if (_muzzle != -1) then { _player addPrimaryWeaponItem (_weaponItems select _muzzle) };
+} else
+{
+	_player addWeapon "Binocular";
+};
 
 switch (true) do
 {

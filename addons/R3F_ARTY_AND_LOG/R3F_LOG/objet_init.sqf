@@ -91,3 +91,11 @@ if ({_objet isKindOf _x} count R3F_LOG_classes_objets_transportables > 0) then
 
 	_objet addAction [("<img image='client\icons\r3f_loadin.paa' color='#dddd00'/> <t color='#dddd00'>" + STR_R3F_LOG_action_selectionner_objet_cancel + "</t>"), "addons\R3F_ARTY_AND_LOG\R3F_LOG\transporteur\charge_cancel.sqf", nil, 5.5, false, true, "", "R3F_LOG_objet_addAction == _target && !isNull R3F_LOG_objet_selectionne && R3F_LOG_objet_selectionne == _target && !(R3F_LOG_objet_selectionne getVariable ['objectLocked', false])"];
 };
+
+if (_objet isKindOf "CargoPlatform_01_base_F") then
+{
+	_objet addAction ["Rotate Up Panel", "addons\R3F_ARTY_AND_LOG\R3F_LOG\cargoPlatform\rotate.sqf", -(pi / 3), 1, false, true, "", "R3F_LOG_objet_addAction == _target && R3F_LOG_action_objet_platform_rotate_up"];
+	_objet addAction ["Rotate Down Panel", "addons\R3F_ARTY_AND_LOG\R3F_LOG\cargoPlatform\rotate.sqf", pi / 3, 1, false, true, "", "R3F_LOG_objet_addAction == _target && R3F_LOG_action_objet_platform_rotate_down"];
+	_objet addAction ["Add Panel", "addons\R3F_ARTY_AND_LOG\R3F_LOG\cargoPlatform\hide.sqf", 0, 1, false, true, "", "R3F_LOG_objet_addAction == _target && R3F_LOG_action_objet_platform_add"];
+	_objet addAction ["Remove Panel", "addons\R3F_ARTY_AND_LOG\R3F_LOG\cargoPlatform\hide.sqf", 1, 1, false, true, "", "R3F_LOG_objet_addAction == _target && R3F_LOG_action_objet_platform_remove"];
+};

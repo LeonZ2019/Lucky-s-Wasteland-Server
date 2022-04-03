@@ -43,6 +43,8 @@ pilotGroundVehicles = [
 
 waitUntil {["playerSetupComplete", false] call getPublicVar};
 
+if (player getVariable ["donator", 0] != 0) exitWith {};
+
 _isPilotRole = ["_Pilot_", typeOf player] call fn_findString != -1;
 
 while {true} do

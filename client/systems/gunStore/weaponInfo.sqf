@@ -38,6 +38,7 @@ _itemConfigInfo = [_itemText, _itemData] call getItemInfo;
 
 _parentCfg = _itemConfigInfo select 0;
 _price = _itemConfigInfo select 1;
+_price = _price - ([(_price * GenGun_discount / 100), 0] call BIS_fnc_cutDecimals);
 _description = _itemConfigInfo select 2;
 _showAmmo = _itemConfigInfo select 3;
 

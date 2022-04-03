@@ -36,17 +36,20 @@ _vehArray = switch (_switch) do
 	default { [] };
 };
 
-if (["_Pilot_", typeOf player] call fn_findString != -1) then
+if (player getVariable ["donator", 0] == 0) then
 {
-	if (_switch in [0,1,2] && !isNil "pilotGroundVehicles") then
+	if (["_Pilot_", typeOf player] call fn_findString != -1) then
 	{
-		_vehArray = _vehArray select { _tempVeh = _x select 1; pilotGroundVehicles findIf { _tempVeh isKindOf _x } != -1 && !(_tempVeh isKindOf "Truck_02_MRL_base_F") };
-	};
-} else
-{
-	if (_switch == 4 && !isNil "pilotOnly") then
+		if (_switch in [0,1,2] && !isNil "pilotGroundVehicles") then
+		{
+			_vehArray = _vehArray select { _tempVeh = _x select 1; pilotGroundVehicles findIf { _tempVeh isKindOf _x } != -1 && !(_tempVeh isKindOf "Truck_02_MRL_base_F") };
+		};
+	} else
 	{
-		_vehArray = _vehArray select { _tempVeh = _x select 1; pilotOnly findIf { _tempVeh isKindOf _x } == -1 };
+		if (_switch == 4 && !isNil "pilotOnly") then
+		{
+			_vehArray = _vehArray select { _tempVeh = _x select 1; pilotOnly findIf { _tempVeh isKindOf _x } == -1 };
+		};
 	};
 };
 
