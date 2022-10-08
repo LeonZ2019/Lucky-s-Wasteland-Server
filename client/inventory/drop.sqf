@@ -61,16 +61,6 @@ else
 
 if (!isNull _obj) then
 {
-	if (_obj isKindOf "Land_Wallet_01_F") then
-	{
-		// _obj setObjectTextureGlobal [0, "client\images\wastelandID.paa"];
-		if (_id == "wccard") then
-		{
-			_oldScore = player getVariable ["OldWCScore", 0];
-			player setVariable ["OldWCScore", 0, true];
-			_obj setVariable ["OldWCScore", _oldScore, true];
-		};
-	};
 	[_obj] remoteExec ["A3W_fnc_setItemCleanup", 2];
 };
 

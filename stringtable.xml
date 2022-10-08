@@ -37,9 +37,6 @@
 		<Key ID="STR_WL_Loading_Teamswitched">
 			<English>You have played as %1 for too long and cannot switch to the other team. You can still play as Independent. (or if online, ask an admin to unlock you)</English>
 		</Key>
-		<Key ID="STR_WL_Teamstack">
-			<English>There are too many players on the team you are attempting to join. Please join the %1 or Independent</English>
-		</Key>
 	</Package>
 	<Package name="WelcomeMessage">
 		<Key ID="STR_WL_WelcomeToWasteland">
@@ -78,9 +75,6 @@
 		</Key>
 		<Key ID="STR_WL_ShopDescriptions_RepairKit">
 			<English>With this kit, you won't need an engineer!</English>
-		</Key>
-		<Key ID="STR_WL_ShopDescriptions_WCDisposal">
-			<English>With this disposal, you can get rid of being war crime!</English>
 		</Key>
 		<Key ID="STR_WL_ShopDescriptions_Defibrillator">
 			<English>With this tool, you can bring back anyone included yourself from unconscious!</English>

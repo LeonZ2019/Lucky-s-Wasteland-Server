@@ -143,15 +143,12 @@ if (["A3W_atmBounties"] call isConfigOn) then
 	_bounty = _result param [1,0];
 	_bountyKills = _result param [2,[]];
 };
-_reputations = _result param [3,0];
-_donator = _result param [4,0];
+
 _data append
 [
 	["BankMoney", _bank],
 	["Bounty", _bounty],
-	["BountyKills", _bountyKills],
-	["Reputations", _reputations],
-	["Donator", _donator]
+	["BountyKills", _bountyKills]
 ];
 
 if (["A3W_privateParking"] call isConfigOn) then
@@ -191,7 +188,7 @@ if (["A3W_privateStorage"] call isConfigOn) then
 // before returning player data, restore global player stats if applicable
 if (["A3W_playerStatsGlobal"] call isConfigOn) then
 {
-	_columns = ["playerKills", "aiKills", "teamKills", "deathCount", "reviveCount", "captureCount","warCrimes"];
+	_columns = ["playerKills", "aiKills", "teamKills", "deathCount", "reviveCount", "captureCount"];
 	_result = [["getPlayerStats", _UID, _columns joinString ","], 2] call extDB_Database_async;
 
 	{

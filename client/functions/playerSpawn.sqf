@@ -7,8 +7,6 @@
 //	@file Created: 20/11/2012 05:19
 //	@file Args:
 
-_teambalance = ["A3W_teamBalanceThreshold", 3] call getPublicVar;
-
 playerSpawning = true;
 
 //Teamkiller Kick
@@ -23,40 +21,6 @@ if (!isNil "pvar_teamKillList" && {playerSide in [BLUFOR,OPFOR]} && !((getPlayer
 
 		uiNamespace setVariable ["BIS_fnc_guiMessage_status", false];
 		_msgBox = [localize "STR_WL_Loading_Teamkiller"] spawn BIS_fnc_guiMessage;
-		_time = diag_tickTime;
-
-		waitUntil {scriptDone _msgBox || diag_tickTime - _time >= 20};
-		endMission "LOSER";
-		waitUntil {uiNamespace setVariable ["BIS_fnc_guiMessage_status", false]; closeDialog 0; false};
-	};
-};
-
-//Teambalance
-if (playerSide in [BLUFOR,OPFOR] && !((getPlayerUID player) call isAdmin)) then
-{
-	_opside = switch (playerSide) do
-	{
-		case west: {east};
-		case east: {west};
-	};
-	if ((playerSide countSide allPlayers) - (_opside countSide allPlayers) > _teambalance) exitWith
-	{
-		pvar_teamSwitchUnlock = getPlayerUID player;
-		publicVariableServer "pvar_teamSwitchUnlock";
-
-		player allowDamage false;
-		player setUnconscious true;
-		9999 cutText ["", "BLACK", 0.01];
-		0 fadeSound 0;
-
-		uiNamespace setVariable ["BIS_fnc_guiMessage_status", false];
-		_opsideName = switch (playerSide) do
-		{
-			case west: {"Opfor"};
-			case east: {"Blufor"};
-		};
-
-		_msgBox = [format [localize "STR_WL_Teamstack", _opsideName]] spawn BIS_fnc_guiMessage;
 		_time = diag_tickTime;
 
 		waitUntil {scriptDone _msgBox || diag_tickTime - _time >= 20};

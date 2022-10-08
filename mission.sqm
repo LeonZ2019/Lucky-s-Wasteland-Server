@@ -228,7 +228,7 @@ class Mission
 {
 	class Intel
 	{
-		briefingName="Wasteland Custom v15";
+		briefingName="Wasteland Custom v15.1";
 		overviewText="Visit our discord https://discord.gg/ByZcqZx for more details";
 		resistanceWest=0;
 		timeOfChanges=28800;

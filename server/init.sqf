@@ -134,7 +134,6 @@ if (isServer) then
 	forEach
 	[
 		"A3W_startingMoney",
-		"A3W_donatorMoney",
 		"A3W_showGunStoreStatus",
 		"A3W_gunStoreIntruderWarning",
 		"A3W_playerSaving",
@@ -185,8 +184,7 @@ if (isServer) then
 		"A3W_territoryWarningIcons",
 		"A3W_disableBuiltInThermal",
 		"APOC_coolDownTimer",
-		"A3W_headshotNoRevive",
-		"A3W_teamBalanceThreshold"
+		"A3W_headshotNoRevive"
 	];
 
 	addMissionEventHandler ["PlayerConnected", fn_onPlayerConnected];

@@ -18,8 +18,6 @@ if !(_info isEqualTo []) then
 		{
 			case "BankMoney";
 			case "Bounty";
-			case "Reputations";
-			case "Donator";
 			case "BountyKills":    { _statuses pushBack (_info deleteAt _i) };
 			case "PrivateStorage": { _storage = (_info deleteAt _i) param [1,[],[[]]] };
 		};

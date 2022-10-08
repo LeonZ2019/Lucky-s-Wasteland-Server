@@ -10,7 +10,7 @@
 if (!isServer) exitWith {};
 
 scopeName "spawnStoreObject";
-private ["_isGenStore", "_isGunStore", "_isVehStore", "_timeoutKey", "_objectID", "_playerSide", "_objectsArray", "_results", "_itemEntry", "_itemPrice", "_safePos", "_object", "_tax"];
+private ["_isGenStore", "_isGunStore", "_isVehStore", "_timeoutKey", "_objectID", "_playerSide", "_objectsArray", "_results", "_itemEntry", "_itemPrice", "_safePos", "_object"];
 
 params [["_player",objNull,[objNull]], ["_itemEntrySent",[],[[]]], ["_npcName","",[""]], ["_key","",[""]]];
 
@@ -122,14 +122,6 @@ if (_key != "" && _player isKindOf "Man" && {_isGenStore || _isGunStore || _isVe
 	if (!isNil "_itemEntry" && markerShape _marker != "") then
 	{
 		_itemPrice = _itemEntry select 2;
-		_tax = if (_isVehStore) then
-		{
-			_player getVariable ["vehicleStore_tax", 0];
-		} else
-		{
-			_player getVariable ["GenGun_discount", 0];
-		};
-		_itemPrice = _itemPrice + (_itemPrice * _tax / 100);
 		_skipSave = "SKIPSAVE" in (_itemEntry select [3,999]);
 
 		/*if (_class isKindOf "Box_NATO_Ammo_F") then
@@ -337,10 +329,6 @@ if (_key != "" && _player isKindOf "Man" && {_isGenStore || _isGunStore || _isVe
 			{
 				_object setVariable ["resupplyObject", true, true];
 				[_object] remoteExecCall ["A3W_fnc_setupResupplyTruck", 0, _object];
-			};
-			if (_isVehStore) then
-			{
-				[getPlayerUID _player, name _player, side _player, "Buy Vehicle", netId _object, _itemPrice, position _object, typeOf _object, ""] call fn_logPlayerAction;
 			};
 		};
 	};

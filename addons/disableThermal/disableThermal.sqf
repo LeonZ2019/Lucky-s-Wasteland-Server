@@ -44,12 +44,12 @@ while {true && player getVariable ["donator", 0] == 0} do
 			if ({_currUAV isKindOf _x} count _turrets > 0) then
 			{
 				_uavSoldier = ["_soldier_UAV_", typeOf player] call fn_findString != -1;
-				if !(_currUAV getVariable ["A3W_vehicleVariant", ""] in ["greyhawkUnarmed", "falconUnarmed"] && _uavSoldier && _uavRoleEnabled findIf {_currUAV isKindOf _x} != -1) then
+				if !(_currUAV getVariable ["A3W_vehicleVariant", ""] in ["greyhawkUnarmed", "falconUnarmed"]) then
 				{
 					_role = UAVControl _currUAV select 1;
 					if (_role != "") then
 					{
-						_text = if (_uavSoldier) then { "THERMAL IMAGING OFFLINE for Armed Vehicle" } else {"THERMAL IMAGING OFFLINE for None UAV Operator" };
+						_text = if (_uavSoldier) then { "THERMAL IMAGING OFFLINE for Armed Vehicle" } else {"THERMAL IMAGING OFFLINE while connected to UAV" };
 						LAYER cutText [_text, "BLACK", 0.001];
 						playSound "FD_CP_Not_Clear_F";
 						waitUntil {sleep 0.1; currentVisionMode player != 2};

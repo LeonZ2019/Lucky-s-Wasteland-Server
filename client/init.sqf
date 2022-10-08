@@ -67,10 +67,6 @@ player call playerSetupStart;
 
 // Deal with money here
 _baseMoney = ["A3W_startingMoney", 100] call getPublicVar;
-if (player getVariable ["donator", 0] != 0) then
-{
-	_baseMoney = ["A3W_donatorMoney", 100] call getPublicVar;
-};
 //player setVariable ["cmoney", _baseMoney, true];
 [player, _baseMoney, true] call A3W_fnc_setCMoney;
 

@@ -372,12 +372,7 @@ va_transfer_action = {
   if (count _playerList > 5) then { _playerList resize 5; };
   _menu = [["Transfer ownership to",true]];
   {
-    _menu pushBack [_x select 1, [12], "", -5, [["expression", format[
-      '
-      pvar_logPlayerAction = [getPlayerUID %4, name %4, side %4, "Acquired Vehicle", %3 getVariable ["A3W_vehicleID", "0"], "", position %3, typeOf %3, "Owner was %5"];
-			publicVariableServer "pvar_logPlayerAction";
-      [objectFromNetId %1, (objectFromNetId %2)] call A3W_fnc_takeOwnership;', str (netId _vehicle), str (_x select 0), _vehicle, objectFromNetId (_x select 0), _vehicle getVariable ["ownerUID","None"]
-    ]]], "1", "1"];
+    _menu pushBack [_x select 1, [12], "", -5, [["expression", format['[objectFromNetId %1, (objectFromNetId %2)] call A3W_fnc_takeOwnership;', str (netId _vehicle), str (_x select 0)]]], "1", "1"];
   } forEach _playerList;
   _menu pushBack ["", [-1], "", -5, [["expression", ""]], "1", "0"];
   _menu pushBack ["Exit", [13], "", -5, [["expression", ""]], "1", "1"];

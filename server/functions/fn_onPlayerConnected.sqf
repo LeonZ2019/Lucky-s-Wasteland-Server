@@ -8,7 +8,7 @@ params ["_id", "_uid", "_name", "_jip", "_owner"];
 
 diag_log format ["Player connected: %1 (%2)", _name, _uid];
 if (_uid isEqualTo "") exitWith {};
-[_uid, _name, civilian, "Player Connected", "", "", "", "", ""] call fn_logPlayerAction;
+
 missionNamespace setVariable ["A3W_joinTickTime_" + _uid, diag_tickTime];
 [diag_tickTime, { A3W_serverTickTimeDiff = _this - diag_tickTime }] remoteExecCall ["call", _owner];
 

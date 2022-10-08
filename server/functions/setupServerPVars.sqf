@@ -39,6 +39,5 @@ publicVariable "currentInvites";
 	["pvar_manualObjectDelete", { if (!isNil "fn_manualObjectDelete") then { PVAL call fn_manualObjectDelete } }],
 	["pvar_manualVehicleSave", { if (!isNil "fn_manualVehicleSave") then { PVAL call fn_manualVehicleSave } }],
 	["pvar_waitUntilBagTaken", { PVAL spawn waitUntilBagTaken }],
-	["pvar_dropPlayerItems", { PVAL spawn dropPlayerItems }],
-	["pvar_logPlayerAction", { if (!isNil "fn_logPlayerAction") then { PVAL call fn_logPlayerAction } }]
+	["pvar_dropPlayerItems", { PVAL spawn dropPlayerItems }]
 ];

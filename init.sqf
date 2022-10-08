@@ -101,7 +101,6 @@ if (hasInterface || isServer) then
 	[] execVM "addons\serverRestartMessage\init.sqf";
 	[] execVM "addons\hostage\init.sqf";
 	[] execVM "addons\HvT\HvT.sqf";
-	[] execVM "addons\HvT\WC.sqf";
 	[] execVM "addons\suicideVest\init.sqf";
 	[] execVM "addons\APOC_Airdrop_Assistance\init.sqf";
 	[] execVM "addons\surrender\init.sqf";
@@ -109,7 +108,6 @@ if (hasInterface || isServer) then
 	[] execVM "addons\infoPage\key_press.sqf";
 	[] execVM "addons\scripts\artilleryRestrictedZone.sqf";
 	[] execVM "addons\scripts\swimFaster.sqf";
-	[] execVM "addons\scripts\planeRestrictedRole.sqf";
 	[] execVM "addons\contactScripts\LightSwitch.sqf";
 	[] execVM "addons\contactScripts\gps.sqf";
 	[] execVM "addons\contactScripts\switchAntenna.sqf";

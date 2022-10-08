@@ -40,7 +40,7 @@ if (!isNil "_owner") then
 		{
 			_friendly = units (group player);
 		};
-		vehicleStore_tax = (((count _friendly) - 1) min 5) - ((player getVariable ["donator", 0]) * 10);
+		vehicleStore_tax = ((count _friendly) - 1) min 5;
 		player setVariable ["vehicleStore_tax", vehicleStore_tax, true];
 		if (vehicleStore_tax > 0) then
 		{

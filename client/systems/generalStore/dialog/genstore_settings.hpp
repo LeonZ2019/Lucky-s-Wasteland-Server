@@ -46,7 +46,7 @@ class genstored
 
 		class DialogTitleText: w_RscTextCenter
 		{
-			idc = 2051;
+			idc = -1;
 			text = "General Store";
 			sizeEx = 0.06 * TEXT_SCALE;
 

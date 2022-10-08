@@ -20,7 +20,6 @@
 #define scoreGUI_PListEntry_Deaths(ID) (scoreGUI_PListEntry(ID) + 7)
 #define scoreGUI_PListEntry_Revives(ID) (scoreGUI_PListEntry(ID) + 8)
 #define scoreGUI_PListEntry_Captures(ID) (scoreGUI_PListEntry(ID) + 9)
-#define scoreGUI_PListEntry_WarCrime(ID) (scoreGUI_PListEntry(ID) + 10)
 
 #define scoreGUI_PRespawnTimer 49501
 #define scoreGUI_PRespawnTimerText 49502

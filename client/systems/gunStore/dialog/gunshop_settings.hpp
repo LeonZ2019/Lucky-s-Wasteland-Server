@@ -68,7 +68,7 @@ class gunshopd
 
 		class DialogTitleText: w_RscTextCenter
 		{
-			idc = 2050;
+			idc = -1;
 			text = "Gun Store";
 			sizeEx = 0.06 * TEXT_SCALE;
 

@@ -143,8 +143,6 @@ storeSellingHandle = _this spawn
 			};
 
 			private _attachedObjs = attachedObjects _vehicle;
-			pvar_logPlayerAction = [getPlayerUID player, name player, side player, "Sold Vehicle", _vehicle getVariable ["A3W_vehicleID", "0"], _price, position _vehicle, typeOf _vehicle, ""];
-			publicVariableServer "pvar_logPlayerAction";
 			deleteVehicle _vehicle;
 			{
 				["detach", _x] call A3W_fnc_towingHelper;

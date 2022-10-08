@@ -6,7 +6,7 @@
 //	@file Author: [404] Deadbeat, AgentRev
 //	@file Created: 20/11/2012 05:19
 
-private ["_playerUID", "_senderUID", "_sender", "_newGroup", "_teambalance"];
+private ["_playerUID", "_senderUID", "_sender", "_newGroup"];
 
 _playerUID = getPlayerUID player;
 
@@ -32,22 +32,6 @@ if (!isNil "_senderUID") then
 
 if (!isNil "_sender" && {side _newGroup == playerSide}) then
 {
-	if (playerSide == Independent && !((getPlayerUID player) call isAdmin)) then
-	{
-		_teambalance = ["A3W_teamBalanceThreshold", 3] call getPublicVar;
-		_eastSide = east countSide allPlayers;
-		_westSide = west countSide allPlayers;
-		_groupSide = count (units _newGroup);
-		if ((_groupSide - _westSide > _teambalance) && (_groupSide - _eastSide > _teambalance)) exitWith
-		{
-			if (!isNil "_senderUID") then
-			{
-				pvar_processGroupInvite = ["decline", _senderUID, _playerUID];
-				publicVariableServer "pvar_processGroupInvite";
-			};
-			player globalChat "There are too many players on the team you are attempting to join";
-		};
-	};
 	_oldGroup = group player;
 
 	_oldTerritories = _oldGroup getVariable ["currentTerritories", []];

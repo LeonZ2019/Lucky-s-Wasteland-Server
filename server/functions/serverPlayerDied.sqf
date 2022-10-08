@@ -18,18 +18,6 @@ private _killer = (_this select [0,3]) call A3W_fnc_registerKillScore;
 // Remove player save on death
 if (isPlayer _unit && {["A3W_playerSaving"] call isConfigOn}) then
 {
-	_remarks = format["%2 - %1", name _killer, side _killer];
-	if (side _killer == UNKNOWN) then
-	{
-		_remarks = "";
-	} else
-	{
-		if (isPlayer _killer) then
-		{
-			_remarks = format["%3 - %2[%1]", getPlayerUID _killer, name _killer, side _killer];
-		};
-	};
-	[getPlayerUID _unit, name _unit, side _unit, "Player Killed", netId _killer, 1, position _unit, _deathCause, _remarks] call fn_logPlayerAction;
 	(getPlayerUID _unit) call fn_deletePlayerSave;
 };
 
