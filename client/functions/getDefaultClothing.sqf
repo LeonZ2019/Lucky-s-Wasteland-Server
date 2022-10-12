@@ -61,7 +61,7 @@ _sideGears = [
 			["H_HelmetB", ["U_B_CombatUniform_mcam", "U_B_CombatUniform_mcam_tshirt", "U_B_CombatUniform_mcam_vest"], "V_PlateCarrier1_rgr", "B_AssaultPack_rgr", "G_Bandanna_khk"], //MTP
 			["H_HelmetB_plain_wdl", ["U_B_CombatUniform_mcam_wdl_f", "U_B_CombatUniform_tshirt_mcam_wdL_f", "U_B_CombatUniform_vest_mcam_wdl_f"], "V_PlateCarrier1_wdl", "B_AssaultPack_wdl_F", "G_Balaclava_TI_G_tna_F"], //woodland
 			["H_HelmetB_tna_F", ["U_B_T_Soldier_F", "U_B_T_Soldier_AR_F", "U_B_T_Soldier_SL_F"], "V_PlateCarrier1_tna_F", "B_AssaultPack_tna_F", "G_Balaclava_oli"], //Tropic
-			["H_HelmetB_TI_tna_F", ["U_B_CTRG_1", "U_B_CTRG_2", "U_B_CTRG_3", "U_B_CTRG_Soldier_F", "U_B_CTRG_Soldier_3_F", "U_B_CTRG_Soldier_2_F"], "V_TacVest_oli", "B_AssaultPack_rgr", "G_Balaclava_TI_G_tna_F"0] //CTRG
+			["H_HelmetB_TI_tna_F", ["U_B_CTRG_1", "U_B_CTRG_2", "U_B_CTRG_3", "U_B_CTRG_Soldier_F", "U_B_CTRG_Soldier_3_F", "U_B_CTRG_Soldier_2_F"], "V_TacVest_oli", "B_AssaultPack_rgr", "G_Balaclava_TI_G_tna_F"] //CTRG
 		]
 	],
 	[ // opfor gear
