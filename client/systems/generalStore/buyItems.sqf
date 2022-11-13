@@ -132,7 +132,7 @@ storePurchaseHandle = _this spawn
 				else
 				{
 					_price = _x select 2;
-				};z
+				};
 				// Ensure the player has enough money
 				if (_price > _playerMoney) exitWith
 				{
