@@ -26,8 +26,8 @@ X_JIP = false;
 
 CHVD_allowNoGrass = false;
 CHVD_allowTerrain = false; // terrain option has been disabled out from the menu due to terrible code, this variable has currently no effect
-CHVD_maxView = 10000; // Set maximum view distance (default: 12000)
-CHVD_maxObj = 10000; // Set maximimum object view distance (default: 12000)
+CHVD_maxView = 5000; // Set maximum view distance (default: 12000)
+CHVD_maxObj = 5000; // Set maximimum object view distance (default: 12000)
 
 // versionName = ""; // Set in STR_WL_WelcomeToWasteland in stringtable.xml
 
@@ -100,19 +100,20 @@ if (hasInterface || isServer) then
 	[] execVM "addons\compass\voyagerCompass.sqf";
 	[] execVM "addons\serverRestartMessage\init.sqf";
 	[] execVM "addons\hostage\init.sqf";
+	[] execVM "addons\scripts\terminal.sqf";
 	[] execVM "addons\HvT\HvT.sqf";
 	[] execVM "addons\suicideVest\init.sqf";
 	[] execVM "addons\APOC_Airdrop_Assistance\init.sqf";
 	[] execVM "addons\surrender\init.sqf";
 	[] execVM "addons\scripts\intro.sqf";
+	[] execVM "addons\scripts\mapDescription.sqf";
+	[] execVM "addons\scripts\nearestLegend.sqf";
+	[] execVM "addons\scripts\attackHeli_onKeyPress.sqf";
 	[] execVM "addons\infoPage\key_press.sqf";
 	[] execVM "addons\scripts\artilleryRestrictedZone.sqf";
 	[] execVM "addons\scripts\swimFaster.sqf";
-	[] execVM "addons\contactScripts\LightSwitch.sqf";
-	[] execVM "addons\contactScripts\gps.sqf";
-	[] execVM "addons\contactScripts\switchAntenna.sqf";
-	[] execVM "addons\contactScripts\fn_grenadeThrowback.sqf";
-
+	[] execVM "addons\contactScripts\init.sqf";
+	[] execVM "mapConfig\locationMaps.sqf";
 	if (isNil "drn_DynamicWeather_MainThread") then { drn_DynamicWeather_MainThread = [] execVM "addons\scripts\DynamicWeatherEffects.sqf" };
 };
 

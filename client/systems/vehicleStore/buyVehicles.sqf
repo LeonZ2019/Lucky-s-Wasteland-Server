@@ -143,7 +143,19 @@ storePurchaseHandle = _this spawn
 	if (_itemData isEqualType []) then
 	{
 		_class = _itemData param [1];
-		_price = (_itemData param [2]) + ((_itemData param [2]) * vehicleStore_tax / 100);
+		
+		_title = ctrlText 5300;
+		_isTax = _title select [count _title - 4, 4] == "Tax)";
+		_percentage = (parseNumber (_title select [15, (_title find "%") - 15]) / 100);
+		if (_isTax) then
+		{
+			_percentage = 1 + _percentage;
+		} else
+		{
+			_percentage = 1 - _percentage;
+		};
+
+		_price = [(_itemData param [2]) * _percentage, 0] call BIS_fnc_cutDecimals;
 		// Ensure the player has enough money
 		if (_price > _playerMoney) exitWith
 		{

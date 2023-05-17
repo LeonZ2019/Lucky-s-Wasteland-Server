@@ -95,6 +95,17 @@ if (isNil "_itemEntry") then
 	} forEach [backpackArray, genObjectsArray, genBuildingsArray, genWallsArray, staticGunsArray, genMiscArray];
 };
 
+if (isNil "_itemEntry") then
+{
+	{
+		if (_itemData == _x select 1) exitWith
+		{
+			_itemEntry = _x;
+			_parentCfg = "CfgMagazines";
+		}
+	} forEach (call ammoArray);
+};
+
 if (!isNil "_itemEntry") then
 {
 	_itemType = _itemEntry select 1;

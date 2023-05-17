@@ -99,6 +99,7 @@ for "_i" from 1 to _nbUnits do
 		};
 	};
 
+	_unit addItem "FirstAidKit";
 	_unit addPrimaryWeaponItem "acc_flashlight";
 	_unit enablegunlights "forceOn";
 

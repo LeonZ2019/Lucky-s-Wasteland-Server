@@ -39,9 +39,9 @@ if (_key != "" && _player isKindOf "Man" && {_isGenStore || _isGunStore || _isVe
 		{
 			case _isGenStore: {
 				_objectsArray = call genObjectsArray;
-				{ _objectsArray pushBack _x } forEach (call genBuildingsArray);
-				{ _objectsArray pushBack _x } forEach (call genWallsArray);
-				{ _objectsArray pushBack _x } forEach (call genMiscArray);
+				_objectsArray append (call genBuildingsArray);
+				_objectsArray append (call genWallsArray);
+				_objectsArray append (call genMiscArray);
 			};
 			case _isGunStore: { _objectsArray = call staticGunsArray};
 		};
@@ -155,8 +155,10 @@ if (_key != "" && _player isKindOf "Man" && {_isGenStore || _isGunStore || _isVe
 				if (count _safePos == 0) then { _safePos = _markerPos };
 				_spawnPosAGL = _safePos;
 				if (_seaSpawn) then {
-					_safePos = [_markerPos, 0, 15, 2, (sizeOf _class) + 2.5, 10, 0, []] call BIS_fnc_findSafePos;
-					_safePos = _safePos vectorAdd [0,0,0.4];
+					_safePos = [_markerPos, 0, 15, (sizeOf _class / 2) + 1.5, 1, 10, 0] call BIS_fnc_findSafePos;
+					private _bounding = [["SDV_01_base_F", 1.9], ["Scooter_Transport_01_base_F", 1.5], ["Rubber_duck_base_F", 1.5], ["Boat_Civil_01_base_F", 1.6], ["Boat_Transport_02_base_F", -1.9], ["Boat_Armed_01_base_F", 3.5]];
+					private _index = _bounding findIf { _class isKindOf (_x select 0) };
+					_safePos = _safePos vectorAdd [0,0,0.4 + (_bounding select _index select 1)];
 				};
 			};
 
@@ -170,7 +172,6 @@ if (_key != "" && _player isKindOf "Man" && {_isGenStore || _isGunStore || _isVe
 			} forEach nearestObjects [_wreckPos, ["LandVehicle","Air","Ship"], 25 max sizeOf _class];
 
 			if (_player getVariable [_timeoutKey, true]) then { breakOut "spawnStoreObject" }; // Timeout
-
 			_object = createVehicle [_class, _safePos, [], 0, "NONE"];
 
 			if (_waterNonBoat) then
@@ -206,7 +207,10 @@ if (_key != "" && _player isKindOf "Man" && {_isGenStore || _isGunStore || _isVe
 			if (_isUAV) then
 			{
 				createVehicleCrew _object;
-
+				if (_class == "B_Ship_MRLS_01_F") then
+				{
+					[_object] execVM "addons\scripts\vls\vls.sqf";
+				};
 				//assign AI to the vehicle so it can actually be used
 				[_object, _playerSide, _playerGroup] spawn
 				{

@@ -123,9 +123,7 @@ _setPlayersInfo =
 
 _isTerritoryCaptured =
 {
-	private ["_location", "_index"];
-	_location = _this;
-	_index = A3W_currentTerritoryOwners findIf { (_x select 0) == _location };
+	params ["_location", "_index"];
 	_friendlyUnits = [];
 	_friendlyPlayers = 0;
 	_friendlyNPCs = 0;
@@ -170,7 +168,11 @@ _isTerritoryCaptured =
 	missionNamespace setVariable [format ["%1_enemyNPCs", _location], _enemyNPCs];
 
 	_playerGroup = group player;
-	_territoryOwner = A3W_currentTerritoryOwners select _index select 1;
+	_territoryOwner = sideUnknown;
+	if !(isNil "A3W_currentTerritoryOwners") then
+	{
+		_territoryOwner = A3W_currentTerritoryOwners select _index select 1;
+	};
 	if (_territoryOwner isEqualType grpNull) then
 	{
 		(_playerGroup == _territoryOwner)
@@ -496,7 +498,7 @@ while {!isNull _display} do
 	{
 		private "_friendlyPlayers";
 		_territory = _x select 0;
-		if (_territory call _isTerritoryCaptured) then
+		if ([_territory, _forEachIndex] call _isTerritoryCaptured) then
 		{
 			_territories pushBack _territory;
 		};

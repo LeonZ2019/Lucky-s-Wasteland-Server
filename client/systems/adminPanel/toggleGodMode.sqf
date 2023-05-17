@@ -40,7 +40,7 @@ if ((getPlayerUID player) call isAdmin) then
 			{
 				hungerLevel = 100;
 			};
-			if (getDammage player > 0.20) then
+			if (damage player > 0.20) then
 			{
 				player setDamage 0;
 			};

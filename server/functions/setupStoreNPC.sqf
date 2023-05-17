@@ -171,7 +171,7 @@ if (isServer) then
 						if (_classname != "") then
 						{
 							//diag_log format ["Applying %1 as uniform for %2", _classname, _npcName];
-							_npc addUniform _classname;
+							_npc forceAddUniform _classname;
 						};
 					};
 					case "switchMove":

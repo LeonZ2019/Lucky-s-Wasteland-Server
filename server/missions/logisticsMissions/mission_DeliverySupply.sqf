@@ -21,7 +21,7 @@ _setupObjects =
 {
 	_town = markerPos (((call cityList) call BIS_fnc_selectRandom) select 0);
 	_missionPos = markerPos _missionLocation;
-	while {_town distance _missionPos < 5500 || _town distance _missionPos > 7500} do {
+	while {_town distance _missionPos < 2000 || _town distance _missionPos > 4000} do {
 		_town = markerPos (((call cityList) call BIS_fnc_selectRandom) select 0);
 	};
 	_safePos = [_town, 50, 100, 5, 0, 0, 0] call findSafePos;

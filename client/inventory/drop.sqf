@@ -35,29 +35,35 @@ if (_item select QTY <= 0) exitWith {
 
 private ["_pos", "_obj"];
 _obj = objNull;
-
+/*if (_id == MF_ITEMS_PERKS) then
+{
+	_obj = (position player) nearestObject "CBRNContainer_01_closed_yellow_F";
+};*/
 if (alive player) then
 {
 	MUTEX_LOCK_OR_FAIL;
-	//player playMove ([player, "AmovMstpDnon_AinvMstpDnon", "putdown"] call getFullMove);
 	player playActionNow "PutDown";
 	sleep 0.5;
-
-	_obj = createVehicle [_type, [player, [0,1,0]] call relativePos, [], 0, "CAN_COLLIDE"];
-	_obj setDir getDir player;
-	_obj setVariable ["mf_item_id", _id, true];
-	[_id, 1] call mf_inventory_remove;
-
+	if (isNull _obj) then
+	{
+		_obj = createVehicle [_type, [player, [0,1,0]] call relativePos, [], 0, "CAN_COLLIDE"];
+		_obj setDir getDir player;
+	};
 	sleep 0.5;
 	MUTEX_UNLOCK;
 }
 else
 {
-	_obj = createVehicle [_type, getPosATL player, [], 0.5, "CAN_COLLIDE"];
-	_obj setDir random 360;
-	_obj setVariable ["mf_item_id", _id, true];
-	[_id, 1] call mf_inventory_remove;
+	if (isNull _obj) then
+	{
+		_obj = createVehicle [_type, getPosATL player, [], 0.5, "CAN_COLLIDE"];
+		_obj setDir random 360;
+	};
 };
+
+_obj setVariable ["mf_item_id", _id, true];
+[_id, 1] call mf_inventory_remove;
+// if (_id == MF_ITEMS_PERKS) then { _obj setVariable ["perkPoints", (_obj getVariable ["perkPoints", 0]) + 1, true] };
 
 if (!isNull _obj) then
 {

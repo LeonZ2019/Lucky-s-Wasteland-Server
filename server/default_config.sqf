@@ -17,12 +17,12 @@ A3W_disableBuiltInThermal = 0;     // Display a black screen if the player tries
 // Time settings
 A3W_startHour = 15;                // In-game hour at mission start (0 to 23) - time is saved and restored between server restarts if A3W_timeSaving = 1
 APOC_coolDownTimer = 600;         // APOC Air Drop Cool Down Timer
-A3W_timeMultiplierDay = 3.0;       // Sets the speed of time between 5 AM and 8 PM (for example, 6.0 means 6 hours in-game will pass in 1 real hour)
-A3W_timeMultiplierNight = 6.0;     // Sets the speed of time between 8 PM and 5 AM
+A3W_timeMultiplierDay = 3;       // Sets the speed of time between 5 AM and 8 PM (for example, 6.0 means 6 hours in-game will pass in 1 real hour)
+A3W_timeMultiplierNight = 5;     // Sets the speed of time between 8 PM and 5 AM
 A3W_moonLight = 1;                 // Moon light during night (0 = no, 1 = yes)
 
 // Player settings
-A3W_startingMoney = 2000;           // Amount of money that players start with
+A3W_startingMoney = 500;           // Amount of money that players start with
 A3W_survivalSystem = 1;            // Food and water are required to stay alive (0 = no, 1 = yes) - 0 removes food and water items from the mission
 A3W_unlimitedStamina = 1;          // Allow unlimited sprinting, jumping, etc. (0 = no, 1 = yes) - this also removes energy drinks from the mission
 A3W_bleedingTime = 5*60;             // Time in seconds for which to allow revive after a critical injury (minimum 10 seconds) - to disable revive, go in addons\far_revive\FAR_defines.sqf
@@ -33,7 +33,7 @@ A3W_artilleryStrike = 1;           // Availability of Artillery Strike item (0 =
 A3W_artilleryShells = 15;          // Number of shells per strike
 A3W_artilleryRadius = 50;          // Strike radius in meters within which the shells will randomly hit
 A3W_artilleryCooldown = 30*60;     // Cooldown in seconds between strike uses per individual player - resets on server restart
-A3W_artilleryCrateOdds = 1/20;     // Odds of finding one Artillery Strike in a mission crate (0.0 to 1.0)
+A3W_artilleryCrateOdds = 1/15;     // Odds of finding one Artillery Strike in a mission crate (0.0 to 1.0)
 A3W_artilleryAmmo = "ModuleOrdnanceHowitzer_F_ammo"; // CfgAmmo class of fired shells, also available for example are the more powerful "R_230mm_fly" and less powerful "ModuleOrdnanceMortar_F_ammo"
 
 // Spawn settings
@@ -55,7 +55,7 @@ A3W_vehiclePurchaseCooldown = 30;  // Number of seconds to wait before allowing 
 
 // ATM settings
 A3W_atmEnabled = 1;                // Enable ATM system (0 = no, 1 = yes)
-A3W_atmMaxBalance = 2000000;       // Maximum amount of money that can be stored in a bank account (don't go over 16777216 as numbers start losing accuracy)
+A3W_atmMaxBalance = 1000000;       // Maximum amount of money that can be stored in a bank account (don't go over 16777216 as numbers start losing accuracy)
 A3W_atmTransferFee = 5;            // Fee in percent charged to players for money transfers to other players (0 to 50)
 A3W_atmTransferAllTeams = 1;       // Allow money transfers between players of all teams/sides (0 = same team only, 1 = all teams)
 A3W_atmEditorPlacedOnly = 0;       // Only allow access via ATMs placed from the mission editor (0 = all ATMs from towns & editor allowed, 1 = ATMs from editor only) Note: Stratis has no town ATMs, only editor ones.
@@ -93,8 +93,8 @@ A3W_mineSaving = 1;                // Save player-placed proximity mines between
 A3W_mineLifetime = 14*24;           // Maximum lifetime in hours for saved mines across server restarts (0 = no time limit)
 A3W_privateStorage = 1;            // Enable persistent private storage locations across the map (0 = no, 1 = yes)
 A3W_privateParking = 1;            // If vehicleSaving = 1 and savingMethod = "extDB" or "sock", enable persistent private parking locations across the map (0 = no, 1 = yes)
-A3W_privateParkingLimit = 50;       // Maximum amount of vehicles allowed in private parking (0 = no limit)
-A3W_privateParkingCost = 1000;     // Cost to retrieve an individual vehicle from private parking
+A3W_privateParkingLimit = 15;       // Maximum amount of vehicles allowed in private parking (0 = no limit)
+A3W_privateParkingCost = 500;     // Cost to retrieve an individual vehicle from private parking
 A3W_vehicleLocking = 1;            // Enable vehicle locking and lockpicking (0 = no, 1 = yes)
 
 // iniDB settings
@@ -149,16 +149,16 @@ A3W_vehicleLoot = 2;               // Level of loot added to vehicles (0 = none,
 A3W_territoryCaptureTime = 4 * 60;   // Time in seconds needed to capture a territory
 A3W_territoryPayroll = 1;          // Periodically reward sides and indie groups based on how many territories they own (0 = no, 1 = yes)
 A3W_territoryWarningIcons = 0;     // Show exclamation marks on map for friendly territories where enemies are present (0 = no, 1 = yes)
-A3W_payrollInterval = 15*60;       // Delay in seconds between each payroll
-A3W_payrollAmount = 500;           // Amount of money rewarded per territory on each payroll
+A3W_payrollInterval = 12*60;       // Delay in seconds between each payroll
+A3W_payrollAmount = 300;           // Amount of money rewarded per territory on each payroll
 A3W_territoryCaptureBoost = 5;     // Boost capturing for each player
-A3W_portalAmount = 1000;
+A3W_portalAmount = 200;
 
 // Mission settings
 A3W_serverMissions = 1;            // Enable server missions (0 = no, 1 = yes)
-A3W_missionsDifficulty = 1;        // Missions difficulty (0 = normal, 1 = hard)
+A3W_missionsDifficulty = 0;        // Missions difficulty (0 = normal, 1 = hard)
 A3W_missionFarAiDrawLines = 1;     // Draw small red lines on the map from mission markers to individual units & vehicles which are further away than 75m from the objective (0 = no, 1 = yes)
-A3W_missionsQuantity = 13;          // Number of missions running at the same time (0 to 11)
+A3W_missionsQuantity = 9;          // Number of missions running at the same time (0 to 11)
 A3W_heliPatrolMissions = 1;        // Enable missions involving flying helicopters piloted by AI (0 = no, 1 = yes)
 A3W_jetPatrolMissions = 1;        // Enable missions involving flying jet piloted by AI (0 = no, 1 = yes)
 A3W_policeMissions = 1;        // Enable missions which will have police controlling altis (0 = no, 1 = yes)
@@ -171,7 +171,7 @@ A3W_sideMissionTimeout = 45*60;    // Time in seconds that a Side Mission will r
 A3W_moneyMissionDelay = 15*60;     // Time in seconds between Money Missions
 A3W_moneyMissionTimeout = 60*60;   // Time in seconds that a Money Mission will run for, unless completed
 A3W_militaryMissionDelay = 10*60;       // Time in seconds between Military Missions
-A3W_militaryMissionTimeout = 60*60;    // Time in seconds that a Military Mission will run for, unless completed
+A3W_militaryMissionTimeout = 45*60;    // Time in seconds that a Military Mission will run for, unless completed
 A3W_logisticsMissionDelay = 7*60;
 A3W_logisticsMissionTimeout = 30*60;
 A3W_waterMissionDelay = 5*60;

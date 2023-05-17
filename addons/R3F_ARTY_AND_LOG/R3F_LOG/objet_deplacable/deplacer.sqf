@@ -175,37 +175,40 @@ else
 					case (_class == "Land_PierLadder_F"):          { 2 };
 					default { 0 };
 				};
-				switch (R3F_LOG_release_type) do
+				if (!isNil "R3F_LOG_release_type") then
 				{
-					case "normal":
+					switch (R3F_LOG_release_type) do // erro while load in
 					{
-						_objectPos = _objet call fn_getPos3D;
-						_objectPos set [2, ((player call fn_getPos3D) select 2) + _zOffset];
-						_objet setPos _objectPos;
-					};
-					case "horizontal":
-					{
-						_objectATL = getPosATL _objet;
-						if ((_objectATL select 2) - _zOffset < 0) then
+						case "normal":
 						{
-							_objectATL set [2, 0 + _zOffset];
-							_objet setPosATL _objectATL;
-						} else
-						{
-							_objectASL = getPosASL _objet;
-							_objectASL set [2, ((getPosASL player) select 2) + _zOffset];
-							_objet setPosASL _objectASL;
+							_objectPos = _objet call fn_getPos3D;
+						_objectPos set [2, ((player call fn_getPos3D) select 2) + 	_zOffset];
+							_objet setPos _objectPos;
 						};
-					_objet setVectorUp [0,0,1];
-
+						case "horizontal":
+						{
+							_objectATL = getPosATL _objet;
+							if ((_objectATL select 2) - _zOffset < 0) then
+							{
+								_objectATL set [2, 0 + _zOffset];
+								_objet setPosATL _objectATL;
+							} else
+							{
+								_objectASL = getPosASL _objet;
+							_objectASL set [2, ((getPosASL player) select 2) + 	_zOffset];
+								_objet setPosASL _objectASL;
+							};
+						_objet setVectorUp [0,0,1];
+	
+						};
+						case "collide":
+						{
+							_objectATL = getPosATL _objet;
+							_objet setPosATL _objectATL;
+						};
 					};
-					case "collide":
-					{
-						_objectATL = getPosATL _objet;
-						_objet setPosATL _objectATL;
-					};
+					_objet setVelocity [0,0,0];
 				};
-				_objet setVelocity [0,0,0];
 			};
 
 			player removeAction _action_menu_release_relative;

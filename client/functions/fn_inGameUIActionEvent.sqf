@@ -76,18 +76,22 @@ if (_unit == player && (_showWindow || _menuOpen)) then
 				_bob setName ["","",""];
 				[_bob, ["","",""]] remoteExec ["A3W_fnc_setName"];
 				_bob moveInGunner _veh;
+				[_veh, _bob] execVM "addons\scripts\attackHeli.sqf";
 
-				private _turretCfg = ([_veh, configNull] call BIS_fnc_getTurrets) param [1, configNull];
+				/*private _turretCfg = ([_veh, configNull] call BIS_fnc_getTurrets) param [1, configNull];
 				private _rotH = getText (_turretCfg >> "animationSourceBody");
 				private _rotV = getText (_turretCfg >> "animationSourceGun");
 
 				[_veh, _bob, _rotH, _rotV] spawn
 				{
 					params ["_veh", "_bob", "_rotH", "_rotV"];
-					_time = time;
-					waitUntil {_bob doWatch objNull; (abs (_veh animationSourcePhase _rotH) < 0.001 && abs (_veh animationSourcePhase _rotV) < 0.001) || time - _time > 10};
+					waitUntil {sleep 0.05; !(isManualFire _veh) || !(alive _veh)};
+					_bob doWatch objNull;
+					// _bob doWatch (ASLToAGL (lineIntersectsSurfaces [eyePos player, (ATLtoASL screenToWorld [0.5,0.5]), player, _veh, true,1] select 0 select 0)); 
+					// abs (deg (_veh animationSourcePhase _rotH)) < 0.5
+					// abs (deg (_veh animationSourcePhase _rotV)) < 0.5
 					deleteVehicle _bob;
-				};
+				};*/
 			};
 		};
 
@@ -132,6 +136,11 @@ if (_unit == player && (_showWindow || _menuOpen)) then
 if (!_handled && !isNil "A3W_fnc_stickyCharges_actionEvent") then
 {
 	_handled = _this call A3W_fnc_stickyCharges_actionEvent;
+};
+
+if (!_handled && !isNil "CBRN_Shower_Action") then
+{
+	_this call CBRN_Shower_Action;
 };
 
 _handled

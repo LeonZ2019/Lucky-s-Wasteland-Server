@@ -10,7 +10,7 @@ if (_veh getVariable ["A3W_resupplyTruckSetup", false]) exitWith {};
 
 if (hasInterface) then
 {
-	_veh addAction ["<img image='client\icons\repair.paa'/> Resupply Vehicle", "client\functions\fn_resupplyTruck.sqf", [], 51, false, true, "", "alive _target && alive objectParent _this && attachedTo _target != vehicle _this && _target distance vehicle _this <= (15 max (sizeOf typeOf vehicle _this * 1.25)) && (isNil 'mutexScriptInProgress' || {!mutexScriptInProgress})"]; // _target = truck, _this = player
+	_veh addAction ["<img image='client\icons\repair.paa'/> Resupply Vehicle", "client\functions\fn_resupplyTruck.sqf", [], 51, false, true, "", "alive _target && alive objectParent _this && attachedTo _target != vehicle _this && speed (vehicle _this) < 10 && _target distance vehicle _this <= (15 max (sizeOf typeOf vehicle _this * 1.25)) && (isNil 'mutexScriptInProgress' || {!mutexScriptInProgress})"]; // _target = truck, _this = player
 };
 
 if (local _veh) then

@@ -83,6 +83,7 @@ A3W_fnc_setCMoney = [_serverFunc, "fn_setCMoney.sqf"] call mf_compile;
 A3W_fnc_setVarServer = [_serverFunc, "fn_setVarServer.sqf"] call mf_compile;
 A3W_fnc_setVehicleLoadout = [_serverFunc, "fn_setVehicleLoadout.sqf"] call mf_compile;
 A3W_fnc_takeArtilleryStrike = "client\items\artillery\fn_takeArtilleryStrike.sqf" call mf_compile;
+A3W_fnc_takePerkPoints = "client\items\perkPoint\fn_takePerkPoints.sqf" call mf_compile;
 A3W_fnc_towingHelper = [_serverFunc, "towingHelper.sqf"] call mf_compile;
 applyVehicleTexture = "client\systems\vehicleStore\applyVehicleTexture.sqf" call mf_compile;
 cargoToPairs = [_serverFunc, "cargoToPairs.sqf"] call mf_compile;

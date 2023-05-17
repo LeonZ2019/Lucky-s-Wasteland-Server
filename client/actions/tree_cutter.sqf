@@ -27,12 +27,12 @@ _checks = {
 };
 
 mutexScriptInProgress = true;
-_sound = playSound "chopTree";
+_sound = playSound3D [getMissionPath "client\sounds\chopTree.ogg", player];
 _success = [DURATION, ANIMATION, _checks, []] call a3w_actions_start;
-_sound spawn
+/*_sound spawn
 {
 	if (!isNull _this) then { deleteVehicle _this };
-};
+};*/
 mutexScriptInProgress = false;
 
 if (_success) then {

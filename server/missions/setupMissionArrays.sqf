@@ -17,7 +17,8 @@ MainMissions =
 	["mission_LightArmVeh", 0.7],
 	["mission_ArmedHeli", 0.7],
 	["mission_CivHeli", 1],
-	["mission_DefendTerritory", 0.9]
+	["mission_DefendTerritory", 0.9],
+	["mission_AlienInvasion", 1]
 ];
 
 SideMissions =
@@ -29,7 +30,9 @@ SideMissions =
 	["mission_geoCache", 0.3],
 	["mission_RescueHostage", 1],
 	["mission_Demining", 1.15],
-	["mission_Medevac", 0]
+	["mission_Medevac", 0],
+	["mission_BanditHideout", 0.3],
+	["mission_chemical", 1]
 ];
 
 MoneyMissions =
@@ -48,7 +51,9 @@ MilitaryMissions =
 	["mission_policePatrol", 1.25],
 	["mission_militaryPatrol", 1],
 	["mission_RescueWarCrime", 0.9],
-	["mission_AntiAir", 0.75]
+	["mission_AntiAir", 0.75],
+	["mission_redDawn", 100],
+	["mission_submarineHunter", 0.8]
 ];
 
 LogisticsMissions =
@@ -57,7 +62,7 @@ LogisticsMissions =
 	["mission_Airdrop", 1.1],
 	["mission_DeliverySupply", 1],
 	["mission_deviceDelivery", 0.8],
-	["mission_AltisHasFallen", 1]
+	["mission_AltisHasFallen", 0.45]
 ];
 
 WaterMissions =
@@ -65,7 +70,8 @@ WaterMissions =
 	["mission_Coastal_Convoy", 1],
 	["mission_ArmedDiversquad", 1],
 	["mission_SunkenTreasure", 1],
-	["mission_SunkenSupplies", 1]
+	["mission_SunkenSupplies", 1],
+	["mission_disarmMine", 1]
 ];
 
 MissionSpawnMarkers = (allMapMarkers select {["Mission_", _x] call fn_startsWith}) apply {[_x, false]};
@@ -74,7 +80,10 @@ SunkenMissionMarkers = (allMapMarkers select {["SunkenMission_", _x] call fn_sta
 SniperMissionMarkers = (allMapMarkers select {["Sniper_", _x] call fn_startsWith}) apply {[_x, false]}; // the mission file need create sniper_01 something
 RoadblockMissionMarkers = (allMapMarkers select {["RoadBlock_", _x] call fn_startsWith}) apply {[_x, false]};
 JetMarkers = (allMapMarkers select {["Jet_", _x] call fn_startsWith}) apply {[_x, false]};
-HQSafePosMarkers = (allMapMarkers select {["EvacHQ_", _x] call fn_startsWith}) apply {[_x, false]};
+// HQSafePosMarkers = (allMapMarkers select {["EvacHQ_", _x] call fn_startsWith}) apply {[_x, false]};
+DeepWaterMarkers = (allMapMarkers select {["DeepWater_", _x] call fn_startsWith}) apply {[_x, false]};
+MountainMissionMarkers = (allMapMarkers select {["Mountain_", _x] call fn_startsWith}) apply {[_x, false]};
+MorayMissionMarkers = (allMapMarkers select {["Moray_", _x] call fn_startsWith}) apply {[_x, false]};
 
 if !(ForestMissionMarkers isEqualTo []) then
 {

@@ -10,5 +10,9 @@ if (["Are you sure you want to use defibrillator?", "Confirm", true, true] call 
 	player setVariable ["FAR_isUnconscious", 0, true];
 	["You bring back yourself from dead", 5] call mf_notify_client;
     ["defibrillator", 1] call mf_inventory_remove;
-	player setDamage 0.5;
+	player allowDamage false;
+	waitUntil { !(["unconscious", animationState player] call fn_startsWith) };
+	sleep 3;
+	player allowDamage true;
+	player setDamage 0.25;
 };

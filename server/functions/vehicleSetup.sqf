@@ -22,6 +22,12 @@ if !(_class isKindOf "AllVehicles") exitWith {}; // if not actual vehicle, finis
 
 clearBackpackCargoGlobal _vehicle;
 
+// Disable thermal on all manned vehicles
+if (!unitIsUAV _vehicle) then
+{
+	_vehicle disableTIEquipment true;
+};
+
 if ({_vehicle isKindOf _x} count ["StaticMGWeapon","StaticGrenadeLauncher","StaticMortar"] > 0) then
 {
 	_vehicle enableWeaponDisassembly false;
@@ -83,6 +89,13 @@ switch (true) do
 		};
 
 		_vehicle addWeaponTurret ["CMFlareLauncher", [-1]];
+	};
+	case (_class isKindOf "Plane_Fighter_03_base_F"):
+	{
+		if (_brandNew) then
+		{
+			_vehicle addMagazineTurret ["300Rnd_20mm_shells", [-1]];
+		};
 	};
 	case ({_class isKindOf _x} count ["Wheeled_APC_F","Tank"] > 0):
 	{

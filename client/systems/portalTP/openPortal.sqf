@@ -100,7 +100,7 @@ if (!_isCurrentSafe) exitWith
 				[] spawn {
 					uiSleep 1;
 					openMap false;
-					cutText ["Teleport failed, try other territory", "BLACK IN", 2.5];
+					cutText ["Teleport failed, try on captured territory", "BLACK IN", 2.5];
 				};
 			};
 		};

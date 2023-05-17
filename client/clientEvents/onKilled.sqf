@@ -40,6 +40,7 @@ if (_killer == _player) then
 		{
 			case (_player == player && ([missionNamespace getVariable "thirstLevel"] param [0,1,[0]] <= 0 || [missionNamespace getVariable "hungerLevel"] param [0,1,[0]] <= 0)): { "survival" };
 			case (getOxygenRemaining _player <= 0 && getPosASLW _player select 2 < -0.1): { "drown" };
+			case (_player getVariable ["killByChemical", false]): { "chemical" };
 			default { "suicide" };
 		};
 

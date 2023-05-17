@@ -9,7 +9,7 @@
 
 if (!isServer) exitWith {};
 
-private ["_unit", "_skill", "_accuracy"];
+private ["_unit", "_skill", "_accuracy", "_timeSkill"];
 _unit = _this;
 
 if (["A3W_missionsDifficulty"] call isConfigOn) then
@@ -23,12 +23,15 @@ else
 	_accuracy = 0.5; // more intensive
 };
 
+_timeSkill = (1 + sunOrMoon) / 2;
+_skill = _skill * _timeSkill;
+
 _unit allowFleeing 0;
 _unit setSkill _skill;
 _unit setSkill ["aimingAccuracy", (_unit skill "aimingAccuracy") * _accuracy];
 _unit setSkill ["courage", 1];
-_unit setSkill ["spotDistance", 0.23];
-_unit setSkill ["spotTime", 0.23];
+_unit setSkill ["spotDistance", 0.46];
+_unit setSkill ["spotTime", 0.46];
 _unit setSkill ["aimingShake", 0.23];
 _unit disableAI "MINEDETECTION"; //ai will walk on mine
 _unit disableAI "COVER"; //no cover, since courage=1, is AI ready to die?

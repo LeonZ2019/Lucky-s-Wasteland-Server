@@ -20,6 +20,83 @@ player createDiarySubject ["credits", "Credits"];
 player createDiarySubject ["customupdate", "Lucky's Wasteland"];
 player createDiaryRecord ["customupdate",
 [
+"Custom Update Build 15",
+"
+<br/>[Added] New item in general Store
+<br/>[Added] Demining mission
+<br/>[Added] Airdrop system from APOC
+<br/>[Added] Beacon detector
+<br/>[Added] Titan Static mountable to offroad and Truck
+<br/>[Added] 'Tree Cutter' for allow helicopter take off
+<br/>[Added] Defend territory mission
+<br/>[Added] Containers and objects from Apex DLC
+<br/>[Added] Transfer ownership action
+<br/>[Added] New category in general store
+<br/>[Added] Sell object in every store
+<br/>[Added] Surrender feature - `Shift + H`
+<br/>[Added] Info page for shortcut key
+<br/>[Added] welcome message
+<br/>[Added] Artillery Computer restricted area
+<br/>[Added] Texture for Mohawk
+<br/>[Added] Item filter for Gun Store and General Store
+<br/>[Added] Altis Has Fallen mission
+<br/>[Added] Beacon rename feature and repair feature
+<br/>[Added] Map usage for Remote designator
+<br/>[Adjusted] Limit on ATM now up to 2mil
+<br/>[Adjusted] refillbox to balance the game
+<br/>[Adjusted] Price on vehicle store
+<br/>[Adjusted] Transfer to box max direction
+<br/>[Adjusted] Default clothing
+<br/>[Adjusted] view distance range from 8500 to 10000
+<br/>[Adjusted] Mission config
+<br/>[Adjusted] Mission line for custom distance
+<br/>[Adjusted] Thermal for few equitment
+<br/>[Retextured] Vehicle texture for digital green, wooldland and multicam
+<br/>[Retextured] AAF and OPFOR vehicle paint
+<br/>[Modifed] Vehicle textures
+<br/>[Modified] Tailhook prefix
+<br/>[Modified] Territory name
+<br/>[Modified] Corpse missing problem
+<br/>[Enabled] Warchest
+<br/>[Moved] water mission to New Water mission
+<br/>[Removed] Unused texture
+<br/>[Improved] Gun store direct load magazine to weapon
+<br/>[Improved] UAV issue, could be exist in server
+<br/>[Improved] R3F Helicopter lift
+<br/>[Improved] Vehicle get out for turn off engine
+<br/>[Improved] Heal soldier problem
+<br/>[Improved] R3F object move
+<br/>[Improved] Help hint
+<br/>[Improved] Human target scoreboard problem
+<br/>[Improved] Weapon swap issue
+<br/>[Improved] R3F object select
+<br/>[Improved] UAV take control
+<br/>[Improved] Revive message
+<br/>[Fixed] Thermal on vorona
+<br/>[Fixed] Admin tool
+<br/>[Fixed] Mission abandoned jet
+<br/>[Fixed] Sell and Repaint on turret
+<br/>[Fixed] Resupply crate
+<br/>[Fixed] Uninstall cargo problem
+<br/>[Fixed] player will not get damage from installed vehicle
+<br/>[Fixed] Eject corpse script
+<br/>[Fixed] Park Plane instead of Park Vehicle
+<br/>[Fixed] Land convoy path
+<br/>[Fixed] Boat spawn position
+<br/>[Fixed] Condition and action text
+<br/>[Fixed] Duplicated R3F action
+<br/>[Fixed] Scoreboard reset
+<br/>[Fixed] Take uniform problem
+<br/>[Fixed] Handgun magazine missing
+<br/>[Fixed] Sell vehicle problem
+<br/>[Fixed] Create unit
+<br/>[Fixed] Animation stuck on unconscious
+<br/>[Fixed] Block artillery restricted zone on store location
+"
+]];
+
+player createDiaryRecord ["customupdate",
+[
 "Custom Update Build 14",
 "
 <br/>[Updated] Wasteland official

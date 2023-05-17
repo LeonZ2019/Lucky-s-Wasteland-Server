@@ -449,15 +449,37 @@ switch (true) do
 		];
 	};
 	
-	case(_class isKindOf "B_MBT_01_TUSK_F"):
+	case (_class isKindOf "B_MBT_01_TUSK_F"):
 	{
-		switch(_variant) do
+		switch (_variant) do
 		{
 			case "tough":
 			{
 				_customCode = {_veh setVariable ["vehicle_tough", true, true];};
 			};
 			default {};
+		};
+	};
+	case (_class isKindOf "B_Ship_MRLS_01_F"):
+	{
+		_mags =
+		[
+			["magazine_Missiles_Cruise_01_x18", [0]]
+		];
+		_customCode = {
+			switch (_veh currentMagazineTurret [0]) do
+			{
+				case "magazine_Missiles_Cruise_01_x18":
+				{
+					_veh setVariable ["VLS_HE", 0, true];
+					_veh setVariable ["VLS_CLUSTER", 18, true];
+				};
+				case "magazine_Missiles_Cruise_01_Cluster_x18":
+				{
+					_veh setVariable ["VLS_HE", 18, true];
+					_veh setVariable ["VLS_CLUSTER", 0, true];
+				};
+			}
 		};
 	};
 };

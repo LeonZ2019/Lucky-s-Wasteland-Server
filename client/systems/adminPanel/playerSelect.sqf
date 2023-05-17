@@ -112,6 +112,11 @@ if (_uid call isAdmin) then
 			if (_target getVariable ["FAR_isUnconscious", 0] == 1) then
 			{
 				_target setVariable ["FAR_isUnconscious", 0, true];
+				_target allowDamage false;
+				waitUntil { !(["unconscious", animationState _target] call fn_startsWith) };
+				uiSleep 3;
+				_target allowDamage true;
+				_target setDamage 0;
 			};
 			(findDisplay 27910) closeDisplay 0;
 			["PlayerMgmt_HealPlayer", format ["%1 (%2)", name _target, getPlayerUID _target]] call notifyAdminMenu;

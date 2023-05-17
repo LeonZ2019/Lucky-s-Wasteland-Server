@@ -100,7 +100,7 @@ switch (_side) do
 				_backpack = "B_Carryall_ghex_F";
 				_loadout pushBack ["H_HelmetLeaderO_ghex_F", "H_MilCap_ghex_F", "H_HelmetO_ghex_F"];
 				_loadout pushBack ["U_O_T_Soldier_F", "U_O_V_Soldier_Viper_F"]; // wrong uniform tropic
-				_loadout pushBack ["V_HarnessO_ghex_F", "B_FieldPack_ghex_OTReconMedic_F", "V_TacVest_oli"];
+				_loadout pushBack ["V_HarnessO_ghex_F", "V_HarnessOGL_ghex_F", "V_TacVest_oli"];
 			};
 			case "Hex":
 			{
@@ -197,7 +197,7 @@ for "_i" from 1 to _nbUnits do
 	removeGoggles _unit;
 
 	_unit addHeadgear ((_loadout select 0) call BIS_fnc_selectRandom);
-	_unit addUniform ((_loadout select 1) call BIS_fnc_selectRandom);
+	_unit forceAddUniform ((_loadout select 1) call BIS_fnc_selectRandom);
 	_unit addVest ((_loadout select 2) call BIS_fnc_selectRandom);
 
 	switch (true) do
@@ -234,7 +234,7 @@ for "_i" from 1 to _nbUnits do
 			}
 		};
 	};
-
+	_unit addItem "FirstAidKit";
 	_unit addPrimaryWeaponItem "acc_flashlight";
 	_unit addPrimaryWeaponItem (_scope call BIS_fnc_selectRandom);
 	_unit addMagazines [(_magazines select 0), 6];
@@ -243,6 +243,7 @@ for "_i" from 1 to _nbUnits do
 
 	_unit addRating 1e11;
 	_unit call setMissionSkill;
+	_unit spawn refillPrimaryAmmo;
 };
 
 [_group, _pos] call defendArea;

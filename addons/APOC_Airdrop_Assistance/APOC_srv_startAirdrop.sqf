@@ -22,10 +22,8 @@ switch (_type) do {
 	case "base2": { _selectionArray = APOC_AA_SupOptions };
 	default { _selectionArray = APOC_AA_VehOptions; diag_log "AAA - Default Array Selected - Something broke"; };
 };
-
-_selectionName 	= (_selectionArray select _selectionNumber) select 0;
-_selectionClass = (_selectionArray select _selectionNumber) select 1;
-_price 			= (_selectionArray select _selectionNumber) select 2;
+_option = _selectionArray select _selectionNumber;
+_option params ["_selectionName", "_selectionClass", "_price", ["_variant", "", [""]]];
 
 /////// Let's spawn us an AI helo to carry the cargo /////////////////////////////////////////////////
 
@@ -34,7 +32,9 @@ _center = createCenter civilian;
 _grp = createGroup civilian;
 
 _flyHeight = 150;
-_dropSpot = [position _player select 0,position _player select 1, _flyHeight];
+_dropSpot = _player getRelPos [30, abs (360 - _heliDirection)];
+_dropSpot set [2, _flyHeight];
+
 _flyHeight = 100;  //Distance from ground that heli will fly at
 _heliStartDistance = 2000;
 _spos = [(_dropSpot select 0) - (sin _heliDirection) * _heliStartDistance, (_dropSpot select 1) - (cos _heliDirection) * _heliStartDistance, (_flyHeight + 200)];
@@ -71,11 +71,11 @@ _heli flyInHeight _flyHeight;
 _object = switch (_type) do {
 	case "vehicle":
 	{
-		_objectSpawnPos = _spos vectorAdd [0, 0, -10];
+		_objectSpawnPos = _spos vectorAdd [0, 0, 300];
 		_object = createVehicle [_selectionClass, _objectSpawnPos, [], 0, "None"];
-		if (_selectionClass == "B_Heli_Light_01_dynamicLoadout_F") then
+		if (isNil "_variant") then
 		{
-			_object setVariable ["A3W_vehicleVariant", "pawneeGun", true];
+			_object setVariable ["A3W_vehicleVariant", _variant, true];
 		};
 		_object setVariable ["A3W_purchasedStoreObject", true];
 		_object setVariable ["A3W_purchasedVehicle", true, true];
@@ -92,7 +92,7 @@ _object = switch (_type) do {
 	};
 	case "supply":
 	{
-		_objectSpawnPos = [(_spos select 0), (_spos select 1), (_spos select 2) - 5];
+		_objectSpawnPos = [(_spos select 0), (_spos select 1), (_spos select 2) + 300];
 		_object = createVehicle ["B_supplyCrate_F", _objectSpawnPos, [], 0, "None"];
 		_object setVariable ["A3W_purchasedStoreObject", true];
 		_object setVariable ["R3F_LOG_Disabled", false, true];
@@ -103,7 +103,7 @@ _object = switch (_type) do {
 	};
 	case "picnic":
 	{
-		_objectSpawnPos = [(_spos select 0), (_spos select 1), (_spos select 2) - 5];
+		_objectSpawnPos = [(_spos select 0), (_spos select 1), (_spos select 2) + 300];
 		_object = createVehicle ["B_supplyCrate_F", _objectSpawnPos, [], 0, "None"];
 		_object setVariable ["A3W_purchasedStoreObject", true];
 		_object setVariable ["R3F_LOG_Disabled", false, true];
@@ -112,7 +112,7 @@ _object = switch (_type) do {
 	};
 	case "base":
 	{
-		_objectSpawnPos = [(_spos select 0), (_spos select 1), (_spos select 2) - 5];
+		_objectSpawnPos = [(_spos select 0), (_spos select 1), (_spos select 2) + 300];
 		_object = createVehicle ["Land_CargoBox_V1_F", _objectSpawnPos, [], 0, "None"];
 		_object AllowDamage false;
 		_object setVariable ["A3W_purchasedStoreObject", true];
@@ -127,7 +127,7 @@ _object = switch (_type) do {
 	};
 	case "base1":
 	{
-		_objectSpawnPos = [(_spos select 0), (_spos select 1), (_spos select 2) - 5];
+		_objectSpawnPos = [(_spos select 0), (_spos select 1), (_spos select 2) + 300];
 		_object = createVehicle ["Land_Cargo20_yellow_F", _objectSpawnPos, [], 0, "None"];
 		_object AllowDamage false;
 		_object setVariable ["A3W_purchasedStoreObject", true];
@@ -142,7 +142,7 @@ _object = switch (_type) do {
 	};
 		case "base2":
 	{
-		_objectSpawnPos = [(_spos select 0), (_spos select 1), (_spos select 2) - 5];
+		_objectSpawnPos = [(_spos select 0), (_spos select 1), (_spos select 2) + 300];
 		_object = createVehicle ["Land_Cargo40_white_F", _objectSpawnPos, [], 0, "None"];
 		_object AllowDamage false;
 		_object setVariable ["A3W_purchasedStoreObject", true];

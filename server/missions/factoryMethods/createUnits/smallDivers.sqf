@@ -7,16 +7,20 @@
 
 if (!isServer) exitWith {};
 
-private ["_group", "_pos", "_leader", "_man2", "_man3", "_man4"];
+private ["_group", "_pos", "_defendArea", "_leader", "_man2", "_man3", "_man4"];
 
 _group = _this select 0;
 _pos = _this select 1;
-
+_defendArea = true;
+if (count _this == 3) then
+{
+	_defendArea = _this select 2;
+};
 // Leader
 _leader = _group createUnit ["C_man_polo_1_F", [(_pos select 0) + 10, _pos select 1, 0], [], 1, "Form"];
 removeAllAssignedItems _leader;
 _leader addVest "V_RebreatherB";
-_leader addUniform "U_B_Wetsuit";
+_leader forceAddUniform "U_B_Wetsuit";
 _leader addGoggles "G_Diving";
 _leader addMagazine "20Rnd_556x45_UW_Mag";
 _leader addWeapon "arifle_SDAR_F";
@@ -26,7 +30,7 @@ _leader addMagazine "20Rnd_556x45_UW_Mag";
 // Rifleman
 _man2 = _group createUnit ["C_man_polo_2_F", [(_pos select 0) + 10, _pos select 1, 0], [], 1, "Form"];
 removeAllAssignedItems _man2;
-_man2 addUniform "U_B_Wetsuit";
+_man2 forceAddUniform "U_B_Wetsuit";
 _man2 addVest "V_RebreatherB";
 _man2 addGoggles "G_Diving";
 _man2 addMagazine "20Rnd_556x45_UW_Mag";
@@ -37,7 +41,7 @@ _man2 addMagazine "20Rnd_556x45_UW_Mag";
 // Rifleman
 _man3 = _group createUnit ["C_man_polo_3_F", [(_pos select 0) + 10, _pos select 1, 0], [], 1, "Form"];
 removeAllAssignedItems _man3;
-_man3 addUniform "U_B_Wetsuit";
+_man3 forceAddUniform "U_B_Wetsuit";
 _man3 addVest "V_RebreatherB";
 _man3 addGoggles "G_Diving";
 _man3 addMagazine "20Rnd_556x45_UW_Mag";
@@ -48,7 +52,7 @@ _man3 addMagazine "20Rnd_556x45_UW_Mag";
 // Rifleman
 _man4 = _group createUnit ["C_man_polo_4_F", [(_pos select 0) + 10, _pos select 1, 0], [], 1, "Form"];
 removeAllAssignedItems _man4;
-_man4 addUniform "U_B_Wetsuit";
+_man4 forceAddUniform "U_B_Wetsuit";
 _man4 addVest "V_RebreatherB";
 _man4 addGoggles "G_Diving";
 _man4 addMagazine "20Rnd_556x45_UW_Mag";
@@ -64,4 +68,4 @@ _leader = leader _group;
 	_x addRating 9999999;
 } forEach units _group;
 
-[_group, _pos, "Ship"] call defendArea;
+if (_defendArea) then { [_group, _pos, "Ship"] call defendArea; };

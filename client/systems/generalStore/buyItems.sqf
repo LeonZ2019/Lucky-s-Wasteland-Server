@@ -195,6 +195,11 @@ storePurchaseHandle = _this spawn
 						if (backpack player != "" && {!(["backpack"] call _showReplaceConfirmMessage)}) exitWith {};
 						removeBackpack player;
 						player addBackpack _class;
+
+						if (_class in CBRN_gear_list) then
+						{
+							[player] call CBRN_gear_update;
+						};
 					};
 					case "gogg":
 					{
@@ -208,6 +213,11 @@ storePurchaseHandle = _this spawn
 
 						removeGoggles player;
 						player addGoggles _class;
+
+						if (_class in CBRN_gear_list) then
+						{
+							[player] call CBRN_gear_update;
+						};
 					};
 					case "nvg":
 					{
@@ -267,12 +277,17 @@ storePurchaseHandle = _this spawn
 					};
 					case "watch":
 					{
-						if !("ItemWatch" in (assignedItems player)) then
+						if !("ChemicalDetector_01_watch_F" in (assignedItems player)) then
 						{
 							player linkItem _class;
 						} else
 						{
 							[_itemText] call _showInsufficientSpaceError;
+						};
+
+						if (_class == "ChemicalDetector_01_watch_F") then
+						{
+							[player] call CBRN_gear_update;
 						};
 					};
 					case "compass":

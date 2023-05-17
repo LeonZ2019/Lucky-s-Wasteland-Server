@@ -6,7 +6,7 @@ private ["_messages", "_timeout"];
 _messages = [
 	["Lucky's Wasteland", "With Lucky, Lee, Papa Kilo, Victor"],
 	["Welcome", (name player)],
-	["Discord Invite", "https://discord.gg/ByZcqZx"],
+	["Discord Invite", "https://discord.gg/JDbBKTepwe"],
 	["Restart", "The server restart at 5AM GMT+8 every day"]
 ];
 

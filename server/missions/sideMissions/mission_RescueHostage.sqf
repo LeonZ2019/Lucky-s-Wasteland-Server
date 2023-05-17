@@ -38,8 +38,8 @@ _setupObjects =
 _waitUntilMarkerPos = {getPos _hostage};
 _waitUntilExec =
 {
-	HostageEHAdd = [_hostage, _aiGroup];
-	publicVariable "HostageEHAdd";
+	// HostageEHAdd = [_hostage, _aiGroup];
+	// publicVariable "HostageEHAdd";
 };
 _waitUntilCondition = {!alive _hostage};
 _waitUntilSuccessCondition = { animationState _hostage == "amovpercmstpsnonwnondnon" };
@@ -47,6 +47,7 @@ _ignoreAiDeaths = true;
 _failedExec = {
 	HostageEHRemove = _hostage;
 	publicVariable "HostageEHRemove";
+	deleteVehicle _hostage;
 };
 
 _successExec =

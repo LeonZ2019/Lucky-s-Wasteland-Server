@@ -404,15 +404,39 @@ switch (_boxType) do
 			["itm", "Toolkit", RANDOM_BETWEEN(2,3)],
 			["itm", "MineDetector", 2],
 			["itm", ["H_CrewHelmetHeli_B","H_CrewHelmetHeli_O", "H_CrewHelmetHeli_I"], RANDOM_BETWEEN(1,3)],
-			["bac", ["B_Kitbag_mcamo", "B_Bergen_sgg", "B_FieldPack_khk", "B_Carryall_mcamo"], RANDOM_BETWEEN(1,3)],
+			["itm", ["B_Kitbag_mcamo", "B_Bergen_sgg", "B_FieldPack_khk", "B_Carryall_mcamo"], RANDOM_BETWEEN(1,3)],
 			["itm", ["V_PlateCarrierIAGL_dgtl", "V_TacVest_camo", "V_PlateCarrierGL_rgr"], RANDOM_BETWEEN(1,3)],
 			["itm", ["Chemlight_red", "Chemlight_green", "Chemlight_yellow", "Chemlight_blue"], RANDOM_BETWEEN(3,6)],
 			["mag", ["SmokeShell", "SmokeShellRed", "SmokeShellgreen"], RANDOM_BETWEEN(3,6)]
 		]
 	};
+	case "mission_junk":
+	{
+		_boxItems =
+		[
+			["itm", "FirstAidKit", RANDOM_BETWEEN(3,5)]
+		];
+	};
+	case "mission_empty":
+	{
+		_boxItems = [];
+	};
+	case "mission_CBRN":
+	{
+		_boxItems = [
+			["itm", ["G_Respirator_blue_F", "G_Respirator_white_F", "G_Respirator_yellow_F"], RANDOM_BETWEEN(2,4)],
+			["itm", ["G_AirPurifyingRespirator_01_F", "G_AirPurifyingRespirator_02_black_F", "G_AirPurifyingRespirator_02_olive_F", "G_AirPurifyingRespirator_02_sand_F"], RANDOM_BETWEEN(2,4)],
+			["itm", ["U_I_CBRN_Suit_01_AAF_F", "U_C_CBRN_Suit_01_Blue_F", "U_I_E_CBRN_Suit_01_EAF_F", "U_B_CBRN_Suit_01_MTP_F", "U_B_CBRN_Suit_01_Tropic_F", "U_C_CBRN_Suit_01_White_F", "U_B_CBRN_Suit_01_Wdl_F"], RANDOM_BETWEEN(4,8)],
+			["itm", ["B_CombinationUnitRespirator_01_F", "B_SCBA_01_F"], RANDOM_BETWEEN(4,8)]
+		]; // gear and few gun
+	};
+	// more type of box
 };
 
-[_box, _boxItems] call processItems;
+if (count _boxItems > 0) then
+{
+	[_box, _boxItems] call processItems;
+};
 
 if (["A3W_artilleryStrike"] call isConfigOn) then
 {

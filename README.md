@@ -2,24 +2,26 @@
 
 A3Wasteland is a survival-like combat sandbox, which incorporates elements of team deathmatch and sector control in one big fun-to-play package. Similar to DayZ, the objectives are to scavenge weapons and vehicles, team up with fellow players, and engage in combat to obtain control of the landscape. Best experienced with 50 or more players. 
 
-For questions and support, please visit our [Discord](https://discord.gg/ByZcqZx)
+For questions and support, please visit our [Discord](https://discord.gg/JDbBKTepwe)
+
+Arma 3 Unit: [Spartan Pacific Command [SPARTAN]](https://units.arma3.com/unit/spartanpacificcommand)
 
 ---
 ### Server Info
-IP Address: 139.99.49.140
+IP Address: 139.99.4.177
 
 Port: 2302
 
 Mod: no mod required
 
-Map: Altis
+Map: Malden
 
-Restart time: 5AM, 11AM, 5PM, 11PM GMT +8
+Restart time: 5AM GMT +8
 
-Max Player: 20
+Max Player: 10
 
 ### Admins (Discord Tag)
-* Lucky (Rhyane#1234)
+* Lucky (Rhyane#1392)
 * Lee (LeonZ#1848)
 * Papa Kilo (PK -Kilo#3540)
 * Victor (VecTorr#8443)
@@ -108,5 +110,5 @@ Max Player: 20
 * Sunken Supplies
 * Sunken Treasure
 
-This Github Repo page: [Lucky's Wasteland](https://github.com/LeonZ2019/Lucky-s-Wasteland-Server)
+This Github Repo page: [Lucky's Wasteland (Branch malden-dev)](https://github.com/LeonZ2019/Lucky-s-Wasteland-Server/tree/malden-dev)
 This project is licensed under the [GNU Affero GPL v3](http://tldrlegal.com/l/agpl3). Copyright © 2013 - 2015 [A3Wasteland.com](http://a3wasteland.com/)

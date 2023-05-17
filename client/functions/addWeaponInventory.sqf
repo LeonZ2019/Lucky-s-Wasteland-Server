@@ -11,13 +11,18 @@ private ["_player", "_weapon", "_return"];
 
 _player = _this select 0;
 _weapon = _this select 1;
+_value = [[_weapon, "", "", "", [], [], ""], 1];
+if (_weapon == "hgun_esd_01_F") then
+{
+	_value = [[_weapon, "muzzle_antenna_01_f", "", "", [], [], ""], 1];
+};
 _return = true;
 
 switch (true) do
 {
-	case ([_player, _weapon, "backpack"] call fn_fitsInventory): { (backpackContainer _player) addWeaponCargoGlobal [_weapon, 1] };
-	case ([_player, _weapon, "vest"] call fn_fitsInventory):     { (vestContainer _player) addWeaponCargoGlobal [_weapon, 1] };
-	case ([_player, _weapon, "uniform"] call fn_fitsInventory):  { (uniformContainer _player) addWeaponCargoGlobal [_weapon, 1] };
+	case ([_player, _weapon, "backpack"] call fn_fitsInventory): { (backpackContainer _player) addWeaponWithAttachmentsCargoGlobal _value };
+	case ([_player, _weapon, "vest"] call fn_fitsInventory):     { (vestContainer _player) addWeaponWithAttachmentsCargoGlobal _value };
+	case ([_player, _weapon, "uniform"] call fn_fitsInventory):  { (uniformContainer _player) addWeaponWithAttachmentsCargoGlobal _value };
 	default                                                      { _return = false };
 };
 

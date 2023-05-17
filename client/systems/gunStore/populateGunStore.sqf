@@ -93,6 +93,21 @@ switch(_switch) do
 			};
 		} forEach (call staticGunsArray);
 	};
+	case 9:
+	{
+		private _compatibleAmmo = [];
+		{
+			_compatibleAmmo append (compatibleMagazines _x);
+		} forEach [primaryWeapon player, secondaryWeapon player, handgunWeapon player];
+
+		_itemsArray = [];
+		{
+			if ((_x select 1) in _compatibleAmmo) then
+			{
+				_itemsArray pushBack _x;
+			};
+		} forEach (call ammoArray);
+	};
 	default
 	{
 		_itemsArray = [];

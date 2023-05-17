@@ -44,13 +44,13 @@ switch (_name) do
 		_men addVest "V_PlateCarrier2_rgr_noflag_F";
 		for "_i" from 1 to 3 do {_men addItemToUniform "30Rnd_556x45_Stanag";};
 		for "_i" from 1 to 2 do {_men addItemToVest "HandGrenade";};
-		[_men,"Miller","male03engb"] call BIS_fnc_setIdentity;
+		[_men, "Miller", "male03engb"] call BIS_fnc_setIdentity;
 	};
 	case "president":
 	{
 		_men forceAddUniform "U_C_FormalSuit_01_black_F";
-		[_men,"WhiteHead_14","male11eng"] call BIS_fnc_setIdentity;
-		_men setName "Benjamin Asher";
+		[_men, "WhiteHead_14", "male11eng"] call BIS_fnc_setIdentity;
+		[_men, ["Donald Trump","",""]] remoteExec ["A3W_fnc_setName", 0, _men];
 	};
 };
 

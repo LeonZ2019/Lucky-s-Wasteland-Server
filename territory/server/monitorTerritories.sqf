@@ -77,6 +77,7 @@ currentTerritoryDetails = [];
 } forEach (["config_territory_markers", []] call getPublicVar);
 
 A3W_currentTerritoryOwners = [];
+publicVariable "A3W_currentTerritoryOwners";
 
 // This will track how long each loop takes, to monitor how long it really ends up taking when
 // the server is lagging to shit

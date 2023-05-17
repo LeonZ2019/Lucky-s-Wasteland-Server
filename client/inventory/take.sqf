@@ -51,6 +51,21 @@ if not(isNull _obj) then {
 			[_id,1] call mf_inventory_add;
 			titleText [format ['You have picked up "%1"', (_id call mf_inventory_get) select NAME], "PLAIN DOWN", 0.5];
 		};
+		/*else
+		{
+			if (_id == MF_ITEMS_PERKS) then
+			{
+				call compile preprocessFileLineNumbers "client\items\perkPoint\takeFromCrate.sqf";
+				// [player, _obj] remoteExecCall ["a3W_fnc_takePerkPoints", 2];
+				sleep 0.25;
+			} else
+			{
+				sleep 0.25;
+				deleteVehicle _obj;
+				[_id,1] call mf_inventory_add;
+				titleText [format ['You have picked up "%1"', (_id call mf_inventory_get) select NAME], "PLAIN DOWN", 0.5];
+			};
+		};*/
 	};
 
 	sleep 0.5;

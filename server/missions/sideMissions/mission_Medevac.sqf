@@ -61,7 +61,7 @@ _setupObjects =
 			_x animateSource ["SolarPanel2_Hide", 1];
 		};
 		_x allowDamage false;
-		_x setDammage 0;
+		_x setDamage 0;
 	} forEach _headquarters;
 	_boxType = ["mission_USLaunchers","mission_RULaunchers","mission_USSpecial","mission_USRifles","mission_RURifles","mission_Explosive","mission_Gear","mission_Militia"] call BIS_fnc_selectRandom;
 	_box = createVehicle ["Box_NATO_WpsSpecial_F", _safePos, [], 2, "None"];

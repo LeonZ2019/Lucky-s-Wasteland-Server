@@ -95,11 +95,11 @@ _setupObjects =
 		if (_type isKindOf "Air") then
 		{
 			{
-				if (["CMFlare", _x] call fn_findString != -1) then
+				if (["CMFlare", _x select 0] call fn_findString != -1) then
 				{
-					_vehicle removeMagazinesTurret [_x, [-1]];
+					_vehicle setMagazineTurretAmmo [_x select 0, 15, _x select 1];
 				};
-			} forEach getArray (configFile >> "CfgVehicles" >> _type >> "magazines");
+			} forEach (magazinesAllTurrets _vehicle);
 		};
 
 		[_vehicle, _aiGroup] spawn checkMissionVehicleLock;
@@ -117,9 +117,9 @@ _setupObjects =
 
 	_vehicles =
 	[
-		[_veh1, _missionPos vectorAdd ([[random 50, 0, 100], random 360] call BIS_fnc_rotateVector2D), 0] call _createVehicle,
-		[_veh2, _missionPos vectorAdd ([[random 50, 0, 100], random 360] call BIS_fnc_rotateVector2D), 0] call _createVehicle,
-		[_veh3, _missionPos vectorAdd ([[random 50, 0, 100], random 360] call BIS_fnc_rotateVector2D), 0] call _createVehicle
+		[_veh1, _missionPos vectorAdd ([[random 25, 0, 150], random 360] call BIS_fnc_rotateVector2D), 0] call _createVehicle,
+		[_veh2, _missionPos vectorAdd ([[25 + random 50, 0, 150], random 360] call BIS_fnc_rotateVector2D), 0] call _createVehicle,
+		[_veh3, _missionPos vectorAdd ([[75 + random 50, 0, 150], random 360] call BIS_fnc_rotateVector2D), 0] call _createVehicle
 	];
 
 	_leader = effectiveCommander (_vehicles select 0);

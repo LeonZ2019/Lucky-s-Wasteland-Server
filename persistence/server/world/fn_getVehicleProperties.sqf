@@ -88,6 +88,12 @@ if (_artiCount >= 1) then
 	_variables pushBack ["artillery", 1]; // capped at 1 for safety
 };
 
+private _perksCount = [_veh getVariable "perkPoints"] param [0,0,[0]];
+if (_perksCount >= 1) then
+{
+	_variables pushBack ["perkPoints", _veh getVariable "perkPoints"];
+};
+
 private _locked = 1 max locked _veh; // default vanilla state is always 1, so we ignore 0's
 
 _textures = [];

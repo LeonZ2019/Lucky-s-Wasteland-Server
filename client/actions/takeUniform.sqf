@@ -1,4 +1,4 @@
-private ["_type", "_target", "_holder", "_container", "_items", "_oldItems", "_removeItemCargo", "_uniformIndex", "_uniform", "_droppedContainer", "_oldItems", "_allItems", "_class", "_ammo"];
+private ["_type", "_target", "_holder", "_container", "_items", "_oldItems", "_removeItemCargo", "_uniformIndex", "_uniform", "_oldItems", "_allItems", "_class", "_ammo", "_allWeapons"];
 _type = _this select 3 select 0;
 _target = cursorObject;
 
@@ -11,13 +11,14 @@ _oldItems = [];
 
 _removeItemCargo =
 {
-	private ["_container", "_class", "_index", "_oldItems", "_item", "_oldContainer", "_newContainer", "_itemClass", "_itemCount", "_objID", "_inContainer", "_cfgWeapons"];
+	private ["_container", "_class", "_index", "_oldItems", "_item", "_oldContainer", "_newContainer", "_itemClass", "_itemCount", "_objID", "_cfgWeapons"];
 	_container = _this select 0;
 	_class = _this select 1;
 	_oldContainer = everyContainer _container;
 	_index = _oldContainer findIf {_x select 0 == _class};
 	_item = _oldContainer select _index;
 	_oldItems = getItemCargo _container;
+	// _oldWeapons = getWeaponCargo _container;
 	_oldContainer deleteAt _index;
 	clearItemCargoGlobal _container;
 	_newContainer = everyContainer _container;
@@ -35,16 +36,15 @@ _removeItemCargo =
 				_container addItemCargoGlobal [_x, _itemCount];
 			};
 		};
-	}
-	forEach (_oldItems select 0);
+	} forEach (_oldItems select 0);
 	{
-		_inContainer = _container addItemCargoGlobal [_x select 0, 1];
+			_container addItemCargoGlobal [_x select 0, 1];
 		if ((_x select 0) isKindOf ["Vest_Camo_Base", _cfgWeapons]) then
 		{
 			{
 				if !(_x isKindOf _CfgMagazines) then
 				{
-					_inContainer addItemCargoGlobal [_x, 1];
+					_container addItemCargoGlobal [_x, 1];
 				};
 			} forEach (vestItems (_x select 1));
 		} else
@@ -52,12 +52,12 @@ _removeItemCargo =
 			{
 				if !(_x isKindOf _CfgMagazines) then
 				{
-					_inContainer addItemCargoGlobal [_x, 1];
+					_container addItemCargoGlobal [_x, 1];
 				};
 			} forEach (uniformItems (_x select 1));
 		};
 		{
-			_inContainer addMagazineAmmoCargo [_x select 0, 1, _x select 1];
+			_container addMagazineAmmoCargo [_x select 0, 1, _x select 1];
 		} forEach (magazinesAmmo (_x select 1));
 	} forEach _oldContainer;
 	_item select 1
@@ -81,10 +81,11 @@ switch (_type) do
 	};
 };
 _allItems = magazinesAmmoCargo _oldItems;
+_allWeapons = weaponsItemsCargo _oldItems;
 { _allItems pushBack _x } forEach (itemCargo _oldItems);
 { _allItems pushBack _x } forEach (magazinesAmmoCargo _items);
 { _allItems pushBack _x } forEach (itemCargo _items);
-_droppedContainer = everyContainer _holder select 0 select 1;
+{ _allWeapons pushBack _x } forEach (weaponsItemsCargo _items);
 {
 	_class = _x;
 	_ammo = 0;
@@ -100,7 +101,7 @@ _droppedContainer = everyContainer _holder select 0 select 1;
 			(uniformContainer player) addMagazineAmmoCargo [_class, 1, _ammo];
 		} else
 		{
-			_droppedContainer addMagazineAmmoCargo [_class, 1, _ammo];
+			_holder addMagazineAmmoCargo [_class, 1, _ammo];
 		};
 	} else
 	{
@@ -109,7 +110,58 @@ _droppedContainer = everyContainer _holder select 0 select 1;
 			player addItemToUniform _class;
 		} else
 		{
-			_droppedContainer addItemCargoGlobal [_class, 1];
+			_holder addItemCargoGlobal [_class, 1];
 		};
 	};
 } forEach _allItems;
+{
+	_weaponsItems = _x;
+	_ewi = _weaponsItems select { !(str _x in ["""""", "[]"]) };
+	if ((count _ewi) == ({
+		if (typeName _x == "ARRAY") then
+		{
+			uniformContainer player canAdd (_x select 0)
+		} else
+		{
+			uniformContainer player canAdd _x
+		}
+		} count _ewi)) then
+	{
+			(uniformContainer player) addWeaponWithAttachmentsCargoGlobal [_x, 1];
+	} else
+	{
+		{
+			if (typeName _x == "ARRAY") then
+			{
+				if (uniformContainer player canAdd (_x select 0)) then
+				{
+					(uniformContainer player) addMagazineAmmoCargo [_x select 0, 1, _x select 1];
+				} else
+				{
+					_holder addMagazineAmmoCargo [_x select 0, 1, _x select 1];
+				};
+			} else
+			{
+				if (uniformContainer player canAdd _x) then
+				{
+					if (_x isKindOf ["ItemCore", configfile >> "CfgWeapons"])then
+					{
+						player addItemToUniform _x;
+					} else
+					{
+						_holder addWeaponCargoGlobal [_x, 1];
+					};
+				} else
+				{
+					if (_x isKindOf ["ItemCore", configfile >> "CfgWeapons"])then
+					{
+						_holder addItemCargo [_x, 1];
+					} else
+					{
+						_holder addWeaponCargoGlobal [_x, 1];
+					};
+				};
+			};
+		} forEach _ewi;
+	};
+} forEach _allWeapons;

@@ -23,7 +23,7 @@ _soldier = _group createUnit [_soldierTypes call BIS_fnc_selectRandom, _position
 
 removeAllAssignedItems _soldier;
 
-_soldier addUniform (_uniformTypes call BIS_fnc_selectRandom);
+_soldier forceAddUniform (_uniformTypes call BIS_fnc_selectRandom);
 _soldier addVest (_vestTypes call BIS_fnc_selectRandom);
 _soldier addWeapon _weapon;
 _soldier addWeaponItem [_weapon, "Titan_AA", true];

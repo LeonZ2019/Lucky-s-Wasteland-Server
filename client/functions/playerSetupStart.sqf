@@ -23,12 +23,12 @@ if (["A3W_unlimitedStamina"] call isConfigOn) then
 
 if (["_sniper_", typeOf _player] call fn_findString != -1) then
 {
-	_player setCustomAimCoef 0.45;
+	_player setCustomAimCoef 0.35;
 } else
 {
-	_player setCustomAimCoef 0.75;
+	_player setCustomAimCoef 0.65;
 };
-
+_player setUnitTrait ["explosiveSpecialist", true];
 enableSentences false;
 
 removeAllWeapons _player;

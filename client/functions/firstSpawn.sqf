@@ -18,6 +18,10 @@ player addEventHandler ["Take",
 	{
 		_vehicle setVariable ["itemTakenFromVehicle", true, true];
 	};
+	if ((_this select 2) in CBRN_gear_list) then
+	{
+		[_this select 0] call CBRN_gear_update;
+	};
 }];
 
 player addEventHandler ["Put",
@@ -52,6 +56,10 @@ player addEventHandler ["Put",
 
 			_vehicle setVariable ["A3W_storeSellBox_track", nil];
 		}];
+	};
+	if ((_this select 2) in CBRN_gear_list) then
+	{
+		[_this select 0] call CBRN_gear_update;
 	};
 }];
 
@@ -205,6 +213,7 @@ player addEventHandler ["InventoryOpened",
 			_blocked = true;
 		} else
 		{
+			// backpackContainer player lockInventory true;
 			if (_isBackpack isEqualTo 1) then {
 				_objectParent = objectParent _container;
 				if (!isNull _objectParent && alive _objectParent && isPlayer _objectParent && _objectParent getVariable ["BL_lockState", false]) then {
@@ -333,7 +342,7 @@ if (playerSide in [BLUFOR,OPFOR] && {{_x select 0 == _uid} count pvar_teamSwitch
 
 player addEventHandler ["HandleHeal", {
 	_this spawn {
-		params ["_injured", "_healer"];
+		params ["_injured", "_healer", "_isMedic"];
 		if !(_injured == _healer) then
 		{
 			[format ["Stay close, your are treating by %1", name _healer], 5] call mf_notify_client;
@@ -345,14 +354,14 @@ player addEventHandler ["HandleHeal", {
 		waitUntil {animationState _healer != _healAnimation}; // end healing animation
 		if (_healer distance _injured < 2.5 && vehicle _injured == _injured) then // heal success
 		{
-			_isMedic = ["_medic_", typeOf _healer] call fn_findString != -1;
+			// _isMedic = ["_medic_", typeOf _healer] call fn_findString != -1;
 			_haveMedkit = count (items _healer select {_x == "Medikit"}) > 0;
 			if ((_isMedic && !_haveMedkit) || !_isMedic) then
 			{
 				_newFAK = count (items _healer select {_x == "FirstAidKit"});
 				if (_oldFAK == _newFAK) then // custom treat by script
 				{
-					_injured removeItem "FirstAidKit";
+					_healer removeItem "FirstAidKit";
 				};
 			};
 			_injured setDamage 0;

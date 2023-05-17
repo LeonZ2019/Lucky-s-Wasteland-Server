@@ -44,16 +44,14 @@ switch (true) do
 	// Earplugs - End Key
 	case (_key in A3W_customKeys_earPlugs):
 	{
-		if (soundVolume > 0.5) then
-		{
-			0.5 fadeSound 0.2;
-			["You've inserted your earplugs.", 5] call mf_notify_client;
-		}
-		else
-		{
-			0.5 fadeSound 1;
-			["You've taken out your earplugs.", 5] call mf_notify_client;
-		};
+		_volume = [1, 0.2, 0.1, 0.05];
+		_index = _volume findIf { soundVolume > _x };
+		if (_index == -1) then { _index = 0; };
+		_newVolume = _volume select _index;
+		0 fadeSound _newVolume;
+
+		_text = if (_index == 0) then { "You've taken out your earplugs." } else { format ["You've inserted your earplugs and reduced the volume to %1%2", _newVolume * 100, "%"] };
+        [_text, 5] call mf_notify_client;
 	};
 };
 

@@ -60,4 +60,21 @@ if (_items isEqualTo []) then
 		_obj setVariable ["mf_item_id", _id, true];
 		_obj call A3W_fnc_setItemCleanup;
 	};
+	/*
+	for "_i" from 1 to _qty do // this
+	{
+		_obj = objNull;
+		if (_id == MF_ITEMS_PERKS) then
+		{
+			_obj = (position player) nearestObject "CBRNContainer_01_closed_yellow_F";
+		};
+		if (isNull _obj) then
+		{
+			_obj = createVehicle [_type, _targetPos, [], 1, "CAN_COLLIDE"];
+			_obj setDir random 360;
+		};
+		_obj setVariable ["mf_item_id", _id, true];
+		if (_id == MF_ITEMS_PERKS) then { _obj setVariable ["perkPoints", (_obj getVariable ["perkPoints", 0]) + 1, true] };
+		_obj call A3W_fnc_setItemCleanup;
+	};*/
 } forEach _items;

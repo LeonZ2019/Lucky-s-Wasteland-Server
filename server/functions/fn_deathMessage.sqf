@@ -40,6 +40,8 @@ params [["_killer",_killerName,[""]], ["_victim",_victimName,[""]]]; // custom n
 
 		case "forcekill": { format ["%1 was killed", _victim] }; // admin slay, antihack/teamkill kick
 
+		case "chemical": { format ["%1 died from exposure and contamination", _victim]};
+
 		default
 		{
 			switch (true) do

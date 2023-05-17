@@ -13,7 +13,6 @@ class BIS_fnc_effectKilledSecondaries {};
 class BIS_fnc_initVehicle {}; // required for vehicle parts like tank cages
 class BIS_fnc_setCustomSoundController {}; // police siren
 class BIS_fnc_objectVar {};
-class allowDamage {};
 // do NOT whitelist BIS_fnc_execVM or BIS_fnc_spawn, hackers will exploit them!
 
 // A3W vanilla
@@ -45,6 +44,7 @@ class A3W_fnc_setLockState {};
 class A3W_fnc_setName { jip = 1; };
 class A3W_fnc_setVarServer { allowedTargets = 2; };
 class A3W_fnc_takeArtilleryStrike { allowedTargets = 2; };
+class A3W_fnc_takePerkPoints { allowedTargets = 2; };
 class A3W_fnc_takeOwnership { allowedTargets = 2; };
 class A3W_fnc_titleTextMessage {};
 class A3W_fnc_towingHelper {};

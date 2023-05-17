@@ -44,6 +44,12 @@ if (_artiCount >= 1) then
 	_variables pushBack ["artillery", 1]; // capped at 1 for safety
 };
 
+private _perksCount = [_obj getVariable "perkPoints"] param [0,0,[0]];
+if (_perksCount >= 1) then
+{
+	_variables pushBack ["perkPoints", _obj getVariable "perkPoints"];
+};
+
 switch (true) do
 {
 	case (_obj call _isBox):

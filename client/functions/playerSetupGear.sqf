@@ -4,26 +4,20 @@
 //	@file Name: playerSetupGear.sqf
 //	@file Author: [GoT] JoSchaap, AgentRev
 
-private ["_player", "_uniform", "_goggles", "_nvg", "_weapon", "_weaponItem", "_pistol", "_primaryGunConfig", "_primaryGunMags", "_hgunConfig", "_hgunMags", "_terminal", "_weaponItems"];
+private ["_player", "_uniform", "_nvg", "_weapon", "_weaponItem", "_pistol", "_primaryGunConfig", "_primaryGunMags", "_hgunConfig", "_hgunMags", "_terminal", "_weaponItems"];
 _player = _this;
 
 // Clothing is now defined in "client\functions\getDefaultClothing.sqf"
-
 _uniform = [_player, "uniform"] call getDefaultClothing;
-_goggles = [_player, "goggles"] call getDefaultClothing;
 _weapon = [_player, "weapon"] call getDefaultClothing;
 _weaponItem = [_player, "weaponItem"] call getDefaultClothing;
 _nvg = [_player, "nvg"] call getDefaultClothing;
 
-if (count _uniform == 5) then
-{
-	_player addHeadgear (_uniform select 0);
-	_player forceAddUniform (_uniform select 1);
-	_player addVest (_uniform select 2);
-	_player addBackpack (_uniform select 3);
-	_player addGoggles (_uniform select 4);
-};
-if (_goggles != "") then { _player addGoggles _goggles };
+_player addHeadgear (_uniform select 0);
+_player forceAddUniform (_uniform select 1);
+_player addVest (_uniform select 2);
+_player addBackpack (_uniform select 3);
+_player addGoggles (_uniform select 4);
 
 sleep 0.1;
 
@@ -82,8 +76,8 @@ switch (true) do
 {
 	case (["_medic_", typeOf _player] call fn_findString != -1):
 	{
-		_player removeItem "FirstAidKit";
-		_player removeItem "FirstAidKit";
+		// _player removeItem "FirstAidKit";
+		// _player removeItem "FirstAidKit";
 		_player addItem "Medikit";
 	};
 	case (["_engineer_", typeOf _player] call fn_findString != -1):

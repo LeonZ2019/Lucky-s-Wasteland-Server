@@ -1,6 +1,6 @@
 while {true} do
 {
-	waitUntil {count (allDisplays select {!(isNull (_x displayCtrl 510))}) == 1};
+	waitUntil {uiSleep 1; count (allDisplays select {!(isNull (_x displayCtrl 510))}) == 1};
 	private _eh = (findDisplay -1 displayCtrl 500) ctrlAddEventHandler ["mouseButtonDown","
 		if (_this select 1 == 0) then
 		{

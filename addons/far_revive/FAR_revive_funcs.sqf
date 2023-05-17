@@ -624,7 +624,7 @@ FAR_FindDeadbody =
 			{
 				_target = _unit;
 			};
-		} forEach nearestObjects [HEALER, ["Man"], 15];
+		} forEach nearestObjects [HEALER, ["Man"], 5];
 	};
 	_target
 }
@@ -639,17 +639,17 @@ call mf_compile;
 
 FAR_Transfer_Box =
 {
-	private ["_target", "_box", "_headgear", "_goggles", "_binocular", "_hmd", "_assignedItems", "_uniform", "_vest", "_backpack" , "_ammo", "_items", "_weaponHolder", "_weaponsItems", "_deleteObjects"];
+	private ["_target", "_box", "_headgear", "_goggles", "_assignedItems", "_uniform", "_vest", "_backpack" , "_ammo", "_items", "_weaponHolder", "_weaponsItems", "_deleteObjects"];
 	_target = _this select 0;
 
 	_headgear = headgear _target;
 	_goggles = goggles _target;
 	_binocular = binocular _target;
-	_hmd = hmd _target;
+	// _hmd = hmd _target;
 	_assignedItems = assignedItems _target;
 	_uniform = uniform _target;
 	_vest = vest _target;
-	_backpack = backpack _target;
+	// _backpack = backpack _target;
 	_ammo = magazinesAmmo _target;
 	_items = items _target;
 	_weaponHolder = nearestObjects [position _target, ["WeaponHolderSimulated"], 5];
@@ -663,11 +663,21 @@ FAR_Transfer_Box =
 	clearItemCargoGlobal _box;
 	if (_headgear != "") then { _box addItemCargoGlobal [_headgear, 1]; };
 	if (_goggles != "") then { _box addItemCargoGlobal [_goggles, 1]; };
-	if (_binocular != "") then { _box addItemCargoGlobal [_binocular, 1]; };
-	if (_hmd != "") then { _box addItemCargoGlobal [_hmd, 1]; };
+	// if (_binocular != "") then { _box addItemCargoGlobal [_binocular, 1]; };
+	// if (_hmd != "") then { _box addItemCargoGlobal [_hmd, 1]; };
 	if (_uniform != "") then { _box addItemCargoGlobal [_uniform, 1]; };
 	if (_vest != "") then { _box addItemCargoGlobal [_vest, 1]; };
-	if (_backpack != "") then { _box addBackpackCargoGlobal [_backpack, 1]; };
+	if (_backpack != "") then {
+		_box addBackpackCargoGlobal [_backpack, 1];
+		_backpackObj = (everyBackpack cursorObject) select 0;
+		clearMagazineCargoGlobal _backpackObj;
+		clearItemCargoGlobal _backpackObj;
+		_backpackWeapon = getWeaponCargo _backpackObj;
+		{
+			_box addItemCargoGlobal [_x, _backpackWeapon select 1 select _forEachIndex];
+		} forEach (_backpackWeapon select 0);
+		clearWeaponCargoGlobal _backpackObj;
+	};
 	{
   		_box addMagazineAmmoCargo [_x select 0, 1, _x select 1];
 	} forEach _ammo;

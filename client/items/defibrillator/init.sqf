@@ -1,4 +1,4 @@
-//	@file Name: use.sqf
+//	@file Name: init.sqf
 //	@file Author: Leon
 
 #define build(file) format["%1\%2", _this, file] call mf_compile

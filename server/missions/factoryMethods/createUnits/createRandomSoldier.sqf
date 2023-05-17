@@ -88,7 +88,7 @@ switch (_camo) do
 		_magazine = "30Rnd_65x39_caseless_green";
 		_loadout pushBack ["H_HelmetLeaderO_ghex_F", "H_MilCap_ghex_F", "H_HelmetO_ghex_F"];
 		_loadout pushBack ["U_O_T_Soldier_F", "U_O_V_Soldier_Viper_F"];
-		_loadout pushBack ["V_HarnessO_ghex_F", "B_FieldPack_ghex_OTReconMedic_F", "V_TacVest_oli"];
+		_loadout pushBack ["V_HarnessO_ghex_F", "V_HarnessOGL_ghex_F", "V_TacVest_oli"];
 	};
 	case "Hex":
 	{
@@ -159,6 +159,7 @@ if (_weaponIndex == 1) then
 {
 	_soldier addMagazines ["1Rnd_HE_Grenade_shell", 3];
 };
+_soldier addItem "FirstAidKit";
 _soldier addPrimaryWeaponItem (_scope call BIS_fnc_selectRandom);
 
 if (_rank != "") then
@@ -166,8 +167,7 @@ if (_rank != "") then
 	_soldier setRank _rank;
 };
 
-_soldier spawn refillPrimaryAmmo;
-
 _soldier call setMissionSkill;
+_soldier spawn refillPrimaryAmmo;
 
 _soldier

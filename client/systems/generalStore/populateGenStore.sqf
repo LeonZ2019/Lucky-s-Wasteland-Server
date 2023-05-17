@@ -9,7 +9,7 @@
 
 #include "dialog\genstoreDefines.sqf";
 disableSerialization;
-private ["_switch", "_dialog", "_itemlist", "_itemlisttext", "_itemDesc", "_showPicture", "_itemsArray", "_playerSideNum", "_parentCfg", "_weapon", "_picture", "_listIndex", "_showItem", "_factionCfg", "_faction", "_isUniform", "_sideCfg", "_side"];
+private ["_switch", "_dialog", "_itemlist", "_itemlisttext", "_itemDesc", "_showPicture", "_showEditorPreview", "_itemsArray", "_playerSideNum", "_parentCfg", "_weapon", "_picture", "_listIndex", "_showItem", "_factionCfg", "_faction", "_isUniform", "_sideCfg", "_side"];
 _switch = _this select 0;
 GeneralStoreSelected = _switch;
 // Grab access to the controls
@@ -25,6 +25,7 @@ _itemlisttext ctrlSetText "";
 _itemDesc ctrlSetText "";
 
 _showPicture = true;
+_showEditorPreview = false;
 
 switch(_switch) do
 {
@@ -79,21 +80,25 @@ switch(_switch) do
 	{
 		_itemsArray = call genObjectsArray;
 		_showPicture = false;
+		_showEditorPreview = true;
 	};
 	case 7:
 	{
 		_itemsArray = call genBuildingsArray;
 		_showPicture = false;
+		_showEditorPreview = true;
 	};
 	case 8:
 	{
 		_itemsArray = call genWallsArray;
 		_showPicture = false;
+		_showEditorPreview = true;
 	};
 	case 9:
 	{
 		_itemsArray = call genMiscArray;
 		_showPicture = false;
+		_showEditorPreview = true;
 	};
 	default
 	{
@@ -214,7 +219,11 @@ _playerSideNum = switch (playerSide) do
 			{
 				_itemlist lbSetPicture [_listIndex, _picture];
 			};
-
+			if (_showEditorPreview) then
+			{
+				_editorPreview = getText (_weapon >> "editorPreview");
+				_itemlist lbSetPicture [_listIndex, _editorPreview];
+			};
 			[_x, _parentCfg, _itemlist, _listIndex] call fn_checkStoreItemDLC;
 		};
 

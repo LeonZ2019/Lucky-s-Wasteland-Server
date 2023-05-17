@@ -33,7 +33,7 @@ removeAllAssignedItems _soldier;
 removeVest _soldier;
 removeBackpack _soldier;
 
-_soldier addUniform (_uniformTypes call BIS_fnc_selectRandom);
+_soldier forceAddUniform (_uniformTypes call BIS_fnc_selectRandom);
 _soldier addVest (_vestTypes call BIS_fnc_selectRandom);
 _soldier addHeadgear (_headGearTypes call BIS_fnc_selectRandom);
 [_soldier, _weaponTypes call BIS_fnc_selectRandom, 3] call BIS_fnc_addWeapon;
@@ -43,6 +43,7 @@ if (_rank != "") then
 	_soldier setRank _rank;
 };
 
+_soldier addItem "FirstAidKit";
 _soldier spawn refillPrimaryAmmo;
 _soldier call setMissionSkill;
 

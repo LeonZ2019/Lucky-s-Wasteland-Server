@@ -3,7 +3,7 @@ while {!_loopStopper} do
 {
     waitUntil {sleep 1; true};
     _messageBeforeRestart = [20*60, 10*60, 5*60, 1*60, 30, 10, 5];
-    _timeToRestart = [[5,0,0],[11,0,0],[17,0,0],[23,0,0]]; // hours, minutes, seconds
+    _timeToRestart = [[5,0,0]]; // hours, minutes, seconds
     {
         _currentTime = systemTime;
         _hours = _currentTime select 3;

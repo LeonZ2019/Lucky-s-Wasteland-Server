@@ -26,7 +26,7 @@ _position = _this select 1;
 _soldier = _group createUnit [_soldierTypes call BIS_fnc_selectRandom, _position, [], 0, "NONE"];
 removeAllAssignedItems _soldier;
 
-_soldier addUniform (_uniformTypes call BIS_fnc_selectRandom);
+_soldier forceAddUniform (_uniformTypes call BIS_fnc_selectRandom);
 _soldier addVest (_vestTypes call BIS_fnc_selectRandom);
 
 _soldier addItemToVest "Chemlight_green";
@@ -46,6 +46,7 @@ switch (_weapon) do {
 for "_i" from 1 to 3 do {_soldier addItemToVest _ammo;};
 for "_i" from 1 to 2 do {_soldier addItemToUniform "9Rnd_45ACP_Mag";};
 
+_soldier addItem "FirstAidKit";
 _soldier addHeadgear (_headGearTypes call BIS_fnc_selectRandom);
 _soldier addWeaponItem [_weapon, _ammo];
 

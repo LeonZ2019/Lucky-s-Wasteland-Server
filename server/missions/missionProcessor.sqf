@@ -12,7 +12,7 @@ if (!isServer) exitwith {};
 private ["_controllerSuffix", "_missionTimeout", "_availableLocations", "_missionLocation", "_leader", "_marker", "_failed", "_complete", "_startTime", "_oldAiCount", "_leaderTemp", "_newAiCount", "_adjustTime", "_lastPos", "_floorHeight"];
 
 // Variables that can be defined in the mission script :
-private ["_missionType", "_locationsArray", "_aiGroup", "_missionPos", "_missionPicture", "_missionHintText", "_successHintMessage", "_failedHintMessage"];
+private ["_misisonHint", "_missionType", "_locationsArray", "_aiGroup", "_missionPos", "_missionPicture", "_missionHintText", "_successHintMessage", "_failedHintMessage"];
 
 _controllerSuffix = param [0, "", [""]];
 _aiGroup = grpNull;
@@ -46,14 +46,16 @@ _aiGroup setVariable ["A3W_missionMarkerName", _marker, true];
 
 if (isNil "_missionPicture") then { _missionPicture = "" };
 
-[
+_misisonHint = [
 	format ["%1 Objective", MISSION_PROC_TYPE_NAME],
 	_missionType,
 	_missionPicture,
 	_missionHintText,
 	MISSION_PROC_COLOR_DEFINE
-]
-call missionHint;
+];
+_misisonHint call missionHint;
+A3W_RunningMission pushBack [_marker, _misisonHint];
+publicVariable "A3W_RunningMission";
 
 diag_log format ["WASTELAND SERVER - %1 Mission%2 waiting to be finished: %3", MISSION_PROC_TYPE_NAME, _controllerSuffix, _missionType];
 
@@ -108,6 +110,14 @@ waitUntil
 
 	(_failed || _complete || (!_ignoreAiDeaths && {alive _x} count units _aiGroup == 0))
 };
+
+{
+	if (_x isEqualTo _misisonHint) exitWith
+	{
+		A3W_RunningMission deleteAt _forEachIndex;
+	};
+} forEach A3W_RunningMission;
+publicVariable "A3W_RunningMission";
 
 if (_failed) then
 {

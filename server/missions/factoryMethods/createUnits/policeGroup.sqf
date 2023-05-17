@@ -39,7 +39,7 @@ for "_i" from 1 to _nbUnits do
 
 	_unit addGoggles "G_Spectacles_Tinted";
 	_unit addVest "V_TacVest_blk_POLICE";
-	_unit addUniform "U_B_GEN_Soldier_F";
+	_unit forceAddUniform "U_B_GEN_Soldier_F";
 
 	switch (true) do
 	{
@@ -102,6 +102,7 @@ for "_i" from 1 to _nbUnits do
 		};
 	};
 
+	_unit addItem "FirstAidKit";
 	_unit addWeapon "hgun_Rook40_F";
 	_unit addHandgunItem "16Rnd_9x21_Mag";
 	for "_i" from 1 to 3 do {_unit addItemToUniform "16Rnd_9x21_Mag";};

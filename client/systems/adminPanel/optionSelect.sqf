@@ -112,7 +112,7 @@ if (_uid call isAdmin) then
 				};
 				case 9: //Money
 				{
-					_money = 10000;
+					_money = 5000;
 					[player, _money] call A3W_fnc_setCMoney;
 					if (!isNil "notifyAdminMenu") then { ["money", _money] call notifyAdminMenu };
 				};

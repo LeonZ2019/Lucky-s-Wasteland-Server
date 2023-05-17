@@ -59,7 +59,15 @@ _uav setVehicleReceiveRemoteTargets true;
 _uav setVehicleReportOwnPosition true;
 _uav setVehicleRadar 1;
 ((crew _uav) select 0) action ["ActiveSensorsOn", true];
-if ({_uav isKindOf _x} count ["Static_Designator_01_base_F", "Static_Designator_02_base_F"] != -1) then {((crew _uav) select 0) addWeapon "ItemMap";};
+if ({_uav isKindOf _x} count ["Static_Designator_01_base_F", "Static_Designator_02_base_F"] != -1) then
+{
+	{
+		_x addWeapon "ItemMap";
+	} forEach (crew _uav);
+};
+{
+	_x linkItem "NVGoggles";
+} forEach (crew _uav);
 
 _uav spawn
 {
@@ -78,6 +86,26 @@ if (round getNumber (configFile >> "CfgVehicles" >> _uavClass >> "attendant") > 
 {
 	_uav disableTIEquipment true;
 };*/
-
-_uav confirmSensorTarget [civilian, true];
+_enemySides = [civilian];
+if (_side != sideUnknown) then
+{
+	switch (_side) do
+	{
+		case BLUFOR:
+		{
+			_enemySides append [east, independent];
+		};
+		case OPFOR:
+		{
+			_enemySides append [west, independent];
+		};
+		case INDEPENDENT:
+		{
+			_enemySides append [west, east, independent];
+		};
+	};
+};
+{
+	_uav confirmSensorTarget [_x, true];
+} forEach _enemySides;
 _grp

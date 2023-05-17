@@ -21,7 +21,7 @@ if (_uid call isAdmin) then
 				if (vehicle player isKindOf "Plane" && _speed >= 200) then
 				{
 					_maxDistance = _maxDistance * _speed / 200;
-				}
+				};
 				if (vehicle player isKindOf "Helicopter" && _speed >= 125) then
 				{
 					_maxDistance = _maxDistance * _speed / 125;

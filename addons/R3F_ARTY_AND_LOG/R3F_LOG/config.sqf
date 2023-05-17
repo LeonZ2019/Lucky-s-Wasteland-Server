@@ -634,5 +634,6 @@ R3F_LOG_CFG_objets_deplacables =
 	"CargoPlaftorm_01_green_F",
 	"CargoPlaftorm_01_rusty_F",
 	"CargoPlaftorm_01_brown_F",
-	"CargoPlaftorm_01_jungle_F"
+	"CargoPlaftorm_01_jungle_F",
+	"Land_Workbench_01_F"
 ];

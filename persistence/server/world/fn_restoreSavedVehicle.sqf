@@ -90,7 +90,10 @@ if (_isUAV) then
 		_veh setVelocity _vel;
 		_veh flyInHeight ((_veh modelToWorld [0,0,0]) select 2);
 	};
-
+	if (_class == "B_Ship_MRLS_01_F") then
+	{
+		[_veh] execVM "addons\scripts\vls\vls.sqf";
+	};
 	//assign AI to the vehicle so it can actually be used
 	[_veh, _flying, _uavSide, _uavAuto] spawn
 	{

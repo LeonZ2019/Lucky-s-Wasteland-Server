@@ -141,6 +141,10 @@ _exclObjectIDs = [];
 
 		if (unitIsUAV _obj) then
 		{
+			if (_class == "B_Ship_MRLS_01_F") then
+			{
+				[_obj] execVM "addons\scripts\vls\vls.sqf";
+			};
 			[_obj, _uavSide, false, _uavAuto] spawn fn_createCrewUAV;
 		};
 

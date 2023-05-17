@@ -12,7 +12,7 @@ private ["_locArray", "_buildingRadius", "_townName", "_createVehicle", "_safePo
 
 _setupVars =
 {
-	_missionType = "Altis Has Fallen";
+	_missionType = "Malden Has Fallen";
 	_locArray = ((call cityList) call BIS_fnc_selectRandom);
 	_missionPos = markerPos (_locArray select 0);
 	_buildingRadius = _locArray select 1;
@@ -49,11 +49,12 @@ _setupObjects =
 	_president disableAI "all";
 	_airportPos = [];
 	_distanceMin = worldSize;
-	for "_i" from 1 to 5 do
+	// allPorts
+	for "_i" from 1 to 1 do
 	{
-		_taxiIn = getArray (configfile >> "CfgWorlds" >> "Altis" >> "SecondaryAirports" >> format ["Airstrip_%1", _i] >> "ilsTaxiIn");
+		_taxiIn = getArray (configfile >> "CfgWorlds" >> "Malden" >> "SecondaryAirports" >> format ["Airstrip_%1", _i] >> "ilsTaxiIn");
 		_taxiDistance = _safePos distance2D [_taxiIn select 0, _taxiIn select 1];
-		if (_taxiDistance >= 3500 && _taxiDistance < _distanceMin) then
+		if (_taxiDistance >= 2000 && _taxiDistance < _distanceMin) then
 		{
 			_distanceMin = _taxiDistance;
 			_airportPos = _taxiIn;
@@ -128,7 +129,7 @@ _setupObjects =
 _ignoreAiDeaths = true;
 _waitUntilMarkerPos = {getPos _president};
 _waitUntilExec = nil;
-_waitUntilCondition = {!alive _president || !alive _heli}; // let focus on the man instead of heli, heli down mean man down
+_waitUntilCondition = {!alive _president || !alive _heli || vehicle _president != _heli}; // let focus on the man instead of heli, heli down mean man down
 _waitUntilSuccessCondition = {
 	((getPosATL _heli) select 2 <= 1) && (vectorMagnitude velocity _heli < 1) && alive _president && (vehicle _president distance _airforceOne <= 75)
 };
@@ -140,7 +141,7 @@ _failedExec =
 	_failedhintMessage = "POTUS didn't survive on the way back to his aircraft";
 	deleteMarker _extractedPoint;
 	_heli setVariable ["Mission_Vehicle", false, true];
-	{ if (alive _x) then { deleteVehicle _x }; } forEach [_president, _airforceOne];
+	{ if (alive _x) then { deleteVehicle _x }; } forEach [_president, _airforceOne, _heli];
 };
 
 _successExec =

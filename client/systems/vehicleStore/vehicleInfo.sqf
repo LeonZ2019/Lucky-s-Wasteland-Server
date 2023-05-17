@@ -40,7 +40,17 @@ if (isNil "_itemData") exitWith
 
 _itemData params ["_vehName", "_vehClass", "_price"];
 
-_vehText ctrlSetText format ["%1Price: $%2", [_vehName + "\n", ""] select isNil "_repaint", [[_price + (_price * vehicleStore_tax / 100), 0] call BIS_fnc_cutDecimals] call fn_numbersText];
+_title = ctrlText 5300;
+_isTax = _title select [count _title - 4, 4] == "Tax)";
+_percentage = (parseNumber (_title select [15, (_title find "%") - 15]) / 100);
+if (_isTax) then
+{
+	_percentage = 1 + _percentage;
+} else
+{
+	_percentage = 1 - _percentage;
+};
+_vehText ctrlSetText format ["%1Price: $%2", [_vehName + "\n", ""] select isNil "_repaint", [[_price * _percentage, 0] call BIS_fnc_cutDecimals] call fn_numbersText];
 
 _vehCfg = configFile >> "CfgVehicles" >> _vehClass;
 

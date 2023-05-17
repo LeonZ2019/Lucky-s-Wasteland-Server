@@ -34,6 +34,7 @@ _setupObjects =
 
 		_type = _this select 0;
 		_position = _this select 1;
+		_position set [2, 150];
 		_direction = _this select 2;
 		_variant = _type param [1,"",[""]];
 
@@ -84,11 +85,11 @@ _setupObjects =
 		if (_type isKindOf "Air") then
 		{
 			{
-				if (["CMFlare", _x] call fn_findString != -1) then
+				if (["CMFlare", _x select 0] call fn_findString != -1) then
 				{
-					_vehicle removeMagazinesTurret [_x, [-1]];
+					_vehicle setMagazineTurretAmmo [_x select 0, 20, _x select 1];
 				};
-			} forEach getArray (configFile >> "CfgVehicles" >> _type >> "magazines");
+			} forEach (magazinesAllTurrets _vehicle);
 		};
 
 		[_vehicle, _aiGroup] spawn checkMissionVehicleLock;

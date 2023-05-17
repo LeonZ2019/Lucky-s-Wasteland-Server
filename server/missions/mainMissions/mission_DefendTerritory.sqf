@@ -83,7 +83,7 @@ _setupObjects =
 		_triggerArea resize 2;
 		_minDist = (selectMax _triggerArea) * 1.75 + 150 min 300;
 		_maxDist = _minDist + 50;
-		_perGroup = parseNumber ((_minDist * 0.06) toFixed 0) max 20 min 30;
+		_perGroup = parseNumber ((_minDist * 0.06) toFixed 0) max 10 min 15;
 		for "_i" from 0 to (_playerCount - 1) do
 		{
 			_pos = [position _trigger, _minDist, _maxDist, 5, 0, 1, 0] call BIS_fnc_findSafePos;
@@ -239,7 +239,7 @@ _setupObjects =
 };
 
 _ignoreAiDeaths = true;
-_waitUntilMarkerPos = { _missionPos };
+_waitUntilMarkerPos = nil;
 _waitUntilExec = nil;
 _waitUntilCondition = { _trigger getVariable ["Attacking", false] && count (_trigger getVariable ["Attackers", []] select { alive _x && vehicle _x == _x && _x distance _missionPos <= 10 }) >= 5};
 _waitUntilSuccessCondition = {
@@ -248,7 +248,6 @@ _waitUntilSuccessCondition = {
 
 _failedExec =
 {
-	// systemChat "territory retrieve back to sideUnknown!";
 	if (count (_trigger getVariable ["Attackers", []] select {alive _x && vehicle _x == _x && _x distance2D _missionPos <= 10}) >= 5) then
 	{
 		_failedHintMessage = "Enemy have made through in final area";
